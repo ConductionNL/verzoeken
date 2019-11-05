@@ -65,26 +65,24 @@ $ helm dependency update ./api/helm
 
 If you want to create a new instance
 ```CLI
-$ helm install ./api/helm --name protocomponent --kubeconfig="api/helm/kubeconfig.yaml"
-```
-
-```CLI
-$ helm install ./api/helm --name vrc-dev --kubeconfig="api/helm/kubeconfig.yaml"   --set settings.env=dev,settings.debug=1
-$ helm install ./api/helm --name vrc-stag --kubeconfig="api/helm/kubeconfig.yaml"  --set settings.env=stag,settings.debug=0
-$ helm install ./api/helm --name vrc-prod --kubeconfig="api/helm/kubeconfig.yaml"  --set settings.env=prod,settings.debug=0
+$ helm install --name vrc-dev ./api/helm  --kubeconfig="api/helm/kubeconfig.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1
+$ helm install --name vrc-stag ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=stag --set settings.env=stag,settings.debug=0
+$ helm install --name vrc-prod ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=prod --set settings.env=prod,settings.debug=0 
 ```
 
 Or update if you want to update an existing one
 ```CLI
-$ helm upgrade protocomponent  ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" 
+$ helm upgrade vrc-dev ./api/helm  --kubeconfig="api/helm/kubeconfig.yaml --namespace=dev  --set settings.env=dev, settings.debug=1" 
+$ helm upgrade vrc-stag ./api/helm --kubeconfig="api/helm/kubeconfig.yaml --namespace=stag --set settings.env=stag, settings.debug=0" 
+$ helm upgrade vrc-prod ./api/helm --kubeconfig="api/helm/kubeconfig.yaml --namespace=prod --set settings.env=prod, settings.debug=0" 
 ```
 
 Or del if you want to delete an existing  one
 ```CLI
-$ helm del protocomponent  --purge --kubeconfig="api/helm/kubeconfig.yaml" 
+$ helm del vrc-dev  --purge --kubeconfig="api/helm/kubeconfig.yaml --namespace=dev" 
+$ helm del vrc-stag --purge --kubeconfig="api/helm/kubeconfig.yaml --namespace=stag" 
+$ helm del vrc-prod --purge --kubeconfig="api/helm/kubeconfig.yaml --namespace=prod" 
 ```
-
-
 
 ## Making your app known on NLX
 The proto component comes with an default NLX setup, if you made your own component however you might want to provide it trough the [NLX](https://www.nlx.io/) service. Fortunately the proto component commes with an nice setup for NLX integration.
