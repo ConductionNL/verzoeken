@@ -50,26 +50,25 @@ class ApiHelmCommand extends Command
 		/** @var string $version */
 		$version = $input->getOption('spec-version');
 		
-		if (!\in_array($version, ['0.1.0'], true)) {
-			throw new InvalidOptionException(sprintf('This tool only supports version 2 and 3 of the OpenAPI specification ("%s" given).', $version));
-		}
+		//if (!\in_array($version, ['0.1.0'], true)) {
+		//	throw new InvalidOptionException(sprintf('This tool only supports version 2 and 3 of the OpenAPI specification ("%s" given).', $version));
+		//}
 		
 		$values = $this->twig->render('helm/Values.yaml.twig');
 		$chart = $this->twig->render('helm/Chart.yaml.twig');
 		
-		// outputs multiple lines to the console (adding "\n" at the end of each line)
-		$output->writeln([
-				'Helm Chart Creator',
-				'============',
-				'',
-		]);
 		
 		if (!empty($location= $input->getOption('location')) && \is_string($location)) {
 			file_put_contents($location.'/values.yaml', $values);
 			file_put_contents($location.'/Chart.yaml', $chart);
 			$io->success(sprintf('Data written to %s (specification version %s).', $location, $version));
 		} else {
-			$output->writeln($chart);
+			// outputs multiple lines to the console (adding "\n" at the end of each line)
+			$output->writeln([
+					'Helm Chart Creator',
+					'============',
+					$chart,
+			]);
 		}
 	}
 }

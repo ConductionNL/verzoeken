@@ -40,6 +40,6 @@ This component was created by conduction (https://www.conduction.nl/team) for th
 [![Conduction](https://raw.githubusercontent.com/ConductionNL/verzoeken/master/resources/logo-conduction.svg?sanitize=true "Conduction")](https://www.conduction.nl/)
 
 ## License
-Copyright © [Gemeente 's-Hertogenbosch](https://www.s-hertogenbosch.nl/) 2019
+Copyright ï¿½ [Gemeente 's-Hertogenbosch](https://www.s-hertogenbosch.nl/) 2019
 
 [Licensed under the EUPL](LICENCE.md)
