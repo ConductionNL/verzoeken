@@ -7,7 +7,7 @@ The request component handles request by a person to an organization, and valida
 
 Requests signify a request that has either been made by a person/organization to an specific organization, or an request that is being formulated by a person/organization but has not yet been submitted to an organization. As such an requests can be stateless and is by definition without consequence until it is submitted. They represent a form free option for anything that is not an case and a handling route for information that will never become an case.
 
-Requests are designed to align with both [DSO]( https://redocly.github.io/redoc/?url=https://pre.omgevingswet.overheid.nl/knooppunt/apistore/api-docs/Rijkswaterstaat/Gebruikerstoepassingen-IndienenVerzoek/v1) and the case api [zaak-api]( https://zaken-api.vng.cloud/api/v1/schema), but primarily serves to support a [process]( http://ptc.zaakonline.nl). As such, small design interpretation might differ. They can be found in the [design_considerations]( https://github.com/gemeenteshertogenbosch/verzoekregistratiecomponent/blob/master/DESIGN.md).
+Technically requests are designed to align with both [DSO]( https://redocly.github.io/redoc/?url=https://pre.omgevingswet.overheid.nl/knooppunt/apistore/api-docs/Rijkswaterstaat/Gebruikerstoepassingen-IndienenVerzoek/v1) and the case api [zaak-api]( https://zaken-api.vng.cloud/api/v1/schema), but primely serve to support a [process]( http://ptc.zaakonline.nl). As such, small design interpretation might differ.  They can be found in the [design considerations]( https://github.com/gemeenteshertogenbosch/verzoekregistratiecomponent/blob/master/DESIGN.md).
               
 Request cannot be seen as an standalone entity as they take their definition from [request types]( http://vtc.zaakonline.nl/) where the actual rules that a request should adhere to are defined. Requests on them self only serve to store the in between and end results of processes.                
 
@@ -40,6 +40,6 @@ This component was created by conduction (https://www.conduction.nl/team) for th
 [![Conduction](https://raw.githubusercontent.com/ConductionNL/verzoeken/master/resources/logo-conduction.svg?sanitize=true "Conduction")](https://www.conduction.nl/)
 
 ## License
-Copyright [Gemeente 's-Hertogenbosch](https://www.s-hertogenbosch.nl/) 2019
+Copyright � [Gemeente 's-Hertogenbosch](https://www.s-hertogenbosch.nl/) 2019
 
 [Licensed under the EUPL](LICENCE.md)
