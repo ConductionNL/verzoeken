@@ -3034,7 +3034,7 @@ components:
   schemas:
     Archive-read:
       type: object
-      description: 'This is an example entity'
+      description: 'This is an example entity.'
       properties:
         id:
           readOnly: true
@@ -3046,46 +3046,15 @@ components:
         action_date:
           description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
           type: string
-          format: date-time
-        status:
-          description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
+        camelCase:
+          description: 'Proof that we camel case our api'
           type: string
-    Archive-write:
-      type: object
-      description: ''
-      properties:
-        nomination:
-          description: 'The archive nomination of the resource'
-          type: string
-        action_date:
-          description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
-          type: string
-          format: date-time
-        status:
-          description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
-          type: string
-    Organization-read:
-      type: object
-      description: 'An organization handling a request'
-      properties:
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this object'
-          type: string
-        rsin:
-          description: 'The RSIN of a organization that is handling or supposed to handle this request'
-          type: string
-        status:
-          type: string
-        request:
-          description: 'The request that this organsisation is handling'
-          $ref: '#/components/schemas/Request-read'
       required:
         - rsin
         - status
     Organization-write:
       type: object
-      description: 'An organization handling a request'
+      description: 'This is an example entity.'
       required:
         - rsin
         - status
@@ -3095,208 +3064,62 @@ components:
           type: string
         status:
           type: string
-        request:
-          description: 'The request that this organsisation is handling'
-          $ref: '#/components/schemas/Request-write'
-    Request-read:
-      type: object
-      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
-      properties:
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this resource'
+        camelCase:
+          description: 'Proof that we camel case our api'
           type: string
-        reference:
-          readOnly: true
-          description: 'The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations'
-          type: string
-        status:
-          description: 'The status of this request. e.g submitted'
-          type: string
-        request_type:
-          description: 'The type of request against which this request should be validated'
-          type: string
-        target_organization:
-          description: 'The RSIN of the organization that should handle this request'
-          type: string
-        submitter:
-          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
-          type: string
-        submitters:
-          description: 'The submitters of this request'
-          type: array
-          items:
-            $ref: '#/components/schemas/Submitter-read'
-        submitter_person:
-          description: 'True if the submitter is a person'
-          type: boolean
-        properties:
-          description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
-          type: array
-          items:
-            type: string
-        created_at:
-          readOnly: true
-          description: 'The moment this request was created by the submitter'
-          type: string
-          format: date-time
-        submitted_at:
-          readOnly: true
-          description: 'The moment this request was submitted by the submitter'
-          type: string
-          format: date-time
-        organizations:
-          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
-          type: array
-          items:
-            $ref: '#/components/schemas/Organization-read'
-        request_cases:
-          description: 'Any or all cases currently attached to this request'
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestCase-read'
-        parent:
-          description: 'The request that this request was based on'
-          $ref: '#/components/schemas/Request-read'
-        children:
-          description: 'The requests that are bassed on this request'
-          type: array
-          items:
-            $ref: '#/components/schemas/Request-read'
-        confidential:
-          description: 'Whether or not this request is considered confidential'
-          type: boolean
-        archive:
-          description: 'Archivation rules of this resource'
-          $ref: '#/components/schemas/Archive-read'
-      required:
-        - request_type
-    Request-write:
-      type: object
-      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
-      properties:
-        status:
-          description: 'The status of this request. e.g submitted'
-          type: string
-        request_type:
-          description: 'The type of request against which this request should be validated'
-          type: string
-        target_organization:
-          description: 'The RSIN of the organization that should handle this request'
-          type: string
-        submitter:
-          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
-          type: string
-        submitters:
-          description: 'The submitters of this request'
-          type: array
-          items:
-            $ref: '#/components/schemas/Submitter-write'
-        submitter_person:
-          description: 'True if the submitter is a person'
-          type: boolean
-        properties:
-          description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
-          type: array
-          items:
-            type: string
-        organizations:
-          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
-          type: array
-          items:
-            $ref: '#/components/schemas/Organization-write'
-        request_cases:
-          description: 'Any or all cases currently attached to this request'
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestCase-write'
-        parent:
-          description: 'The request that this request was based on'
-          $ref: '#/components/schemas/Request-write'
-        children:
-          description: 'The requests that are bassed on this request'
-          type: array
-          items:
-            $ref: '#/components/schemas/Request-write'
-        confidential:
-          description: 'Whether or not this request is considered confidential'
-          type: boolean
-        archive:
-          description: 'Archivation rules of this resource'
-          $ref: '#/components/schemas/Archive-write'
-      required:
-        - request_type
-    RequestCase-read:
-      type: object
-      description: 'An case atached to a request'
-      properties:
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this object'
-          type: string
-        request_case:
-          description: 'The OpenCase that is handling this request or supposed to handle this request'
-          type: string
-        request:
-          description: 'The request that this case is handling'
-          $ref: '#/components/schemas/Request-read'
-        case_number:
-          description: 'The number of an case'
-          type: string
-    RequestCase-write:
-      type: object
-      description: 'An case atached to a request'
-      properties:
-        request_case:
-          description: 'The OpenCase that is handling this request or supposed to handle this request'
-          type: string
-        request:
-          description: 'The request that this case is handling'
-          $ref: '#/components/schemas/Request-write'
-        case_number:
-          description: 'The number of an case'
-          type: string
-    Submitter-read:
-      type: object
-      description: 'The submitters of a request'
-      properties:
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this object'
-          type: string
-        assent:
-          description: 'The Assent that is used to check if this submitter given assent to this request'
-          type: string
-        person:
-          description: 'The BSN of the person that submitted this request'
-          type: string
-        organization:
-          description: 'The RSIN of the organization that submitted this request'
-          type: string
-        request:
-          description: 'The request that this submitter submitted'
-          $ref: '#/components/schemas/Request-read'
-        role:
-          type: string
-    Submitter-write:
-      type: object
-      description: 'The submitters of a request'
-      properties:
-        assent:
-          description: 'The Assent that is used to check if this submitter given assent to this request'
-          type: string
-        person:
-          description: 'The BSN of the person that submitted this request'
-          type: string
-        organization:
-          description: 'The RSIN of the organization that submitted this request'
-          type: string
-        request:
-          description: 'The request that this submitter submitted'
-          $ref: '#/components/schemas/Request-write'
-        role:
-          type: string
-host: vrc.zaakonline.nl
+definitions:
+  ExampleEntity-read:
+    properties:
+      id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        example: 'My Group'
+        maxLength: 255
+      description:
+        example: 'Is the best group ever'
+        maxLength: 2555
+      camelCase:
+        example: 'Best api ever'
+        maxLength: 255
+    required:
+      - name
+  ExampleEntity-write:
+    properties:
+      name:
+        example: 'My Group'
+        maxLength: 255
+      description:
+        example: 'Is the best group ever'
+        maxLength: 2555
+      camelCase:
+        example: 'Best api ever'
+        maxLength: 255
+    required:
+      - name
+tags:
+  -
+    name: ExampleEntity
+    description: |
+      This is an example entity.
+      
+      With an adtional description, all in all its pritty nice [url](www.google.nl)
+securityDefinitions:
+  JWT-Oauth:
+    type: oauth2
+    authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
+    flow: implicit
+    scopes:
+      read: 'read right to the ExampleEntity resource'
+      write: 'write right to the ExampleEntity resource'
+  JWT-Token:
+    type: apiKey
+    in: header
+    name: Authorization
+    scopes:
+      read: 'read right to the ExampleEntity resource'
+      write: 'write right to the ExampleEntity resource'
+host: irc.zaakonline.nl
 servers:
   -
     description: 'Demo Omgeving'
