@@ -1,15 +1,15 @@
 openapi: 3.0.2
 info:
-  title: 'Verzoek Regsitratie Component'
+  title: 'Verzoek Registratie Component'
   version: V.0.1
   description: |
     API Details
-    - Component: Verzoek Regsitratie Component
+    - Component: Verzoek Registratie Component
     - Reference: vrc
     - Enviroment: dev
     - Version: V.0.1
-    - Repository: [online](https://github.com/ConductionNL/Proto-component-commonground) / [zip](https://github.com/ConductionNL/Proto-component-commonground/archive/master.zip)
-    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pc-php) 
+    - Repository: [online](https://github.com/ConductionNL/verzoekregistratiecomponent) / [zip](https://github.com/ConductionNL/verzoekregistratiecomponent/archive/master.zip)
+    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
     - Datamodel: [postman](/schema/openapi.postman_collection) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
     'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
@@ -74,21 +74,17 @@ paths:
           schema:
             type: integer
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -100,12 +96,56 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
     post:
       tags:
         - Archive
@@ -178,21 +218,17 @@ paths:
         description: 'The new Archive resource'
       parameters:
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -204,10 +240,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
   '/archives/{id}':
@@ -224,21 +260,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -250,12 +282,54 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
       responses:
         200:
           description: 'Archive resource response'
@@ -286,6 +360,8 @@ paths:
                 $ref: '#/components/schemas/Archive-read'
         404:
           description: 'Resource not found'
+      produces:
+        - application/health+json
     delete:
       tags:
         - Archive
@@ -304,21 +380,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -330,10 +402,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
     put:
@@ -349,21 +421,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -375,10 +443,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
       responses:
@@ -453,21 +521,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -479,10 +543,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
       responses:
@@ -905,6 +969,8 @@ paths:
                 $ref: '#/components/schemas/Organization-read'
         404:
           description: 'Resource not found'
+      produces:
+        - application/health+json
     delete:
       tags:
         - Organization
@@ -948,7 +1014,7 @@ paths:
           description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
     put:
@@ -1210,21 +1276,17 @@ paths:
           schema:
             type: integer
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -1236,12 +1298,56 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
     post:
       tags:
         - RequestCase
@@ -1314,21 +1420,17 @@ paths:
         description: 'The new RequestCase resource'
       parameters:
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -1340,10 +1442,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
   '/request_cases/{id}':
@@ -1360,21 +1462,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -1386,12 +1484,54 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
       responses:
         200:
           description: 'RequestCase resource response'
@@ -1422,6 +1562,8 @@ paths:
                 $ref: '#/components/schemas/RequestCase-read'
         404:
           description: 'Resource not found'
+      produces:
+        - application/health+json
     delete:
       tags:
         - RequestCase
@@ -1440,21 +1582,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -1466,10 +1604,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
     put:
@@ -1485,21 +1623,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -1511,10 +1645,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
       responses:
@@ -1589,21 +1723,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -1615,10 +1745,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
       responses:
@@ -2031,21 +2161,17 @@ paths:
           schema:
             type: integer
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2057,12 +2183,56 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
     post:
       tags:
         - Request
@@ -2135,21 +2305,17 @@ paths:
         description: 'The new Request resource'
       parameters:
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2161,10 +2327,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
   '/requests/{id}':
@@ -2181,21 +2347,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2207,12 +2369,54 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
       responses:
         200:
           description: 'Request resource response'
@@ -2243,6 +2447,8 @@ paths:
                 $ref: '#/components/schemas/Request-read'
         404:
           description: 'Resource not found'
+      produces:
+        - application/health+json
     delete:
       tags:
         - Request
@@ -2261,21 +2467,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2287,10 +2489,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
     put:
@@ -2306,21 +2508,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2332,10 +2530,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
       responses:
@@ -2410,21 +2608,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2436,10 +2630,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
       responses:
@@ -2560,21 +2754,17 @@ paths:
           schema:
             type: integer
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2586,12 +2776,56 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
     post:
       tags:
         - Submitter
@@ -2664,21 +2898,17 @@ paths:
         description: 'The new Submitter resource'
       parameters:
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2690,10 +2920,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
   '/submitters/{id}':
@@ -2710,21 +2940,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2736,12 +2962,54 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
       responses:
         200:
           description: 'Submitter resource response'
@@ -2772,6 +3040,8 @@ paths:
                 $ref: '#/components/schemas/Submitter-read'
         404:
           description: 'Resource not found'
+      produces:
+        - application/health+json
     delete:
       tags:
         - Submitter
@@ -2790,21 +3060,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2816,10 +3082,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
     put:
@@ -2835,21 +3101,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2861,10 +3123,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
       responses:
@@ -2939,21 +3201,17 @@ paths:
           schema:
             type: string
         -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
           name: API-Version
           description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
           example: 1.0.1
           in: header
         -
-          name: X-NLX-Request-User-Id
-          description: 'The id of the user performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Application-Id
-          description: 'The id of the application performing the request'
-          in: header
-        -
-          name: X-NLX-Request-Subject-Identifier
-          description: 'An subject identifier for purpose registration (doelbinding)'
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
           in: header
         -
           name: X-NLX-Request-Process-Id
@@ -2965,10 +3223,10 @@ paths:
           in: header
         -
           name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678,kenteken=ab-12-fg`'
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
           in: header
         -
-          name: X-Audit-Clarification
+          name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
       responses:
@@ -3034,7 +3292,7 @@ components:
   schemas:
     Archive-read:
       type: object
-      description: 'This is an example entity.'
+      description: ''
       properties:
         id:
           readOnly: true
@@ -3043,18 +3301,49 @@ components:
         nomination:
           description: 'The archive nomination of the resource'
           type: string
-        action_date:
+        actionDate:
           description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
           type: string
-        camelCase:
-          description: 'Proof that we camel case our api'
+          format: date-time
+        status:
+          description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
           type: string
+    Archive-write:
+      type: object
+      description: ''
+      properties:
+        nomination:
+          description: 'The archive nomination of the resource'
+          type: string
+        actionDate:
+          description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
+          type: string
+          format: date-time
+        status:
+          description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
+          type: string
+    Organization-read:
+      type: object
+      description: 'An organization handling a request'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          type: string
+        rsin:
+          description: 'The RSIN of a organization that is handling or supposed to handle this request'
+          type: string
+        status:
+          type: string
+        request:
+          description: 'The request that this organsisation is handling'
+          $ref: '#/components/schemas/Request-read'
       required:
         - rsin
         - status
     Organization-write:
       type: object
-      description: 'This is an example entity.'
+      description: 'An organization handling a request'
       required:
         - rsin
         - status
@@ -3064,62 +3353,441 @@ components:
           type: string
         status:
           type: string
-        camelCase:
-          description: 'Proof that we camel case our api'
+        request:
+          description: 'The request that this organsisation is handling'
+          $ref: '#/components/schemas/Request-write'
+    Request-read:
+      type: object
+      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          type: string
+        reference:
+          readOnly: true
+          description: 'The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations'
+          type: string
+        status:
+          description: 'The status of this request. e.g submitted'
+          type: string
+        requestType:
+          description: 'The type of request against which this request should be validated'
+          type: string
+        targetOrganization:
+          description: 'The RSIN of the organization that should handle this request'
+          type: string
+        submitter:
+          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
+          type: string
+        submitters:
+          description: 'The submitters of this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Submitter-read'
+        submitterPerson:
+          description: 'True if the submitter is a person'
+          type: boolean
+        properties:
+          description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
+          type: array
+          items:
+            type: string
+        createdAt:
+          readOnly: true
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+        submittedAt:
+          readOnly: true
+          description: 'The moment this request was submitted by the submitter'
+          type: string
+          format: date-time
+        organizations:
+          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization-read'
+        requestCases:
+          description: 'Any or all cases currently attached to this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestCase-read'
+        parent:
+          description: 'The request that this request was based on'
+          $ref: '#/components/schemas/Request-read'
+        children:
+          description: 'The requests that are bassed on this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Request-read'
+        confidential:
+          description: 'Whether or not this request is considered confidential'
+          type: boolean
+        archive:
+          description: 'Archivation rules of this resource'
+          $ref: '#/components/schemas/Archive-read'
+      required:
+        - requestType
+    Request-write:
+      type: object
+      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
+      properties:
+        status:
+          description: 'The status of this request. e.g submitted'
+          type: string
+        requestType:
+          description: 'The type of request against which this request should be validated'
+          type: string
+        targetOrganization:
+          description: 'The RSIN of the organization that should handle this request'
+          type: string
+        submitter:
+          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
+          type: string
+        submitters:
+          description: 'The submitters of this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Submitter-write'
+        submitterPerson:
+          description: 'True if the submitter is a person'
+          type: boolean
+        properties:
+          description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
+          type: array
+          items:
+            type: string
+        organizations:
+          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization-write'
+        requestCases:
+          description: 'Any or all cases currently attached to this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestCase-write'
+        parent:
+          description: 'The request that this request was based on'
+          $ref: '#/components/schemas/Request-write'
+        children:
+          description: 'The requests that are bassed on this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Request-write'
+        confidential:
+          description: 'Whether or not this request is considered confidential'
+          type: boolean
+        archive:
+          description: 'Archivation rules of this resource'
+          $ref: '#/components/schemas/Archive-write'
+      required:
+        - requestType
+    RequestCase-read:
+      type: object
+      description: 'An case atached to a request'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          type: string
+        requestCase:
+          description: 'The OpenCase that is handling this request or supposed to handle this request'
+          type: string
+        request:
+          description: 'The request that this case is handling'
+          $ref: '#/components/schemas/Request-read'
+        caseNumber:
+          description: 'The number of an case'
+          type: string
+    RequestCase-write:
+      type: object
+      description: 'An case atached to a request'
+      properties:
+        requestCase:
+          description: 'The OpenCase that is handling this request or supposed to handle this request'
+          type: string
+        request:
+          description: 'The request that this case is handling'
+          $ref: '#/components/schemas/Request-write'
+        caseNumber:
+          description: 'The number of an case'
+          type: string
+    Submitter-read:
+      type: object
+      description: 'The submitters of a request'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          type: string
+        assent:
+          description: 'The Assent that is used to check if this submitter given assent to this request'
+          type: string
+        person:
+          description: 'The BSN of the person that submitted this request'
+          type: string
+        organization:
+          description: 'The RSIN of the organization that submitted this request'
+          type: string
+        request:
+          description: 'The request that this submitter submitted'
+          $ref: '#/components/schemas/Request-read'
+        role:
+          type: string
+    Submitter-write:
+      type: object
+      description: 'The submitters of a request'
+      properties:
+        assent:
+          description: 'The Assent that is used to check if this submitter given assent to this request'
+          type: string
+        person:
+          description: 'The BSN of the person that submitted this request'
+          type: string
+        organization:
+          description: 'The RSIN of the organization that submitted this request'
+          type: string
+        request:
+          description: 'The request that this submitter submitted'
+          $ref: '#/components/schemas/Request-write'
+        role:
           type: string
 definitions:
-  ExampleEntity-read:
+  Archive-read:
     properties:
       id:
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      name:
-        example: 'My Group'
-        maxLength: 255
-      description:
-        example: 'Is the best group ever'
-        maxLength: 2555
-      camelCase:
-        example: 'Best api ever'
-        maxLength: 255
-    required:
-      - name
-  ExampleEntity-write:
+      nomination:
+        example: destroy
+      actionDate: []
+      status:
+        example: to_be_archived
+    required: []
+  Archive-write:
     properties:
-      name:
-        example: 'My Group'
+      nomination:
+        example: destroy
+      actionDate: []
+      status:
+        example: to_be_archived
+    required: []
+  Organization-read:
+    properties:
+      id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      rsin:
+        example: '002851234'
+      status:
+        example: none
         maxLength: 255
-      description:
-        example: 'Is the best group ever'
-        maxLength: 2555
-      camelCase:
-        example: 'Best api ever'
-        maxLength: 255
+      createdAt: []
+      request: []
     required:
-      - name
+      - rsin
+      - status
+  Organization-write:
+    properties:
+      rsin:
+        example: '002851234'
+      status:
+        example: none
+        maxLength: 255
+      request: []
+    required:
+      - rsin
+      - status
+  Request-read:
+    properties:
+      id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      reference:
+        maxLength: 255
+      status:
+        example: incomplete
+        maxLength: 255
+      requestType:
+        example: 'http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
+        format: url
+        maxLength: 255
+      targetOrganization:
+        example: '002851234'
+      submitter:
+        example: '002851234'
+      submitterPerson:
+        example: 'true'
+      properties:
+        example: '}'
+      processType:
+        example: 'http://ptc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
+        format: url
+        maxLength: 255
+      createdAt: []
+      submittedAt: []
+      confidential:
+        example: 'false'
+      submitters: []
+      organizations: []
+      requestCases: []
+      parent: []
+      children: []
+      archive: []
+    required:
+      - requestType
+  Request-write:
+    properties:
+      status:
+        example: incomplete
+        maxLength: 255
+      requestType:
+        example: 'http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
+        format: url
+        maxLength: 255
+      targetOrganization:
+        example: '002851234'
+      submitter:
+        example: '002851234'
+      submitterPerson:
+        example: 'true'
+      properties:
+        example: '}'
+      processType:
+        example: 'http://ptc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
+        format: url
+        maxLength: 255
+      confidential:
+        example: 'false'
+      submitters: []
+      organizations: []
+      requestCases: []
+      parent: []
+      children: []
+      archive: []
+    required:
+      - requestType
+  RequestCase-read:
+    properties:
+      id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      requestCase:
+        example: zrc.gemeente.nl/case/e2984465-190a-4562-829e-a8cca81aa35d
+        format: url
+        maxLength: 255
+      createdAt: []
+      caseNumber:
+        example: '12345'
+        maxLength: 255
+      request: []
+    required: []
+  RequestCase-write:
+    properties:
+      requestCase:
+        example: zrc.gemeente.nl/case/e2984465-190a-4562-829e-a8cca81aa35d
+        format: url
+        maxLength: 255
+      caseNumber:
+        example: '12345'
+        maxLength: 255
+      request: []
+    required: []
+  Submitter-read:
+    properties:
+      id:
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      assent:
+        example: irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d
+        format: url
+        maxLength: 255
+      contact:
+        example: crc.zaakonline.nl/person/e2984465-190a-4562-829e-a8cca81aa35d
+        format: url
+        maxLength: 255
+      person:
+        example: '999993653'
+        maxLength: 10
+      organization:
+        example: '002851234'
+        maxLength: 10
+      createdAt: []
+      role:
+        example: initiator
+        maxLength: 255
+      request: []
+    required: []
+  Submitter-write:
+    properties:
+      assent:
+        example: irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d
+        format: url
+        maxLength: 255
+      contact:
+        example: crc.zaakonline.nl/person/e2984465-190a-4562-829e-a8cca81aa35d
+        format: url
+        maxLength: 255
+      person:
+        example: '999993653'
+        maxLength: 10
+      organization:
+        example: '002851234'
+        maxLength: 10
+      role:
+        example: initiator
+        maxLength: 255
+      request: []
+    required: []
 tags:
   -
-    name: ExampleEntity
+    name: Archive
     description: |
-      This is an example entity.
       
-      With an adtional description, all in all its pritty nice [url](www.google.nl)
+      
+      
+  -
+    name: Organization
+    description: |
+      An organization handling a request
+      
+      
+  -
+    name: Request
+    description: |
+      A request (or verzoek in dutch) to an organization (usually governmental) to do 'something' on behalf of a citizen or another organization
+      
+      
+  -
+    name: RequestCase
+    description: |
+      An case atached to a request
+      
+      
+  -
+    name: Submitter
+    description: |
+      The submitters of a request
+      
+      
 securityDefinitions:
   JWT-Oauth:
     type: oauth2
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ExampleEntity resource'
-      write: 'write right to the ExampleEntity resource'
+      read: 'read right to the Submitter resource'
+      write: 'write right to the Submitter resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ExampleEntity resource'
-      write: 'write right to the ExampleEntity resource'
-host: irc.zaakonline.nl
+      read: 'read right to the Submitter resource'
+      write: 'write right to the Submitter resource'
+host: vrc.zaakonline.nl
 servers:
   -
     description: 'Demo Omgeving'
@@ -3129,7 +3797,7 @@ externalDocs:
     description: 'OAS Documentatie'
     url: 'http://verzoeken.zaakonline.nl/'
 x-commonground:
-  type: service
+  type: tool
   developers:
     -
       name: Conduction

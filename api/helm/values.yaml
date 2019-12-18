@@ -1,17 +1,15 @@
 # Default values for api.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-docker:
-  containerRegistryBase: docker.io/conduction/
-  containerProjectName: vrc
 
 settings:
   registryBase: docker.io/conduction
   projectName: vrc
-  name: pc
-  title: Proto Component
+  name: vrc
+  title: Verzoek Registratie Component
+  version: V.0.1
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
-  repro: 'https://github.com/ConductionNL/Proto-component-commonground'
+  repro: 'https://github.com/ConductionNL/verzoekregistratiecomponent'
   domain: conduction.nl  
   organisationName: Conduction
   email: info@conduction.nl
@@ -69,14 +67,14 @@ postgresql:
   enabled: true
   imageTag: 10-alpine
   # If bringing your own PostgreSQL, the full uri to use
-  # url: postgres://requests-demo:owjrblxv35fg610a@den-bosh-postgresql-ams3-03414-do-user-4716261-0.db.ondigitalocean.com:25060/requests-demo?sslmode=require
+  #url: pgsql://api-platform:!ChangeMe!@example.com/api?serverVersion=10.1
   postgresqlUsername: "example"
   postgresqlPassword: "!ChangeMe!"
   postgresqlDatabase: "api"
   # Persistent Volume Storage configuration.
   # ref: https://kubernetes.io/docs/user-guide/persistent-volumes
   persistence:
-    enabled: true
+    enabled: false
   pullPolicy: IfNotPresent
 #  image:
 #    repository: postgres
