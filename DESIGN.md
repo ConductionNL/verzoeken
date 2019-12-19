@@ -131,7 +131,7 @@ We implement both endpoint and header versioning
 
 Extending
 -------
-A part of the [haal centraal](https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/master/api-specificatie/Bevraging-Ingeschreven-Perso on/openapi.yaml) the concept of extending has been introduced, its general purpose being to allow the inclusion of sub resources at an api level thereby preventing unnecessary API calls. In the [NL API Strategie](https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/master/features/expand.feature) this has been implemented as a parameter consisting of comma separated values. However the normal web standard for optional lists (conform w3c form standards) is an array.
+A part of the [haal_centraal](https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/master/api-specificatie/Bevraging-Ingeschreven-Perso on/openapi.yaml) the concept of extending has been introduced, its general purpose being to allow the inclusion of sub resources at an api level thereby preventing unnecessary API calls. In the [NL API Strategie](https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/master/features/expand.feature) this has been implemented as a parameter consisting of comma separated values. However the normal web standard for optional lists (conform w3c form standards) is an array.
 
 __solution__
 The extend parameter has been implemented as an array
@@ -151,6 +151,7 @@ There is a need (by law) for archivation, meaning that we should only keep resou
 ```
 
 This gives us an interesting thought, according to [NL API Strategie](https://docs.geostandaarden.nl/api/API-Strategie/#api-10-implement-operations-that-do-not-fit-the-crud-model-as-sub-resources) sub resources should have their own endpoint. Therefore we could use a archive sub of a different resource for archivation rules e.g. /zaken/{uuid}/archivation for a verzoek. This in itself leads credence to the thought that archivation should have its own central crud api.
+
 
 
 Audittrail
@@ -196,13 +197,14 @@ No solution as of yet, so there is no implementation of Authorization or Scopes.
 
 Timetravel
 -------
-A part of the [haal centraal](https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/master/api-specificatie/Bevraging-Ingeschreven-Persoon/openapi.yaml) the concept of timetravel has been introduced, as in getting the version of an object as it was on a given date. For this the `geldigop` [see the docs](file:///C:/Users/ruben/Desktop/doc_gba_historie.html#operation/getBewoningen) header is used. In addition the `geldigvan` and `geldigtot` are introduced as collection filters. 
+A part of the [haal_centraal](https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/master/api-specificatie/Bevraging-Ingeschreven-Persoon/openapi.yaml) the concept of timetravel has been introduced, as in getting the version of an object as it was on a given date. For this the `geldigop` [see the docs](file:///C:/Users/ruben/Desktop/doc_gba_historie.html#operation/getBewoningen) header is used. In addition the `geldigvan` and `geldigtot` are introduced as collection filters. 
 
 The commonground proto componant natively supports time traveling on all resources that are annotaded with the @Gedmo\Loggable, this is done by adding the ?validOn=[date] query to a request, date can either be a datetime or datedatime string. Any value supported by php's [strtotime()](https://www.php.net/manual/en/function.strtotime.php) is supported. Keep in mind that this returns the entity a as it was valid on that time or better put, the last changed version BEFORE that moment. To get a complete list of all changes on an item the [/audittrail](#Audittrail
 ) endpoint can be used.
 
 __solution__
 In compliance with [schema.org](https://schema.org/validFrom) `geldigop`,`geldigvan` and `geldigtot` are implemented as `validOn`,`validFrom` and `validUntil`. And can be used a query parameters on collection operations/
+
 
 Additionally `validOn` can be used on a single object get request to get the version of that object on a given date, a 404 is returned if no version of that object can be given for the given date 
 
@@ -223,7 +225,7 @@ Arrays
 -------
 The NL API standard uses comma notation on array's in http requests. E.g. fields=id,name,description however common browsers(based on chromium e.g. chrome and edge) use bracket notation for query style array's e.g. fields[]=id&fields[]=name,&fields[]=description. The difference of course is obvious since comma notation doesn't allow you to index arrays. [Interestingly enough there isn't actually a rfc spec for this](https://stackoverflow.com/questions/15854017/what-rfc-defines-arrays-transmitted-over-http). 
 
-It is perceivable that in future iterations we would like to use indexed array in situations where the index of the array can't be assumed on basis of url notation, when indexes aren�t numerical, when we don�t want an index to start at 0 or when indexes are purpusly missing (comma notation of id,name,description would always refert to the equivalent of fields: [
+It is perceivable that in future iterations we would like to use indexed array in situations where the index of the array can't be assumed on basis of url notation, when indexes aren't numerical, when we don�t want an index to start at 0 or when indexes are purposely missing (comma notation of id,name,description would always refert to the equivalent of fields: [
   0 => id,
   1 => name,
   2 => description
@@ -249,6 +251,7 @@ __Regex Contains__
 __Like___
 The like filters is used to search for resources with the traditional sql LIKE operator. If pattern does not contain percent signs or underscores, then the pattern only represents the string itself; in that case LIKE acts like the equals operator. An underscore (_) in pattern stands for (matches) any single character; a percent sign (%) matches any sequence of zero or more characters.
 
+
 Some examples:
 
 'abc' LIKE 'abc'    true
@@ -264,6 +267,7 @@ To match a literal underscores or percentage signs without matching other charac
 
 ### Loadbalancers
 We no longer provide a load balancer per component, since this would require a IP address per component (and ipv 4 addresses are in short supply). Instead we make components available as an internal service. A central load balancer could then be used to provide several api�s in one 
+
 
 ### server naming
 A component is (speaking in kubernetes terms) a service that is available at a name corresponding to its designation 

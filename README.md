@@ -3,16 +3,16 @@
 [![Status badge](https://img.shields.io/endpoint.svg?style=for-the-badge&url=https%3A//api-test.nl/api/v1/provider-latest-badge/5a146368-56a0-4092-8630-f806fc86ef50/)](https://api-test.nl/api/v1/provider-latest-badge/5a146368-56a0-4092-8630-f806fc86ef50/)
 ![Repo Status](https://img.shields.io/badge/status-concept-lightgrey.svg?style=plastic)
 
-The request component handles request by a person to an organisation, and validation thereof. Examples of requests could be a persons wishing to declare a relocation (verhuizing in dutch) to his new municipality or an intention to marry (melding voorgenomen huwelijk) to his or her municipality.   
+The request component handles request by a person to an organization, and validation thereof. Examples of requests could be a persons wishing to declare a relocation (verhuizing in dutch) to his new municipality or an intention to marry (melding voorgenomen huwelijk) to his or her municipality.   
 
-Requests signify a request that has been either made by a person/organization to an specific organization or an request that is being formulated by a person/organization but has not yet been submitted to an organization. As such an requests can be stateless, and is by definition without consequence until it is submitted. In that they represent an a form free option for anything that is not an case and an handling route for information that will never become an case.
+Requests signify a request that has either been made by a person/organization to an specific organization, or an request that is being formulated by a person/organization but has not yet been submitted to an organization. As such an requests can be stateless and is by definition without consequence until it is submitted. They represent a form free option for anything that is not an case and a handling route for information that will never become an case.
 
 Technically requests are designed to align with both [DSO]( https://redocly.github.io/redoc/?url=https://pre.omgevingswet.overheid.nl/knooppunt/apistore/api-docs/Rijkswaterstaat/Gebruikerstoepassingen-IndienenVerzoek/v1) and the case api [zaak-api]( https://zaken-api.vng.cloud/api/v1/schema), but primely serve to support a [process]( http://ptc.zaakonline.nl). As such, small design interpretation might differ.  They can be found in the [design considerations]( https://github.com/gemeenteshertogenbosch/verzoekregistratiecomponent/blob/master/DESIGN.md).
               
 Request cannot be seen as an standalone entity as they take their definition from [request types]( http://vtc.zaakonline.nl/) where the actual rules that a request should adhere to are defined. Requests on them self only serve to store the in between and end results of processes.                
 
 ## Questions and contributing
-Read more about how to ask qoustions, reporte or contribute (with code, documantaition or examples) in [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Read more about how to ask questions, report or contribute (with code, documentaition or examples) in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Documentation
 

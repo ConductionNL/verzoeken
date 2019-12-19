@@ -13,11 +13,11 @@ parameters:
     common_ground.oas.servers:
             -
               description: Demo Omgeving
-              url: 'http://verzoeken.zaakonline.nl/'       
+              url: 'http://vrc.demo.common-ground.dev/'       
     common_ground.oas.externalDocs:
             -
               description: OAS Documentatie
-              url: 'http://verzoeken.zaakonline.nl/'  
+              url: 'http://vrc.demo.common-ground.dev/'  
     common_ground.oas.developers:
             -
               name: Conduction
