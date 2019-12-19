@@ -59,6 +59,7 @@ $ kubectl -n kube-system get secret  --kubeconfig="kubeconfig.yaml"
 
 Because we just bound tiller to our admin account and use tiller (trough helm) to manage our code deployment it makes sense to use the tiller token, lets look at the tiller secret (it should look something like "tiller-token-XXXXX" and ask for the corresponding token. 
 
+
 ```CLI
 $ kubectl -n kube-system describe secrets tiller-token-xxxxx  --kubeconfig="kubeconfig.yaml"
 ```
@@ -104,15 +105,10 @@ $ helm dependency update ./api/helm
 ```
 If you want to create a new instance
 ```CLI
-$ helm install --name pc-dev ./api/helm  --kubeconfig="api/helm/kubeconfig.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1
-$ helm install --name pc-stag ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=stag --set settings.env=stag,settings.debug=0
-$ helm install --name pc-prod ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=prod --set settings.env=prod,settings.debug=0
-```
 
-```CLI
-$ helm install ./api/helm --name vrc-dev --kubeconfig="api/helm/kubeconfig.yaml"   --set settings.env=dev,settings.debug=1
-$ helm install ./api/helm --name vrc-stag --kubeconfig="api/helm/kubeconfig.yaml"  --set settings.env=stag,settings.debug=0
-$ helm install ./api/helm --name vrc-prod --kubeconfig="api/helm/kubeconfig.yaml"  --set settings.env=prod,settings.debug=0
+$ helm install --name vrc-dev ./api/helm  --kubeconfig="api/helm/kubeconfig.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1
+$ helm install --name vrc-stag ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=stag --set settings.env=stag,settings.debug=0
+$ helm install --name vrc-prod ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=prod --set settings.env=prod,settings.debug=0 
 ```
 
 Or update if you want to update an existing one
@@ -124,12 +120,10 @@ $ helm upgrade pc-prod ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --name
 
 Or del if you want to delete an existing  one
 ```CLI
-$ helm del pc-dev  --purge --kubeconfig="api/helm/kubeconfig.yaml" 
-$ helm del pc-stag --purge --kubeconfig="api/helm/kubeconfig.yaml" 
-$ helm del pc-prod --purge --kubeconfig="api/helm/kubeconfig.yaml" 
+$ helm del vrc-dev  --purge --kubeconfig="api/helm/kubeconfig.yaml --namespace=dev" 
+$ helm del vrc-stag --purge --kubeconfig="api/helm/kubeconfig.yaml --namespace=stag" 
+$ helm del vrc-prod --purge --kubeconfig="api/helm/kubeconfig.yaml --namespace=prod" 
 ```
-
-
 
 ## Making your app known on NLX
 The proto component comes with an default NLX setup, if you made your own component however you might want to provide it trough the [NLX](https://www.nlx.io/) service. Fortunately the proto component comes with an nice setup for NLX integration.
@@ -150,7 +144,7 @@ Have you seen our sweet support-chat on the documentation page? We didn't build 
 Would you like to use a different analytics or chat-tool? Just shoot us a [feature request](https://github.com/ConductionNL/commonground-component/issues/new?assignees=&labels=&template=feature_request.md&title=New%20Analytics%20or%20Chat%20provider)!  
 
 ## Setting up NLX
-Let first check if we have a propper nlx root certidicate
+Lets first check if we have a propper nlx root certificate
 
 ```
 docker-compose exec vrc-php openssl x509 -in nlx-setup/root.crt -text | grep Subject:

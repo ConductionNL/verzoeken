@@ -3791,11 +3791,11 @@ host: vrc.zaakonline.nl
 servers:
   -
     description: 'Demo Omgeving'
-    url: 'http://verzoeken.zaakonline.nl/'
+    url: 'http://vrc.demo.common-ground.dev/'
 externalDocs:
   -
     description: 'OAS Documentatie'
-    url: 'http://verzoeken.zaakonline.nl/'
+    url: 'http://vrc.demo.common-ground.dev/'
 x-commonground:
   type: tool
   developers:

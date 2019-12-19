@@ -1,6 +1,6 @@
 # CONTRIBUTING
 
-We – [Gemeente 's-Hertogenbosch](https://www.s-hertogenbosch.nl/) and the maintainers of this project – know we can only create this standard together with you. Thus we appreciate your input, enjoy feedback and welcome improvements to this project and are very open to collaboration.
+We, the municipalities and the maintainers of this project know, we can only create this standard together with you. Thus we appreciate your input, enjoy feedback and welcome improvements to this project and are very open to collaboration.
 
 We love issues and pull requests from everyone.
 
@@ -18,7 +18,7 @@ This project uses the **OneFlow branching model** and workflow. When you've fork
 
 Add your changes in commits [with a message that explains them](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message). Document choices or decisions you make in the commit message, this will enable everyone to be informed of your choices in the future.
 
-If you are adding code, make sure you've added and updated the relevant documentation and tests before you submit your pull request. Make sure to write tests that show the behaviour of the newly added or changed code.
+If you are adding code, make sure you've added and updated the relevant documentation and tests before you submit your pull request. Make sure to write tests that show the behavior of the newly added or changed code.
 
 ### 2. Pull Request
 
