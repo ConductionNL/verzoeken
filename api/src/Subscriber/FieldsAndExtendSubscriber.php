@@ -54,7 +54,7 @@ class FieldsAndExtendSubscriber implements EventSubscriberInterface
         }
         
         // Its possible to nest fields for filterins
-        foreach($fields as $key->$value){
+        foreach($fields as $key => $value){
         	// Lets check if the fields contain one or more .'s
         	if (strpos($value, '.') !== false) {
         		// This is where it gets complicated couse it could go on indevinitly        		
