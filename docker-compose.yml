@@ -8,6 +8,7 @@ x-cache:
     - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-varnish
     - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-admin
     - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-client
+    - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-h2-proxy
 
 services:
   php:
@@ -30,13 +31,12 @@ services:
       - CONTAINER_PROJECT_NAME=${CONTAINER_PROJECT_NAME}
       - CONTAINER_REPRO=${CONTAINER_REPRO}
       - DATABASE_URL=postgres://api-platform:!ChangeMe!@db/api?serverVersion=10.1
-      #- DATABASE_URL=mysql://api-platform:!ChangeMe!@db/api?serverVersion=10.1
       - APP_ENV=${APP_ENV}
       - APP_DEBUG=${APP_DEBUG} 
       - APP_VERSION=${APP_VERSION}    
       - APP_NAME=${APP_NAME} 
       - APP_TITLE=${APP_TITLE}
-      - APP_SUBDOMAIN=${APP_SUBDOMAIN}
+      - APP_DOMAIN=${APP_DOMAIN}
       - APP_DOMAINS=${APP_DOMAINS}
       - APP_DEMO=${APP_DEMO}
       - APP_REPRO=${APP_REPRO}
@@ -176,17 +176,6 @@ services:
       - POSTGRES_PASSWORD=!ChangeMe!
     volumes:
       - db-data:/var/lib/postgresql/data:rw
-    
-  #db:
-  #  image: mysql:5.6
-  #  restart: always
-  #  environment:
-  #    - MYSQL_ROOT_PASSWORD=example
-  #    - MYSQL_DATABASE=api
-  #    - MYSQL_USER=api-platform
-  #    - MYSQL_PASSWORD=!ChangeMe!
-  #  volumes:
-  #    - db-mysql:/var/lib/mysql:rw 
 
   mercure:
     # In production, you may want to use the managed version of Mercure, https://mercure.rocks
@@ -208,7 +197,7 @@ services:
     build:
       context: ./client
       cache_from:
-        - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-client
+        - ${CONTAINER_REGISTRY_BASE}/client
     env_file:
       - ./client/.env
     volumes:
@@ -218,7 +207,7 @@ services:
   admin:
     # Use a static website hosting service in production
     # See https://facebook.github.io/create-react-app/docs/deployment
-    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-admin
+    image: ${CONTAINER_REGISTRY_BASE}/admin
     build:
       context: ./admin
       cache_from:
@@ -234,7 +223,6 @@ services:
       cache_from:
         - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-h2-proxy
     depends_on:
-      - db
       - client
       - admin
       - api
@@ -261,5 +249,4 @@ networks:
 
 volumes:
   db-data: {}
-  db-mysql: {}
   nlx-data-2: {}

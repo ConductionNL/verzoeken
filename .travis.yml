@@ -86,7 +86,6 @@ deploy:
     on:
         branch: staging  
         
-        
 # kubectl rollout restart       
 
 # we also want to warn the common-ground dev page that a change has been made 

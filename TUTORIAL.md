@@ -18,7 +18,7 @@ You can install docker-desktop from [the docker website](https://hub.docker.com/
 ## Generating your component (repository/codebase)
 Starting up your first Common Ground component is extremely easy, al you need is a GitHub account and go the link below and fill in the form, press create and press to we have a component!
 
-[https://github.com/ConductionNL/Proto-component-commonground/generate](https://github.com/ConductionNL/Proto-component-commonground/generate)
+[https://github.com/ConductionNL/Proto-component-commonground/generate](https://github.com/ConductionNL/Proto-component-commonground/generate) 
 
 After that you should be redirected to your own brand new repository. 
 
@@ -41,7 +41,7 @@ cd c:\repos\common-ground\my-component (if you installed your code on a differen
 $ docker-compose up
 ```
 
-Your computer should now start up your local development environment. Don’t worry about al the code coming by, let's just wait until it finishes. You're free to watch along and see what exactly docker is doing, you will know when it's finished when it tells you that it is ready to handle connections. 
+Your computer should now start up your local development environment. Don't worry about al the code coming by, let's just wait until it finishes. You're free to watch along and see what exactly docker is doing, you will know when it's finished when it tells you that it is ready to handle connections. 
 
 Open your browser type <http://localhost/> as address and hit enter, you should now see your common ground component up and running.
 
@@ -65,7 +65,7 @@ First let's remove the resources currently in the api, we can do that by just re
 
 Next let's add our own resources, we can do this in two ways, we can do old fashioned coding, but we can also use the build in maker bundle of the proto component, to quickly generate our entities for us (without the fuss of actual coding).
  
-Let's open a new command line window and navigate to our root folder, exactly like we did under *“spinning up your component”*. And then lets fire up maker bundle (make sure that your component is still running in your other command window). We can do so by the following command:
+Let's open a new command line window and navigate to our root folder, exactly like we did under "spinning up your component". And then lets fire up maker bundle (make sure that your component is still running in your other command window). We can do so by the following command:
 
 ```CLI
 $ docker-compose exec php bin/console make:entity
@@ -112,7 +112,6 @@ Keep in mind that you wil need to make sure to stay up to date about changes on 
 Right now the name of your component is `commonground component` and its unique id `cg` that's that's fine while running it locally or in its own kubernetes cluster but wil get you in when running it with other components when it without using a name space. So its good practice to name your component distinctly. But besides al of these practical reasons its of course also just cool to name your child before you unleash it on the unsuspecting common ground community.
 
 Oke, so before we can nae the component we need to come up with a name. There are a couple of conventions here. First of the name should tell us what the component does, or is supposed to do with one or two words. So we would normally call an component about dogs the DogComponent and one about cats te CatComponent. The second convention is that we don't usually actually name our component 'component' but indicate its position in de common ground architecture. For that we have the following options:
-
 * Catalogus
 * RegistratieComponent
 * Service
@@ -124,7 +123,6 @@ The actual name change is rather simple doh, just head over to the .env that con
 
 ## Setting up security and access 
 We want to secure our resources in such a way that only users or applications with propper right can acces and update properties. 
-
 
 ```PHP
 // src/Entity/Organisation.php
@@ -152,7 +150,6 @@ class Organisation
 ## Using validation
 Right now we are just accepting data and passing them on to the database, and in a mock or poc context this is fine. Most of the calls will end up being get requests anyway. But in case that we actually want our clients to make post to the api it would be wise to add some validation to the fields we are recieving. Luckely for us the component comes pre packed with a valdiation tool that we can configure from our resources through annotion. If we for example want to make a field required we could do so as follows: 
 
-
 ```PHP
 // src/Entity/Organisation.php
 namespace App\Entity;
@@ -179,7 +176,6 @@ More information on using validation can be found at the [symfony website](https
 
 ## Using UUID
 As default doctrine uses auto increment integers as identifiers (1,2, etc). For modern web applications we however prefer the use of UUID's. (e.g. e2984465-190a-4562-829e-a8cca81aa35d). Why? Wel for one it is more secure integer id's are easily guessable and make it possible to "ask" endpoint about resources that you should not know about. But UUID's also have a benefit in future proofing the application. If we in the future want to merge a table with another table (for example because two organisations using a component perform a merger) then we would have to reassign al id's and relations if we where using int based id's (both tables would have a row 1,2 etc) with UUID's however the change of doubles range somewhere in the billions. Meaning that it is likely that we only need to either reidentify only a handful of rows or more likely none at al! Turning our entire migration into a copy paste action.
-
 
 The proto component supports Ramsey's uuid objects strategy out of the box, so to use UUID's as identifier simply we need to add the ApiProperty as a dependency
 
@@ -297,37 +293,29 @@ We can now prevent circular references by setting a max depth on the properties 
 //...
 ```
 
-
-## Datafixtures
-For testing cases it can be usefull to use datafixtures a predefined set of data that fills the database of your component at startup. Since we use php classes to describe our objects creating fixtures is easy (you can find an example in your project folder at api/src/DataFixtures). We simply go trough some classes assign values and persist them to the database. Once we have written our fixtures we can use a single command to load them  
-
+## Data fixtures
+For testing cases it can be useful to use data fixtures a predefined set of data that fills the database of your component at startup. Since we use php classes to describe our resources creating fixtures is easy (you can find an example in your project folder at api/src/DataFixtures). We simply go trough some classes assign values and persist them to the database. Once we have written our fixtures we can use a single command to load them  
 
 ```CLI
 $ bin/console doctrine:fixtures:load --env=dev
 ```
 
+Be mindful of the --env=dev here! Doctrine wil only allow fixture loading on a dev environment (for obvious security reasons)
 
-Be mindfull of the --env=dev here! Doctrine wil only allow fixture loading on a dev environment (for obvious security reasons)
-
-More inforation on using datafixtures can be found at the [symfony website](https://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html)(you can skip the installation instructions) we also encourage you to take a look at the [tabbelen component](https://github.com/ConductionNL/landelijketabellencatalogus) that makes extensive use of datafixtures.
+More information on using data fixtures can be found at the [symfony website](https://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html) (you can skipp the installation instructions) we also encourage you to take a look at the [tabellen component](https://github.com/ConductionNL/landelijketabellencatalogus) that makes extensive use of data fixtures.
 
 ## Sharing your work 
-A vital part of te common ground community is sharing your work, and telling other people what you are working on . This way people can help you whit problems that you run into and keep tabs on any (security) updates that you make to you code. Sounds like a lot of work right?
+A vital part of te common ground community is sharing your work, and telling other people what you are working. This way people can help you with problems that you run into. And keep tabs on any (security) updates that you make to you code. Sounds like a lot of work right?
 
-Wel it actually isn't, there is a specific commonground platform over at common-gorund.dev that reads repository's and updates users. So the only thing we need to do is tell this platform that we have started a new common ground repository. And tell it when we have updates ours. We can do all that by simply adding a webhook to our component. 
-
+Wel it actually isn't, there is a specific common ground platform over at common-ground.dev that reads repositories and updates user. So the only thing we need to do is tell this platform that we have started a new common ground repository. And tell it when we have updates ours. We can do all that by simply adding a webhook to our component. 
 
 When using Github. To set up a webhook, go to the settings page of your repository or organization. From there, click Webhooks, then Add webhook. Use te following settings:
-
-* Payload URL: <https://www.common-ground.dev/webhook/github>
+* Payload URL: https://www.common-ground.dev/webhook/github
 * Content type: Application/JSON
 * Secret: [leave blanck]
 * Events: [just the push event]
 
 Now every time you update your repository the commonground dev page will alerted, rescan your repository and do al the appropriate platform actions. It just as easy as that.
-
-Now every time you update your repository the commonground dev page will allerted, rescan your repository and do al the appropriate platform actions. It just as easy as that.
-
 
 
 Continues integration

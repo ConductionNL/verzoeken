@@ -8,7 +8,7 @@ info:
     - Reference: vrc
     - Enviroment: dev
     - Version: V.0.1
-    - Repository: [online](https://github.com/ConductionNL/verzoekregistratiecomponent) / [zip](https://github.com/ConductionNL/verzoekregistratiecomponent/archive/master.zip)
+    - Repository: [online]() / [zip](/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
     - Datamodel: [postman](/schema/openapi.postman_collection) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
@@ -3301,7 +3301,7 @@ components:
         nomination:
           description: 'The archive nomination of the resource'
           type: string
-        actionDate:
+        action_date:
           description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
           type: string
           format: date-time
@@ -3315,7 +3315,7 @@ components:
         nomination:
           description: 'The archive nomination of the resource'
           type: string
-        actionDate:
+        action_date:
           description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
           type: string
           format: date-time
@@ -3371,10 +3371,10 @@ components:
         status:
           description: 'The status of this request. e.g submitted'
           type: string
-        requestType:
+        request_type:
           description: 'The type of request against which this request should be validated'
           type: string
-        targetOrganization:
+        target_organization:
           description: 'The RSIN of the organization that should handle this request'
           type: string
         submitter:
@@ -3385,7 +3385,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Submitter-read'
-        submitterPerson:
+        submitter_person:
           description: 'True if the submitter is a person'
           type: boolean
         properties:
@@ -3393,12 +3393,12 @@ components:
           type: array
           items:
             type: string
-        createdAt:
+        created_at:
           readOnly: true
           description: 'The moment this request was created by the submitter'
           type: string
           format: date-time
-        submittedAt:
+        submitted_at:
           readOnly: true
           description: 'The moment this request was submitted by the submitter'
           type: string
@@ -3408,7 +3408,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Organization-read'
-        requestCases:
+        request_cases:
           description: 'Any or all cases currently attached to this request'
           type: array
           items:
@@ -3428,7 +3428,7 @@ components:
           description: 'Archivation rules of this resource'
           $ref: '#/components/schemas/Archive-read'
       required:
-        - requestType
+        - request_type
     Request-write:
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
@@ -3436,10 +3436,10 @@ components:
         status:
           description: 'The status of this request. e.g submitted'
           type: string
-        requestType:
+        request_type:
           description: 'The type of request against which this request should be validated'
           type: string
-        targetOrganization:
+        target_organization:
           description: 'The RSIN of the organization that should handle this request'
           type: string
         submitter:
@@ -3450,7 +3450,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Submitter-write'
-        submitterPerson:
+        submitter_person:
           description: 'True if the submitter is a person'
           type: boolean
         properties:
@@ -3463,7 +3463,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Organization-write'
-        requestCases:
+        request_cases:
           description: 'Any or all cases currently attached to this request'
           type: array
           items:
@@ -3483,7 +3483,7 @@ components:
           description: 'Archivation rules of this resource'
           $ref: '#/components/schemas/Archive-write'
       required:
-        - requestType
+        - request_type
     RequestCase-read:
       type: object
       description: 'An case atached to a request'
@@ -3492,26 +3492,26 @@ components:
           readOnly: true
           description: 'The UUID identifier of this object'
           type: string
-        requestCase:
+        request_case:
           description: 'The OpenCase that is handling this request or supposed to handle this request'
           type: string
         request:
           description: 'The request that this case is handling'
           $ref: '#/components/schemas/Request-read'
-        caseNumber:
+        case_number:
           description: 'The number of an case'
           type: string
     RequestCase-write:
       type: object
       description: 'An case atached to a request'
       properties:
-        requestCase:
+        request_case:
           description: 'The OpenCase that is handling this request or supposed to handle this request'
           type: string
         request:
           description: 'The request that this case is handling'
           $ref: '#/components/schemas/Request-write'
-        caseNumber:
+        case_number:
           description: 'The number of an case'
           type: string
     Submitter-read:
@@ -3787,17 +3787,17 @@ securityDefinitions:
     scopes:
       read: 'read right to the Submitter resource'
       write: 'write right to the Submitter resource'
-host: vrc.zaakonline.nl
+host: irc.zaakonline.nl
 servers:
   -
     description: 'Demo Omgeving'
-    url: 'http://vrc.demo.common-ground.dev/'
+    url: 'http://proto.demo.common-ground.dev'
 externalDocs:
   -
     description: 'OAS Documentatie'
-    url: 'http://vrc.demo.common-ground.dev/'
+    url: 'http://proto.demo.common-ground.dev'
 x-commonground:
-  type: tool
+  type: service
   developers:
     -
       name: Conduction

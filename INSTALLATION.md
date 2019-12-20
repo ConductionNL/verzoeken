@@ -59,7 +59,6 @@ $ kubectl -n kube-system get secret  --kubeconfig="kubeconfig.yaml"
 
 Because we just bound tiller to our admin account and use tiller (trough helm) to manage our code deployment it makes sense to use the tiller token, lets look at the tiller secret (it should look something like "tiller-token-XXXXX" and ask for the corresponding token. 
 
-
 ```CLI
 $ kubectl -n kube-system describe secrets tiller-token-xxxxx  --kubeconfig="kubeconfig.yaml"
 ```
@@ -105,25 +104,27 @@ $ helm dependency update ./api/helm
 ```
 If you want to create a new instance
 ```CLI
-
-$ helm install --name vrc-dev ./api/helm  --kubeconfig="api/helm/kubeconfig.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1
-$ helm install --name vrc-stag ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=stag --set settings.env=stag,settings.debug=0
-$ helm install --name vrc-prod ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=prod --set settings.env=prod,settings.debug=0 
+$ helm install --name brp-dev ./api/helm  --kubeconfig="api/helm/kubeconfig.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1
+$ helm install --name brp-stag ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=stag --set settings.env=stag,settings.debug=0
+$ helm install --name brp-prod ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=prod --set settings.env=prod,settings.debug=0 
 ```
 
 Or update if you want to update an existing one
 ```CLI
-$ helm upgrade vrc-dev ./api/helm  --kubeconfig="api/helm/kubeconfig.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1
-$ helm upgrade vrc-stag ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=stag --set settings.env=stag,settings.debug=0
-$ helm upgrade vrc-prod ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=prod --set settings.env=prod,settings.debug=0
+$ helm upgrade brp-dev ./api/helm  --kubeconfig="api/helm/kubeconfig.yaml" --namespace=dev  --set settings.env=dev,settings.debug=1 
+$ helm upgrade brp-stag ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=stag --set settings.env=stag,settings.debug=0 
+$ helm upgrade brp-prod ./api/helm --kubeconfig="api/helm/kubeconfig.yaml" --namespace=prod --set settings.env=prod,settings.debug=0 
 ```
 
 Or del if you want to delete an existing  one
 ```CLI
-$ helm del vrc-dev  --purge --kubeconfig="api/helm/kubeconfig.yaml" 
-$ helm del vrc-stag --purge --kubeconfig="api/helm/kubeconfig.yaml" 
-$ helm del vrc-prod --purge --kubeconfig="api/helm/kubeconfig.yaml" 
+$ helm del brp-dev  --purge --kubeconfig="api/helm/kubeconfig.yaml" 
+$ helm del brp-stag --purge --kubeconfig="api/helm/kubeconfig.yaml" 
+$ helm del brp-prod --purge --kubeconfig="api/helm/kubeconfig.yaml" 
 ```
+
+Note that you can replace common ground with the namespace that you want to use (normally the name of your component).
+
 
 ## Making your app known on NLX
 The proto component comes with an default NLX setup, if you made your own component however you might want to provide it trough the [NLX](https://www.nlx.io/) service. Fortunately the proto component comes with an nice setup for NLX integration.
@@ -142,17 +143,3 @@ As a developer you might be interested to know how your application documentatio
 Have you seen our sweet support-chat on the documentation page? We didn't build that ourselves ;). We use a Hubspot chat for that, just head over to Hubspot, create an account and enter your Hubspot embed code in het .env file (replacing the default) under HUBSPOT_EMBED_CODE.
 
 Would you like to use a different analytics or chat-tool? Just shoot us a [feature request](https://github.com/ConductionNL/commonground-component/issues/new?assignees=&labels=&template=feature_request.md&title=New%20Analytics%20or%20Chat%20provider)!  
-
-## Setting up NLX
-Lets first check if we have a propper nlx root certificate
-
-```
-docker-compose exec vrc-php openssl x509 -in nlx-setup/root.crt -text | grep Subject:
-```
-
-```
-docker-compose exec vrc-php openssl req -utf8 -nodes -sha256 -newkey rsa:4096 -keyout nlx-setup/org.key -out nlx-setup/org.csr
-```
-You should now see the content of a certificate
-
-See also [this](https://docs.nlx.io/get-started/)
