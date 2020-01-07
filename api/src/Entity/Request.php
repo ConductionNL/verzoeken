@@ -378,6 +378,11 @@ class Request
      */
     private $archive;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $currentStage;
+
     public function __construct()
     {
         $this->submitters = new ArrayCollection();
@@ -387,149 +392,149 @@ class Request
     }
 	
 	public function getId()
-                                                                                                                        	{
-                                                                                                                        		return $this->id;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->id;
+                                                                                                                                 	}
 	
 	public function setId($id): self
-	{
-	    $this->id = $id;
-	    
-	    return $this;
-	}
+         	{
+         	    $this->id = $id;
+         	    
+         	    return $this;
+         	}
 	
 	public function getReference(): ?string
-                                                                                                                        	{
-                                                                                                                        		return $this->reference;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->reference;
+                                                                                                                                 	}
 	
 	public function setReference(string $reference): self
-                                                                                                                        	{
-                                                                                                                        		$this->reference = $reference;
-                                                                                                                        		
-                                                                                                                        		return $this;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		$this->reference = $reference;
+                                                                                                                                 		
+                                                                                                                                 		return $this;
+                                                                                                                                 	}
 	
 	public function getReferenceId(): ?int
-                                                                                                                        	{
-                                                                                                                        		return $this->reference;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->reference;
+                                                                                                                                 	}
 	
 	public function setReferenceId(int $referenceId): self
-                                                                                                                        	{
-                                                                                                                        		$this->referenceId = $referenceId;
-                                                                                                                        		
-                                                                                                                        		return $this;
-                                                                  	}
+                                                                                                                                 	{
+                                                                                                                                 		$this->referenceId = $referenceId;
+                                                                                                                                 		
+                                                                                                                                 		return $this;
+                                                                           	}
 	
 	public function getStatus(): ?string
-                                                                  	{
-                                                                  		return $this->status;
-                                                                  	}
+                                                                           	{
+                                                                           		return $this->status;
+                                                                           	}
 	
 	public function setStatus(string $status): self
-                                                                  	{
-                                                                  		$this->status = $status;
-                                                                  		
-                                                                  		return $this;
-                                                                  	}
+                                                                           	{
+                                                                           		$this->status = $status;
+                                                                           		
+                                                                           		return $this;
+                                                                           	}
 	
 	
 	public function getRequestType(): ?string
-                                                                                                                        	{
-                                                                                                                        		return $this->requestType;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->requestType;
+                                                                                                                                 	}
 	
 	public function setRequestType(string $requestType): self
-                                                                                                                        	{
-                                                                                                                        		$this->requestType = $requestType;
-                                                                                                                        		
-                                                                                                                        		return $this;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		$this->requestType = $requestType;
+                                                                                                                                 		
+                                                                                                                                 		return $this;
+                                                                                                                                 	}
 	
 	public function getTargetOrganization(): ?string
-                                                                                                                        	{
-                                                                                                                        		return $this->targetOrganization;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->targetOrganization;
+                                                                                                                                 	}
 	
 	public function setTargetOrganization(string $targetOrganization): self
-                                                                                                                        	{
-                                                                                                                        		$this->targetOrganization= $targetOrganization;
-                                                                                                                        		
-                                                                                                                        		return $this;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		$this->targetOrganization= $targetOrganization;
+                                                                                                                                 		
+                                                                                                                                 		return $this;
+                                                                                                                                 	}
 	
 	public function getSubmitter(): ?string
-                                                                                                                        	{
-                                                                                                                        		return $this->submitter;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->submitter;
+                                                                                                                                 	}
 	
 	public function setSubmitter(string $submitter): self
-                                                                                                                        	{
-                                                                                                                        		$this->submitter = $submitter;
-                                                                                                                        		
-                                                                                                                        		return $this;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		$this->submitter = $submitter;
+                                                                                                                                 		
+                                                                                                                                 		return $this;
+                                                                                                                                 	}
 	
 	public function getSubmitterPerson(): ?bool
-                                                                                                                        	{
-                                                                                                                        		return $this->submitterPerson;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->submitterPerson;
+                                                                                                                                 	}
 	
 	public function setSubmitterPerson(bool $submitterPerson): self
-                                                                                                                        	{
-                                                                                                                        		$this->submitterPerson = $submitterPerson;
-                                                                                                                        		
-                                                                                                                        		return $this;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		$this->submitterPerson = $submitterPerson;
+                                                                                                                                 		
+                                                                                                                                 		return $this;
+                                                                                                                                 	}
 	
 	public function getProperties()
-                                                                                                                        	{
-                                                                                                                        		return $this->properties;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->properties;
+                                                                                                                                 	}
 	
 	public function setProperties($properties): self
-                                                                                                                        	{
-                                                                                                                        		$this->properties = $properties;
-                                                                                                                        		
-                                                                                                                        		return $this;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		$this->properties = $properties;
+                                                                                                                                 		
+                                                                                                                                 		return $this;
+                                                                                                                                 	}
 	
 	public function getProcess(): ?string
-                                                                                                                        	{
-                                                                                                                        		return $this->process;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->process;
+                                                                                                                                 	}
 	
 	public function setProcess(?string $process): self
-                                                                                                                        	{
-                                                                                                                        		$this->process = $process;
-                                                                                                                        		
-                                                                                                                        		return $this;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		$this->process = $process;
+                                                                                                                                 		
+                                                                                                                                 		return $this;
+                                                                                                                                 	}
 	
 	public function getCreatedAt(): ?\DateTimeInterface
-                                                                                                                        	{
-                                                                                                                        		return $this->createdAt;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->createdAt;
+                                                                                                                                 	}
 	
 	public function setCreatedAt(\DateTimeInterface $createdAt): self
-                                                                                                                        	{
-                                                                                                                        		$this->createdAt = $createdAt;
-                                                                                                                        		
-                                                                                                                        		return $this;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		$this->createdAt = $createdAt;
+                                                                                                                                 		
+                                                                                                                                 		return $this;
+                                                                                                                                 	}
 	
 	public function getSubmittedAt(): ?\DateTimeInterface
-                                                                                                                        	{
-                                                                                                                        		return $this->submittedAt;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		return $this->submittedAt;
+                                                                                                                                 	}
 	
 	public function setSubmittedAt(\DateTimeInterface $submittedAt): self
-                                                                                                                        	{
-                                                                                                                        		$this->submittedAt = $submittedAt;
-                                                                                                                        		
-                                                                                                                        		return $this;
-                                                                                                                        	}
+                                                                                                                                 	{
+                                                                                                                                 		$this->submittedAt = $submittedAt;
+                                                                                                                                 		
+                                                                                                                                 		return $this;
+                                                                                                                                 	}
 
     /**
      * @return Collection|Submitter[]
@@ -687,6 +692,18 @@ class Request
     public function setArchive(?Archive $archive): self
     {
         $this->archive = $archive;
+
+        return $this;
+    }
+
+    public function getCurrentStage(): ?string
+    {
+        return $this->currentStage;
+    }
+
+    public function setCurrentStage(?string $currentStage): self
+    {
+        $this->currentStage = $currentStage;
 
         return $this;
     }
