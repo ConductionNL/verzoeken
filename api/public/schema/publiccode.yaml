@@ -1,12 +1,12 @@
 publiccodeYmlVersion: "0.2"
 
-name: pc
+name: vrc
 applicationSuite: commonground
-url: "https://github.com/ConductionNL/Proto-component-commonground"
+url: ""
 landingURL: "pc.zaakonline.nl" 
 isBasedOn: "https://github.com/ConductionNL/Proto-component-commonground.git" 
 softwareVersion: "V.0.1"
-releaseDate: "2020-01-01"
+releaseDate: "2020-07-01"
 logo: pc.zaakonline.nl 
 monochromeLogo: img/logo-mono.svg
 
@@ -37,7 +37,7 @@ usedBy:
   - Gemeente Hoorn
   
 
-roadmap: "https://github.com/ConductionNL/Proto-component-commonground/blob/master/ROADMAP.md"
+roadmap: "/blob/master/ROADMAP.md"
 
 developmentStatus: development
 
@@ -66,7 +66,7 @@ description:
 #          on multiple rows. You should note what the software
 #          is and why one should need it.
 
-    documentation: "https://github.com/ConductionNL/Proto-component-commonground/blob/master/README.md"
+    documentation: "/blob/master/README.md"
     apiDocumentation: "pc.zaakonline.nl"
 #
 #    features:
