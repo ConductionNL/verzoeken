@@ -8,9 +8,9 @@ info:
     - Reference: vrc
     - Enviroment: dev
     - Version: V.0.1
-    - Repository: [online](https://github.com/ConductionNL/Proto-component-commonground) / [zip](https://github.com/ConductionNL/Proto-component-commonground/archive/master.zip)
-    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pc-php) 
-    - Datamodel: [postman](/schema/pc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
+    - Repository: [online]() / [zip](/archive/master.zip)
+    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
+    - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
     'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
     
@@ -34,7 +34,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/ExampleEntity:jsonld-read' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Archive:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -78,6 +78,7 @@ paths:
           description: 'The collection page number'
           schema:
             type: integer
+            default: 1
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -165,7 +166,7 @@ paths:
                 $ref: '#/components/schemas/Archive-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Archive-read'
+                $ref: '#/components/schemas/Archive:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Archive-read'
@@ -201,7 +202,7 @@ paths:
               $ref: '#/components/schemas/Archive-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Archive-write'
+              $ref: '#/components/schemas/Archive:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Archive-write'
@@ -344,7 +345,7 @@ paths:
                 $ref: '#/components/schemas/Archive-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Archive-read'
+                $ref: '#/components/schemas/Archive:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Archive-read'
@@ -463,7 +464,7 @@ paths:
                 $ref: '#/components/schemas/Archive-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Archive-read'
+                $ref: '#/components/schemas/Archive:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Archive-read'
@@ -493,7 +494,7 @@ paths:
               $ref: '#/components/schemas/Archive-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Archive-write'
+              $ref: '#/components/schemas/Archive:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Archive-write'
@@ -563,7 +564,7 @@ paths:
                 $ref: '#/components/schemas/Archive-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Archive-read'
+                $ref: '#/components/schemas/Archive:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Archive-read'
@@ -588,28 +589,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
           application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          text/html:
             schema:
               $ref: '#/components/schemas/Archive-write'
         description: 'The updated Archive resource'
@@ -630,9 +610,14 @@ paths:
                   $ref: '#/components/schemas/Organization-read'
             application/ld+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization-read'
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Organization:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
             application/vnd.api+json:
               schema:
                 type: array
@@ -775,7 +760,7 @@ paths:
                 $ref: '#/components/schemas/Organization-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity:jsonld-read'
+                $ref: '#/components/schemas/Organization:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Organization-read'
@@ -811,7 +796,7 @@ paths:
               $ref: '#/components/schemas/Organization-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity:jsonld-write'
+              $ref: '#/components/schemas/Organization:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Organization-write'
@@ -954,7 +939,7 @@ paths:
                 $ref: '#/components/schemas/Organization-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity:jsonld-read'
+                $ref: '#/components/schemas/Organization:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Organization-read'
@@ -1073,7 +1058,7 @@ paths:
                 $ref: '#/components/schemas/Organization-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity:jsonld-read'
+                $ref: '#/components/schemas/Organization:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Organization-read'
@@ -1103,7 +1088,7 @@ paths:
               $ref: '#/components/schemas/Organization-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity:jsonld-write'
+              $ref: '#/components/schemas/Organization:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Organization-write'
@@ -1173,7 +1158,7 @@ paths:
                 $ref: '#/components/schemas/Organization-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Organization-read'
+                $ref: '#/components/schemas/Organization:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Organization-read'
@@ -1198,28 +1183,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
           application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          text/html:
             schema:
               $ref: '#/components/schemas/Organization-write'
         description: 'The updated Organization resource'
@@ -1240,9 +1204,14 @@ paths:
                   $ref: '#/components/schemas/RequestCase-read'
             application/ld+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RequestCase-read'
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/RequestCase:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
             application/vnd.api+json:
               schema:
                 type: array
@@ -1281,6 +1250,7 @@ paths:
           description: 'The collection page number'
           schema:
             type: integer
+            default: 1
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -1368,7 +1338,7 @@ paths:
                 $ref: '#/components/schemas/RequestCase-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/RequestCase-read'
+                $ref: '#/components/schemas/RequestCase:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/RequestCase-read'
@@ -1404,7 +1374,7 @@ paths:
               $ref: '#/components/schemas/RequestCase-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/RequestCase-write'
+              $ref: '#/components/schemas/RequestCase:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/RequestCase-write'
@@ -1547,7 +1517,7 @@ paths:
                 $ref: '#/components/schemas/RequestCase-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/RequestCase-read'
+                $ref: '#/components/schemas/RequestCase:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/RequestCase-read'
@@ -1666,7 +1636,7 @@ paths:
                 $ref: '#/components/schemas/RequestCase-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/RequestCase-read'
+                $ref: '#/components/schemas/RequestCase:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/RequestCase-read'
@@ -1696,7 +1666,7 @@ paths:
               $ref: '#/components/schemas/RequestCase-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/RequestCase-write'
+              $ref: '#/components/schemas/RequestCase:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/RequestCase-write'
@@ -1766,7 +1736,7 @@ paths:
                 $ref: '#/components/schemas/RequestCase-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/RequestCase-read'
+                $ref: '#/components/schemas/RequestCase:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/RequestCase-read'
@@ -1791,28 +1761,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
           application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          text/html:
             schema:
               $ref: '#/components/schemas/RequestCase-write'
         description: 'The updated RequestCase resource'
@@ -1833,9 +1782,14 @@ paths:
                   $ref: '#/components/schemas/Request-read'
             application/ld+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Request-read'
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Request:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
             application/vnd.api+json:
               schema:
                 type: array
@@ -2081,84 +2035,126 @@ paths:
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[reference]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[status]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[requestType]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[processType]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[organizations.rsin]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[organizations.status]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[submitters.organization]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[submitters.person]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[submitters.contact]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[archive.nomination]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[archive.status]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[createdAt]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: 'order[submittedAt]'
           in: query
           required: false
           schema:
             type: string
+            enum:
+              - asc
+              - desc
         -
           name: page
           in: query
@@ -2166,6 +2162,7 @@ paths:
           description: 'The collection page number'
           schema:
             type: integer
+            default: 1
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -2253,7 +2250,7 @@ paths:
                 $ref: '#/components/schemas/Request-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Request-read'
+                $ref: '#/components/schemas/Request:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
@@ -2289,7 +2286,7 @@ paths:
               $ref: '#/components/schemas/Request-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Request-write'
+              $ref: '#/components/schemas/Request:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Request-write'
@@ -2432,7 +2429,7 @@ paths:
                 $ref: '#/components/schemas/Request-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Request-read'
+                $ref: '#/components/schemas/Request:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
@@ -2551,7 +2548,7 @@ paths:
                 $ref: '#/components/schemas/Request-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Request-read'
+                $ref: '#/components/schemas/Request:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
@@ -2581,7 +2578,7 @@ paths:
               $ref: '#/components/schemas/Request-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Request-write'
+              $ref: '#/components/schemas/Request:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Request-write'
@@ -2651,7 +2648,7 @@ paths:
                 $ref: '#/components/schemas/Request-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Request-read'
+                $ref: '#/components/schemas/Request:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
@@ -2676,28 +2673,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Request-write'
           application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          text/html:
             schema:
               $ref: '#/components/schemas/Request-write'
         description: 'The updated Request resource'
@@ -2718,9 +2694,14 @@ paths:
                   $ref: '#/components/schemas/Submitter-read'
             application/ld+json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Submitter-read'
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Submitter:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
             application/vnd.api+json:
               schema:
                 type: array
@@ -2759,6 +2740,7 @@ paths:
           description: 'The collection page number'
           schema:
             type: integer
+            default: 1
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -2846,7 +2828,7 @@ paths:
                 $ref: '#/components/schemas/Submitter-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Submitter-read'
+                $ref: '#/components/schemas/Submitter:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Submitter-read'
@@ -2882,7 +2864,7 @@ paths:
               $ref: '#/components/schemas/Submitter-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Submitter-write'
+              $ref: '#/components/schemas/Submitter:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Submitter-write'
@@ -3025,7 +3007,7 @@ paths:
                 $ref: '#/components/schemas/Submitter-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Submitter-read'
+                $ref: '#/components/schemas/Submitter:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Submitter-read'
@@ -3144,7 +3126,7 @@ paths:
                 $ref: '#/components/schemas/Submitter-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Submitter-read'
+                $ref: '#/components/schemas/Submitter:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Submitter-read'
@@ -3174,7 +3156,7 @@ paths:
               $ref: '#/components/schemas/Submitter-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Submitter-write'
+              $ref: '#/components/schemas/Submitter:jsonld-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Submitter-write'
@@ -3244,7 +3226,7 @@ paths:
                 $ref: '#/components/schemas/Submitter-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Submitter-read'
+                $ref: '#/components/schemas/Submitter:jsonld-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Submitter-read'
@@ -3269,28 +3251,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
           application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          text/html:
             schema:
               $ref: '#/components/schemas/Submitter-write'
         description: 'The updated Submitter resource'
@@ -3302,14 +3263,17 @@ components:
       properties:
         id:
           readOnly: true
+          description: 'The UUID identifier of this resource'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
         nomination:
           description: 'The archive nomination of the resource'
           type: string
-        action_date:
+        actionDate:
           description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         status:
@@ -3322,8 +3286,66 @@ components:
         nomination:
           description: 'The archive nomination of the resource'
           type: string
-        action_date:
+        actionDate:
           description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+        status:
+          description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
+          type: string
+    'Archive:jsonld-read':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        nomination:
+          description: 'The archive nomination of the resource'
+          type: string
+        actionDate:
+          description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+        status:
+          description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
+          type: string
+    'Archive:jsonld-write':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        nomination:
+          description: 'The archive nomination of the resource'
+          type: string
+        actionDate:
+          description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
         status:
@@ -3336,6 +3358,8 @@ components:
         id:
           readOnly: true
           description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
           type: string
         rsin:
           description: 'The RSIN of a organization that is handling or supposed to handle this request'
@@ -3363,6 +3387,60 @@ components:
         request:
           description: 'The request that this organsisation is handling'
           $ref: '#/components/schemas/Request-write'
+    'Organization:jsonld-read':
+      type: object
+      description: 'An organization handling a request'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        rsin:
+          description: 'The RSIN of a organization that is handling or supposed to handle this request'
+          type: string
+        status:
+          type: string
+        request:
+          description: 'The request that this organsisation is handling'
+          $ref: '#/components/schemas/Request:jsonld-read'
+      required:
+        - rsin
+        - status
+    'Organization:jsonld-write':
+      type: object
+      description: 'An organization handling a request'
+      required:
+        - rsin
+        - status
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        rsin:
+          description: 'The RSIN of a organization that is handling or supposed to handle this request'
+          type: string
+        status:
+          type: string
+        request:
+          description: 'The request that this organsisation is handling'
+          $ref: '#/components/schemas/Request:jsonld-write'
     Request-read:
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
@@ -3370,10 +3448,136 @@ components:
         id:
           readOnly: true
           description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
           type: string
-    'ExampleEntity:jsonld-read':
+        reference:
+          readOnly: true
+          description: 'The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations'
+          type: string
+        status:
+          description: 'The status of this request. e.g submitted'
+          type: string
+        requestType:
+          description: 'The type of request against which this request should be validated'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        targetOrganization:
+          description: 'The RSIN of the organization that should handle this request'
+          type: string
+        submitter:
+          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
+          type: string
+        submitters:
+          description: 'The submitters of this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Submitter-read'
+        submitterPerson:
+          description: 'True if the submitter is a person'
+          type: boolean
+        properties:
+          description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
+          type: array
+          items:
+            type: string
+        createdAt:
+          readOnly: true
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+        submittedAt:
+          readOnly: true
+          description: 'The moment this request was submitted by the submitter'
+          type: string
+          format: date-time
+        organizations:
+          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization-read'
+        requestCases:
+          description: 'Any or all cases currently attached to this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestCase-read'
+        parent:
+          description: 'The request that this request was based on'
+          $ref: '#/components/schemas/Request-read'
+        children:
+          description: 'The requests that are bassed on this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Request-read'
+        confidential:
+          description: 'Whether or not this request is considered confidential'
+          type: boolean
+        archive:
+          description: 'Archivation rules of this resource'
+          $ref: '#/components/schemas/Archive-read'
+      required:
+        - requestType
+    Request-write:
       type: object
-      description: 'This is an example entity.'
+      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
+      properties:
+        status:
+          description: 'The status of this request. e.g submitted'
+          type: string
+        requestType:
+          description: 'The type of request against which this request should be validated'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        targetOrganization:
+          description: 'The RSIN of the organization that should handle this request'
+          type: string
+        submitter:
+          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
+          type: string
+        submitters:
+          description: 'The submitters of this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Submitter-write'
+        submitterPerson:
+          description: 'True if the submitter is a person'
+          type: boolean
+        properties:
+          description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
+          type: array
+          items:
+            type: string
+        organizations:
+          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization-write'
+        requestCases:
+          description: 'Any or all cases currently attached to this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestCase-write'
+        parent:
+          description: 'The request that this request was based on'
+          $ref: '#/components/schemas/Request-write'
+        children:
+          description: 'The requests that are bassed on this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Request-write'
+        confidential:
+          description: 'Whether or not this request is considered confidential'
+          type: boolean
+        archive:
+          description: 'Archivation rules of this resource'
+          $ref: '#/components/schemas/Archive-write'
+      required:
+        - requestType
+    'Request:jsonld-read':
+      type: object
+      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
       properties:
         '@context':
           readOnly: true
@@ -3386,25 +3590,80 @@ components:
           type: string
         id:
           readOnly: true
+          description: 'The UUID identifier of this resource'
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
-        name:
-          description: 'The name of this example property'
+        reference:
+          readOnly: true
+          description: 'The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations'
           type: string
-        description:
-          description: 'The description of this example property'
+        status:
+          description: 'The status of this request. e.g submitted'
           type: string
-        camelCase:
-          description: 'Proof that we camel case our api'
+        requestType:
+          description: 'The type of request against which this request should be validated'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
+        targetOrganization:
+          description: 'The RSIN of the organization that should handle this request'
+          type: string
+        submitter:
+          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
+          type: string
+        submitters:
+          description: 'The submitters of this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Submitter:jsonld-read'
+        submitterPerson:
+          description: 'True if the submitter is a person'
+          type: boolean
+        properties:
+          description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
+          type: array
+          items:
+            type: string
+        createdAt:
+          readOnly: true
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+        submittedAt:
+          readOnly: true
+          description: 'The moment this request was submitted by the submitter'
+          type: string
+          format: date-time
+        organizations:
+          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization:jsonld-read'
+        requestCases:
+          description: 'Any or all cases currently attached to this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestCase:jsonld-read'
+        parent:
+          description: 'The request that this request was based on'
+          $ref: '#/components/schemas/Request:jsonld-read'
+        children:
+          description: 'The requests that are bassed on this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Request:jsonld-read'
+        confidential:
+          description: 'Whether or not this request is considered confidential'
+          type: boolean
+        archive:
+          description: 'Archivation rules of this resource'
+          $ref: '#/components/schemas/Archive:jsonld-read'
       required:
-        - name
-    'ExampleEntity:jsonld-write':
+        - requestType
+    'Request:jsonld-write':
       type: object
-      description: 'This is an example entity.'
-      required:
-        - name
+      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
       properties:
         '@context':
           readOnly: true
@@ -3415,14 +3674,258 @@ components:
         '@type':
           readOnly: true
           type: string
-        name:
-          description: 'The name of this example property'
+        status:
+          description: 'The status of this request. e.g submitted'
           type: string
-        description:
-          description: 'The description of this example property'
+        requestType:
+          description: 'The type of request against which this request should be validated'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
-        camelCase:
-          description: 'Proof that we camel case our api'
+        targetOrganization:
+          description: 'The RSIN of the organization that should handle this request'
+          type: string
+        submitter:
+          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
+          type: string
+        submitters:
+          description: 'The submitters of this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Submitter:jsonld-write'
+        submitterPerson:
+          description: 'True if the submitter is a person'
+          type: boolean
+        properties:
+          description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
+          type: array
+          items:
+            type: string
+        organizations:
+          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization:jsonld-write'
+        requestCases:
+          description: 'Any or all cases currently attached to this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestCase:jsonld-write'
+        parent:
+          description: 'The request that this request was based on'
+          $ref: '#/components/schemas/Request:jsonld-write'
+        children:
+          description: 'The requests that are bassed on this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Request:jsonld-write'
+        confidential:
+          description: 'Whether or not this request is considered confidential'
+          type: boolean
+        archive:
+          description: 'Archivation rules of this resource'
+          $ref: '#/components/schemas/Archive:jsonld-write'
+      required:
+        - requestType
+    RequestCase-read:
+      type: object
+      description: 'An case atached to a request'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        requestCase:
+          description: 'The OpenCase that is handling this request or supposed to handle this request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        request:
+          description: 'The request that this case is handling'
+          $ref: '#/components/schemas/Request-read'
+        caseNumber:
+          description: 'The number of an case'
+          type: string
+    RequestCase-write:
+      type: object
+      description: 'An case atached to a request'
+      properties:
+        requestCase:
+          description: 'The OpenCase that is handling this request or supposed to handle this request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        request:
+          description: 'The request that this case is handling'
+          $ref: '#/components/schemas/Request-write'
+        caseNumber:
+          description: 'The number of an case'
+          type: string
+    'RequestCase:jsonld-read':
+      type: object
+      description: 'An case atached to a request'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        requestCase:
+          description: 'The OpenCase that is handling this request or supposed to handle this request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        request:
+          description: 'The request that this case is handling'
+          $ref: '#/components/schemas/Request:jsonld-read'
+        caseNumber:
+          description: 'The number of an case'
+          type: string
+    'RequestCase:jsonld-write':
+      type: object
+      description: 'An case atached to a request'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        requestCase:
+          description: 'The OpenCase that is handling this request or supposed to handle this request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        request:
+          description: 'The request that this case is handling'
+          $ref: '#/components/schemas/Request:jsonld-write'
+        caseNumber:
+          description: 'The number of an case'
+          type: string
+    Submitter-read:
+      type: object
+      description: 'The submitters of a request'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        assent:
+          description: 'The Assent that is used to check if this submitter given assent to this request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        person:
+          description: 'The BSN of the person that submitted this request'
+          type: string
+        organization:
+          description: 'The RSIN of the organization that submitted this request'
+          type: string
+        request:
+          description: 'The request that this submitter submitted'
+          $ref: '#/components/schemas/Request-read'
+        role:
+          type: string
+    Submitter-write:
+      type: object
+      description: 'The submitters of a request'
+      properties:
+        assent:
+          description: 'The Assent that is used to check if this submitter given assent to this request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        person:
+          description: 'The BSN of the person that submitted this request'
+          type: string
+        organization:
+          description: 'The RSIN of the organization that submitted this request'
+          type: string
+        request:
+          description: 'The request that this submitter submitted'
+          $ref: '#/components/schemas/Request-write'
+        role:
+          type: string
+    'Submitter:jsonld-read':
+      type: object
+      description: 'The submitters of a request'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        assent:
+          description: 'The Assent that is used to check if this submitter given assent to this request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        person:
+          description: 'The BSN of the person that submitted this request'
+          type: string
+        organization:
+          description: 'The RSIN of the organization that submitted this request'
+          type: string
+        request:
+          description: 'The request that this submitter submitted'
+          $ref: '#/components/schemas/Request:jsonld-read'
+        role:
+          type: string
+    'Submitter:jsonld-write':
+      type: object
+      description: 'The submitters of a request'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        assent:
+          description: 'The Assent that is used to check if this submitter given assent to this request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        person:
+          description: 'The BSN of the person that submitted this request'
+          type: string
+        organization:
+          description: 'The RSIN of the organization that submitted this request'
+          type: string
+        request:
+          description: 'The request that this submitter submitted'
+          $ref: '#/components/schemas/Request:jsonld-write'
+        role:
           type: string
 definitions:
   Archive-read:
