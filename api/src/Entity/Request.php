@@ -133,13 +133,13 @@ class Request
 	 *             "type"="string",
 	 *             "example"="incomplete",
 	 *             "maxLength"="255",
-	 *             "enum"={"incomplete", "complete", "submitted", "processed"},
+	 *             "enum"={"incomplete", "complete", "submitted", "processed","cancelled"},
 	 *             "default"="incomplete"
 	 *         }
 	 *     }
 	 * )	 
 	 *
-     * @Assert\Choice({"incomplete", "complete", "submitted", "processed"})
+     * @Assert\Choice({"incomplete", "complete", "submitted", "processed","cancelled"})
 	 * @Assert\Length(
 	 *      max = 255
 	 * )
