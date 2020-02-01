@@ -1870,13 +1870,13 @@ paths:
           style: form
           explode: true
         -
-          name: requestType
+          name: request_type
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'requestType[]'
+          name: 'request_type[]'
           in: query
           required: false
           schema:
@@ -1886,13 +1886,13 @@ paths:
           style: form
           explode: true
         -
-          name: processType
+          name: process_type
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'processType[]'
+          name: 'process_type[]'
           in: query
           required: false
           schema:
@@ -1982,49 +1982,73 @@ paths:
           style: form
           explode: true
         -
-          name: 'createdAt[before]'
+          name: 'date_created[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'createdAt[strictly_before]'
+          name: 'date_created[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'createdAt[after]'
+          name: 'date_created[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'createdAt[strictly_after]'
+          name: 'date_created[strictly_after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'submittedAt[before]'
+          name: 'date_modified[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'submittedAt[strictly_before]'
+          name: 'date_modified[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'submittedAt[after]'
+          name: 'date_modified[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'submittedAt[strictly_after]'
+          name: 'date_modified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'submitted_at[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'submitted_at[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'submitted_at[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'submitted_at[strictly_after]'
           in: query
           required: false
           schema:
@@ -2057,7 +2081,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[requestType]'
+          name: 'order[request_type]'
           in: query
           required: false
           schema:
@@ -2066,7 +2090,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[processType]'
+          name: 'order[process_type]'
           in: query
           required: false
           schema:
@@ -2138,7 +2162,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[createdAt]'
+          name: 'order[date_created]'
           in: query
           required: false
           schema:
@@ -2147,7 +2171,16 @@ paths:
               - asc
               - desc
         -
-          name: 'order[submittedAt]'
+          name: 'order[date_modified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[submitted_at]'
           in: query
           required: false
           schema:
@@ -3270,7 +3303,7 @@ components:
         nomination:
           description: 'The archive nomination of the resource'
           type: string
-        actionDate:
+        action_date:
           description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
           externalDocs:
             url: 'http://schema.org/DateTime'
@@ -3279,6 +3312,16 @@ components:
         status:
           description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
           type: string
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
     Archive-write:
       type: object
       description: ''
@@ -3286,7 +3329,7 @@ components:
         nomination:
           description: 'The archive nomination of the resource'
           type: string
-        actionDate:
+        action_date:
           description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
           externalDocs:
             url: 'http://schema.org/DateTime'
@@ -3317,7 +3360,7 @@ components:
         nomination:
           description: 'The archive nomination of the resource'
           type: string
-        actionDate:
+        action_date:
           description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
           externalDocs:
             url: 'http://schema.org/DateTime'
@@ -3326,6 +3369,16 @@ components:
         status:
           description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
           type: string
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
     'Archive:jsonld-write':
       type: object
       description: ''
@@ -3342,7 +3395,7 @@ components:
         nomination:
           description: 'The archive nomination of the resource'
           type: string
-        actionDate:
+        action_date:
           description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
           externalDocs:
             url: 'http://schema.org/DateTime'
@@ -3369,6 +3422,16 @@ components:
         request:
           description: 'The request that this organsisation is handling'
           $ref: '#/components/schemas/Request-read'
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
       required:
         - rsin
         - status
@@ -3414,6 +3477,16 @@ components:
         request:
           description: 'The request that this organsisation is handling'
           $ref: '#/components/schemas/Request:jsonld-read'
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
       required:
         - rsin
         - status
@@ -3458,12 +3531,12 @@ components:
         status:
           description: 'The status of this request. e.g submitted'
           type: string
-        requestType:
+        request_type:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        targetOrganization:
+        target_organization:
           description: 'The RSIN of the organization that should handle this request'
           type: string
         submitter:
@@ -3474,7 +3547,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Submitter-read'
-        submitterPerson:
+        submitter_person:
           description: 'True if the submitter is a person'
           type: boolean
         properties:
@@ -3482,12 +3555,7 @@ components:
           type: array
           items:
             type: string
-        createdAt:
-          readOnly: true
-          description: 'The moment this request was created by the submitter'
-          type: string
-          format: date-time
-        submittedAt:
+        submitted_at:
           readOnly: true
           description: 'The moment this request was submitted by the submitter'
           type: string
@@ -3497,7 +3565,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Organization-read'
-        requestCases:
+        request_cases:
           description: 'Any or all cases currently attached to this request'
           type: array
           items:
@@ -3516,8 +3584,21 @@ components:
         archive:
           description: 'Archivation rules of this resource'
           $ref: '#/components/schemas/Archive-read'
+        current_stage:
+          description: 'The current stage of the client journey in this proces'
+          type: string
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
       required:
-        - requestType
+        - request_type
     Request-write:
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
@@ -3525,12 +3606,12 @@ components:
         status:
           description: 'The status of this request. e.g submitted'
           type: string
-        requestType:
+        request_type:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        targetOrganization:
+        target_organization:
           description: 'The RSIN of the organization that should handle this request'
           type: string
         submitter:
@@ -3541,7 +3622,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Submitter-write'
-        submitterPerson:
+        submitter_person:
           description: 'True if the submitter is a person'
           type: boolean
         properties:
@@ -3554,7 +3635,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Organization-write'
-        requestCases:
+        request_cases:
           description: 'Any or all cases currently attached to this request'
           type: array
           items:
@@ -3573,8 +3654,11 @@ components:
         archive:
           description: 'Archivation rules of this resource'
           $ref: '#/components/schemas/Archive-write'
+        current_stage:
+          description: 'The current stage of the client journey in this proces'
+          type: string
       required:
-        - requestType
+        - request_type
     'Request:jsonld-read':
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
@@ -3601,12 +3685,12 @@ components:
         status:
           description: 'The status of this request. e.g submitted'
           type: string
-        requestType:
+        request_type:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        targetOrganization:
+        target_organization:
           description: 'The RSIN of the organization that should handle this request'
           type: string
         submitter:
@@ -3617,7 +3701,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Submitter:jsonld-read'
-        submitterPerson:
+        submitter_person:
           description: 'True if the submitter is a person'
           type: boolean
         properties:
@@ -3625,12 +3709,7 @@ components:
           type: array
           items:
             type: string
-        createdAt:
-          readOnly: true
-          description: 'The moment this request was created by the submitter'
-          type: string
-          format: date-time
-        submittedAt:
+        submitted_at:
           readOnly: true
           description: 'The moment this request was submitted by the submitter'
           type: string
@@ -3640,7 +3719,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Organization:jsonld-read'
-        requestCases:
+        request_cases:
           description: 'Any or all cases currently attached to this request'
           type: array
           items:
@@ -3659,8 +3738,21 @@ components:
         archive:
           description: 'Archivation rules of this resource'
           $ref: '#/components/schemas/Archive:jsonld-read'
+        current_stage:
+          description: 'The current stage of the client journey in this proces'
+          type: string
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
       required:
-        - requestType
+        - request_type
     'Request:jsonld-write':
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
@@ -3677,12 +3769,12 @@ components:
         status:
           description: 'The status of this request. e.g submitted'
           type: string
-        requestType:
+        request_type:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        targetOrganization:
+        target_organization:
           description: 'The RSIN of the organization that should handle this request'
           type: string
         submitter:
@@ -3693,7 +3785,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Submitter:jsonld-write'
-        submitterPerson:
+        submitter_person:
           description: 'True if the submitter is a person'
           type: boolean
         properties:
@@ -3706,7 +3798,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Organization:jsonld-write'
-        requestCases:
+        request_cases:
           description: 'Any or all cases currently attached to this request'
           type: array
           items:
@@ -3725,8 +3817,11 @@ components:
         archive:
           description: 'Archivation rules of this resource'
           $ref: '#/components/schemas/Archive:jsonld-write'
+        current_stage:
+          description: 'The current stage of the client journey in this proces'
+          type: string
       required:
-        - requestType
+        - request_type
     RequestCase-read:
       type: object
       description: 'An case atached to a request'
@@ -3737,7 +3832,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
-        requestCase:
+        request_case:
           description: 'The OpenCase that is handling this request or supposed to handle this request'
           externalDocs:
             url: 'http://schema.org/url'
@@ -3745,14 +3840,24 @@ components:
         request:
           description: 'The request that this case is handling'
           $ref: '#/components/schemas/Request-read'
-        caseNumber:
+        case_number:
           description: 'The number of an case'
           type: string
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
     RequestCase-write:
       type: object
       description: 'An case atached to a request'
       properties:
-        requestCase:
+        request_case:
           description: 'The OpenCase that is handling this request or supposed to handle this request'
           externalDocs:
             url: 'http://schema.org/url'
@@ -3760,7 +3865,7 @@ components:
         request:
           description: 'The request that this case is handling'
           $ref: '#/components/schemas/Request-write'
-        caseNumber:
+        case_number:
           description: 'The number of an case'
           type: string
     'RequestCase:jsonld-read':
@@ -3782,7 +3887,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
-        requestCase:
+        request_case:
           description: 'The OpenCase that is handling this request or supposed to handle this request'
           externalDocs:
             url: 'http://schema.org/url'
@@ -3790,9 +3895,19 @@ components:
         request:
           description: 'The request that this case is handling'
           $ref: '#/components/schemas/Request:jsonld-read'
-        caseNumber:
+        case_number:
           description: 'The number of an case'
           type: string
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
     'RequestCase:jsonld-write':
       type: object
       description: 'An case atached to a request'
@@ -3806,7 +3921,7 @@ components:
         '@type':
           readOnly: true
           type: string
-        requestCase:
+        request_case:
           description: 'The OpenCase that is handling this request or supposed to handle this request'
           externalDocs:
             url: 'http://schema.org/url'
@@ -3814,7 +3929,7 @@ components:
         request:
           description: 'The request that this case is handling'
           $ref: '#/components/schemas/Request:jsonld-write'
-        caseNumber:
+        case_number:
           description: 'The number of an case'
           type: string
     Submitter-read:
@@ -3843,6 +3958,16 @@ components:
           $ref: '#/components/schemas/Request-read'
         role:
           type: string
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
     Submitter-write:
       type: object
       description: 'The submitters of a request'
@@ -3898,6 +4023,16 @@ components:
           $ref: '#/components/schemas/Request:jsonld-read'
         role:
           type: string
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
     'Submitter:jsonld-write':
       type: object
       description: 'The submitters of a request'
@@ -3938,6 +4073,8 @@ definitions:
       actionDate: []
       status:
         example: to_be_archived
+      dateCreated: []
+      dateModified: []
     required: []
   Archive-write:
     properties:
@@ -3957,7 +4094,8 @@ definitions:
       status:
         example: none
         maxLength: 255
-      createdAt: []
+      dateCreated: []
+      dateModified: []
       request: []
     required:
       - rsin
@@ -3999,10 +4137,13 @@ definitions:
         example: 'http://ptc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
-      createdAt: []
       submittedAt: []
       confidential:
         example: 'false'
+      currentStage:
+        maxLength: 255
+      dateCreated: []
+      dateModified: []
       submitters: []
       organizations: []
       requestCases: []
@@ -4034,6 +4175,8 @@ definitions:
         maxLength: 255
       confidential:
         example: 'false'
+      currentStage:
+        maxLength: 255
       submitters: []
       organizations: []
       requestCases: []
@@ -4051,10 +4194,11 @@ definitions:
         example: zrc.gemeente.nl/case/e2984465-190a-4562-829e-a8cca81aa35d
         format: url
         maxLength: 255
-      createdAt: []
       caseNumber:
         example: '12345'
         maxLength: 255
+      dateCreated: []
+      dateModified: []
       request: []
     required: []
   RequestCase-write:
@@ -4087,10 +4231,11 @@ definitions:
       organization:
         example: '002851234'
         maxLength: 10
-      createdAt: []
       role:
         example: initiator
         maxLength: 255
+      dateCreated: []
+      dateModified: []
       request: []
     required: []
   Submitter-write:

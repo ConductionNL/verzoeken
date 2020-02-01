@@ -15,11 +15,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * A request (or verzoek in dutch) to an organization (usually governmental) to do 'something' on behalf of a citizen or another organization
  *
  * @ApiResource(
+ *     attributes={"order"={"dateCreated": "ASC"}},
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
@@ -39,7 +42,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  * 		"requestCases.request_case": "exact",
  * })
  * @ApiFilter(DateFilter::class, properties={
- * 		"createdAt",
+ * 		"dateCreated",
+ * 		"dateModified",
  * 		"submittedAt",
  * })
  * @ApiFilter(OrderFilter::class, properties={
@@ -56,7 +60,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  * 		"requestCases.request_case",
  * 		"archive.nomination",
  * 		"archive.status",
- * 		"createdAt",
+ * 		"dateCreated",
+ * 		"dateModified",
  * 		"submittedAt",
  *
  * })
@@ -295,16 +300,7 @@ class Request
 	 * @ORM\Column(type="string", length=255, nullable=true)
 	 */
 	private $processType;
-	
-	/**
-	 * @var Datetime $createdAt The moment this request was created by the submitter 
-	 * 
-	 * @Groups({"read"})
-     * @Gedmo\Timestampable(on="create")
-	 * @ORM\Column(type="datetime", nullable=true)
-	 */
-	private $createdAt;
-	
+		
 	/**
 	 * @var Datetime $submittedAt The moment this request was submitted by the submitter
 	 * 
@@ -399,6 +395,24 @@ class Request
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $currentStage;
+    
+    /**
+     * @var Datetime $dateCreated The moment this request was created
+     *
+     * @Groups({"read"})
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateCreated;
+    
+    /**
+     * @var Datetime $dateModified  The moment this request last Modified
+     *
+     * @Groups({"read"})
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateModified;
 
     public function __construct()
     {
@@ -521,18 +535,6 @@ class Request
 	public function setProcess(?string $process): self
 	{
 		$this->process = $process;
-		
-		return $this;
-	}
-	
-	public function getCreatedAt(): ?\DateTimeInterface
-	{
-		return $this->createdAt;
-	}
-	
-	public function setCreatedAt(\DateTimeInterface $createdAt): self
-	{
-		$this->createdAt = $createdAt;
 		
 		return $this;
 	}
@@ -719,5 +721,29 @@ class Request
         $this->currentStage = $currentStage;
 
         return $this;
+    }
+    
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+    	return $this->dateCreated;
+    }
+    
+    public function setDateCreated(\DateTimeInterface $dateCreated): self
+    {
+    	$this->dateCreated= $dateCreated;
+    	
+    	return $this;
+    }    
+    
+    public function getDateModified(): ?\DateTimeInterface
+    {
+    	return $this->dateModified;
+    }
+    
+    public function setDateModified(\DateTimeInterface $dateModified): self
+    {
+    	$this->dateModified = $dateModified;
+    	
+    	return $this;
     }
 }
