@@ -589,7 +589,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Archive-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Archive-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Archive:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Archive-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Archive-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Archive-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Archive-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Archive-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/Archive-write'
         description: 'The updated Archive resource'
@@ -1183,7 +1207,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Organization-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Organization:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Organization-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Organization-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Organization-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Organization-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Organization-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/Organization-write'
         description: 'The updated Organization resource'
@@ -1761,7 +1809,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCase-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/RequestCase-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/RequestCase:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RequestCase-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/RequestCase-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/RequestCase-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/RequestCase-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/RequestCase-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/RequestCase-write'
         description: 'The updated RequestCase resource'
@@ -2706,7 +2778,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Request:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/Request-write'
         description: 'The updated Request resource'
@@ -3284,7 +3380,31 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Submitter:jsonld-write'
           application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          text/html:
             schema:
               $ref: '#/components/schemas/Submitter-write'
         description: 'The updated Submitter resource'
