@@ -16,6 +16,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ApiResource(
+ *     attributes={"order"={"dateCreated": "ASC"}},
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
@@ -102,6 +103,24 @@ class Archive
      * @ORM\Column(type="string", length=255)
      */
     private $status = "to_be_archived";
+    
+    /**
+     * @var Datetime $dateCreated The moment this request was created
+     *
+     * @Groups({"read"})
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateCreated;
+    
+    /**
+     * @var Datetime $dateModified  The moment this request last Modified
+     *
+     * @Groups({"read"})
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateModified;
 
     public function getId(): ?int
     {
@@ -142,5 +161,29 @@ class Archive
         $this->status = $status;
 
         return $this;
+    }
+    
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+    	return $this->dateCreated;
+    }
+    
+    public function setDateCreated(\DateTimeInterface $dateCreated): self
+    {
+    	$this->dateCreated= $dateCreated;
+    	
+    	return $this;
+    }
+    
+    public function getDateModified(): ?\DateTimeInterface
+    {
+    	return $this->dateModified;
+    }
+    
+    public function setDateModified(\DateTimeInterface $dateModified): self
+    {
+    	$this->dateModified = $dateModified;
+    	
+    	return $this;
     }
 }

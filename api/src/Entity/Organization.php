@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  * An organization handling a request
  * 
  * @ApiResource(
+ *     attributes={"order"={"dateCreated": "ASC"}},
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
@@ -111,13 +112,22 @@ class Organization
     private $request;
     
     /**
-     * @var Datetime $createdAt The moment this submitter was added to the request
-     * 
+     * @var Datetime $dateCreated The moment this request was created
+     *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $createdAt;
+    private $dateCreated;
+    
+    /**
+     * @var Datetime $dateModified  The moment this request last Modified
+     *
+     * @Groups({"read"})
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateModified;
 
     public function getId()
     {
@@ -158,5 +168,29 @@ class Organization
         $this->request = $request;
 
         return $this;
+    }
+    
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+    	return $this->dateCreated;
+    }
+    
+    public function setDateCreated(\DateTimeInterface $dateCreated): self
+    {
+    	$this->dateCreated= $dateCreated;
+    	
+    	return $this;
+    }
+    
+    public function getDateModified(): ?\DateTimeInterface
+    {
+    	return $this->dateModified;
+    }
+    
+    public function setDateModified(\DateTimeInterface $dateModified): self
+    {
+    	$this->dateModified = $dateModified;
+    	
+    	return $this;
     }
 }
