@@ -393,7 +393,6 @@ class Request
     
     /**
      * @MaxDepth(1)
-     * @Groups({"read", "write"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Organization", inversedBy="requests")
      */
     private $organizations;
