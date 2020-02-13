@@ -18,6 +18,10 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
+
+use App\Repository\OrganizationRepository;
+use App\Repository\RequestRepository;
+
 /**
  * A request (or verzoek in dutch) to an organization (usually governmental) to do 'something' on behalf of a citizen or another organization
  *
@@ -310,15 +314,6 @@ class Request
 	private $submittedAt;
 
     /**
-	 * @var ArrayCollection $organizations Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.
-	 * 
-     * @MaxDepth(1)
-	 * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Organization", mappedBy="request", orphanRemoval=true, fetch="EAGER", cascade={"persist"})
-     */
-    private $organizations;
-
-    /**
 	 * @var ArrayCollection $requestCases Any or all cases currently attached to this request
 	 * 
      * @MaxDepth(1)
@@ -397,6 +392,13 @@ class Request
     private $currentStage;
     
     /**
+     * @MaxDepth(1)
+     * @Groups({"read", "write"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Organization", inversedBy="requests")
+     */
+    private $organizations;
+    
+    /**
      * @var Datetime $dateCreated The moment this request was created
      *
      * @Groups({"read"})
@@ -414,6 +416,7 @@ class Request
      */
     private $dateModified;
 
+
     public function __construct()
     {
         $this->submitters = new ArrayCollection();
@@ -423,133 +426,133 @@ class Request
     }
 	
 	public function getId()
-	{
-		return $this->id;
-	}
+            	{
+            		return $this->id;
+            	}
 	
 	public function setId($id): self
-	{
-		$this->id = $id;
-		return $this;
-	}
+            	{
+            		$this->id = $id;
+            		return $this;
+            	}
 	
 	public function getReference(): ?string
-	{
-		return $this->reference;
-	}
+            	{
+            		return $this->reference;
+            	}
 	
 	public function setReference(string $reference): self
-	{
-		$this->reference = $reference;
-		
-		return $this;
-	}
+            	{
+            		$this->reference = $reference;
+            		
+            		return $this;
+            	}
 	
 	public function getReferenceId(): ?int
-	{
-		return $this->reference;
-	}
+            	{
+            		return $this->reference;
+            	}
 	
 	public function setReferenceId(int $referenceId): self
-	{
-		$this->referenceId = $referenceId;
-		
-		return $this;
-	}
+            	{
+            		$this->referenceId = $referenceId;
+            		
+            		return $this;
+            	}
 	
 	public function getStatus(): ?string
-	{
-		return $this->status;
-	}
+            	{
+            		return $this->status;
+            	}
 	
 	public function setStatus(string $status): self
-	{
-		$this->status = $status;
-		
-		return $this;
-	}
+            	{
+            		$this->status = $status;
+            		
+            		return $this;
+            	}
 	
 	
 	public function getRequestType(): ?string
-	{
-		return $this->requestType;
-	}
+            	{
+            		return $this->requestType;
+            	}
 	
 	public function setRequestType(string $requestType): self
-	{
-		$this->requestType = $requestType;
-		return $this;
-	}
+            	{
+            		$this->requestType = $requestType;
+            		return $this;
+            	}
 	
 	public function getTargetOrganization(): ?string
-	{
-		return $this->targetOrganization;
-	}
+            	{
+            		return $this->targetOrganization;
+            	}
 	
 	public function setTargetOrganization(string $targetOrganization): self
-	{
-		$this->targetOrganization= $targetOrganization;
-		return $this;
-	}
+            	{
+            		$this->targetOrganization= $targetOrganization;
+            		return $this;
+            	}
 	
 	public function getSubmitter(): ?string
-	{
-		return $this->submitter;
-	}
+            	{
+            		return $this->submitter;
+            	}
 	
 	public function setSubmitter(string $submitter): self
-	{
-		$this->submitter = $submitter;
-                                                                                                                                 		
-		return $this;
-	}
+            	{
+            		$this->submitter = $submitter;
+                                                                                                                                             		
+            		return $this;
+            	}
 	
 	public function getSubmitterPerson(): ?bool
-	{
-		return $this->submitterPerson;
-	}
+            	{
+            		return $this->submitterPerson;
+            	}
 	
 	public function setSubmitterPerson(bool $submitterPerson): self
-	{
-		$this->submitterPerson = $submitterPerson;
-		
-		return $this;
-	}
+            	{
+            		$this->submitterPerson = $submitterPerson;
+            		
+            		return $this;
+            	}
 	
 	public function getProperties()
-	{
-		return $this->properties;
-	}
+            	{
+            		return $this->properties;
+            	}
 	
 	public function setProperties($properties): self
-	{
-		$this->properties = $properties;
-		return $this;
-	}
+            	{
+            		$this->properties = $properties;
+            		return $this;
+            	}
 	
 	public function getProcess(): ?string
-	{
-		return $this->process;
-	}
+            	{
+            		return $this->process;
+            	}
 	
 	public function setProcess(?string $process): self
-	{
-		$this->process = $process;
-		
-		return $this;
-	}
+            	{
+            		$this->process = $process;
+            		
+            		return $this;
+            	}
 	
 	public function getSubmittedAt(): ?\DateTimeInterface
-	{
-		return $this->submittedAt;
-	}
+            	{
+            		return $this->submittedAt;
+            	}
 	
 	public function setSubmittedAt(\DateTimeInterface $submittedAt): self
-	{
-		$this->submittedAt = $submittedAt;
-		
-		return $this;
-	}
+            	{
+            		$this->submittedAt = $submittedAt;
+            		
+            		return $this;
+            	}
 
     /**
      * @return Collection|Submitter[]
@@ -576,37 +579,6 @@ class Request
             // set the owning side to null (unless already changed)
             if ($submitter->getRequest() === $this) {
                 $submitter->setRequest(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Organization[]
-     */
-    public function getOrganizations(): Collection
-    {
-        return $this->organizations;
-    }
-
-    public function addOrganization(Organization $organization): self
-    {
-        if (!$this->organizations->contains($organization)) {
-            $this->organizations[] = $organization;
-            $organization->setRequest($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrganization(Organization $organization): self
-    {
-    	if ($this->organizations->contains($organization)) {
-    		$this->organizations->removeElement($organization);
-            // set the owning side to null (unless already changed)
-    		if ($organization->getRequest() === $this) {
-    			$organization->setRequest(null);
             }
         }
 
@@ -745,5 +717,31 @@ class Request
     	$this->dateModified = $dateModified;
     	
     	return $this;
+    }
+
+    /**
+     * @return Collection|Organization[]
+     */
+    public function getOrganizations(): Collection
+    {
+        return $this->organizations;
+    }
+
+    public function addOrganization(Organization $organization): self
+    {
+        if (!$this->organizations->contains($organization)) {
+            $this->organizations[] = $organization;
+        }
+
+        return $this;
+    }
+
+    public function removeOrganization(Organization $organization): self
+    {
+        if ($this->organizations->contains($organization)) {
+            $this->organizations->removeElement($organization);
+        }
+
+        return $this;
     }
 }

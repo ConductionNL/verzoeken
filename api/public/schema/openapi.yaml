@@ -3417,6 +3417,9 @@ components:
         rsin:
           description: 'The RSIN of a organization that is handling or supposed to handle this request'
           type: string
+        shortcode:
+          description: 'The shortcode of a organization that is handling or supposed to handle this request'
+          type: string
         status:
           type: string
         request:
@@ -3434,16 +3437,21 @@ components:
           format: date-time
       required:
         - rsin
+        - shortcode
         - status
     Organization-write:
       type: object
       description: 'An organization handling a request'
       required:
         - rsin
+        - shortcode
         - status
       properties:
         rsin:
           description: 'The RSIN of a organization that is handling or supposed to handle this request'
+          type: string
+        shortcode:
+          description: 'The shortcode of a organization that is handling or supposed to handle this request'
           type: string
         status:
           type: string
@@ -3472,6 +3480,9 @@ components:
         rsin:
           description: 'The RSIN of a organization that is handling or supposed to handle this request'
           type: string
+        shortcode:
+          description: 'The shortcode of a organization that is handling or supposed to handle this request'
+          type: string
         status:
           type: string
         request:
@@ -3489,12 +3500,14 @@ components:
           format: date-time
       required:
         - rsin
+        - shortcode
         - status
     'Organization:jsonld-write':
       type: object
       description: 'An organization handling a request'
       required:
         - rsin
+        - shortcode
         - status
       properties:
         '@context':
@@ -3508,6 +3521,9 @@ components:
           type: string
         rsin:
           description: 'The RSIN of a organization that is handling or supposed to handle this request'
+          type: string
+        shortcode:
+          description: 'The shortcode of a organization that is handling or supposed to handle this request'
           type: string
         status:
           type: string
@@ -4091,6 +4107,8 @@ definitions:
         format: uuid
       rsin:
         example: '002851234'
+      shortcode:
+        example: '002851234'
       status:
         example: none
         maxLength: 255
@@ -4099,10 +4117,13 @@ definitions:
       request: []
     required:
       - rsin
+      - shortcode
       - status
   Organization-write:
     properties:
       rsin:
+        example: '002851234'
+      shortcode:
         example: '002851234'
       status:
         example: none
@@ -4110,6 +4131,7 @@ definitions:
       request: []
     required:
       - rsin
+      - shortcode
       - status
   Request-read:
     properties:

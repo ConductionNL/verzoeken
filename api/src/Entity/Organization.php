@@ -71,45 +71,37 @@ class Organization
 	 * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
-    private $rsin;
+    private $rsin;    
     
     /**
-     * @param string $status The status of this request in the organization
-	 * @example none
+     * @var string $shortcode The shortcode of a organization that is handling or supposed to handle this request
+     * @example 002851234
      *
      * @ApiProperty(
      *     attributes={
      *         "swagger_context"={
-     *         	   "description" = "The status of this request in the organization",
+     *         	   "description" = "The RSIN of a organization that is handling or supposed to handle this request",
      *             "type"="string",
-     *             "example"="none",
-     *             "maxLength"="255",
-     *             "enum"={"none","accepted","processing","complete","rejected"},
-     *             "default"="none",
+     *             "example"="002851234",
+     *              "maxLength"="255",
+     *             "required"=true
      *         }
      *     }
-     * )	 
-     *
-     * @Assert\Choice({"none","accepted","processing","complete","rejected"})
-     * @Assert\NotNull
-     * @Assert\Length(
-     *      max = 255
      * )
-     * @Groups({"read","write"})
+     *
+     * @Assert\NotNull
+     * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
-     * @ApiFilter(SearchFilter::class, strategy="exact")
      */
-    private $status = "none";
+    private $shortcode;
     
     /**
-     * @var Object $request The request that this organsisation is handling
-     * 
      * @MaxDepth(1)
-     * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Request", inversedBy="organizations")
-     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"read", "write"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Request", mappedBy="organizations")
      */
-    private $request;
+    private $requests;
+   
     
     /**
      * @var Datetime $dateCreated The moment this request was created
@@ -128,7 +120,12 @@ class Organization
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateModified;
-
+        
+    public function __construct()
+    {
+    	$this->requests = new ArrayCollection();
+    }
+    
     public function getId()
     {
         return $this->id;
@@ -144,31 +141,21 @@ class Organization
         $this->rsin = $rsin;
 
         return $this;
-    }    
-    
-    public function getStatus(): ?string
-    {
-    	return $this->status;
     }
     
-    public function setStatus(string $status): self
+    public function getShortcode(): ?string
     {
-    	$this->status = $status;
+    	return $this->shortcode;
+    }
+    
+    public function setShortcode(string $shortcode): self
+    {
+    	$this->shortcode = $shortcode;
     	
     	return $this;
-    }
-
-    public function getRequest(): ?Request
-    {
-        return $this->request;
-    }
-
-    public function setRequest(?Request $request): self
-    {
-        $this->request = $request;
-
-        return $this;
-    }
+    }    
+    
+   
     
     public function getDateCreated(): ?\DateTimeInterface
     {
@@ -192,5 +179,33 @@ class Organization
     	$this->dateModified = $dateModified;
     	
     	return $this;
+    }
+
+    /**
+     * @return Collection|Request[]
+     */
+    public function getRequests(): Collection
+    {
+        return $this->requests;
+    }
+
+    public function addRequest(Request $request): self
+    {
+        if (!$this->requests->contains($request)) {
+            $this->requests[] = $request;
+            $request->addOrganization($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequest(Request $request): self
+    {
+        if ($this->requests->contains($request)) {
+            $this->requests->removeElement($request);
+            $request->removeOrganization($this);
+        }
+
+        return $this;
     }
 }

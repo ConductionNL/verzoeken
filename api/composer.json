@@ -6,6 +6,7 @@
 		"ext-ctype": "*",
 		"ext-iconv": "*",
 		"api-platform/api-pack": "^1.1",
+		"beberlei/doctrineextensions": "^1.2",
 		"conduction/commongroundbundle": "dev-master",
 		"doctrine/doctrine-fixtures-bundle": "^3.2",
 		"doctrine/rst-parser": "^0.1.0",

@@ -21,13 +21,34 @@ class RequestRepository extends ServiceEntityRepository
 
     
     /**
-    * @param string $rsin Returns an array of Request objects
+    * @param Organization $organization The orgniaztion for wich this reference should be unique
+    * @param Datetime $date The date used to provide a year for the reference
     * @return integer the referenceId that should be used for the next refenceId
     */
-    public function getNextReferenceId($rsin)
+    public function getNextReferenceId($organization, $date = null)
     {
-    	return 1;
+    	if(!$date){
+    		$date = New \Datetime;	
+    	}
+    	
+    	$result = $this->createQueryBuilder('r')
+    	->select('MAX(r.referenceId) AS reference_id')
+    	->andWhere(':organisation MEMBER OF r.organizations')
+    	->setParameter('organisation', $organization)
+    	//->andWhere('YEAR(r.dateCreated) = YEAR(:date)')
+    	//->setParameter('date', $date)
+    	->getQuery()
+    	->getOneOrNullResult()
+    	;
+    	
+    	if(!$result){
+    		return 1;
+    	}
+    	else{
+    		return $result['reference_id'] + 1;
+    	}
     }
+    
     // /**
     //  * @return Request[] Returns an array of Request objects
     //  */

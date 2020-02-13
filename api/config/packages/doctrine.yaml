@@ -14,6 +14,11 @@ doctrine:
             underInvestigation:  App\Types\UnderInvestigationType
             money: Tbbc\MoneyBundle\Type\MoneyType
     orm:
+        dql:
+           datetime_functions:
+                DAY: DoctrineExtensions\Query\Mysql\Day
+                MONTH: DoctrineExtensions\Query\Mysql\Month
+                YEAR: DoctrineExtensions\Query\Mysql\Year
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
