@@ -1,13 +1,13 @@
 openapi: 3.0.2
 info:
   title: 'Verzoek Registratie Component'
-  version: V.0.1
+  version: V.1.1
   description: |
     API Details
     - Component: Verzoek Registratie Component
     - Reference: vrc
     - Enviroment: dev
-    - Version: V.0.1
+    - Version: V.1.1
     - Repository: [online]() / [zip](/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
     - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
