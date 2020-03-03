@@ -15,1828 +15,6 @@ info:
     'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
     
 paths:
-  /archives:
-    get:
-      tags:
-        - Archive
-      operationId: getArchiveCollection
-      summary: 'Retrieves the collection of Archive resources.'
-      responses:
-        200:
-          description: 'Archive collection response'
-          content:
-            application/hal+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Archive-read'
-            application/ld+json:
-              schema:
-                type: object
-                properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Archive:jsonld-read' } }
-                  'hydra:totalItems': { type: integer, minimum: 0 }
-                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
-                required:
-                  - 'hydra:member'
-            application/vnd.api+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Archive-read'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Archive-read'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Archive-read'
-            application/x-yaml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Archive-read'
-            text/csv:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Archive-read'
-            text/html:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Archive-read'
-      parameters:
-        -
-          name: page
-          in: query
-          required: false
-          description: 'The collection page number'
-          schema:
-            type: integer
-            default: 1
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-        -
-          name: Link
-          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
-          in: header
-        -
-          name: 'extend[]'
-          required: false
-          description: 'An array of nested objects to include in the return object'
-          in: query
-          schema:
-            type: array
-        -
-          name: 'fields[]'
-          required: false
-          description: 'An array of fields to return in output, wil return all fields is not supplied'
-          in: query
-          schema:
-            type: array
-        -
-          name: validOn
-          required: false
-          description: 'Returns object as valid on a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validFrom
-          required: false
-          description: 'Returns objects valid from a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validUntil
-          required: false
-          description: 'Returns objects valid until a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-      produces:
-        - application/health+json
-    post:
-      tags:
-        - Archive
-      operationId: postArchiveCollection
-      summary: 'Creates a Archive resource.'
-      responses:
-        201:
-          description: 'Archive resource created'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Archive:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-          links:
-            GetArchiveItem:
-              parameters:
-                id: '$response.body#/id'
-              operationId: getArchiveItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /archives/{id}`.'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Archive:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-        description: 'The new Archive resource'
-      parameters:
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-  '/archives/{id}':
-    get:
-      tags:
-        - Archive
-      operationId: getArchiveItem
-      summary: 'Retrieves a Archive resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-        -
-          name: Link
-          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
-          in: header
-        -
-          name: 'extend[]'
-          required: false
-          description: 'An array of nested objects to include in the return object'
-          in: query
-          schema:
-            type: array
-        -
-          name: 'fields[]'
-          required: false
-          description: 'An array of fields to return in output, wil return all fields is not supplied'
-          in: query
-          schema:
-            type: array
-        -
-          name: validOn
-          required: false
-          description: 'Returns object as valid on a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validFrom
-          required: false
-          description: 'Returns objects valid from a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validUntil
-          required: false
-          description: 'Returns objects valid until a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-      responses:
-        200:
-          description: 'Archive resource response'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Archive:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-        404:
-          description: 'Resource not found'
-      produces:
-        - application/health+json
-    delete:
-      tags:
-        - Archive
-      operationId: deleteArchiveItem
-      summary: 'Removes the Archive resource.'
-      responses:
-        204:
-          description: 'Archive resource deleted'
-        404:
-          description: 'Resource not found'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-    put:
-      tags:
-        - Archive
-      operationId: putArchiveItem
-      summary: 'Replaces the Archive resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-      responses:
-        200:
-          description: 'Archive resource updated'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Archive:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Archive:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-        description: 'The updated Archive resource'
-    patch:
-      tags:
-        - Archive
-      operationId: patchArchiveItem
-      summary: 'Updates the Archive resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-      responses:
-        200:
-          description: 'Archive resource updated'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Archive:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Archive-read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Archive:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/merge-patch+json:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          applications/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Archive-write'
-        description: 'The updated Archive resource'
-  /organizations:
-    get:
-      tags:
-        - Organization
-      operationId: getOrganizationCollection
-      summary: 'Retrieves the collection of Organization resources.'
-      responses:
-        200:
-          description: 'Organization collection response'
-          content:
-            application/hal+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization-read'
-            application/ld+json:
-              schema:
-                type: object
-                properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Organization:jsonld-read' } }
-                  'hydra:totalItems': { type: integer, minimum: 0 }
-                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
-                required:
-                  - 'hydra:member'
-            application/vnd.api+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization-read'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization-read'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization-read'
-            application/x-yaml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization-read'
-            text/csv:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization-read'
-            text/html:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization-read'
-      parameters:
-        -
-          name: status
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'status[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: page
-          in: query
-          required: false
-          description: 'The collection page number'
-          schema:
-            type: integer
-            default: 1
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-        -
-          name: Link
-          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
-          in: header
-        -
-          name: 'extend[]'
-          required: false
-          description: 'An array of nested objects to include in the return object'
-          in: query
-          schema:
-            type: array
-        -
-          name: 'fields[]'
-          required: false
-          description: 'An array of fields to return in output, wil return all fields is not supplied'
-          in: query
-          schema:
-            type: array
-        -
-          name: validOn
-          required: false
-          description: 'Returns object as valid on a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validFrom
-          required: false
-          description: 'Returns objects valid from a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validUntil
-          required: false
-          description: 'Returns objects valid until a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-      produces:
-        - application/health+json
-    post:
-      tags:
-        - Organization
-      operationId: postOrganizationCollection
-      summary: 'Creates a Organization resource.'
-      responses:
-        201:
-          description: 'Organization resource created'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Organization:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-          links:
-            GetOrganizationItem:
-              parameters:
-                id: '$response.body#/id'
-              operationId: getOrganizationItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /organizations/{id}`.'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Organization:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-        description: 'The new Organization resource'
-      parameters:
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-  '/organizations/{id}':
-    get:
-      tags:
-        - Organization
-      operationId: getOrganizationItem
-      summary: 'Retrieves a Organization resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-        -
-          name: Link
-          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
-          in: header
-        -
-          name: 'extend[]'
-          required: false
-          description: 'An array of nested objects to include in the return object'
-          in: query
-          schema:
-            type: array
-        -
-          name: 'fields[]'
-          required: false
-          description: 'An array of fields to return in output, wil return all fields is not supplied'
-          in: query
-          schema:
-            type: array
-        -
-          name: validOn
-          required: false
-          description: 'Returns object as valid on a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validFrom
-          required: false
-          description: 'Returns objects valid from a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validUntil
-          required: false
-          description: 'Returns objects valid until a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-      responses:
-        200:
-          description: 'Organization resource response'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Organization:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-        404:
-          description: 'Resource not found'
-      produces:
-        - application/health+json
-    delete:
-      tags:
-        - Organization
-      operationId: deleteOrganizationItem
-      summary: 'Removes the Organization resource.'
-      responses:
-        204:
-          description: 'Organization resource deleted'
-        404:
-          description: 'Resource not found'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-    put:
-      tags:
-        - Organization
-      operationId: putOrganizationItem
-      summary: 'Replaces the Organization resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-      responses:
-        200:
-          description: 'Organization resource updated'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Organization:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Organization:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-        description: 'The updated Organization resource'
-    patch:
-      tags:
-        - Organization
-      operationId: patchOrganizationItem
-      summary: 'Updates the Organization resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-      responses:
-        200:
-          description: 'Organization resource updated'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Organization:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Organization-read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Organization:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/merge-patch+json:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          applications/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Organization-write'
-        description: 'The updated Organization resource'
-  /request_cases:
-    get:
-      tags:
-        - RequestCase
-      operationId: getRequestCaseCollection
-      summary: 'Retrieves the collection of RequestCase resources.'
-      responses:
-        200:
-          description: 'RequestCase collection response'
-          content:
-            application/hal+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RequestCase-read'
-            application/ld+json:
-              schema:
-                type: object
-                properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/RequestCase:jsonld-read' } }
-                  'hydra:totalItems': { type: integer, minimum: 0 }
-                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
-                required:
-                  - 'hydra:member'
-            application/vnd.api+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RequestCase-read'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RequestCase-read'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RequestCase-read'
-            application/x-yaml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RequestCase-read'
-            text/csv:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RequestCase-read'
-            text/html:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RequestCase-read'
-      parameters:
-        -
-          name: page
-          in: query
-          required: false
-          description: 'The collection page number'
-          schema:
-            type: integer
-            default: 1
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-        -
-          name: Link
-          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
-          in: header
-        -
-          name: 'extend[]'
-          required: false
-          description: 'An array of nested objects to include in the return object'
-          in: query
-          schema:
-            type: array
-        -
-          name: 'fields[]'
-          required: false
-          description: 'An array of fields to return in output, wil return all fields is not supplied'
-          in: query
-          schema:
-            type: array
-        -
-          name: validOn
-          required: false
-          description: 'Returns object as valid on a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validFrom
-          required: false
-          description: 'Returns objects valid from a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validUntil
-          required: false
-          description: 'Returns objects valid until a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-      produces:
-        - application/health+json
-    post:
-      tags:
-        - RequestCase
-      operationId: postRequestCaseCollection
-      summary: 'Creates a RequestCase resource.'
-      responses:
-        201:
-          description: 'RequestCase resource created'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-          links:
-            GetRequestCaseItem:
-              parameters:
-                id: '$response.body#/id'
-              operationId: getRequestCaseItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /request_cases/{id}`.'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-        description: 'The new RequestCase resource'
-      parameters:
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-  '/request_cases/{id}':
-    get:
-      tags:
-        - RequestCase
-      operationId: getRequestCaseItem
-      summary: 'Retrieves a RequestCase resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-        -
-          name: Link
-          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
-          in: header
-        -
-          name: 'extend[]'
-          required: false
-          description: 'An array of nested objects to include in the return object'
-          in: query
-          schema:
-            type: array
-        -
-          name: 'fields[]'
-          required: false
-          description: 'An array of fields to return in output, wil return all fields is not supplied'
-          in: query
-          schema:
-            type: array
-        -
-          name: validOn
-          required: false
-          description: 'Returns object as valid on a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validFrom
-          required: false
-          description: 'Returns objects valid from a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validUntil
-          required: false
-          description: 'Returns objects valid until a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-      responses:
-        200:
-          description: 'RequestCase resource response'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-        404:
-          description: 'Resource not found'
-      produces:
-        - application/health+json
-    delete:
-      tags:
-        - RequestCase
-      operationId: deleteRequestCaseItem
-      summary: 'Removes the RequestCase resource.'
-      responses:
-        204:
-          description: 'RequestCase resource deleted'
-        404:
-          description: 'Resource not found'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-    put:
-      tags:
-        - RequestCase
-      operationId: putRequestCaseItem
-      summary: 'Replaces the RequestCase resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-      responses:
-        200:
-          description: 'RequestCase resource updated'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-        description: 'The updated RequestCase resource'
-    patch:
-      tags:
-        - RequestCase
-      operationId: patchRequestCaseItem
-      summary: 'Updates the RequestCase resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-      responses:
-        200:
-          description: 'RequestCase resource updated'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/RequestCase-read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/merge-patch+json:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          applications/x-yaml:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/RequestCase-write'
-        description: 'The updated RequestCase resource'
   /requests:
     get:
       tags:
@@ -1893,22 +71,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/Request-read'
       parameters:
-        -
-          name: submitter
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'submitter[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
         -
           name: reference
           in: query
@@ -1974,86 +136,6 @@ paths:
           style: form
           explode: true
         -
-          name: organizations.rsin
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'organizations.rsin[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: organizations.status
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'organizations.status[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: submitters.organization
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'submitters.organization[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: submitters.person
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'submitters.person[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: submitters.contact
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'submitters.contact[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: 'date_created[before]'
           in: query
           required: false
@@ -2102,39 +184,6 @@ paths:
           schema:
             type: string
         -
-          name: 'submitted_at[before]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'submitted_at[strictly_before]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'submitted_at[after]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'submitted_at[strictly_after]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'order[submitter]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
           name: 'order[reference]'
           in: query
           required: false
@@ -2171,69 +220,6 @@ paths:
               - asc
               - desc
         -
-          name: 'order[organizations.rsin]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[organizations.status]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[submitters.organization]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[submitters.person]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[submitters.contact]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[archive.nomination]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[archive.status]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
           name: 'order[date_created]'
           in: query
           required: false
@@ -2244,15 +230,6 @@ paths:
               - desc
         -
           name: 'order[date_modified]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[submitted_at]'
           in: query
           required: false
           schema:
@@ -2806,850 +783,8 @@ paths:
             schema:
               $ref: '#/components/schemas/Request-write'
         description: 'The updated Request resource'
-  /submitters:
-    get:
-      tags:
-        - Submitter
-      operationId: getSubmitterCollection
-      summary: 'Retrieves the collection of Submitter resources.'
-      responses:
-        200:
-          description: 'Submitter collection response'
-          content:
-            application/hal+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Submitter-read'
-            application/ld+json:
-              schema:
-                type: object
-                properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Submitter:jsonld-read' } }
-                  'hydra:totalItems': { type: integer, minimum: 0 }
-                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
-                required:
-                  - 'hydra:member'
-            application/vnd.api+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Submitter-read'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Submitter-read'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Submitter-read'
-            application/x-yaml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Submitter-read'
-            text/csv:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Submitter-read'
-            text/html:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Submitter-read'
-      parameters:
-        -
-          name: page
-          in: query
-          required: false
-          description: 'The collection page number'
-          schema:
-            type: integer
-            default: 1
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-        -
-          name: Link
-          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
-          in: header
-        -
-          name: 'extend[]'
-          required: false
-          description: 'An array of nested objects to include in the return object'
-          in: query
-          schema:
-            type: array
-        -
-          name: 'fields[]'
-          required: false
-          description: 'An array of fields to return in output, wil return all fields is not supplied'
-          in: query
-          schema:
-            type: array
-        -
-          name: validOn
-          required: false
-          description: 'Returns object as valid on a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validFrom
-          required: false
-          description: 'Returns objects valid from a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validUntil
-          required: false
-          description: 'Returns objects valid until a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-      produces:
-        - application/health+json
-    post:
-      tags:
-        - Submitter
-      operationId: postSubmitterCollection
-      summary: 'Creates a Submitter resource.'
-      responses:
-        201:
-          description: 'Submitter resource created'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Submitter:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-          links:
-            GetSubmitterItem:
-              parameters:
-                id: '$response.body#/id'
-              operationId: getSubmitterItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /submitters/{id}`.'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Submitter:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-        description: 'The new Submitter resource'
-      parameters:
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-  '/submitters/{id}':
-    get:
-      tags:
-        - Submitter
-      operationId: getSubmitterItem
-      summary: 'Retrieves a Submitter resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-        -
-          name: Link
-          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
-          in: header
-        -
-          name: 'extend[]'
-          required: false
-          description: 'An array of nested objects to include in the return object'
-          in: query
-          schema:
-            type: array
-        -
-          name: 'fields[]'
-          required: false
-          description: 'An array of fields to return in output, wil return all fields is not supplied'
-          in: query
-          schema:
-            type: array
-        -
-          name: validOn
-          required: false
-          description: 'Returns object as valid on a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validFrom
-          required: false
-          description: 'Returns objects valid from a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-        -
-          name: validUntil
-          required: false
-          description: 'Returns objects valid until a given date time'
-          schema:
-            type: string
-            format: date-time
-          in: query
-      responses:
-        200:
-          description: 'Submitter resource response'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Submitter:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-        404:
-          description: 'Resource not found'
-      produces:
-        - application/health+json
-    delete:
-      tags:
-        - Submitter
-      operationId: deleteSubmitterItem
-      summary: 'Removes the Submitter resource.'
-      responses:
-        204:
-          description: 'Submitter resource deleted'
-        404:
-          description: 'Resource not found'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-    put:
-      tags:
-        - Submitter
-      operationId: putSubmitterItem
-      summary: 'Replaces the Submitter resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-      responses:
-        200:
-          description: 'Submitter resource updated'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Submitter:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Submitter:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-        description: 'The updated Submitter resource'
-    patch:
-      tags:
-        - Submitter
-      operationId: patchSubmitterItem
-      summary: 'Updates the Submitter resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
-      responses:
-        200:
-          description: 'Submitter resource updated'
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Submitter:jsonld-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Submitter-read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Submitter:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/merge-patch+json:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          applications/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Submitter-write'
-        description: 'The updated Submitter resource'
 components:
   schemas:
-    Archive-read:
-      type: object
-      description: ''
-      properties:
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this resource'
-          externalDocs:
-            url: 'http://schema.org/identifier'
-          type: string
-        nomination:
-          description: 'The archive nomination of the resource'
-          type: string
-        action_date:
-          description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
-          type: string
-          format: date-time
-        status:
-          description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
-          type: string
-        date_created:
-          readOnly: true
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        date_modified:
-          readOnly: true
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
-    Archive-write:
-      type: object
-      description: ''
-      properties:
-        nomination:
-          description: 'The archive nomination of the resource'
-          type: string
-        action_date:
-          description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
-          type: string
-          format: date-time
-        status:
-          description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
-          type: string
-    'Archive:jsonld-read':
-      type: object
-      description: ''
-      properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this resource'
-          externalDocs:
-            url: 'http://schema.org/identifier'
-          type: string
-        nomination:
-          description: 'The archive nomination of the resource'
-          type: string
-        action_date:
-          description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
-          type: string
-          format: date-time
-        status:
-          description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
-          type: string
-        date_created:
-          readOnly: true
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        date_modified:
-          readOnly: true
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
-    'Archive:jsonld-write':
-      type: object
-      description: ''
-      properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        nomination:
-          description: 'The archive nomination of the resource'
-          type: string
-        action_date:
-          description: 'A "Y-m-d H:i:s" formatted value stating when an archive action should be made on the resource'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
-          type: string
-          format: date-time
-        status:
-          description: 'Indication whether the resource must be permanently stored or destroyed after a certain period.'
-          type: string
-    Organization-read:
-      type: object
-      description: 'An organization handling a request'
-      properties:
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this object'
-          externalDocs:
-            url: 'http://schema.org/identifier'
-          type: string
-        rsin:
-          description: 'The RSIN of a organization that is handling or supposed to handle this request'
-          type: string
-        shortcode:
-          description: 'The shortcode of a organization that is handling or supposed to handle this request'
-          type: string
-        status:
-          type: string
-        request:
-          description: 'The request that this organsisation is handling'
-          $ref: '#/components/schemas/Request-read'
-        date_created:
-          readOnly: true
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        date_modified:
-          readOnly: true
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
-      required:
-        - rsin
-        - shortcode
-        - status
-    Organization-write:
-      type: object
-      description: 'An organization handling a request'
-      required:
-        - rsin
-        - shortcode
-        - status
-      properties:
-        rsin:
-          description: 'The RSIN of a organization that is handling or supposed to handle this request'
-          type: string
-        shortcode:
-          description: 'The shortcode of a organization that is handling or supposed to handle this request'
-          type: string
-        status:
-          type: string
-        request:
-          description: 'The request that this organsisation is handling'
-          $ref: '#/components/schemas/Request-write'
-    'Organization:jsonld-read':
-      type: object
-      description: 'An organization handling a request'
-      properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this object'
-          externalDocs:
-            url: 'http://schema.org/identifier'
-          type: string
-        rsin:
-          description: 'The RSIN of a organization that is handling or supposed to handle this request'
-          type: string
-        shortcode:
-          description: 'The shortcode of a organization that is handling or supposed to handle this request'
-          type: string
-        status:
-          type: string
-        request:
-          description: 'The request that this organsisation is handling'
-          $ref: '#/components/schemas/Request:jsonld-read'
-        date_created:
-          readOnly: true
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        date_modified:
-          readOnly: true
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
-      required:
-        - rsin
-        - shortcode
-        - status
-    'Organization:jsonld-write':
-      type: object
-      description: 'An organization handling a request'
-      required:
-        - rsin
-        - shortcode
-        - status
-      properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        rsin:
-          description: 'The RSIN of a organization that is handling or supposed to handle this request'
-          type: string
-        shortcode:
-          description: 'The shortcode of a organization that is handling or supposed to handle this request'
-          type: string
-        status:
-          type: string
-        request:
-          description: 'The request that this organsisation is handling'
-          $ref: '#/components/schemas/Request:jsonld-write'
     Request-read:
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
@@ -3660,52 +795,43 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+        organization:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
         reference:
           readOnly: true
           description: 'The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations'
           type: string
         status:
-          description: 'The status of this request. e.g submitted'
+          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
           type: string
         request_type:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        target_organization:
-          description: 'The RSIN of the organization that should handle this request'
-          type: string
-        submitter:
-          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
+        process_type:
+          description: 'The processType that made this request'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         submitters:
-          description: 'The submitters of this request'
+          description: 'An array instemmingen of the people or organizations that submitted this request'
           type: array
           items:
-            $ref: '#/components/schemas/Submitter-read'
-        submitter_person:
-          description: 'True if the submitter is a person'
-          type: boolean
+            type: string
         properties:
           description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
           type: array
           items:
             type: string
-        submitted_at:
-          readOnly: true
-          description: 'The moment this request was submitted by the submitter'
-          type: string
-          format: date-time
-        organizations:
-          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
+        cases:
+          description: 'An array of cases tied to this request'
           type: array
           items:
-            $ref: '#/components/schemas/Organization-read'
-        request_cases:
-          description: 'Any or all cases currently attached to this request'
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestCase-read'
+            type: string
         parent:
           description: 'The request that this request was based on'
           $ref: '#/components/schemas/Request-read'
@@ -3717,12 +843,14 @@ components:
         confidential:
           description: 'Whether or not this request is considered confidential'
           type: boolean
-        archive:
-          description: 'Archivation rules of this resource'
-          $ref: '#/components/schemas/Archive-read'
         current_stage:
           description: 'The current stage of the client journey in this proces'
           type: string
+        date_submitted:
+          readOnly: true
+          description: 'The moment this request was submitted by the submitter'
+          type: string
+          format: date-time
         date_created:
           readOnly: true
           description: 'The moment this request was created'
@@ -3734,48 +862,50 @@ components:
           type: string
           format: date-time
       required:
+        - organization
         - request_type
+        - submitters
     Request-write:
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
+      required:
+        - organization
+        - request_type
+        - submitters
       properties:
+        organization:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
         status:
-          description: 'The status of this request. e.g submitted'
+          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
           type: string
         request_type:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        target_organization:
-          description: 'The RSIN of the organization that should handle this request'
-          type: string
-        submitter:
-          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
+        process_type:
+          description: 'The processType that made this request'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         submitters:
-          description: 'The submitters of this request'
+          description: 'An array instemmingen of the people or organizations that submitted this request'
           type: array
           items:
-            $ref: '#/components/schemas/Submitter-write'
-        submitter_person:
-          description: 'True if the submitter is a person'
-          type: boolean
+            type: string
         properties:
           description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
           type: array
           items:
             type: string
-        organizations:
-          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
+        cases:
+          description: 'An array of cases tied to this request'
           type: array
           items:
-            $ref: '#/components/schemas/Organization-write'
-        request_cases:
-          description: 'Any or all cases currently attached to this request'
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestCase-write'
+            type: string
         parent:
           description: 'The request that this request was based on'
           $ref: '#/components/schemas/Request-write'
@@ -3787,14 +917,9 @@ components:
         confidential:
           description: 'Whether or not this request is considered confidential'
           type: boolean
-        archive:
-          description: 'Archivation rules of this resource'
-          $ref: '#/components/schemas/Archive-write'
         current_stage:
           description: 'The current stage of the client journey in this proces'
           type: string
-      required:
-        - request_type
     'Request:jsonld-read':
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
@@ -3814,52 +939,43 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+        organization:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
         reference:
           readOnly: true
           description: 'The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations'
           type: string
         status:
-          description: 'The status of this request. e.g submitted'
+          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
           type: string
         request_type:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        target_organization:
-          description: 'The RSIN of the organization that should handle this request'
-          type: string
-        submitter:
-          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
+        process_type:
+          description: 'The processType that made this request'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         submitters:
-          description: 'The submitters of this request'
+          description: 'An array instemmingen of the people or organizations that submitted this request'
           type: array
           items:
-            $ref: '#/components/schemas/Submitter:jsonld-read'
-        submitter_person:
-          description: 'True if the submitter is a person'
-          type: boolean
+            type: string
         properties:
           description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
           type: array
           items:
             type: string
-        submitted_at:
-          readOnly: true
-          description: 'The moment this request was submitted by the submitter'
-          type: string
-          format: date-time
-        organizations:
-          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
+        cases:
+          description: 'An array of cases tied to this request'
           type: array
           items:
-            $ref: '#/components/schemas/Organization:jsonld-read'
-        request_cases:
-          description: 'Any or all cases currently attached to this request'
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestCase:jsonld-read'
+            type: string
         parent:
           description: 'The request that this request was based on'
           $ref: '#/components/schemas/Request:jsonld-read'
@@ -3871,12 +987,14 @@ components:
         confidential:
           description: 'Whether or not this request is considered confidential'
           type: boolean
-        archive:
-          description: 'Archivation rules of this resource'
-          $ref: '#/components/schemas/Archive:jsonld-read'
         current_stage:
           description: 'The current stage of the client journey in this proces'
           type: string
+        date_submitted:
+          readOnly: true
+          description: 'The moment this request was submitted by the submitter'
+          type: string
+          format: date-time
         date_created:
           readOnly: true
           description: 'The moment this request was created'
@@ -3888,10 +1006,16 @@ components:
           type: string
           format: date-time
       required:
+        - organization
         - request_type
+        - submitters
     'Request:jsonld-write':
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
+      required:
+        - organization
+        - request_type
+        - submitters
       properties:
         '@context':
           readOnly: true
@@ -3902,43 +1026,39 @@ components:
         '@type':
           readOnly: true
           type: string
+        organization:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
         status:
-          description: 'The status of this request. e.g submitted'
+          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
           type: string
         request_type:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        target_organization:
-          description: 'The RSIN of the organization that should handle this request'
-          type: string
-        submitter:
-          description: 'The BSN (if its a person) or RSIN (if its an organization) that is the primary submiter of this request'
+        process_type:
+          description: 'The processType that made this request'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         submitters:
-          description: 'The submitters of this request'
+          description: 'An array instemmingen of the people or organizations that submitted this request'
           type: array
           items:
-            $ref: '#/components/schemas/Submitter:jsonld-write'
-        submitter_person:
-          description: 'True if the submitter is a person'
-          type: boolean
+            type: string
         properties:
           description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
           type: array
           items:
             type: string
-        organizations:
-          description: 'Organizations that are handling this request, the use of this under discussion since it would mean giving an organization all request info there where it might need less. Forcing AVG issues upon the parties. The sollotion for this might be found in goal binding.'
+        cases:
+          description: 'An array of cases tied to this request'
           type: array
           items:
-            $ref: '#/components/schemas/Organization:jsonld-write'
-        request_cases:
-          description: 'Any or all cases currently attached to this request'
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestCase:jsonld-write'
+            type: string
         parent:
           description: 'The request that this request was based on'
           $ref: '#/components/schemas/Request:jsonld-write'
@@ -3950,315 +1070,20 @@ components:
         confidential:
           description: 'Whether or not this request is considered confidential'
           type: boolean
-        archive:
-          description: 'Archivation rules of this resource'
-          $ref: '#/components/schemas/Archive:jsonld-write'
         current_stage:
           description: 'The current stage of the client journey in this proces'
           type: string
-      required:
-        - request_type
-    RequestCase-read:
-      type: object
-      description: 'An case atached to a request'
-      properties:
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this object'
-          externalDocs:
-            url: 'http://schema.org/identifier'
-          type: string
-        request_case:
-          description: 'The OpenCase that is handling this request or supposed to handle this request'
-          externalDocs:
-            url: 'http://schema.org/url'
-          type: string
-        request:
-          description: 'The request that this case is handling'
-          $ref: '#/components/schemas/Request-read'
-        case_number:
-          description: 'The number of an case'
-          type: string
-        date_created:
-          readOnly: true
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        date_modified:
-          readOnly: true
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
-    RequestCase-write:
-      type: object
-      description: 'An case atached to a request'
-      properties:
-        request_case:
-          description: 'The OpenCase that is handling this request or supposed to handle this request'
-          externalDocs:
-            url: 'http://schema.org/url'
-          type: string
-        request:
-          description: 'The request that this case is handling'
-          $ref: '#/components/schemas/Request-write'
-        case_number:
-          description: 'The number of an case'
-          type: string
-    'RequestCase:jsonld-read':
-      type: object
-      description: 'An case atached to a request'
-      properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this object'
-          externalDocs:
-            url: 'http://schema.org/identifier'
-          type: string
-        request_case:
-          description: 'The OpenCase that is handling this request or supposed to handle this request'
-          externalDocs:
-            url: 'http://schema.org/url'
-          type: string
-        request:
-          description: 'The request that this case is handling'
-          $ref: '#/components/schemas/Request:jsonld-read'
-        case_number:
-          description: 'The number of an case'
-          type: string
-        date_created:
-          readOnly: true
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        date_modified:
-          readOnly: true
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
-    'RequestCase:jsonld-write':
-      type: object
-      description: 'An case atached to a request'
-      properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        request_case:
-          description: 'The OpenCase that is handling this request or supposed to handle this request'
-          externalDocs:
-            url: 'http://schema.org/url'
-          type: string
-        request:
-          description: 'The request that this case is handling'
-          $ref: '#/components/schemas/Request:jsonld-write'
-        case_number:
-          description: 'The number of an case'
-          type: string
-    Submitter-read:
-      type: object
-      description: 'The submitters of a request'
-      properties:
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this object'
-          externalDocs:
-            url: 'http://schema.org/identifier'
-          type: string
-        assent:
-          description: 'The Assent that is used to check if this submitter given assent to this request'
-          externalDocs:
-            url: 'http://schema.org/url'
-          type: string
-        person:
-          description: 'The BSN of the person that submitted this request'
-          type: string
-        organization:
-          description: 'The RSIN of the organization that submitted this request'
-          type: string
-        request:
-          description: 'The request that this submitter submitted'
-          $ref: '#/components/schemas/Request-read'
-        role:
-          type: string
-        date_created:
-          readOnly: true
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        date_modified:
-          readOnly: true
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
-    Submitter-write:
-      type: object
-      description: 'The submitters of a request'
-      properties:
-        assent:
-          description: 'The Assent that is used to check if this submitter given assent to this request'
-          externalDocs:
-            url: 'http://schema.org/url'
-          type: string
-        person:
-          description: 'The BSN of the person that submitted this request'
-          type: string
-        organization:
-          description: 'The RSIN of the organization that submitted this request'
-          type: string
-        request:
-          description: 'The request that this submitter submitted'
-          $ref: '#/components/schemas/Request-write'
-        role:
-          type: string
-    'Submitter:jsonld-read':
-      type: object
-      description: 'The submitters of a request'
-      properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this object'
-          externalDocs:
-            url: 'http://schema.org/identifier'
-          type: string
-        assent:
-          description: 'The Assent that is used to check if this submitter given assent to this request'
-          externalDocs:
-            url: 'http://schema.org/url'
-          type: string
-        person:
-          description: 'The BSN of the person that submitted this request'
-          type: string
-        organization:
-          description: 'The RSIN of the organization that submitted this request'
-          type: string
-        request:
-          description: 'The request that this submitter submitted'
-          $ref: '#/components/schemas/Request:jsonld-read'
-        role:
-          type: string
-        date_created:
-          readOnly: true
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        date_modified:
-          readOnly: true
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
-    'Submitter:jsonld-write':
-      type: object
-      description: 'The submitters of a request'
-      properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        assent:
-          description: 'The Assent that is used to check if this submitter given assent to this request'
-          externalDocs:
-            url: 'http://schema.org/url'
-          type: string
-        person:
-          description: 'The BSN of the person that submitted this request'
-          type: string
-        organization:
-          description: 'The RSIN of the organization that submitted this request'
-          type: string
-        request:
-          description: 'The request that this submitter submitted'
-          $ref: '#/components/schemas/Request:jsonld-write'
-        role:
-          type: string
 definitions:
-  Archive-read:
-    properties:
-      id:
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      nomination:
-        example: destroy
-      actionDate: []
-      status:
-        example: to_be_archived
-      dateCreated: []
-      dateModified: []
-    required: []
-  Archive-write:
-    properties:
-      nomination:
-        example: destroy
-      actionDate: []
-      status:
-        example: to_be_archived
-    required: []
-  Organization-read:
-    properties:
-      id:
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      rsin:
-        example: '002851234'
-      shortcode:
-        example: '002851234'
-      status:
-        example: none
-        maxLength: 255
-      dateCreated: []
-      dateModified: []
-      request: []
-    required:
-      - rsin
-      - shortcode
-      - status
-  Organization-write:
-    properties:
-      rsin:
-        example: '002851234'
-      shortcode:
-        example: '002851234'
-      status:
-        example: none
-        maxLength: 255
-      request: []
-    required:
-      - rsin
-      - shortcode
-      - status
   Request-read:
     properties:
       id:
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
+      organization:
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
       reference:
+        example: 6666-2019-0000000012
         maxLength: 255
       status:
         example: incomplete
@@ -4267,35 +1092,35 @@ definitions:
         example: 'http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
-      targetOrganization:
-        example: '002851234'
-      submitter:
-        example: '002851234'
-      submitterPerson:
-        example: 'true'
-      properties:
-        example: '}'
       processType:
         example: 'http://ptc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
-      submittedAt: []
+      submitters:
+        example: ''
+      properties:
+        example: '}'
+      cases:
+        example: ''
       confidential:
         example: 'false'
       currentStage:
+        example: getuigen
         maxLength: 255
+      dateSubmitted: []
       dateCreated: []
       dateModified: []
-      submitters: []
-      organizations: []
-      requestCases: []
       parent: []
       children: []
-      archive: []
     required:
+      - organization
       - requestType
+      - submitters
   Request-write:
     properties:
+      organization:
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
       status:
         example: incomplete
         maxLength: 255
@@ -4303,133 +1128,32 @@ definitions:
         example: 'http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
-      targetOrganization:
-        example: '002851234'
-      submitter:
-        example: '002851234'
-      submitterPerson:
-        example: 'true'
-      properties:
-        example: '}'
       processType:
         example: 'http://ptc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
+      submitters:
+        example: ''
+      properties:
+        example: '}'
+      cases:
+        example: ''
       confidential:
         example: 'false'
       currentStage:
+        example: getuigen
         maxLength: 255
-      submitters: []
-      organizations: []
-      requestCases: []
       parent: []
       children: []
-      archive: []
     required:
+      - organization
       - requestType
-  RequestCase-read:
-    properties:
-      id:
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      requestCase:
-        example: zrc.gemeente.nl/case/e2984465-190a-4562-829e-a8cca81aa35d
-        format: url
-        maxLength: 255
-      caseNumber:
-        example: '12345'
-        maxLength: 255
-      dateCreated: []
-      dateModified: []
-      request: []
-    required: []
-  RequestCase-write:
-    properties:
-      requestCase:
-        example: zrc.gemeente.nl/case/e2984465-190a-4562-829e-a8cca81aa35d
-        format: url
-        maxLength: 255
-      caseNumber:
-        example: '12345'
-        maxLength: 255
-      request: []
-    required: []
-  Submitter-read:
-    properties:
-      id:
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      assent:
-        example: irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d
-        format: url
-        maxLength: 255
-      contact:
-        example: crc.zaakonline.nl/person/e2984465-190a-4562-829e-a8cca81aa35d
-        format: url
-        maxLength: 255
-      person:
-        example: '999993653'
-        maxLength: 10
-      organization:
-        example: '002851234'
-        maxLength: 10
-      role:
-        example: initiator
-        maxLength: 255
-      dateCreated: []
-      dateModified: []
-      request: []
-    required: []
-  Submitter-write:
-    properties:
-      assent:
-        example: irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d
-        format: url
-        maxLength: 255
-      contact:
-        example: crc.zaakonline.nl/person/e2984465-190a-4562-829e-a8cca81aa35d
-        format: url
-        maxLength: 255
-      person:
-        example: '999993653'
-        maxLength: 10
-      organization:
-        example: '002851234'
-        maxLength: 10
-      role:
-        example: initiator
-        maxLength: 255
-      request: []
-    required: []
+      - submitters
 tags:
-  -
-    name: Archive
-    description: |
-      
-      
-      
-  -
-    name: Organization
-    description: |
-      An organization handling a request
-      
-      
   -
     name: Request
     description: |
       A request (or verzoek in dutch) to an organization (usually governmental) to do 'something' on behalf of a citizen or another organization
-      
-      
-  -
-    name: RequestCase
-    description: |
-      An case atached to a request
-      
-      
-  -
-    name: Submitter
-    description: |
-      The submitters of a request
       
       
 securityDefinitions:
@@ -4438,15 +1162,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the Submitter resource'
-      write: 'write right to the Submitter resource'
+      read: 'read right to the Request resource'
+      write: 'write right to the Request resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the Submitter resource'
-      write: 'write right to the Submitter resource'
+      read: 'read right to the Request resource'
+      write: 'write right to the Request resource'
 host: irc.zaakonline.nl
 servers:
   -
