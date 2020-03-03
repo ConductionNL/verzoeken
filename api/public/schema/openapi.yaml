@@ -1077,6 +1077,8 @@ definitions:
   Request-read:
     properties:
       id:
+        description: 'The id of this entity'
+        type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       organization:
