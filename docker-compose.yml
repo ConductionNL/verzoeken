@@ -205,4 +205,6 @@ networks:
 
 volumes:
   db-data: {}
+  db-mysql: {}
   nlx-data-2: {}
+
