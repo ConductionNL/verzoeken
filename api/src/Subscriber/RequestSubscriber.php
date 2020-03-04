@@ -41,25 +41,16 @@ class RequestSubscriber implements EventSubscriberInterface
     	$result = $event->getControllerResult();
     	$method = $event->getRequest()->getMethod();
     	$route = $event->getRequest()->attributes->get('_route');
-    	
+
     	if(!$result instanceof CCRequest || $route != 'api_requests_post_collection'){
     		//var_dump('a');
     		return;
     	}
-    	
+
     	if(!$result->getReference()){
-    		$organisation = $result->getOrganizations()[0];
-    		
-    		if(!$organisation){
-    			$organisation = $this->em->getRepository('App\Entity\Organization')->findOrCreateByRsin($result->getTargetOrganization());
-    			$this->em->persist($organisation);
-    			$this->em->flush($organisation);
-    			$result->addOrganization($organisation);
-    		}
-    		
-    		$referenceId = $this->em->getRepository('App\Entity\Request')->getNextReferenceId($organisation);
+
     		$result->setReferenceId($referenceId);
-    		$result->setReference($organisation->getShortcode().'-'.date('Y').'-'.$referenceId);
+    		$result->setReference('UT'.'-'.date('Y').'-'.$referenceId);
     	}
 
         return $result;
