@@ -48,8 +48,8 @@ class RequestSubscriber implements EventSubscriberInterface
     	}
 
     	if(!$result->getReference()){
-
-    		$referenceId = $this->em->getRepository('App\Entity\Request')->getNextReferenceId($organisation);
+            $organization = json_decode($event->getRequest()->getContent(),true)['organization'];
+    		$referenceId = $this->em->getRepository('App\Entity\Request')->getNextReferenceId($organization);
     		$result->setReferenceId($referenceId);
     		$result->setReference('UT'.'-'.date('Y').'-'.$referenceId);
     	}

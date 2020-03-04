@@ -19,7 +19,7 @@ class RequestRepository extends ServiceEntityRepository
         parent::__construct($registry, Request::class);
     }
 
-    
+
     /**
     * @param Organization $organization The orgniaztion for wich this reference should be unique
     * @param Datetime $date The date used to provide a year for the reference
@@ -31,10 +31,10 @@ class RequestRepository extends ServiceEntityRepository
     	$start = new \DateTime('first day of January this year');
     	$end = new \DateTime('last day of December this year');
     	//}
-    	
+
     	$result = $this->createQueryBuilder('r')
     	->select('MAX(r.referenceId) AS reference_id')
-    	->andWhere(':organisation MEMBER OF r.organizations')
+    	->andWhere(':organisation = r.organization')
     	->setParameter('organisation', $organization)
     	->andWhere('r.dateCreated >= :start')
     	->setParameter('start', $start)
@@ -43,7 +43,7 @@ class RequestRepository extends ServiceEntityRepository
     	->getQuery()
     	->getOneOrNullResult()
     	;
-    	
+
     	if(!$result){
     		return 1;
     	}
@@ -51,7 +51,7 @@ class RequestRepository extends ServiceEntityRepository
     		return $result['reference_id'] + 1;
     	}
     }
-    
+
     // /**
     //  * @return Request[] Returns an array of Request objects
     //  */
