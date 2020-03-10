@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -28,63 +30,42 @@ use App\Repository\RequestRepository;
  * @ApiResource(
  *     attributes={"order"={"dateCreated": "ASC"}},
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
- *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
+ *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true},
+ *     itemOperations={
+ *          "get",
+ *          "put",
+ *          "delete",
+ *          "get_change_logs"={
+ *              "path"="/requests/{id}/change_log",
+ *              "method"="get",
+ *              "swagger_context" = {
+ *                  "summary"="Changelogs",
+ *                  "description"="Gets al the change logs for this resource"
+ *              }
+ *          },
+ *          "get_audit_trail"={
+ *              "path"="/requests/{id}/audit_trial",
+ *              "method"="get",
+ *              "swagger_context" = {
+ *                  "summary"="Audittrail",
+ *                  "description"="Gets the audit trail for this resource"
+ *              }
+ *          }
+ *     },
  * )
  * @ORM\Entity(repositoryClass="App\Repository\RequestRepository")
  * @ORM\HasLifecycleCallbacks 
- * @ApiFilter(SearchFilter::class, properties={
- * 		"submitter":"exact",
- * 		"reference":"exact",
- * 		"status":"exact",
- * 		"requestType":"exact",
- * 		"processType":"exact",
- * 		"organizations.rsin": "exact",
- * 		"organizations.status": "exact",
- * 		"requestCases.request_case": "exact",
- * })
- * @ApiFilter(DateFilter::class, properties={
- * 		"dateCreated",
- * 		"dateModified",
- * 		"submittedAt",
- * })
- * @ApiFilter(OrderFilter::class, properties={
- * 		"submitter",
- * 		"reference",
- * 		"status",
- * 		"requestType",
- * 		"processType",
- * 		"organizations.rsin",
- * 		"organizations.status",
- * 		"submitters.organization", 
- * 		"submitters.person", 
- * 		"submitters.contact", 
- * 		"requestCases.request_case",
- * 		"archive.nomination",
- * 		"archive.status",
- * 		"dateCreated",
- * 		"dateModified",
- * 		"submittedAt",
- *
- * })
-
+ * 
+ * @ApiFilter(BooleanFilter::class)
+ * @ApiFilter(OrderFilter::class)
+ * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
+ * @ApiFilter(SearchFilter::class)
  */
 class Request
 {
 	/**
 	 * @var \Ramsey\Uuid\UuidInterface $id The UUID identifier of this resource
 	 * @example e2984465-190a-4562-829e-a8cca81aa35d
-	 *
-	 * @ApiProperty(
-	 * 	   identifier=true,
-	 *     attributes={
-	 *         "swagger_context"={
-	 *         	   "description" = "The UUID identifier of this resource",
-	 *             "type"="string",
-	 *             "format"="uuid",
-	 *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-	 *         }
-	 *     }
-	 * )
 	 *
 	 * @Assert\Uuid
 	 * @Groups({"read"})
@@ -99,6 +80,7 @@ class Request
 	 * @var string $resource A specific commonground organisation that is being reviewd, e.g a single product
 	 * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Assert\Url
 	 * @Groups({"read", "write"})
@@ -110,6 +92,7 @@ class Request
 	 * @var string $reference The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations 
 	 * @example 6666-2019-0000000012
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\Length(
 	 *      max = 255
 	 * )
@@ -121,6 +104,7 @@ class Request
 	/**
 	 * @param string $referenceId The autoincrementing id part of the reference, unique on an organization-year-id basis
 	 *	 
+     * @Gedmo\Versioned
 	 * @Assert\Positive
 	 * @Assert\Length(
 	 *      max = 11
@@ -133,6 +117,7 @@ class Request
 	 * @var string $status The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled
 	 * @example incomplete
 	 *
+     * @Gedmo\Versioned
      * @Assert\Choice({"incomplete", "complete", "submitted", "processed","cancelled"})
 	 * @Assert\Length(
 	 *      max = 255
@@ -147,7 +132,7 @@ class Request
 	 * @var string $requestType The type of request against which this request should be validated
 	 * @example http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a
 	 *
-	 *
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Assert\Url
 	 * @Assert\Length(
@@ -162,6 +147,7 @@ class Request
 	 * @var string $processType The processType that made this request
 	 * @example http://ptc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\Url
 	 * @Assert\Length(
 	 *      max = 255
@@ -175,7 +161,7 @@ class Request
 	 * @var array $submitters An array instemmingen of the people or organizations that submitted this request 
 	 * @example 
 	 * 
-	 * 
+     * @Gedmo\Versioned
 	 * @Assert\NotNull
 	 * @Groups({"read", "write"})
 	 * @ORM\Column(type="array")
@@ -186,17 +172,7 @@ class Request
 	 * @var array $properties The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).
 	 * @example {}
 	 *
-	 * @ApiProperty(
-	 *     attributes={
-	 *         "swagger_context"={
-	 *         	   "description" = "The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/)",
-	 *             "type"="array",
-	 *             "format"="json",
-	 *             "example"={}
-	 *         }
-	 *     }
-	 * )
-	 *
+     * @Gedmo\Versioned
 	 * @Groups({"read", "write"})
 	 * @ORM\Column(type="json_array")
 	 */
@@ -206,6 +182,7 @@ class Request
 	 * @var array $cases An array of cases tied to this request
 	 * @example 
 	 * 
+     * @Gedmo\Versioned
 	 * @Groups({"read", "write"})
 	 * @ORM\Column(type="array", nullable=true)
 	 */
@@ -214,6 +191,7 @@ class Request
     /**
 	 * @var Request $parent The request that this request was based on
 	 * 
+     * @Gedmo\Versioned
      * @MaxDepth(1)
 	 * @Groups({"read","write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Request", inversedBy="children")
@@ -233,6 +211,7 @@ class Request
 	 * @var boolean $confidential Whether or not this request is considered confidential 
 	 * @example false
 	 * 
+     * @Gedmo\Versioned
 	 * @Groups({"read","write"})
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -242,6 +221,7 @@ class Request
 	 * @var string $currentStage The current stage of the client journey in this proces
 	 * @example getuigen
 	 *
+     * @Gedmo\Versioned
 	 * @Assert\Length(
 	 *      max = 255
 	 * )
@@ -253,6 +233,7 @@ class Request
     /**
      * @var Datetime $dateSubmitted The moment this request was submitted by the submitter
      *
+     * @Gedmo\Versioned
      * @Groups({"read"})
      * @ORM\Column(type="datetime", nullable=true)
      */
