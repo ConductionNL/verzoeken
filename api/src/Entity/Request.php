@@ -54,6 +54,7 @@ use App\Repository\RequestRepository;
  *     },
  * )
  * @ORM\Entity(repositoryClass="App\Repository\RequestRepository")
+ * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
  * @ORM\HasLifecycleCallbacks 
  * 
  * @ApiFilter(BooleanFilter::class)
