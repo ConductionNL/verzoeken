@@ -44,7 +44,7 @@ use App\Repository\RequestRepository;
  *              }
  *          },
  *          "get_audit_trail"={
- *              "path"="/requests/{id}/audit_trial",
+ *              "path"="/requests/{id}/audit_trail",
  *              "method"="get",
  *              "swagger_context" = {
  *                  "summary"="Audittrail",
