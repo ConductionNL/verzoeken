@@ -60,6 +60,16 @@ paths:
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditTrail-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditTrail-read'
             application/vnd.api+json:
               schema:
                 type: array
@@ -347,7 +357,7 @@ paths:
         201:
           description: 'Request resource created'
           content:
-            application/health+json:
+            application/ld+json:
               schema:
                 $ref: '#/components/schemas/ExampleEntity-read'
             application/json+health:
@@ -389,7 +399,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/health+json:
+          application/ld+json:
             schema:
               $ref: '#/components/schemas/ExampleEntity-write'
           application/json+health:
@@ -538,7 +548,7 @@ paths:
         200:
           description: 'Request resource response'
           content:
-            application/health+json:
+            application/ld+json:
               schema:
                 $ref: '#/components/schemas/ExampleEntity-read'
             application/json+health:
@@ -663,7 +673,7 @@ paths:
         200:
           description: 'Request resource updated'
           content:
-            application/health+json:
+            application/ld+json:
               schema:
                 $ref: '#/components/schemas/ExampleEntity-read'
             application/json+health:
@@ -699,7 +709,7 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
-          application/health+json:
+          application/ld+json:
             schema:
               $ref: '#/components/schemas/ExampleEntity-write'
           application/json+health:
@@ -805,6 +815,9 @@ paths:
           description: 'Resource not found'
       requestBody:
         content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog:jsonld-write'
           application/json:
             schema:
               $ref: '#/components/schemas/Request-write'
