@@ -8,43 +8,28 @@ info:
     - Reference: vrc
     - Enviroment: dev
     - Version: V.1.1
-    - Repository: [online]() / [zip](/archive/master.zip)
+    - Repository: [online](https://github.com/ConductionNL/verzoekregistratiecomponent) / [zip](https://github.com/ConductionNL/verzoekregistratiecomponent/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
     - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
     'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
     
 paths:
-  /requests:
+  /audit_trails:
     get:
       tags:
-        - Request
-      operationId: getRequestCollection
-      summary: 'Retrieves the collection of Request resources.'
+        - AuditTrail
+      operationId: getAuditTrailCollection
+      summary: 'Retrieves the collection of AuditTrail resources.'
       responses:
         200:
-          description: 'Request collection response'
+          description: 'AuditTrail collection response'
           content:
-            application/health+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExampleEntity-read'
-            application/json+health:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExampleEntity-read'
-            application/hal+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Request-read'
             application/ld+json:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Request:jsonld-read' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/AuditTrail:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -54,7 +39,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/ExampleEntity:jsonld-read' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/AuditTrail:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -74,41 +59,164 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Request-read'
+                  $ref: '#/components/schemas/AuditTrail-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditTrail-read'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Request-read'
+                  $ref: '#/components/schemas/AuditTrail-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditTrail-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditTrail-read'
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Request-read'
+                  $ref: '#/components/schemas/AuditTrail-read'
             application/x-yaml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Request-read'
+                  $ref: '#/components/schemas/AuditTrail-read'
             text/csv:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Request-read'
+                  $ref: '#/components/schemas/AuditTrail-read'
             text/html:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Request-read'
+                  $ref: '#/components/schemas/AuditTrail-read'
       parameters:
         -
-          name: reference
+          name: 'order[application]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[request]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[user]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[subject]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[resource]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[resource_type]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[endpoint]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[content_type]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[content]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[session]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[date_created]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[date_modified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: request
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'reference[]'
+          name: 'request[]'
           in: query
           required: false
           schema:
@@ -118,13 +226,13 @@ paths:
           style: form
           explode: true
         -
-          name: status
+          name: user
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'status[]'
+          name: 'user[]'
           in: query
           required: false
           schema:
@@ -134,13 +242,13 @@ paths:
           style: form
           explode: true
         -
-          name: request_type
+          name: subject
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'request_type[]'
+          name: 'subject[]'
           in: query
           required: false
           schema:
@@ -150,13 +258,83 @@ paths:
           style: form
           explode: true
         -
-          name: process_type
+          name: resource
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'process_type[]'
+          name: 'resource[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: resource_type
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: endpoint
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'endpoint[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: content_type
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'content_type[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: content
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'content[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: session
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'session[]'
           in: query
           required: false
           schema:
@@ -214,7 +392,1659 @@ paths:
           schema:
             type: string
         -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - AuditTrail
+      operationId: postAuditTrailCollection
+      summary: 'Creates a AuditTrail resource.'
+      responses:
+        201:
+          description: 'AuditTrail resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/AuditTrail:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+          links:
+            GetAuditTrailItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getAuditTrailItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /audit_trails/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/AuditTrail:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+        description: 'The new AuditTrail resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/audit_trails/{id}':
+    get:
+      tags:
+        - AuditTrail
+      operationId: getAuditTrailItem
+      summary: 'Retrieves a AuditTrail resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'AuditTrail resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/AuditTrail:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - AuditTrail
+      operationId: deleteAuditTrailItem
+      summary: 'Removes the AuditTrail resource.'
+      responses:
+        204:
+          description: 'AuditTrail resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - AuditTrail
+      operationId: putAuditTrailItem
+      summary: 'Replaces the AuditTrail resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'AuditTrail resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/AuditTrail:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/AuditTrail:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+        description: 'The updated AuditTrail resource'
+    patch:
+      tags:
+        - AuditTrail
+      operationId: patchAuditTrailItem
+      summary: 'Updates the AuditTrail resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'AuditTrail resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/AuditTrail:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/AuditTrail-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail:jsonld-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/AuditTrail-write'
+        description: 'The updated AuditTrail resource'
+  /change_logs:
+    get:
+      tags:
+        - ChangeLog
+      operationId: getChangeLogCollection
+      summary: 'Retrieves the collection of ChangeLog resources.'
+      responses:
+        200:
+          description: 'ChangeLog collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/ChangeLog:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/ChangeLog:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeLog-read'
+      parameters:
+        -
+          name: 'order[action]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[object_id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[object_class]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[version]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[username]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[date_created]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[date_modified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: action
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'action[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: object_id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'object_id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: object_class
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'object_class[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: version
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'version[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'date_created[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_created[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_created[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_created[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_modified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_modified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_modified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_modified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - ChangeLog
+      operationId: postChangeLogCollection
+      summary: 'Creates a ChangeLog resource.'
+      responses:
+        201:
+          description: 'ChangeLog resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/ChangeLog:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+          links:
+            GetChangeLogItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getChangeLogItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /change_logs/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/ChangeLog:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+        description: 'The new ChangeLog resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/change_logs/{id}':
+    get:
+      tags:
+        - ChangeLog
+      operationId: getChangeLogItem
+      summary: 'Retrieves a ChangeLog resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'ChangeLog resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/ChangeLog:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - ChangeLog
+      operationId: deleteChangeLogItem
+      summary: 'Removes the ChangeLog resource.'
+      responses:
+        204:
+          description: 'ChangeLog resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - ChangeLog
+      operationId: putChangeLogItem
+      summary: 'Replaces the ChangeLog resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'ChangeLog resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/ChangeLog:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/ChangeLog:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+        description: 'The updated ChangeLog resource'
+    patch:
+      tags:
+        - ChangeLog
+      operationId: patchChangeLogItem
+      summary: 'Updates the ChangeLog resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'ChangeLog resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/ChangeLog:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ChangeLog-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog:jsonld-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/ChangeLog-write'
+        description: 'The updated ChangeLog resource'
+  /requests:
+    get:
+      tags:
+        - Request
+      operationId: getRequestCollection
+      summary: 'Retrieves the collection of Request resources.'
+      responses:
+        200:
+          description: 'Request collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Request:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Request:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request-read'
+      parameters:
+        -
+          name: confidential
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[organization]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[reference]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[reference_id]'
           in: query
           required: false
           schema:
@@ -250,6 +2080,60 @@ paths:
               - asc
               - desc
         -
+          name: 'order[submitters]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[properties]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[cases]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[confidential]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[current_stage]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[date_submitted]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[date_created]'
           in: query
           required: false
@@ -267,6 +2151,306 @@ paths:
             enum:
               - asc
               - desc
+        -
+          name: 'date_submitted[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_submitted[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_submitted[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_submitted[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_created[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_created[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_created[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_created[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_modified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_modified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_modified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_modified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: organization
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'organization[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: reference
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'reference[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: reference_id
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'reference_id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: status
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'status[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: request_type
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'request_type[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: process_type
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'process_type[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: submitters
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'submitters[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: deepObject
+          explode: true
+        -
+          name: properties
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'properties[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: cases
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'cases[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: deepObject
+          explode: true
+        -
+          name: confidential
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
+          name: 'confidential[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: boolean
+          style: form
+          explode: true
+        -
+          name: current_stage
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'current_stage[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: date_submitted
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_submitted[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: date_created
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_created[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: date_modified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'date_modified[]'
+          in: query
+          required: false
+          schema:
+            type: string
         -
           name: page
           in: query
@@ -359,20 +2543,29 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity-read'
-            application/json+health:
+                $ref: '#/components/schemas/Request:jsonld-read'
+            application/json+ld:
               schema:
-                $ref: '#/components/schemas/ExampleEntity-read'
+                $ref: '#/components/schemas/Request:jsonld-read'
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
-            application/ld+json:
+            application/json+hal:
               schema:
-                $ref: '#/components/schemas/Request:jsonld-read'
+                $ref: '#/components/schemas/Request-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Request-read'
             application/json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/json+health:
               schema:
                 $ref: '#/components/schemas/Request-read'
             application/xml:
@@ -401,20 +2594,29 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity-write'
-          application/json+health:
+              $ref: '#/components/schemas/Request:jsonld-write'
+          application/json+ld:
             schema:
-              $ref: '#/components/schemas/ExampleEntity-write'
+              $ref: '#/components/schemas/Request:jsonld-write'
           application/hal+json:
             schema:
               $ref: '#/components/schemas/Request-write'
-          application/ld+json:
+          application/json+hal:
             schema:
-              $ref: '#/components/schemas/Request:jsonld-write'
+              $ref: '#/components/schemas/Request-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Request-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Request-write'
           application/json:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          application/json+health:
             schema:
               $ref: '#/components/schemas/Request-write'
           application/xml:
@@ -550,20 +2752,29 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity-read'
-            application/json+health:
+                $ref: '#/components/schemas/Request:jsonld-read'
+            application/json+ld:
               schema:
-                $ref: '#/components/schemas/ExampleEntity-read'
+                $ref: '#/components/schemas/Request:jsonld-read'
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
-            application/ld+json:
+            application/json+hal:
               schema:
-                $ref: '#/components/schemas/Request:jsonld-read'
+                $ref: '#/components/schemas/Request-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Request-read'
             application/json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/json+health:
               schema:
                 $ref: '#/components/schemas/Request-read'
             application/xml:
@@ -582,52 +2793,6 @@ paths:
           description: 'Resource not found'
       produces:
         - application/health+json
-    delete:
-      tags:
-        - Request
-      operationId: deleteRequestItem
-      summary: 'Removes the Request resource.'
-      responses:
-        204:
-          description: 'Request resource deleted'
-        404:
-          description: 'Resource not found'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
     put:
       tags:
         - Request
@@ -675,20 +2840,29 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/ExampleEntity-read'
-            application/json+health:
+                $ref: '#/components/schemas/Request:jsonld-read'
+            application/json+ld:
               schema:
-                $ref: '#/components/schemas/ExampleEntity-read'
+                $ref: '#/components/schemas/Request:jsonld-read'
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
-            application/ld+json:
+            application/json+hal:
               schema:
-                $ref: '#/components/schemas/Request:jsonld-read'
+                $ref: '#/components/schemas/Request-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Request-read'
             application/json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/json+health:
               schema:
                 $ref: '#/components/schemas/Request-read'
             application/xml:
@@ -711,20 +2885,29 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/ExampleEntity-write'
-          application/json+health:
+              $ref: '#/components/schemas/Request:jsonld-write'
+          application/json+ld:
             schema:
-              $ref: '#/components/schemas/ExampleEntity-write'
+              $ref: '#/components/schemas/Request:jsonld-write'
           application/hal+json:
             schema:
               $ref: '#/components/schemas/Request-write'
-          application/ld+json:
+          application/json+hal:
             schema:
-              $ref: '#/components/schemas/Request:jsonld-write'
+              $ref: '#/components/schemas/Request-write'
           application/vnd.api+json:
             schema:
               $ref: '#/components/schemas/Request-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Request-write'
           application/json:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Request-write'
+          application/json+health:
             schema:
               $ref: '#/components/schemas/Request-write'
           application/xml:
@@ -740,11 +2923,16 @@ paths:
             schema:
               $ref: '#/components/schemas/Request-write'
         description: 'The updated Request resource'
-    patch:
+    delete:
       tags:
         - Request
-      operationId: patchRequestItem
-      summary: 'Updates the Request resource.'
+      operationId: deleteRequestItem
+      summary: 'Removes the Request resource.'
+      responses:
+        204:
+          description: 'Request resource deleted'
+        404:
+          description: 'Resource not found'
       parameters:
         -
           name: id
@@ -781,20 +2969,119 @@ paths:
           name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+  '/requests/{id}/audit_trail':
+    get:
+      tags:
+        - Request
+      operationId: get_audit_trailRequestItem
+      summary: 'Retrieves a Request resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
       responses:
         200:
-          description: 'Request resource updated'
+          description: 'Request resource response'
           content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Request-read'
             application/ld+json:
               schema:
                 $ref: '#/components/schemas/Request:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Request:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Request-read'
             application/vnd.api+json:
               schema:
                 $ref: '#/components/schemas/Request-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Request-read'
             application/json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/json+health:
               schema:
                 $ref: '#/components/schemas/Request-read'
             application/xml:
@@ -809,45 +3096,525 @@ paths:
             text/html:
               schema:
                 $ref: '#/components/schemas/Request-read'
-        400:
-          description: 'Invalid input'
         404:
           description: 'Resource not found'
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/ChangeLog:jsonld-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Request:jsonld-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          application/merge-patch+json:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          applications/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Request-write'
-        description: 'The updated Request resource'
+      produces:
+        - application/health+json
+  '/requests/{id}/change_log':
+    get:
+      tags:
+        - Request
+      operationId: get_change_logsRequestItem
+      summary: 'Retrieves a Request resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Request resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Request:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Request:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Request-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
 components:
   schemas:
+    AuditTrail-read:
+      type: object
+      description: 'An resource representing a log line.'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        request:
+          readOnly: true
+          description: 'The id of the request within that application'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        user:
+          readOnly: true
+          description: 'The user on behalf of wich the request was made'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        subject:
+          readOnly: true
+          description: '???'
+          type: string
+        process:
+          readOnly: true
+          description: 'The procces on behalf of wich the request was made'
+          type: string
+        data_elements:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: array
+          items:
+            type: string
+        data_subjects:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: array
+          items:
+            type: string
+        resource:
+          readOnly: true
+          description: 'The resource that was requested'
+          type: string
+        resource_type:
+          readOnly: true
+          description: 'The type of the resource that was requested'
+          type: string
+        route:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+        endpoint:
+          readOnly: true
+          description: 'The endpoint that the request was made to'
+          type: string
+        method:
+          readOnly: true
+          description: 'The method that was used'
+          type: string
+        accept:
+          readOnly: true
+          description: 'The contentType that was reqousted'
+          type: string
+        content_type:
+          readOnly: true
+          description: 'The contentType that was suplieds'
+          type: string
+        content:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+        ip:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+        session:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+        headers:
+          readOnly: true
+          description: 'The headers supplied by client'
+          type: array
+          items:
+            type: string
+        status_code:
+          readOnly: true
+          description: 'The status code returned to client'
+          type: integer
+        not_found:
+          readOnly: true
+          description: 'Whether or not the reqousted endpoint was found'
+          type: boolean
+        forbidden:
+          readOnly: true
+          description: 'Whether or not the client was allowed to the reqousted endpoint'
+          type: boolean
+        ok:
+          readOnly: true
+          description: 'Whether or not there where any problems'
+          type: boolean
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+    AuditTrail-write:
+      type: object
+      description: 'An resource representing a log line.'
+    'AuditTrail:jsonld-read':
+      type: object
+      description: 'An resource representing a log line.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        request:
+          readOnly: true
+          description: 'The id of the request within that application'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        user:
+          readOnly: true
+          description: 'The user on behalf of wich the request was made'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        subject:
+          readOnly: true
+          description: '???'
+          type: string
+        process:
+          readOnly: true
+          description: 'The procces on behalf of wich the request was made'
+          type: string
+        data_elements:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: array
+          items:
+            type: string
+        data_subjects:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: array
+          items:
+            type: string
+        resource:
+          readOnly: true
+          description: 'The resource that was requested'
+          type: string
+        resource_type:
+          readOnly: true
+          description: 'The type of the resource that was requested'
+          type: string
+        route:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+        endpoint:
+          readOnly: true
+          description: 'The endpoint that the request was made to'
+          type: string
+        method:
+          readOnly: true
+          description: 'The method that was used'
+          type: string
+        accept:
+          readOnly: true
+          description: 'The contentType that was reqousted'
+          type: string
+        content_type:
+          readOnly: true
+          description: 'The contentType that was suplieds'
+          type: string
+        content:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+        ip:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+        session:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+        headers:
+          readOnly: true
+          description: 'The headers supplied by client'
+          type: array
+          items:
+            type: string
+        status_code:
+          readOnly: true
+          description: 'The status code returned to client'
+          type: integer
+        not_found:
+          readOnly: true
+          description: 'Whether or not the reqousted endpoint was found'
+          type: boolean
+        forbidden:
+          readOnly: true
+          description: 'Whether or not the client was allowed to the reqousted endpoint'
+          type: boolean
+        ok:
+          readOnly: true
+          description: 'Whether or not there where any problems'
+          type: boolean
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+    'AuditTrail:jsonld-write':
+      type: object
+      description: 'An resource representing a log line.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+    ChangeLog-read:
+      type: object
+      description: 'An resource representing a log line.'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        action:
+          readOnly: true
+          type: string
+        object_id:
+          readOnly: true
+          type: string
+        object_class:
+          readOnly: true
+          type: string
+        version:
+          readOnly: true
+          type: integer
+        data:
+          readOnly: true
+          type: array
+          items:
+            type: string
+        username:
+          readOnly: true
+          type: string
+        session:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+    ChangeLog-write:
+      type: object
+      description: 'An resource representing a log line.'
+    'ChangeLog:jsonld-read':
+      type: object
+      description: 'An resource representing a log line.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        action:
+          readOnly: true
+          type: string
+        object_id:
+          readOnly: true
+          type: string
+        object_class:
+          readOnly: true
+          type: string
+        version:
+          readOnly: true
+          type: integer
+        data:
+          readOnly: true
+          type: array
+          items:
+            type: string
+        username:
+          readOnly: true
+          type: string
+        session:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+        date_created:
+          readOnly: true
+          description: 'The moment this request was created'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+        date_modified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+    'ChangeLog:jsonld-write':
+      type: object
+      description: 'An resource representing a log line.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
     Request-read:
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
@@ -1137,46 +3904,248 @@ components:
           description: 'The current stage of the client journey in this proces'
           type: string
 definitions:
-  Request-read:
+  AuditTrail-read:
     properties:
       id:
         description: 'The UUID identifier of this object'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line looks suspicius'
+        maxLength: 2555
+      application:
+        description: 'The application that made the request'
+        type: string
+        format: url
+        maxLength: 255
+      request:
+        description: 'The id of the request within that application'
+        type: string
+        format: url
+        maxLength: 255
+      user:
+        description: 'The user on behalf of wich the request was made'
+        type: string
+        format: url
+        maxLength: 255
+      subject:
+        description: '???'
+        type: \sting
+        maxLength: 255
+      process:
+        description: 'The procces on behalf of wich the request was made'
+        type: \sting
+        maxLength: 255
+      dataElements:
+        description: 'The moment this request was created'
+        type: array
+      dataSubjects:
+        description: 'The moment this request was created'
+        type: array
+      resource:
+        description: 'The resource that was requested'
+        type: \sting
+        maxLength: 255
+      resourceType:
+        description: 'The type of the resource that was requested'
+        type: \sting
+        maxLength: 255
+      route:
+        description: 'The moment this request was created'
+        type: \sting
+        maxLength: 255
+      endpoint:
+        description: 'The endpoint that the request was made to'
+        type: \sting
+        maxLength: 255
+      method:
+        description: 'The method that was used'
+        type: \sting
+        maxLength: 255
+      accept:
+        description: 'The contentType that was reqousted'
+        type: \sting
+        maxLength: 255
+      contentType:
+        description: 'The contentType that was suplieds'
+        type: \sting
+        maxLength: 255
+      content:
+        description: 'The moment this request was created'
+        type: \sting
+        maxLength: 2555
+      ip:
+        description: 'The moment this request was created'
+        type: \sting
+        maxLength: 255
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      headers:
+        description: 'The headers supplied by client'
+        type: array
+      statusCode:
+        description: 'The status code returned to client'
+        type: int
+        example: '200'
+      notFound:
+        description: 'Whether or not the reqousted endpoint was found'
+        type: bool
+        example: 'false'
+      forbidden:
+        description: 'Whether or not the client was allowed to the reqousted endpoint'
+        type: bool
+        example: 'false'
+      ok:
+        description: 'Whether or not there where any problems'
+        type: bool
+        example: 'true'
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-03-11 08:21:09'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-03-11 08:21:09'
+    required: []
+  AuditTrail-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line looks suspicius'
+        maxLength: 2555
+    required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: \sting
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-03-11 08:21:09'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-03-11 08:21:09'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
+  Request-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
       organization:
+        description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+        type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
       reference:
+        description: 'The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations'
+        type: string
         example: 6666-2019-0000000012
         maxLength: 255
       status:
+        description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
+        type: string
         example: incomplete
         maxLength: 255
       requestType:
+        description: 'The type of request against which this request should be validated'
+        type: string
         example: 'http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
       processType:
+        description: 'The processType that made this request'
+        type: string
         example: 'http://ptc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
       submitters:
+        description: 'An array instemmingen of the people or organizations that submitted this request'
+        type: array
         example: ''
       properties:
+        description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
+        type: array
         example: '}'
       cases:
+        description: 'An array of cases tied to this request'
+        type: array
         example: ''
       confidential:
+        description: 'Whether or not this request is considered confidential'
+        type: bool
         example: 'false'
       currentStage:
+        description: 'The current stage of the client journey in this proces'
+        type: string
         example: getuigen
         maxLength: 255
-      dateSubmitted: []
-      dateCreated: []
-      dateModified: []
-      parent: []
-      children: []
+      dateSubmitted:
+        description: 'The moment this request was submitted by the submitter'
+        type: \Datetime
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
+      parent:
+        description: 'The request that this request was based on'
+        type: \Request
+      children:
+        description: 'The requests that are bassed on this request'
+        type: \ArrayCollection
     required:
       - organization
       - requestType
@@ -1184,37 +4153,71 @@ definitions:
   Request-write:
     properties:
       organization:
+        description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+        type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
       status:
+        description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
+        type: string
         example: incomplete
         maxLength: 255
       requestType:
+        description: 'The type of request against which this request should be validated'
+        type: string
         example: 'http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
       processType:
+        description: 'The processType that made this request'
+        type: string
         example: 'http://ptc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
       submitters:
+        description: 'An array instemmingen of the people or organizations that submitted this request'
+        type: array
         example: ''
       properties:
+        description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
+        type: array
         example: '}'
       cases:
+        description: 'An array of cases tied to this request'
+        type: array
         example: ''
       confidential:
+        description: 'Whether or not this request is considered confidential'
+        type: bool
         example: 'false'
       currentStage:
+        description: 'The current stage of the client journey in this proces'
+        type: string
         example: getuigen
         maxLength: 255
-      parent: []
-      children: []
+      parent:
+        description: 'The request that this request was based on'
+        type: \Request
+      children:
+        description: 'The requests that are bassed on this request'
+        type: \ArrayCollection
     required:
       - organization
       - requestType
       - submitters
 tags:
+  -
+    name: AuditTrail
+    description: |
+      An resource representing a log line.
+      
+      This entity represents a product that can be ordered via the OrderRegistratieComponent.
+  -
+    name: ChangeLog
+    description: |
+      An resource representing a log line.
+      
+      This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
     name: Request
     description: |

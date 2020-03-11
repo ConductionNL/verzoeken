@@ -9,7 +9,9 @@ settings:
   title: Verzoek Registratie Component
   version: V.1.1
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
-  repro: ''
+  repro: https://github.com/ConductionNL/verzoekregistratiecomponent
+  demo: vrc.zaakonline.nl
+  container: https://hub.docker.com/repository/docker/conduction/vrc-php
   subdomain:   
   domains:
     - conduction.nl
