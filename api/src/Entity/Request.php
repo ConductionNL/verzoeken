@@ -259,12 +259,12 @@ class Request
     private $dateModified;
 
 	/**
-	 * @var array An array of Submitters of the that submitted this request
+	 * @var ArrayCollection An array of Submitters of the that submitted this request
 	 *
 	 * @Assert\NotNull
      * @MaxDepth(1)
 	 * @Groups({"read", "write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Submitter", mappedBy="request")
+     * @ORM\OneToMany(targetEntity="App\Entity\Submitter", mappedBy="request", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $submitters;
