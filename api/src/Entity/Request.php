@@ -355,12 +355,12 @@ class Request
             		return $this;
             	}
 
-	public function getSubmitters(): ?array
+	public function getSubmitters(): ?ArrayCollection
             	{
             		return $this->submitters;
             	}
 
-	public function setSubmitters(array $submitters): self
+	public function setSubmitters(ArrayCollection $submitters): self
             	{
             		$this->submitters = $submitters;
 
