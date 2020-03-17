@@ -2080,15 +2080,6 @@ paths:
               - asc
               - desc
         -
-          name: 'order[submitters]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
           name: 'order[properties]'
           in: query
           required: false
@@ -2224,13 +2215,13 @@ paths:
           schema:
             type: string
         -
-          name: id
+          name: submitters.brp
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'id[]'
+          name: 'submitters.brp[]'
           in: query
           required: false
           schema:
@@ -2239,218 +2230,6 @@ paths:
               type: string
           style: form
           explode: true
-        -
-          name: organization
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'organization[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: reference
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'reference[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: reference_id
-          in: query
-          required: false
-          schema:
-            type: integer
-        -
-          name: 'reference_id[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: integer
-          style: form
-          explode: true
-        -
-          name: status
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'status[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: request_type
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'request_type[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: process_type
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'process_type[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: submitters
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'submitters[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: deepObject
-          explode: true
-        -
-          name: properties
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'properties[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: cases
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'cases[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: deepObject
-          explode: true
-        -
-          name: confidential
-          in: query
-          required: false
-          schema:
-            type: boolean
-        -
-          name: 'confidential[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: boolean
-          style: form
-          explode: true
-        -
-          name: current_stage
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'current_stage[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: date_submitted
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'date_submitted[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: date_created
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'date_created[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: date_modified
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'date_modified[]'
-          in: query
-          required: false
-          schema:
-            type: string
         -
           name: page
           in: query
@@ -3231,6 +3010,728 @@ paths:
           description: 'Resource not found'
       produces:
         - application/health+json
+  /submitters:
+    get:
+      tags:
+        - Submitter
+      operationId: getSubmitterCollection
+      summary: 'Retrieves the collection of Submitter resources.'
+      responses:
+        200:
+          description: 'Submitter collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Submitter:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Submitter:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submitter-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Submitter
+      operationId: postSubmitterCollection
+      summary: 'Creates a Submitter resource.'
+      responses:
+        201:
+          description: 'Submitter resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Submitter:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Submitter:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+          links:
+            GetSubmitterItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getSubmitterItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /submitters/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Submitter:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Submitter:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+        description: 'The new Submitter resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/submitters/{id}':
+    get:
+      tags:
+        - Submitter
+      operationId: getSubmitterItem
+      summary: 'Retrieves a Submitter resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Submitter resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Submitter:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Submitter:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Submitter
+      operationId: deleteSubmitterItem
+      summary: 'Removes the Submitter resource.'
+      responses:
+        204:
+          description: 'Submitter resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Submitter
+      operationId: putSubmitterItem
+      summary: 'Replaces the Submitter resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Submitter resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Submitter:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Submitter:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Submitter:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Submitter:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+        description: 'The updated Submitter resource'
+    patch:
+      tags:
+        - Submitter
+      operationId: patchSubmitterItem
+      summary: 'Updates the Submitter resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Submitter resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Submitter:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Submitter:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Submitter-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Submitter:jsonld-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Submitter-write'
+        description: 'The updated Submitter resource'
 components:
   schemas:
     AuditTrail-read:
@@ -3647,11 +4148,6 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        submitters:
-          description: 'An array instemmingen of the people or organizations that submitted this request'
-          type: array
-          items:
-            type: string
         properties:
           description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
           type: array
@@ -3691,6 +4187,11 @@ components:
           description: 'The moment this request last Modified'
           type: string
           format: date-time
+        submitters:
+          description: 'An array of Submitters of the that submitted this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Submitter-read'
       required:
         - organization
         - request_type
@@ -3721,11 +4222,6 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        submitters:
-          description: 'An array instemmingen of the people or organizations that submitted this request'
-          type: array
-          items:
-            type: string
         properties:
           description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
           type: array
@@ -3750,6 +4246,11 @@ components:
         current_stage:
           description: 'The current stage of the client journey in this proces'
           type: string
+        submitters:
+          description: 'An array of Submitters of the that submitted this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Submitter-write'
     'Request:jsonld-read':
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
@@ -3791,11 +4292,6 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        submitters:
-          description: 'An array instemmingen of the people or organizations that submitted this request'
-          type: array
-          items:
-            type: string
         properties:
           description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
           type: array
@@ -3835,6 +4331,11 @@ components:
           description: 'The moment this request last Modified'
           type: string
           format: date-time
+        submitters:
+          description: 'An array of Submitters of the that submitted this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Submitter:jsonld-read'
       required:
         - organization
         - request_type
@@ -3874,11 +4375,6 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        submitters:
-          description: 'An array instemmingen of the people or organizations that submitted this request'
-          type: array
-          items:
-            type: string
         properties:
           description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
           type: array
@@ -3903,6 +4399,121 @@ components:
         current_stage:
           description: 'The current stage of the client journey in this proces'
           type: string
+        submitters:
+          description: 'An array of Submitters of the that submitted this request'
+          type: array
+          items:
+            $ref: '#/components/schemas/Submitter:jsonld-write'
+    Submitter-read:
+      type: object
+      description: 'An entity representing a submitter of a request'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        assent:
+          description: 'A reference to a Assent service for the requesting assent of a request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        brp:
+          description: 'A reference to the BRP for the requester of a request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        request:
+          description: 'The request this submitter belongs to'
+          $ref: '#/components/schemas/Request-read'
+      required:
+        - assent
+        - brp
+    Submitter-write:
+      type: object
+      description: 'An entity representing a submitter of a request'
+      required:
+        - assent
+        - brp
+      properties:
+        assent:
+          description: 'A reference to a Assent service for the requesting assent of a request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        brp:
+          description: 'A reference to the BRP for the requester of a request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        request:
+          description: 'The request this submitter belongs to'
+          $ref: '#/components/schemas/Request-write'
+    'Submitter:jsonld-read':
+      type: object
+      description: 'An entity representing a submitter of a request'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+        assent:
+          description: 'A reference to a Assent service for the requesting assent of a request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        brp:
+          description: 'A reference to the BRP for the requester of a request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        request:
+          description: 'The request this submitter belongs to'
+          $ref: '#/components/schemas/Request:jsonld-read'
+      required:
+        - assent
+        - brp
+    'Submitter:jsonld-write':
+      type: object
+      description: 'An entity representing a submitter of a request'
+      required:
+        - assent
+        - brp
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        assent:
+          description: 'A reference to a Assent service for the requesting assent of a request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        brp:
+          description: 'A reference to the BRP for the requester of a request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        request:
+          description: 'The request this submitter belongs to'
+          $ref: '#/components/schemas/Request:jsonld-write'
 definitions:
   AuditTrail-read:
     properties:
@@ -4008,12 +4619,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 08:21:09'
+        example: '2020-03-17 13:11:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 08:21:09'
+        example: '2020-03-17 13:11:20'
     required: []
   AuditTrail-write:
     properties:
@@ -4061,12 +4672,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 08:21:09'
+        example: '2020-03-17 13:11:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 08:21:09'
+        example: '2020-03-17 13:11:20'
     required: []
   ChangeLog-write:
     properties:
@@ -4110,10 +4721,6 @@ definitions:
         example: 'http://ptc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
-      submitters:
-        description: 'An array instemmingen of the people or organizations that submitted this request'
-        type: array
-        example: ''
       properties:
         description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
         type: array
@@ -4146,6 +4753,9 @@ definitions:
       children:
         description: 'The requests that are bassed on this request'
         type: \ArrayCollection
+      submitters:
+        description: 'An array of Submitters of the that submitted this request'
+        type: \ArrayCollection
     required:
       - organization
       - requestType
@@ -4174,10 +4784,6 @@ definitions:
         example: 'http://ptc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a'
         format: url
         maxLength: 255
-      submitters:
-        description: 'An array instemmingen of the people or organizations that submitted this request'
-        type: array
-        example: ''
       properties:
         description: 'The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).'
         type: array
@@ -4201,10 +4807,54 @@ definitions:
       children:
         description: 'The requests that are bassed on this request'
         type: \ArrayCollection
+      submitters:
+        description: 'An array of Submitters of the that submitted this request'
+        type: \ArrayCollection
     required:
       - organization
       - requestType
       - submitters
+  Submitter-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      assent:
+        description: 'A reference to a Assent service for the requesting assent of a request'
+        type: string
+        format: url
+        maxLength: 255
+      brp:
+        description: 'A reference to the BRP for the requester of a request'
+        type: string
+        format: url
+        maxLength: 255
+      request:
+        description: 'The request this submitter belongs to'
+        type: \request
+    required:
+      - assent
+      - brp
+  Submitter-write:
+    properties:
+      assent:
+        description: 'A reference to a Assent service for the requesting assent of a request'
+        type: string
+        format: url
+        maxLength: 255
+      brp:
+        description: 'A reference to the BRP for the requester of a request'
+        type: string
+        format: url
+        maxLength: 255
+      request:
+        description: 'The request this submitter belongs to'
+        type: \request
+    required:
+      - assent
+      - brp
 tags:
   -
     name: AuditTrail
@@ -4224,21 +4874,27 @@ tags:
       A request (or verzoek in dutch) to an organization (usually governmental) to do 'something' on behalf of a citizen or another organization
       
       
+  -
+    name: Submitter
+    description: |
+      An entity representing a submitter of a request
+      
+      This entity represents a request submitter with the goal of being able to find the assent and the brp references
 securityDefinitions:
   JWT-Oauth:
     type: oauth2
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the Request resource'
-      write: 'write right to the Request resource'
+      read: 'read right to the Submitter resource'
+      write: 'write right to the Submitter resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the Request resource'
-      write: 'write right to the Request resource'
+      read: 'read right to the Submitter resource'
+      write: 'write right to the Submitter resource'
 host: irc.zaakonline.nl
 servers:
   -
