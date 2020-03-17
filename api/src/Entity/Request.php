@@ -355,18 +355,6 @@ class Request
             		return $this;
             	}
 
-	public function getSubmitters(): ?ArrayCollection
-            	{
-            		return $this->submitters;
-            	}
-
-	public function setSubmitters(ArrayCollection $submitters): self
-            	{
-            		$this->submitters = $submitters;
-
-            		return $this;
-            	}
-
 	// tot hier nagelopen
 
 	public function getProperties()
