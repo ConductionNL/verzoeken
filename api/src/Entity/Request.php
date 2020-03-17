@@ -484,7 +484,7 @@ class Request
 
     	return $this;
     }
-    public function getSubmitters(): ?ArrayCollection
+    public function getSubmitters(): ?Collection
     {
         return $this->submitters;
     }
