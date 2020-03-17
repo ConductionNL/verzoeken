@@ -276,7 +276,7 @@ class Request
         $this->submitters = new ArrayCollection();
     }
 
-	public function getId()
+	public function getId():?Uuid
                               	{
                               		return $this->id;
                               	}
