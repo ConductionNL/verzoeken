@@ -262,6 +262,7 @@ class Request
 	 * @var ArrayCollection An array of Submitters of the that submitted this request
 	 *
 	 * @Assert\NotNull
+     * @Assert\Valid
      * @MaxDepth(1)
 	 * @Groups({"read", "write"})
      * @ORM\OneToMany(targetEntity="App\Entity\Submitter", mappedBy="request", cascade={"persist", "remove"})
