@@ -4619,12 +4619,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-13 14:14:57'
+        example: '2020-03-17 13:11:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-13 14:14:57'
+        example: '2020-03-17 13:11:20'
     required: []
   AuditTrail-write:
     properties:
@@ -4672,12 +4672,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-13 14:14:57'
+        example: '2020-03-17 13:11:20'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-13 14:14:57'
+        example: '2020-03-17 13:11:20'
     required: []
   ChangeLog-write:
     properties:
@@ -4755,7 +4755,7 @@ definitions:
         type: \ArrayCollection
       submitters:
         description: 'An array of Submitters of the that submitted this request'
-        type: array
+        type: \ArrayCollection
     required:
       - organization
       - requestType
@@ -4809,7 +4809,7 @@ definitions:
         type: \ArrayCollection
       submitters:
         description: 'An array of Submitters of the that submitted this request'
-        type: array
+        type: \ArrayCollection
     required:
       - organization
       - requestType

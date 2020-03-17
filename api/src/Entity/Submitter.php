@@ -4,11 +4,18 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 
 /**
  * An entity representing a submitter of a request
@@ -23,6 +30,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true},
  * )
  * @ORM\Entity(repositoryClass="App\Repository\SubmitterRepository")
+ * @ApiFilter(SearchFilter::class, properties={"brp": "exact"})
  */
 class Submitter
 {
