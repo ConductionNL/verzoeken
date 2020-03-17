@@ -355,6 +355,8 @@ class Request
             		return $this;
             	}
 
+
+
 	// tot hier nagelopen
 
 	public function getProperties()
@@ -482,7 +484,10 @@ class Request
 
     	return $this;
     }
-
+    public function getSubmitters(): ?ArrayCollection
+    {
+        return $this->submitters;
+    }
     public function addSubmitter(Submitter $submitter): self
     {
         if (!$this->submitters->contains($submitter)) {
