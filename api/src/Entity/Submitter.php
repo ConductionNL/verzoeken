@@ -52,12 +52,11 @@ class Submitter
      * @var string A reference to a Assent service for the requesting assent of a request
      *
      * @Assert\Url
-     * @Assert\NotNull
      * @Assert\Length(
      *     max=255
      * )
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $assent;
 
