@@ -30,7 +30,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true},
  * )
  * @ORM\Entity(repositoryClass="App\Repository\SubmitterRepository")
- * @ApiFilter(SearchFilter::class, properties={"brp": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"brp": "exact","assent": "exact","person": "exact"})
  */
 class Submitter
 {
@@ -64,15 +64,26 @@ class Submitter
      * @var string A reference to the BRP for the requester of a request
      *
      * @Assert\Url
-     * @Assert\NotNull
      * @Assert\Length(
      *     max=255
      * )
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $brp;
-
+    
+    /**
+     * @var string A reference to the contact component person
+     *
+     * @Assert\Url
+     * @Assert\Length(
+     *     max=255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $person;    
+    
     /**
      * @var request The request this submitter belongs to
      *
@@ -81,6 +92,33 @@ class Submitter
      * @ORM\ManyToOne(targetEntity="App\Entity\Request", inversedBy="submitters")
      */
     private $request;
+    
+    /**
+     * @var Datetime $dateSubmitted The moment this request was submitted by the submitter
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read"})
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateSubmitted;
+    
+    /**
+     * @var Datetime $dateCreated The moment this request was created
+     *
+     * @Groups({"read"})
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateCreated;
+    
+    /**
+     * @var Datetime $dateModified  The moment this request last Modified
+     *
+     * @Groups({"read"})
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateModified;
 
     public function getId(): ?Uuid
     {
@@ -110,6 +148,18 @@ class Submitter
 
         return $this;
     }
+    
+    public function getPerson(): ?string
+    {
+    	return $this->person;
+    }
+    
+    public function setPerson(string $person): self
+    {
+    	$this->person= $person;
+    	
+    	return $this;
+    }
 
     public function getRequest(): ?Request
     {
@@ -121,5 +171,41 @@ class Submitter
         $this->request = $request;
 
         return $this;
+    }
+    
+    public function getDateSubmitted(): ?\DateTimeInterface
+    {
+    	return $this->dateSubmitted;
+    }
+    
+    public function setDateSubmitted(\DateTimeInterface $dateSubmitted): self
+    {
+    	$this->dateSubmitted= $dateSubmitted;
+    	
+    	return $this;
+    }
+    
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+    	return $this->dateCreated;
+    }
+    
+    public function setDateCreated(\DateTimeInterface $dateCreated): self
+    {
+    	$this->dateCreated= $dateCreated;
+    	
+    	return $this;
+    }
+    
+    public function getDateModified(): ?\DateTimeInterface
+    {
+    	return $this->dateModified;
+    }
+    
+    public function setDateModified(\DateTimeInterface $dateModified): self
+    {
+    	$this->dateModified = $dateModified;
+    	
+    	return $this;
     }
 }

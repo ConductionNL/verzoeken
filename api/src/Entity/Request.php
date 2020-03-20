@@ -60,7 +60,7 @@ use App\Repository\RequestRepository;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"submitters.brp": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"submitters.brp": "exact","submitters.assent": "exact","submitters.person": "exact"})
  */
 class Request
 {
@@ -230,6 +230,18 @@ class Request
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $currentStage;
+    
+    /**
+     * @var ArrayCollection An array of Submitters of the that submitted this request
+     *
+     * @Assert\NotNull
+     * @Assert\Valid
+     * @MaxDepth(1)
+     * @Groups({"read", "write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Submitter", mappedBy="request", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $submitters;
 
     /**
      * @var Datetime $dateSubmitted The moment this request was submitted by the submitter
@@ -253,22 +265,10 @@ class Request
      * @var Datetime $dateModified  The moment this request last Modified
      *
      * @Groups({"read"})
-     * @Gedmo\Timestampable(on="create")
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateModified;
-
-	/**
-	 * @var ArrayCollection An array of Submitters of the that submitted this request
-	 *
-	 * @Assert\NotNull
-     * @Assert\Valid
-     * @MaxDepth(1)
-	 * @Groups({"read", "write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Submitter", mappedBy="request", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $submitters;
 
 
     public function __construct()
