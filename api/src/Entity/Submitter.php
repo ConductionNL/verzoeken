@@ -29,6 +29,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true},
  * )
+ * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
  * @ORM\Entity(repositoryClass="App\Repository\SubmitterRepository")
  * @ApiFilter(SearchFilter::class, properties={"brp": "exact","assent": "exact","person": "exact"})
  */
@@ -71,7 +72,7 @@ class Submitter
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $brp;
-    
+
     /**
      * @var string A reference to the contact component person
      *
@@ -82,8 +83,8 @@ class Submitter
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $person;    
-    
+    private $person;
+
     /**
      * @var request The request this submitter belongs to
      *
@@ -92,7 +93,7 @@ class Submitter
      * @ORM\ManyToOne(targetEntity="App\Entity\Request", inversedBy="submitters")
      */
     private $request;
-    
+
     /**
      * @var Datetime $dateSubmitted The moment this request was submitted by the submitter
      *
@@ -101,7 +102,7 @@ class Submitter
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateSubmitted;
-    
+
     /**
      * @var Datetime $dateCreated The moment this request was created
      *
@@ -110,7 +111,7 @@ class Submitter
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateCreated;
-    
+
     /**
      * @var Datetime $dateModified  The moment this request last Modified
      *
@@ -148,16 +149,16 @@ class Submitter
 
         return $this;
     }
-    
+
     public function getPerson(): ?string
     {
     	return $this->person;
     }
-    
+
     public function setPerson(string $person): self
     {
     	$this->person= $person;
-    	
+
     	return $this;
     }
 
@@ -172,40 +173,40 @@ class Submitter
 
         return $this;
     }
-    
+
     public function getDateSubmitted(): ?\DateTimeInterface
     {
     	return $this->dateSubmitted;
     }
-    
+
     public function setDateSubmitted(\DateTimeInterface $dateSubmitted): self
     {
     	$this->dateSubmitted= $dateSubmitted;
-    	
+
     	return $this;
     }
-    
+
     public function getDateCreated(): ?\DateTimeInterface
     {
     	return $this->dateCreated;
     }
-    
+
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
     	$this->dateCreated= $dateCreated;
-    	
+
     	return $this;
     }
-    
+
     public function getDateModified(): ?\DateTimeInterface
     {
     	return $this->dateModified;
     }
-    
+
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
     	$this->dateModified = $dateModified;
-    	
+
     	return $this;
     }
 }
