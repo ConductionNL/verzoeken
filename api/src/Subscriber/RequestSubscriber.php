@@ -21,13 +21,15 @@ class RequestSubscriber implements EventSubscriberInterface
     private $params;
     private $em;
     private $serializer;
+    private $commonGroundService;
     private $nlxLogService;
 
-    public function __construct(ParameterBagInterface $params, EntityManagerInterface $em, SerializerInterface $serializer)
+    public function __construct(ParameterBagInterface $params, EntityManagerInterface $em, SerializerInterface $serializer, CommonGroundService $commonGroundService)
     {
         $this->params = $params;
         $this->em = $em;
         $this->serializer = $serializer;
+        $this->commonGroundService = $commonGroundService;
     }
 
     public static function getSubscribedEvents()
@@ -37,7 +39,7 @@ class RequestSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function newRequest(GetResponseForControllerResultEvent $event, CommonGroundService $commonGroundService)
+    public function newRequest(GetResponseForControllerResultEvent $event)
     {
     	$result = $event->getControllerResult();
     	$method = $event->getRequest()->getMethod();
@@ -52,7 +54,7 @@ class RequestSubscriber implements EventSubscriberInterface
             $organization = json_decode($event->getRequest()->getContent(),true)['organization'];
     		$referenceId = $this->em->getRepository('App\Entity\Request')->getNextReferenceId($organization);
     		$result->setReferenceId($referenceId);
-    		$organization = $commonGroundService->getResource($organization);
+    		$organization = $this->commonGroundService->getResource($organization);
     		if(key_exists('shortcode', $organization) && $organization['shortcode'] != null){
     		    $shortcode = $organization['shortcode'];
             }
