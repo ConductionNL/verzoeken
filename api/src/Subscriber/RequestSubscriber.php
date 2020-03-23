@@ -3,6 +3,7 @@
 namespace App\Subscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
+use App\Service\CommonGroundService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -36,7 +37,7 @@ class RequestSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function newRequest(GetResponseForControllerResultEvent $event)
+    public function newRequest(GetResponseForControllerResultEvent $event, CommonGroundService $commonGroundService)
     {
     	$result = $event->getControllerResult();
     	$method = $event->getRequest()->getMethod();
@@ -51,7 +52,14 @@ class RequestSubscriber implements EventSubscriberInterface
             $organization = json_decode($event->getRequest()->getContent(),true)['organization'];
     		$referenceId = $this->em->getRepository('App\Entity\Request')->getNextReferenceId($organization);
     		$result->setReferenceId($referenceId);
-    		$result->setReference('UT'.'-'.date('Y').'-'.$referenceId);
+    		$organization = $commonGroundService->getResource($organization);
+    		if(key_exists('shortcode', $organization) && $organization['shortcode'] != null){
+    		    $shortcode = $organization['shortcode'];
+            }
+    		else{
+    		    $shortcode = $organization['name'];
+            }
+    		$result->setReference($shortcode.'-'.date('Y').'-'.$referenceId);
     	}
 
         return $result;
