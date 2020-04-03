@@ -3,6 +3,7 @@
 namespace App\Subscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
+use App\Service\CommonGroundService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,13 +21,15 @@ class RequestSubscriber implements EventSubscriberInterface
     private $params;
     private $em;
     private $serializer;
+    private $commonGroundService;
     private $nlxLogService;
 
-    public function __construct(ParameterBagInterface $params, EntityManagerInterface $em, SerializerInterface $serializer)
+    public function __construct(ParameterBagInterface $params, EntityManagerInterface $em, SerializerInterface $serializer, CommonGroundService $commonGroundService)
     {
         $this->params = $params;
         $this->em = $em;
         $this->serializer = $serializer;
+        $this->commonGroundService = $commonGroundService;
     }
 
     public static function getSubscribedEvents()
@@ -51,7 +54,14 @@ class RequestSubscriber implements EventSubscriberInterface
             $organization = json_decode($event->getRequest()->getContent(),true)['organization'];
     		$referenceId = $this->em->getRepository('App\Entity\Request')->getNextReferenceId($organization);
     		$result->setReferenceId($referenceId);
-    		$result->setReference('UT'.'-'.date('Y').'-'.$referenceId);
+    		$organization = $this->commonGroundService->getResource($organization);
+    		if(key_exists('shortcode', $organization) && $organization['shortcode'] != null){
+    		    $shortcode = $organization['shortcode'];
+            }
+    		else{
+    		    $shortcode = $organization['name'];
+            }
+    		$result->setReference($shortcode.'-'.date('Y').'-'.$referenceId);
     	}
 
         return $result;

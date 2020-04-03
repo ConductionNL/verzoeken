@@ -13,18 +13,22 @@ settings:
   demo: vrc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/vrc-php
   subdomain:   
+  type: component
+  domain: conduction.nl
   domains:
     - conduction.nl
     - zaakonline.nl
-    - huwelijksplanner.online
+    - larping.eu
     - common-ground.dev
-  domainsJson: ["conduction.nl","zaakonline.nl","huwelijksplanner.online","common-ground.dev"]
+    - trouwplanner.online
+    - huwelijksplanner.online
+  domainsJson: ["conduction.nl","zaakonline.nl","larping.eu","common-ground.dev","trouwplanner.online","huwelijksplanner.online"]
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
   state: Noord-Holland
   locality: Amsterdam
-  unit: Common-Ground  
+  unit: Common-Ground
   env: dev
   debug: 1
   replicaCount: 1
