@@ -6,17 +6,15 @@ settings:
   registryBase: docker.io/conduction
   projectName: vrc
   name: vrc
-  title: Verzoek Registratie Component
-  version: V.1.1
+  title: Proto component commonground
+  version: V.0.1
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
-  repro: https://github.com/ConductionNL/verzoekregistratiecomponent
-  demo: vrc.zaakonline.nl
-  container: https://hub.docker.com/repository/docker/conduction/vrc-php
-  subdomain:   
   type: component
+  repro: 
+  demo: 
+  container: https://hub.docker.com/repository/docker/conduction/vrc-php
   domain: conduction.nl
-  domains:
-  domainsJson: []
+  subdomain: vrc
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands

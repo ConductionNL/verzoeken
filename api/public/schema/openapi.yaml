@@ -1,14 +1,14 @@
 openapi: 3.0.2
 info:
-  title: 'Verzoek Registratie Component'
-  version: V.1.1
+  title: 'Proto component commonground'
+  version: V.0.1
   description: |
     API Details
-    - Component: Verzoek Registratie Component
+    - Component: Proto component commonground
     - Reference: vrc
     - Enviroment: dev
-    - Version: V.1.1
-    - Repository: [online](https://github.com/ConductionNL/verzoekregistratiecomponent) / [zip](https://github.com/ConductionNL/verzoekregistratiecomponent/archive/master.zip)
+    - Version: V.0.1
+    - Repository: [online]() / [zip](/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
     - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
@@ -147,7 +147,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[resource_type]'
+          name: 'order[resourceType]'
           in: query
           required: false
           schema:
@@ -165,7 +165,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[content_type]'
+          name: 'order[contentType]'
           in: query
           required: false
           schema:
@@ -192,7 +192,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[date_created]'
+          name: 'order[dateCreated]'
           in: query
           required: false
           schema:
@@ -201,7 +201,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[date_modified]'
+          name: 'order[dateModified]'
           in: query
           required: false
           schema:
@@ -274,7 +274,7 @@ paths:
           style: form
           explode: true
         -
-          name: resource_type
+          name: resourceType
           in: query
           required: false
           schema:
@@ -296,13 +296,13 @@ paths:
           style: form
           explode: true
         -
-          name: content_type
+          name: contentType
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'content_type[]'
+          name: 'contentType[]'
           in: query
           required: false
           schema:
@@ -344,49 +344,49 @@ paths:
           style: form
           explode: true
         -
-          name: 'date_created[before]'
+          name: 'dateCreated[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_created[strictly_before]'
+          name: 'dateCreated[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_created[after]'
+          name: 'dateCreated[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_created[strictly_after]'
+          name: 'dateCreated[strictly_after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[before]'
+          name: 'dateModified[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[strictly_before]'
+          name: 'dateModified[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[after]'
+          name: 'dateModified[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[strictly_after]'
+          name: 'dateModified[strictly_after]'
           in: query
           required: false
           schema:
@@ -1123,7 +1123,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[object_id]'
+          name: 'order[objectId]'
           in: query
           required: false
           schema:
@@ -1132,7 +1132,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[object_class]'
+          name: 'order[objectClass]'
           in: query
           required: false
           schema:
@@ -1159,7 +1159,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[date_created]'
+          name: 'order[dateCreated]'
           in: query
           required: false
           schema:
@@ -1168,7 +1168,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[date_modified]'
+          name: 'order[dateModified]'
           in: query
           required: false
           schema:
@@ -1193,13 +1193,13 @@ paths:
           style: form
           explode: true
         -
-          name: object_id
+          name: objectId
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'object_id[]'
+          name: 'objectId[]'
           in: query
           required: false
           schema:
@@ -1209,13 +1209,13 @@ paths:
           style: form
           explode: true
         -
-          name: object_class
+          name: objectClass
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'object_class[]'
+          name: 'objectClass[]'
           in: query
           required: false
           schema:
@@ -1241,49 +1241,49 @@ paths:
           style: form
           explode: true
         -
-          name: 'date_created[before]'
+          name: 'dateCreated[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_created[strictly_before]'
+          name: 'dateCreated[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_created[after]'
+          name: 'dateCreated[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_created[strictly_after]'
+          name: 'dateCreated[strictly_after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[before]'
+          name: 'dateModified[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[strictly_before]'
+          name: 'dateModified[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[after]'
+          name: 'dateModified[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[strictly_after]'
+          name: 'dateModified[strictly_after]'
           in: query
           required: false
           schema:
@@ -2044,7 +2044,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[reference_id]'
+          name: 'order[referenceId]'
           in: query
           required: false
           schema:
@@ -2062,7 +2062,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[request_type]'
+          name: 'order[requestType]'
           in: query
           required: false
           schema:
@@ -2071,7 +2071,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[process_type]'
+          name: 'order[processType]'
           in: query
           required: false
           schema:
@@ -2107,7 +2107,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[current_stage]'
+          name: 'order[currentStage]'
           in: query
           required: false
           schema:
@@ -2116,7 +2116,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[date_submitted]'
+          name: 'order[dateSubmitted]'
           in: query
           required: false
           schema:
@@ -2125,7 +2125,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[date_created]'
+          name: 'order[dateCreated]'
           in: query
           required: false
           schema:
@@ -2134,7 +2134,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[date_modified]'
+          name: 'order[dateModified]'
           in: query
           required: false
           schema:
@@ -2143,73 +2143,73 @@ paths:
               - asc
               - desc
         -
-          name: 'date_submitted[before]'
+          name: 'dateSubmitted[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_submitted[strictly_before]'
+          name: 'dateSubmitted[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_submitted[after]'
+          name: 'dateSubmitted[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_submitted[strictly_after]'
+          name: 'dateSubmitted[strictly_after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_created[before]'
+          name: 'dateCreated[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_created[strictly_before]'
+          name: 'dateCreated[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_created[after]'
+          name: 'dateCreated[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_created[strictly_after]'
+          name: 'dateCreated[strictly_after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[before]'
+          name: 'dateModified[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[strictly_before]'
+          name: 'dateModified[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[after]'
+          name: 'dateModified[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'date_modified[strictly_after]'
+          name: 'dateModified[strictly_after]'
           in: query
           required: false
           schema:
@@ -2222,6 +2222,38 @@ paths:
             type: string
         -
           name: 'submitters.brp[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: submitters.assent
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'submitters.assent[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: submitters.person
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'submitters.person[]'
           in: query
           required: false
           schema:
@@ -3097,6 +3129,54 @@ paths:
                   $ref: '#/components/schemas/Submitter-read'
       parameters:
         -
+          name: brp
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'brp[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: assent
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'assent[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: person
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'person[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -3764,13 +3844,13 @@ components:
           readOnly: true
           description: 'The procces on behalf of wich the request was made'
           type: string
-        data_elements:
+        dataElements:
           readOnly: true
           description: 'The moment this request was created'
           type: array
           items:
             type: string
-        data_subjects:
+        dataSubjects:
           readOnly: true
           description: 'The moment this request was created'
           type: array
@@ -3780,7 +3860,7 @@ components:
           readOnly: true
           description: 'The resource that was requested'
           type: string
-        resource_type:
+        resourceType:
           readOnly: true
           description: 'The type of the resource that was requested'
           type: string
@@ -3800,7 +3880,7 @@ components:
           readOnly: true
           description: 'The contentType that was reqousted'
           type: string
-        content_type:
+        contentType:
           readOnly: true
           description: 'The contentType that was suplieds'
           type: string
@@ -3822,11 +3902,11 @@ components:
           type: array
           items:
             type: string
-        status_code:
+        statusCode:
           readOnly: true
           description: 'The status code returned to client'
           type: integer
-        not_found:
+        notFound:
           readOnly: true
           description: 'Whether or not the reqousted endpoint was found'
           type: boolean
@@ -3838,14 +3918,14 @@ components:
           readOnly: true
           description: 'Whether or not there where any problems'
           type: boolean
-        date_created:
+        dateCreated:
           readOnly: true
           description: 'The moment this request was created'
           externalDocs:
             url: 'http://schema.org/DateTime'
           type: string
           format: date-time
-        date_modified:
+        dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
           externalDocs:
@@ -3894,13 +3974,13 @@ components:
           readOnly: true
           description: 'The procces on behalf of wich the request was made'
           type: string
-        data_elements:
+        dataElements:
           readOnly: true
           description: 'The moment this request was created'
           type: array
           items:
             type: string
-        data_subjects:
+        dataSubjects:
           readOnly: true
           description: 'The moment this request was created'
           type: array
@@ -3910,7 +3990,7 @@ components:
           readOnly: true
           description: 'The resource that was requested'
           type: string
-        resource_type:
+        resourceType:
           readOnly: true
           description: 'The type of the resource that was requested'
           type: string
@@ -3930,7 +4010,7 @@ components:
           readOnly: true
           description: 'The contentType that was reqousted'
           type: string
-        content_type:
+        contentType:
           readOnly: true
           description: 'The contentType that was suplieds'
           type: string
@@ -3952,11 +4032,11 @@ components:
           type: array
           items:
             type: string
-        status_code:
+        statusCode:
           readOnly: true
           description: 'The status code returned to client'
           type: integer
-        not_found:
+        notFound:
           readOnly: true
           description: 'Whether or not the reqousted endpoint was found'
           type: boolean
@@ -3968,14 +4048,14 @@ components:
           readOnly: true
           description: 'Whether or not there where any problems'
           type: boolean
-        date_created:
+        dateCreated:
           readOnly: true
           description: 'The moment this request was created'
           externalDocs:
             url: 'http://schema.org/DateTime'
           type: string
           format: date-time
-        date_modified:
+        dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
           externalDocs:
@@ -4008,10 +4088,10 @@ components:
         action:
           readOnly: true
           type: string
-        object_id:
+        objectId:
           readOnly: true
           type: string
-        object_class:
+        objectClass:
           readOnly: true
           type: string
         version:
@@ -4029,14 +4109,14 @@ components:
           readOnly: true
           description: 'The moment this request was created'
           type: string
-        date_created:
+        dateCreated:
           readOnly: true
           description: 'The moment this request was created'
           externalDocs:
             url: 'http://schema.org/DateTime'
           type: string
           format: date-time
-        date_modified:
+        dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
           externalDocs:
@@ -4068,10 +4148,10 @@ components:
         action:
           readOnly: true
           type: string
-        object_id:
+        objectId:
           readOnly: true
           type: string
-        object_class:
+        objectClass:
           readOnly: true
           type: string
         version:
@@ -4089,14 +4169,14 @@ components:
           readOnly: true
           description: 'The moment this request was created'
           type: string
-        date_created:
+        dateCreated:
           readOnly: true
           description: 'The moment this request was created'
           externalDocs:
             url: 'http://schema.org/DateTime'
           type: string
           format: date-time
-        date_modified:
+        dateModified:
           readOnly: true
           description: 'The moment this request last Modified'
           externalDocs:
@@ -4138,12 +4218,12 @@ components:
         status:
           description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
           type: string
-        request_type:
+        requestType:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        process_type:
+        processType:
           description: 'The processType that made this request'
           externalDocs:
             url: 'http://schema.org/url'
@@ -4169,39 +4249,39 @@ components:
         confidential:
           description: 'Whether or not this request is considered confidential'
           type: boolean
-        current_stage:
+        currentStage:
           description: 'The current stage of the client journey in this proces'
           type: string
-        date_submitted:
-          readOnly: true
-          description: 'The moment this request was submitted by the submitter'
-          type: string
-          format: date-time
-        date_created:
-          readOnly: true
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        date_modified:
-          readOnly: true
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
         submitters:
           description: 'An array of Submitters of the that submitted this request'
           type: array
           items:
             $ref: '#/components/schemas/Submitter-read'
+        dateSubmitted:
+          readOnly: true
+          description: 'The moment this request was submitted by the submitter'
+          type: string
+          format: date-time
+        dateCreated:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        dateModified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
       required:
         - organization
-        - request_type
+        - requestType
         - submitters
     Request-write:
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
       required:
         - organization
-        - request_type
+        - requestType
         - submitters
       properties:
         organization:
@@ -4212,12 +4292,12 @@ components:
         status:
           description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
           type: string
-        request_type:
+        requestType:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        process_type:
+        processType:
           description: 'The processType that made this request'
           externalDocs:
             url: 'http://schema.org/url'
@@ -4243,7 +4323,7 @@ components:
         confidential:
           description: 'Whether or not this request is considered confidential'
           type: boolean
-        current_stage:
+        currentStage:
           description: 'The current stage of the client journey in this proces'
           type: string
         submitters:
@@ -4282,12 +4362,12 @@ components:
         status:
           description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
           type: string
-        request_type:
+        requestType:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        process_type:
+        processType:
           description: 'The processType that made this request'
           externalDocs:
             url: 'http://schema.org/url'
@@ -4313,39 +4393,39 @@ components:
         confidential:
           description: 'Whether or not this request is considered confidential'
           type: boolean
-        current_stage:
+        currentStage:
           description: 'The current stage of the client journey in this proces'
           type: string
-        date_submitted:
-          readOnly: true
-          description: 'The moment this request was submitted by the submitter'
-          type: string
-          format: date-time
-        date_created:
-          readOnly: true
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        date_modified:
-          readOnly: true
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
         submitters:
           description: 'An array of Submitters of the that submitted this request'
           type: array
           items:
             $ref: '#/components/schemas/Submitter:jsonld-read'
+        dateSubmitted:
+          readOnly: true
+          description: 'The moment this request was submitted by the submitter'
+          type: string
+          format: date-time
+        dateCreated:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        dateModified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
       required:
         - organization
-        - request_type
+        - requestType
         - submitters
     'Request:jsonld-write':
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
       required:
         - organization
-        - request_type
+        - requestType
         - submitters
       properties:
         '@context':
@@ -4365,12 +4445,12 @@ components:
         status:
           description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
           type: string
-        request_type:
+        requestType:
           description: 'The type of request against which this request should be validated'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        process_type:
+        processType:
           description: 'The processType that made this request'
           externalDocs:
             url: 'http://schema.org/url'
@@ -4396,7 +4476,7 @@ components:
         confidential:
           description: 'Whether or not this request is considered confidential'
           type: boolean
-        current_stage:
+        currentStage:
           description: 'The current stage of the client journey in this proces'
           type: string
         submitters:
@@ -4424,18 +4504,32 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        person:
+          description: 'A reference to the contact component person'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
         request:
           description: 'The request this submitter belongs to'
           $ref: '#/components/schemas/Request-read'
-      required:
-        - assent
-        - brp
+        dateSubmitted:
+          readOnly: true
+          description: 'The moment this request was submitted by the submitter'
+          type: string
+          format: date-time
+        dateCreated:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        dateModified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
     Submitter-write:
       type: object
       description: 'An entity representing a submitter of a request'
-      required:
-        - assent
-        - brp
       properties:
         assent:
           description: 'A reference to a Assent service for the requesting assent of a request'
@@ -4444,6 +4538,11 @@ components:
           type: string
         brp:
           description: 'A reference to the BRP for the requester of a request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        person:
+          description: 'A reference to the contact component person'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
@@ -4479,18 +4578,32 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        person:
+          description: 'A reference to the contact component person'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
         request:
           description: 'The request this submitter belongs to'
           $ref: '#/components/schemas/Request:jsonld-read'
-      required:
-        - assent
-        - brp
+        dateSubmitted:
+          readOnly: true
+          description: 'The moment this request was submitted by the submitter'
+          type: string
+          format: date-time
+        dateCreated:
+          readOnly: true
+          description: 'The moment this request was created'
+          type: string
+          format: date-time
+        dateModified:
+          readOnly: true
+          description: 'The moment this request last Modified'
+          type: string
+          format: date-time
     'Submitter:jsonld-write':
       type: object
       description: 'An entity representing a submitter of a request'
-      required:
-        - assent
-        - brp
       properties:
         '@context':
           readOnly: true
@@ -4508,6 +4621,11 @@ components:
           type: string
         brp:
           description: 'A reference to the BRP for the requester of a request'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        person:
+          description: 'A reference to the contact component person'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
@@ -4619,12 +4737,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-17 13:11:20'
+        example: '2020-04-04 11:44:14'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-17 13:11:20'
+        example: '2020-04-04 11:44:14'
     required: []
   AuditTrail-write:
     properties:
@@ -4672,12 +4790,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-17 13:11:20'
+        example: '2020-04-04 11:44:14'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-17 13:11:20'
+        example: '2020-04-04 11:44:14'
     required: []
   ChangeLog-write:
     properties:
@@ -4831,12 +4949,24 @@ definitions:
         type: string
         format: url
         maxLength: 255
+      person:
+        description: 'A reference to the contact component person'
+        type: string
+        format: url
+        maxLength: 255
+      dateSubmitted:
+        description: 'The moment this request was submitted by the submitter'
+        type: \Datetime
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
       request:
         description: 'The request this submitter belongs to'
         type: \request
-    required:
-      - assent
-      - brp
+    required: []
   Submitter-write:
     properties:
       assent:
@@ -4849,12 +4979,15 @@ definitions:
         type: string
         format: url
         maxLength: 255
+      person:
+        description: 'A reference to the contact component person'
+        type: string
+        format: url
+        maxLength: 255
       request:
         description: 'The request this submitter belongs to'
         type: \request
-    required:
-      - assent
-      - brp
+    required: []
 tags:
   -
     name: AuditTrail

@@ -2,11 +2,11 @@ publiccodeYmlVersion: "0.2"
 
 name: vrc
 applicationSuite: commonground
-url: "https://github.com/ConductionNL/verzoekregistratiecomponent"
-landingURL: "vrc.zaakonline.nl" 
+url: ""
+landingURL: "" 
 isBasedOn: "https://github.com/ConductionNL/Proto-component-commonground.git" 
-softwareVersion: "V.1.1"
-releaseDate: "2020-17-03"
+softwareVersion: "V.0.1"
+releaseDate: "2020-04-04"
 logo: pc.zaakonline.nl 
 monochromeLogo: img/logo-mono.svg
 
@@ -37,7 +37,7 @@ usedBy:
   - Gemeente Hoorn
   
 
-roadmap: "https://github.com/ConductionNL/verzoekregistratiecomponent/blob/master/ROADMAP.md"
+roadmap: "/blob/master/ROADMAP.md"
 
 developmentStatus: development
 
@@ -66,8 +66,8 @@ description:
 #          on multiple rows. You should note what the software
 #          is and why one should need it.
 
-    documentation: "https://github.com/ConductionNL/verzoekregistratiecomponent/blob/master/README.md"
-    apiDocumentation: "vrc.zaakonline.nl"
+    documentation: "/blob/master/README.md"
+    apiDocumentation: ""
 #
 #    features:
 #       - Very important feature

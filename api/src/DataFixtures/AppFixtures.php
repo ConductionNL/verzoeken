@@ -17,6 +17,15 @@ use PhpOffice\PhpSpreadsheet;
 
 class AppFixtures extends Fixture
 {
+    private $params;
+    private $encoder;
+
+    public function __construct(ParameterBagInterface $params, UserPasswordEncoderInterface $encoder)
+    {
+        $this->params = $params;
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
        
