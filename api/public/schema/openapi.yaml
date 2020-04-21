@@ -8,7 +8,7 @@ info:
     - Reference: vrc
     - Enviroment: dev
     - Version: V.0.1
-    - Repository: [online]() / [zip](/archive/master.zip)
+    - Repository: [online](https://github.com/ConductionNL/verzoekregistratiecomponent) / [zip](https://github.com/ConductionNL/verzoekregistratiecomponent/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
     - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
@@ -4210,6 +4210,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         organization:
           description: 'A specific commonground organisation that is being reviewd, e.g a single product'
           externalDocs:
@@ -4354,6 +4355,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         organization:
           description: 'A specific commonground organisation that is being reviewd, e.g a single product'
           externalDocs:
@@ -4498,6 +4500,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         assent:
           description: 'A reference to a Assent service for the requesting assent of a request'
           externalDocs:
@@ -4572,6 +4575,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         assent:
           description: 'A reference to a Assent service for the requesting assent of a request'
           externalDocs:
@@ -4741,12 +4745,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-04 11:44:14'
+        example: '2020-04-21 14:06:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-04 11:44:14'
+        example: '2020-04-21 14:06:07'
     required: []
   AuditTrail-write:
     properties:
@@ -4794,12 +4798,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-04 11:44:14'
+        example: '2020-04-21 14:06:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-04 11:44:14'
+        example: '2020-04-21 14:06:07'
     required: []
   ChangeLog-write:
     properties:
@@ -5036,7 +5040,7 @@ host: irc.zaakonline.nl
 servers:
   -
     name: conduction.nl
-    url: pc.dev.conduction.nl
+    url: vrc.dev.conduction.nl
 externalDocs:
   -
     description: 'OAS Documentatie'

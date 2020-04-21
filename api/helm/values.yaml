@@ -8,14 +8,14 @@ settings:
   name: vrc
   title: Proto component commonground
   version: V.0.1
-  id: &#039;&#039;
+  id: 
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
   type: component
-  repro: 
-  demo: 
+  repro: https://github.com/ConductionNL/verzoekregistratiecomponent
+  demo: pc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/vrc-php
   domain: conduction.nl
-  subdomain: vrc
+  subdomain: pc
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
