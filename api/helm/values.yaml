@@ -8,13 +8,14 @@ settings:
   name: vrc
   title: Proto component commonground
   version: V.0.1
+  id: 
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
   type: component
-  repro: 
-  demo: 
+  repro: https://github.com/ConductionNL/verzoekregistratiecomponent
+  demo: pc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/vrc-php
   domain: conduction.nl
-  subdomain: vrc
+  subdomain: pc
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
@@ -26,7 +27,7 @@ settings:
   cache: 1
   replicaCount: 1
   corsAllowOrigin: ['*']
-  trustedHosts: '127.0.0.1$|^(.+\.)?conduction\.nl$|^(.+\.)?huwelijksplanner\.online$|^(.+\.)?larping\.eu$|^(.+\.)?common-ground\.dev$|^(.+\.)?trouwplanner\.online$|^(.+\.)?zaakonline\.nl$|localhost'
+  trustedHosts: '^localhost$|^127.0.0.1$|^(.+\.)?conduction\.nl$'
   pullPolicy: Always
   # You will need these proxies on kubernetes
   trustedProxies:
