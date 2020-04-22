@@ -1,10 +1,10 @@
 openapi: 3.0.2
 info:
-  title: 'Proto component commonground'
+  title: Verzoekregistratiecomponent
   version: V.0.1
   description: |
     API Details
-    - Component: Proto component commonground
+    - Component: Verzoekregistratiecomponent
     - Reference: vrc
     - Enviroment: dev
     - Version: V.0.1
@@ -4745,12 +4745,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 20:21:42'
+        example: '2020-04-22 09:00:58'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 20:21:42'
+        example: '2020-04-22 09:00:58'
     required: []
   AuditTrail-write:
     properties:
@@ -4798,12 +4798,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 20:21:42'
+        example: '2020-04-22 09:00:58'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 20:21:42'
+        example: '2020-04-22 09:00:58'
     required: []
   ChangeLog-write:
     properties:

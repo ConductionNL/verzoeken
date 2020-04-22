@@ -6,7 +6,7 @@ settings:
   registryBase: docker.io/conduction
   projectName: vrc
   name: vrc
-  title: Proto component commonground
+  title: Verzoekregistratiecomponent
   version: V.0.1
   id: 
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
