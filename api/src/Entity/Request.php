@@ -60,7 +60,16 @@ use App\Repository\RequestRepository;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"submitters.brp": "exact","submitters.assent": "exact","submitters.person": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "submitters.brp": "exact",
+ *     "submitters.assent": "exact",
+ *     "submitters.person": "exact",
+ *     "organization": "exact",
+ *     "reference": "exact",
+ *     "status": "exact",
+ *     "requestType": "exact",
+ *     "processType": "exact",
+ *     "currentStage": "exact"})
  */
 class Request
 {
@@ -230,7 +239,7 @@ class Request
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $currentStage;
-    
+
     /**
      * @var ArrayCollection An array of Submitters of the that submitted this request
      *
