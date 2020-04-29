@@ -6,7 +6,7 @@ settings:
   registryBase: docker.io/conduction
   projectName: vrc
   name: vrc
-  title: Proto component commonground
+  title: Verzoekregistratiecomponent
   version: V.0.1
   id: 
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
@@ -15,7 +15,7 @@ settings:
   demo: pc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/vrc-php
   domain: conduction.nl
-  subdomain: pc
+  subdomain: vrc
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
@@ -27,7 +27,7 @@ settings:
   cache: 1
   replicaCount: 1
   corsAllowOrigin: ['*']
-  trustedHosts: '^localhost$|^127.0.0.1$|^(.+\.)?conduction\.nl$'
+  trustedHosts: '^localhost$|^127.0.0.1$|^(.+\.)?conduction\.nl$|^(.+\.)?huwelijksplanner\.online$|^(.+\.)?zaakonline\.nl$'
   pullPolicy: Always
   # You will need these proxies on kubernetes
   trustedProxies:
