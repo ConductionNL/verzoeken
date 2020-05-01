@@ -54,7 +54,7 @@ use App\Repository\RequestRepository;
  *     },
  * )
  * @ORM\Entity(repositoryClass="App\Repository\RequestRepository")
- * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
+ * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
  * @ORM\HasLifecycleCallbacks
  *
  * @ApiFilter(BooleanFilter::class)
@@ -230,7 +230,7 @@ class Request
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $currentStage;
-    
+
     /**
      * @var ArrayCollection An array of Submitters of the that submitted this request
      *

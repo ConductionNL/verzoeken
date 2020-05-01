@@ -5,7 +5,7 @@
 namespace App\Security;
 
 use App\Security\User\CommongroundUser;
-use App\Service\CommonGroundService;
+use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
