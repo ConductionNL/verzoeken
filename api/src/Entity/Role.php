@@ -22,7 +22,32 @@ use Ramsey\Uuid\UuidInterface;
 
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={"order"={"dateCreated": "ASC"}},
+ *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
+ *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true},
+ *     itemOperations={
+ *          "get",
+ *          "put",
+ *          "delete",
+ *          "get_change_logs"={
+ *              "path"="/roles/{id}/change_log",
+ *              "method"="get",
+ *              "swagger_context" = {
+ *                  "summary"="Changelogs",
+ *                  "description"="Gets al the change logs for this resource"
+ *              }
+ *          },
+ *          "get_audit_trail"={
+ *              "path"="/roles/{id}/audit_trail",
+ *              "method"="get",
+ *              "swagger_context" = {
+ *                  "summary"="Audittrail",
+ *                  "description"="Gets the audit trail for this resource"
+ *              }
+ *          }
+ *     },
+ * )
  *
  * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
  * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
@@ -62,7 +87,7 @@ class Role
      * @Assert\Length(
      *      max = 255
      * )
-     *
+     * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
     private $rolType;
@@ -97,7 +122,7 @@ class Role
      * @Assert\Length(
      *      max = 255
      * )
-     *
+     * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
     private $betrokkeneType;
