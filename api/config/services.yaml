@@ -34,18 +34,34 @@ services:
         arguments: [ '@App\Swagger\SwaggerDecorator.inner' ]
         autoconfigure: false
     
+    #CommonGround Commands
+    'Conduction\CommonGroundBundle\Command\ApiHelmCommand':
+        tags: ['console.command']
+    'Conduction\CommonGroundBundle\Command\PubliccodeCommand':
+        tags: ['console.command']
+    
+    #CommonGround Repositories
+    'Conduction\CommonGroundBundle\Repository\AuditTrailRepository':
+        autowire: true
+        tags: ['doctrine.repository_service']
+    
+    #CommonGround Services
     'Conduction\CommonGroundBundle\Service\CommonGroundService': ~
     'Conduction\CommonGroundBundle\Service\NLXLogService': ~
+    'Conduction\CommonGroundBundle\Security\User\CommongroundApplicationProvider': ~
+    'Conduction\CommonGroundBundle\Security\User\CommongroundUserProvider': ~
+    'Conduction\CommonGroundBundle\Security\CommongroundApplicationAuthenticator': ~
+    'Conduction\CommonGroundBundle\Security\CommongroundUserAuthenticator': ~
 
     #CommonGround Subscribers
-#    audit.subscriber:
-#        class: Conduction\CommonGroundBundle\Subscriber\AuditSubscriber
-#        tags:
-#            - { name: kernel.event_subscriber, connection: default }
-#    audit.trail.subscriber:
-#        class: Conduction\CommonGroundBundle\Subscriber\AuditTrailSubscriber
-#        tags:
-#            - { name: kernel.event_subscriber, connection: default }
+    audit.subscriber:
+        class: Conduction\CommonGroundBundle\Subscriber\AuditSubscriber
+        tags:
+            - { name: kernel.event_subscriber, connection: default }
+    audit.trail.subscriber:
+        class: Conduction\CommonGroundBundle\Subscriber\AuditTrailSubscriber
+        tags:
+            - { name: kernel.event_subscriber, connection: default }
     change.log.subscriber:
         class: Conduction\CommonGroundBundle\Subscriber\ChangeLogSubscriber
         tags:
