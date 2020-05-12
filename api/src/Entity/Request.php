@@ -203,6 +203,16 @@ class Request
 	private $cases = [];
 
     /**
+     * @var array $processes An array of processes tied to this request
+     * @example
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $processes = [];
+
+    /**
 	 * @var Request $parent The request that this request was based on
 	 *
      * @Gedmo\Versioned
@@ -406,8 +416,21 @@ class Request
                            		return $this;
                            	}
 
+    public function getProcesses(): ?array
+    {
+        return $this->processes ;
+    }
 
-	public function getParent(): ?self
+    public function setProcesses(?array $processes): self
+    {
+        $this->processes = $processes;
+
+        return $this;
+    }
+
+
+
+    public function getParent(): ?self
                                              	{
                                              		return $this->parent;
                                              	}
