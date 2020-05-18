@@ -3337,38 +3337,6 @@ paths:
           style: form
           explode: true
         -
-          name: roles.betrokkene
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'roles.betrokkene[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: roles.betrokkeneType
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'roles.betrokkeneType[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: page
           in: query
           required: false
@@ -4253,7 +4221,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[betrokkene]'
+          name: 'order[participant]'
           in: query
           required: false
           schema:
@@ -4262,7 +4230,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[betrokkeneType]'
+          name: 'order[participantType]'
           in: query
           required: false
           schema:
@@ -4360,38 +4328,6 @@ paths:
             type: string
         -
           name: 'request[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: betrokkene
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'betrokkene[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: betrokkeneType
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'betrokkeneType[]'
           in: query
           required: false
           schema:
@@ -6847,13 +6783,16 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
-        betrokkene:
+        rolType:
+          description: 'The type of role'
+          type: string
+        participant:
           description: 'A person that has a role, can be a User, Person or Employee object'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        betrokkeneType:
-          description: 'The type of the betrokkene on this request'
+        participantType:
+          description: 'The type of the participant on this request'
           type: string
         dateCreated:
           readOnly: true
@@ -6866,25 +6805,28 @@ components:
           type: string
           format: date-time
       required:
-        - betrokkene
+        - participant
     Role-write:
       type: object
       description: ''
       properties:
+        rolType:
+          description: 'The type of role'
+          type: string
         request:
           writeOnly: true
           description: 'The spefic request that a person has a role on'
           $ref: '#/components/schemas/Request-write'
-        betrokkene:
+        participant:
           description: 'A person that has a role, can be a User, Person or Employee object'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        betrokkeneType:
-          description: 'The type of the betrokkene on this request'
+        participantType:
+          description: 'The type of the participant on this request'
           type: string
       required:
-        - betrokkene
+        - participant
     'Role:jsonld-read':
       type: object
       description: ''
@@ -6905,13 +6847,16 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
-        betrokkene:
+        rolType:
+          description: 'The type of role'
+          type: string
+        participant:
           description: 'A person that has a role, can be a User, Person or Employee object'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        betrokkeneType:
-          description: 'The type of the betrokkene on this request'
+        participantType:
+          description: 'The type of the participant on this request'
           type: string
         dateCreated:
           readOnly: true
@@ -6924,7 +6869,7 @@ components:
           type: string
           format: date-time
       required:
-        - betrokkene
+        - participant
     'Role:jsonld-write':
       type: object
       description: ''
@@ -6938,20 +6883,23 @@ components:
         '@type':
           readOnly: true
           type: string
+        rolType:
+          description: 'The type of role'
+          type: string
         request:
           writeOnly: true
           description: 'The spefic request that a person has a role on'
           $ref: '#/components/schemas/Request:jsonld-write'
-        betrokkene:
+        participant:
           description: 'A person that has a role, can be a User, Person or Employee object'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        betrokkeneType:
-          description: 'The type of the betrokkene on this request'
+        participantType:
+          description: 'The type of the participant on this request'
           type: string
       required:
-        - betrokkene
+        - participant
     Submitter-read:
       type: object
       description: 'An entity representing a submitter of a request'
@@ -7207,12 +7155,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-18 09:13:28'
+        example: '2020-05-18 12:32:13'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-18 09:13:28'
+        example: '2020-05-18 12:32:13'
     required: []
   AuditTrail-write:
     properties:
@@ -7260,12 +7208,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-18 09:13:28'
+        example: '2020-05-18 12:32:13'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-18 09:13:28'
+        example: '2020-05-18 12:32:13'
     required: []
   ChangeLog-write:
     properties:
@@ -7505,13 +7453,13 @@ definitions:
         type: string
         example: initiator
         maxLength: 255
-      betrokkene:
+      participant:
         description: 'A person that has a role, can be a User, Person or Employee object'
         type: string
         example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
-      betrokkeneType:
-        description: 'The type of the betrokkene on this request'
+      participantType:
+        description: 'The type of the participant on this request'
         type: string
         example: 'Natuurlijk persoon'
         maxLength: 255
@@ -7522,7 +7470,7 @@ definitions:
         description: 'The moment this request last Modified'
         type: \Datetime
     required:
-      - betrokkene
+      - participant
   Role-write:
     properties:
       rolType:
@@ -7530,13 +7478,13 @@ definitions:
         type: string
         example: initiator
         maxLength: 255
-      betrokkene:
+      participant:
         description: 'A person that has a role, can be a User, Person or Employee object'
         type: string
         example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
-      betrokkeneType:
-        description: 'The type of the betrokkene on this request'
+      participantType:
+        description: 'The type of the participant on this request'
         type: string
         example: 'Natuurlijk persoon'
         maxLength: 255
@@ -7544,7 +7492,7 @@ definitions:
         description: 'The spefic request that a person has a role on'
         type: string
     required:
-      - betrokkene
+      - participant
   Submitter-read:
     properties:
       id:

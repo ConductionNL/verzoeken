@@ -93,9 +93,9 @@ class Role
     private $rolType;
 
     /**
-     * @var string $request The spefic request that a person has a role on
+     * @var request The spefic request that a person has a role on
      *
-     * @Groups({"write"})
+     * @Groups({"read", "write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Request", inversedBy="roles")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -111,10 +111,10 @@ class Role
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
-    private $betrokkene;
+    private $participant;
 
     /**
-     * @var string $betrokkeneType The type of the betrokkene on this request
+     * @var string $betrokkeneType The type of the participant on this request
      * @example Natuurlijk persoon
      *
      * @Gedmo\Versioned
@@ -125,7 +125,7 @@ class Role
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
-    private $betrokkeneType;
+    private $participantType;
 
     /**
      * @var Datetime $dateCreated The moment this request was created
@@ -156,14 +156,14 @@ class Role
         return $this;
     }
 
-    public function getRoleType(): ?string
+    public function getRolType(): ?string
     {
-        return $this->roleType;
+        return $this->rolType;
     }
 
-    public function setRoleType(string $roleType): self
+    public function setRolType(string $rolType): self
     {
-        $this->roleType = $roleType;
+        $this->rolType = $rolType;
 
         return $this;
     }
@@ -180,26 +180,26 @@ class Role
         return $this;
     }
 
-    public function getBetrokkene(): ?string
+    public function getParticipant(): ?string
     {
-        return $this->betrokkene;
+        return $this->participant;
     }
 
-    public function setBetrokkene(string $betrokkene): self
+    public function setParticipant(string $participant): self
     {
-        $this->betrokkene  = betrokkene;
+        $this->participant  = $participant;
 
         return $this;
     }
 
-    public function getBetrokkeneType(): ?string
+    public function getParticipantType(): ?string
     {
-        return $this->betrokkeneType;
+        return $this->participantType;
     }
 
-    public function setBetrokkeneType(string $betrokkeneType): self
+    public function setParticipantType(string $participantType): self
     {
-        $this->betrokkeneType = $betrokkeneType;
+        $this->participantType = $participantType;
 
         return $this;
     }
