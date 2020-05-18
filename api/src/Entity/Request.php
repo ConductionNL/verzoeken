@@ -261,7 +261,7 @@ class Request
      * @Assert\Valid
      * @MaxDepth(1)
      * @Groups({"read", "write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Submitter", mappedBy="request", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Submitter", mappedBy="request", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $submitters;
