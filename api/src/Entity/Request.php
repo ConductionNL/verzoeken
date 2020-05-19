@@ -72,8 +72,8 @@ use App\Repository\RequestRepository;
  *     "currentStage": "exact",
  *     "roles.rolType": "exact",
  *     "roles.request": "exact",
- *     "roles.betrokkene": "exact",
- *     "roles.betrokkeneType": "exact"})
+ *     "roles.participant": "exact",
+ *     "roles.participantType": "exact"})
  */
 class Request
 {
