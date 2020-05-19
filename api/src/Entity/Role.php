@@ -102,7 +102,7 @@ class Role
     private $request;
 
     /**
-     * @var string $betrokkene  A person that has a role, can be a User, Person or Employee object
+     * @var string $participant  A person that has a role, can be a User, Person or Employee object
      * @example https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f
      *
      * @Gedmo\Versioned
@@ -114,7 +114,7 @@ class Role
     private $participant;
 
     /**
-     * @var string $betrokkeneType The type of the participant on this request
+     * @var string $participantType The type of the participant on this request
      * @example Natuurlijk persoon
      *
      * @Gedmo\Versioned
