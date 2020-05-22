@@ -72,8 +72,8 @@ use App\Repository\RequestRepository;
  *     "currentStage": "exact",
  *     "roles.rolType": "exact",
  *     "roles.request": "exact",
- *     "roles.betrokkene": "exact",
- *     "roles.betrokkeneType": "exact"})
+ *     "roles.participant": "exact",
+ *     "roles.participantType": "exact"})
  */
 class Request
 {
@@ -203,6 +203,16 @@ class Request
 	private $cases = [];
 
     /**
+     * @var array $processes An array of processes tied to this request
+     * @example
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $processes = [];
+
+    /**
 	 * @var Request $parent The request that this request was based on
 	 *
      * @Gedmo\Versioned
@@ -257,6 +267,18 @@ class Request
     private $submitters;
 
     /**
+     * @var ArrayCollection $labels labels for this request
+     *
+     *
+     * @Assert\Valid
+     * @MaxDepth(1)
+     * @Groups({"read", "write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Label", mappedBy="request", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $labels;
+
+    /**
      * @var Datetime $dateSubmitted The moment this request was submitted by the submitter
      *
      * @Gedmo\Versioned
@@ -298,6 +320,7 @@ class Request
         $this->children = new ArrayCollection();
         $this->submitters = new ArrayCollection();
         $this->roles = new ArrayCollection();
+        $this->labels = new ArrayCollection();
     }
 
 	public function getId():?Uuid
@@ -406,8 +429,21 @@ class Request
                            		return $this;
                            	}
 
+    public function getProcesses(): ?array
+    {
+        return $this->processes ;
+    }
 
-	public function getParent(): ?self
+    public function setProcesses(?array $processes): self
+    {
+        $this->processes = $processes;
+
+        return $this;
+    }
+
+
+
+    public function getParent(): ?self
                                              	{
                                              		return $this->parent;
                                              	}
@@ -561,6 +597,37 @@ class Request
             // set the owning side to null (unless already changed)
             if ($role->getRequest() === $this) {
                 $role->setRequest(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Label[]
+     */
+    public function getLabels(): Collection
+    {
+        return $this->labels;
+    }
+
+    public function addLabel(Label $label): self
+    {
+        if (!$this->labels->contains($label)) {
+            $this->labels[] = $label;
+            $label->setRequest($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLabel(Label $label): self
+    {
+        if ($this->labels->contains($label)) {
+            $this->labels->removeElement($label);
+            // set the owning side to null (unless already changed)
+            if ($label->getRequest() === $this) {
+                $label->setRequest(null);
             }
         }
 
