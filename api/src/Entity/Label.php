@@ -26,7 +26,7 @@ use Ramsey\Uuid\UuidInterface;
  * )
  *
  * @ORM\Entity(repositoryClass="App\Repository\LabelRepository")
- * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
+ * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
  *
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)

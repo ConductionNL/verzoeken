@@ -3337,6 +3337,38 @@ paths:
           style: form
           explode: true
         -
+          name: roles.participant
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'roles.participant[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: roles.participantType
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'roles.participantType[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -6291,17 +6323,20 @@ components:
           type: string
         request:
           description: 'The request this submitter belongs to'
-          $ref: '#/components/schemas/Request-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Request-read'
         dateCreated:
-          readOnly: true
           description: 'The moment this resource was created'
           type: string
           format: date-time
+          nullable: true
         dateModified:
-          readOnly: true
           description: 'The moment this resource last Modified'
           type: string
           format: date-time
+          nullable: true
       required:
         - name
         - description
@@ -6330,7 +6365,10 @@ components:
           type: string
         request:
           description: 'The request this submitter belongs to'
-          $ref: '#/components/schemas/Request-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Request-write'
     'Label:jsonld-read':
       type: object
       description: ''
@@ -6365,17 +6403,20 @@ components:
           type: string
         request:
           description: 'The request this submitter belongs to'
-          $ref: '#/components/schemas/Request:jsonld-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Request:jsonld-read'
         dateCreated:
-          readOnly: true
           description: 'The moment this resource was created'
           type: string
           format: date-time
+          nullable: true
         dateModified:
-          readOnly: true
           description: 'The moment this resource last Modified'
           type: string
           format: date-time
+          nullable: true
       required:
         - name
         - description
@@ -6413,7 +6454,10 @@ components:
           type: string
         request:
           description: 'The request this submitter belongs to'
-          $ref: '#/components/schemas/Request:jsonld-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Request:jsonld-write'
     Request-read:
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
@@ -6458,11 +6502,13 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         processes:
           description: 'An array of processes tied to this request'
           type: array
           items:
             type: string
+          nullable: true
         parent:
           description: 'The request that this request was based on'
           nullable: true
@@ -6496,6 +6542,7 @@ components:
           description: 'The moment this request was submitted by the submitter'
           type: string
           format: date-time
+          nullable: true
         roles:
           description: 'An array of roles that exist on this object'
           type: array
@@ -6552,11 +6599,13 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         processes:
           description: 'An array of processes tied to this request'
           type: array
           items:
             type: string
+          nullable: true
         parent:
           description: 'The request that this request was based on'
           nullable: true
@@ -6644,11 +6693,13 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         processes:
           description: 'An array of processes tied to this request'
           type: array
           items:
             type: string
+          nullable: true
         parent:
           description: 'The request that this request was based on'
           nullable: true
@@ -6682,6 +6733,7 @@ components:
           description: 'The moment this request was submitted by the submitter'
           type: string
           format: date-time
+          nullable: true
         roles:
           description: 'An array of roles that exist on this object'
           type: array
@@ -6747,11 +6799,13 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         processes:
           description: 'An array of processes tied to this request'
           type: array
           items:
             type: string
+          nullable: true
         parent:
           description: 'The request that this request was based on'
           nullable: true
@@ -6800,6 +6854,9 @@ components:
         rolType:
           description: 'The type of role'
           type: string
+        request:
+          description: 'The spefic request that a person has a role on'
+          $ref: '#/components/schemas/Request-read'
         participant:
           description: 'A person that has a role, can be a User, Person or Employee object'
           externalDocs:
@@ -6809,15 +6866,15 @@ components:
           description: 'The type of the participant on this request'
           type: string
         dateCreated:
-          readOnly: true
           description: 'The moment this request was created'
           type: string
           format: date-time
+          nullable: true
         dateModified:
-          readOnly: true
           description: 'The moment this request last Modified'
           type: string
           format: date-time
+          nullable: true
       required:
         - participant
     Role-write:
@@ -6828,7 +6885,6 @@ components:
           description: 'The type of role'
           type: string
         request:
-          writeOnly: true
           description: 'The spefic request that a person has a role on'
           $ref: '#/components/schemas/Request-write'
         participant:
@@ -6864,6 +6920,9 @@ components:
         rolType:
           description: 'The type of role'
           type: string
+        request:
+          description: 'The spefic request that a person has a role on'
+          $ref: '#/components/schemas/Request:jsonld-read'
         participant:
           description: 'A person that has a role, can be a User, Person or Employee object'
           externalDocs:
@@ -6873,15 +6932,15 @@ components:
           description: 'The type of the participant on this request'
           type: string
         dateCreated:
-          readOnly: true
           description: 'The moment this request was created'
           type: string
           format: date-time
+          nullable: true
         dateModified:
-          readOnly: true
           description: 'The moment this request last Modified'
           type: string
           format: date-time
+          nullable: true
       required:
         - participant
     'Role:jsonld-write':
@@ -6901,7 +6960,6 @@ components:
           description: 'The type of role'
           type: string
         request:
-          writeOnly: true
           description: 'The spefic request that a person has a role on'
           $ref: '#/components/schemas/Request:jsonld-write'
         participant:
@@ -7089,178 +7147,6 @@ components:
             -
               $ref: '#/components/schemas/Request:jsonld-write'
 definitions:
-  AuditTrail-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line looks suspicius'
-        maxLength: 2555
-      application:
-        description: 'The application that made the request'
-        type: string
-        format: url
-        maxLength: 255
-      request:
-        description: 'The id of the request within that application'
-        type: string
-        format: url
-        maxLength: 255
-      user:
-        description: 'The user on behalf of wich the request was made'
-        type: string
-        format: url
-        maxLength: 255
-      subject:
-        description: '???'
-        type: \sting
-        maxLength: 255
-      process:
-        description: 'The procces on behalf of wich the request was made'
-        type: \sting
-        maxLength: 255
-      dataElements:
-        description: 'The moment this request was created'
-        type: array
-      dataSubjects:
-        description: 'The moment this request was created'
-        type: array
-      resource:
-        description: 'The resource that was requested'
-        type: \sting
-        maxLength: 255
-      resourceType:
-        description: 'The type of the resource that was requested'
-        type: \sting
-        maxLength: 255
-      route:
-        description: 'The moment this request was created'
-        type: \sting
-        maxLength: 255
-      endpoint:
-        description: 'The endpoint that the request was made to'
-        type: \sting
-        maxLength: 255
-      method:
-        description: 'The method that was used'
-        type: \sting
-        maxLength: 255
-      accept:
-        description: 'The contentType that was reqousted'
-        type: \sting
-        maxLength: 255
-      contentType:
-        description: 'The contentType that was suplieds'
-        type: \sting
-        maxLength: 255
-      content:
-        description: 'The moment this request was created'
-        type: \sting
-        maxLength: 2555
-      ip:
-        description: 'The moment this request was created'
-        type: \sting
-        maxLength: 255
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      headers:
-        description: 'The headers supplied by client'
-        type: array
-      statusCode:
-        description: 'The status code returned to client'
-        type: int
-        example: '200'
-      notFound:
-        description: 'Whether or not the reqousted endpoint was found'
-        type: bool
-        example: 'false'
-      forbidden:
-        description: 'Whether or not the client was allowed to the reqousted endpoint'
-        type: bool
-        example: 'false'
-      ok:
-        description: 'Whether or not there where any problems'
-        type: bool
-        example: 'true'
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-05-18 12:32:13'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-05-18 12:32:13'
-    required: []
-  AuditTrail-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line looks suspicius'
-        maxLength: 2555
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: \sting
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-05-18 12:32:13'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-05-18 12:32:13'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
   Label-read:
     properties:
       id:
@@ -7507,6 +7393,9 @@ definitions:
       dateModified:
         description: 'The moment this request last Modified'
         type: \Datetime
+      request:
+        description: 'The spefic request that a person has a role on'
+        type: \request
     required:
       - participant
   Role-write:
@@ -7528,7 +7417,7 @@ definitions:
         maxLength: 255
       request:
         description: 'The spefic request that a person has a role on'
-        type: string
+        type: \request
     required:
       - participant
   Submitter-read:
@@ -7691,12 +7580,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-22 06:13:53'
+        example: '2020-05-22 06:33:31'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-22 06:13:53'
+        example: '2020-05-22 06:33:31'
     required: []
   AuditTrail-write:
     properties:
@@ -7744,12 +7633,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-22 06:13:53'
+        example: '2020-05-22 06:33:31'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-22 06:13:53'
+        example: '2020-05-22 06:33:31'
     required: []
   ChangeLog-write:
     properties:
@@ -7760,30 +7649,6 @@ definitions:
         maxLength: 2555
     required: []
 tags:
-  -
-    name: Request
-    description: |
-      A request (or verzoek in dutch) to an organization (usually governmental) to do 'something' on behalf of a citizen or another organization
-      
-      
-  -
-    name: Submitter
-    description: |
-      An entity representing a submitter of a request
-      
-      This entity represents a request submitter with the goal of being able to find the assent and the brp references
-  -
-    name: AuditTrail
-    description: |
-      An resource representing a log line.
-      
-      This entity represents a product that can be ordered via the OrderRegistratieComponent.
-  -
-    name: ChangeLog
-    description: |
-      An resource representing a log line.
-      
-      This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
     name: Label
     description: |
@@ -7808,6 +7673,18 @@ tags:
       An entity representing a submitter of a request
       
       This entity represents a request submitter with the goal of being able to find the assent and the brp references
+  -
+    name: AuditTrail
+    description: |
+      An resource representing a log line.
+      
+      This entity represents a product that can be ordered via the OrderRegistratieComponent.
+  -
+    name: ChangeLog
+    description: |
+      An resource representing a log line.
+      
+      This entity represents a product that can be ordered via the OrderRegistratieComponent.
 securityDefinitions:
   JWT-Oauth:
     type: oauth2
