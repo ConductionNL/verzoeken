@@ -16,7 +16,7 @@ doctrine:
             money: Tbbc\MoneyBundle\Type\MoneyType
     orm:
         dql:
-           datetime_functions:
+            datetime_functions:
                 DAY: DoctrineExtensions\Query\Mysql\Day
                 MONTH: DoctrineExtensions\Query\Mysql\Month
                 YEAR: DoctrineExtensions\Query\Mysql\Year
