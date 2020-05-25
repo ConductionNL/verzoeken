@@ -29,7 +29,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true},
  * )
- * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
+ * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
  * @ORM\Entity(repositoryClass="App\Repository\SubmitterRepository")
  * @ApiFilter(SearchFilter::class, properties={"brp": "exact","assent": "exact","person": "exact"})
  */
