@@ -10,7 +10,7 @@ info:
     - Version: V.0.1
     - Repository: [online](https://github.com/ConductionNL/verzoekregistratiecomponent) / [zip](https://github.com/ConductionNL/verzoekregistratiecomponent/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
-    - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
+    - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
     'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
     
@@ -3328,6 +3328,38 @@ paths:
             type: string
         -
           name: 'roles.request[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: roles.participant
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'roles.participant[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: roles.participantType
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'roles.participantType[]'
           in: query
           required: false
           schema:
@@ -6786,6 +6818,9 @@ components:
         rolType:
           description: 'The type of role'
           type: string
+        request:
+          description: 'The spefic request that a person has a role on'
+          $ref: '#/components/schemas/Request-read'
         participant:
           description: 'A person that has a role, can be a User, Person or Employee object'
           externalDocs:
@@ -6814,7 +6849,6 @@ components:
           description: 'The type of role'
           type: string
         request:
-          writeOnly: true
           description: 'The spefic request that a person has a role on'
           $ref: '#/components/schemas/Request-write'
         participant:
@@ -6850,6 +6884,9 @@ components:
         rolType:
           description: 'The type of role'
           type: string
+        request:
+          description: 'The spefic request that a person has a role on'
+          $ref: '#/components/schemas/Request:jsonld-read'
         participant:
           description: 'A person that has a role, can be a User, Person or Employee object'
           externalDocs:
@@ -6887,7 +6924,6 @@ components:
           description: 'The type of role'
           type: string
         request:
-          writeOnly: true
           description: 'The spefic request that a person has a role on'
           $ref: '#/components/schemas/Request:jsonld-write'
         participant:
@@ -7155,12 +7191,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-18 12:32:13'
+        example: '2020-05-25 14:12:00'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-18 12:32:13'
+        example: '2020-05-25 14:12:00'
     required: []
   AuditTrail-write:
     properties:
@@ -7208,12 +7244,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-18 12:32:13'
+        example: '2020-05-25 14:12:00'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-18 12:32:13'
+        example: '2020-05-25 14:12:00'
     required: []
   ChangeLog-write:
     properties:
@@ -7469,6 +7505,9 @@ definitions:
       dateModified:
         description: 'The moment this request last Modified'
         type: \Datetime
+      request:
+        description: 'The spefic request that a person has a role on'
+        type: \request
     required:
       - participant
   Role-write:
@@ -7490,7 +7529,7 @@ definitions:
         maxLength: 255
       request:
         description: 'The spefic request that a person has a role on'
-        type: string
+        type: \request
     required:
       - participant
   Submitter-read:
