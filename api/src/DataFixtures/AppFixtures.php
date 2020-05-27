@@ -2,11 +2,8 @@
 
 namespace App\DataFixtures;
 
-use DateTime;
-use Ramsey\Uuid\Uuid;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use PhpOffice\PhpSpreadsheet;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class AppFixtures extends Fixture
@@ -20,8 +17,5 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-
     }
-
-
 }
