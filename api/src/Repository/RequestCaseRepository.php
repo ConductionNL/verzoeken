@@ -16,7 +16,7 @@ class RequestCaseRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-    	parent::__construct($registry, RequestCase::class);
+        parent::__construct($registry, RequestCase::class);
     }
 
     // /**

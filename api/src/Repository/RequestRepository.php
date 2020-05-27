@@ -19,37 +19,35 @@ class RequestRepository extends ServiceEntityRepository
         parent::__construct($registry, Request::class);
     }
 
-
     /**
-    * @param Organization $organization The orgniaztion for wich this reference should be unique
-    * @param Datetime $date The date used to provide a year for the reference
-    * @return integer the referenceId that should be used for the next refenceId
-    */
+     * @param Organization $organization The orgniaztion for wich this reference should be unique
+     * @param Datetime     $date         The date used to provide a year for the reference
+     *
+     * @return int the referenceId that should be used for the next refenceId
+     */
     public function getNextReferenceId($organization, $date = null)
     {
-    	//if(!$date){
-    	$start = new \DateTime('first day of January this year');
-    	$end = new \DateTime('last day of December this year');
-    	//}
+        //if(!$date){
+        $start = new \DateTime('first day of January this year');
+        $end = new \DateTime('last day of December this year');
+        //}
 
-    	$result = $this->createQueryBuilder('r')
-    	->select('MAX(r.referenceId) AS reference_id')
-    	->andWhere(':organisation = r.organization')
-    	->setParameter('organisation', $organization)
-    	->andWhere('r.dateCreated >= :start')
-    	->setParameter('start', $start)
-    	->andWhere('r.dateCreated <= :end')
-    	->setParameter('end', $end)
-    	->getQuery()
-    	->getOneOrNullResult()
-    	;
+        $result = $this->createQueryBuilder('r')
+        ->select('MAX(r.referenceId) AS reference_id')
+        ->andWhere(':organisation = r.organization')
+        ->setParameter('organisation', $organization)
+        ->andWhere('r.dateCreated >= :start')
+        ->setParameter('start', $start)
+        ->andWhere('r.dateCreated <= :end')
+        ->setParameter('end', $end)
+        ->getQuery()
+        ->getOneOrNullResult();
 
-    	if(!$result){
-    		return 1;
-    	}
-    	else{
-    		return $result['reference_id'] + 1;
-    	}
+        if (!$result) {
+            return 1;
+        } else {
+            return $result['reference_id'] + 1;
+        }
     }
 
     // /**
