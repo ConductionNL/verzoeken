@@ -2,23 +2,19 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
-
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * An entity representing a submitter of a request
+ * An entity representing a submitter of a request.
  *
  * This entity represents a request submitter with the goal of being able to find the assent and the brp references
  *
@@ -36,7 +32,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 class Submitter
 {
     /**
-     * @var UuidInterface $id The UUID identifier of this resource
+     * @var UuidInterface The UUID identifier of this resource
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -94,7 +91,7 @@ class Submitter
     private $request;
 
     /**
-     * @var Datetime $dateSubmitted The moment this request was submitted by the submitter
+     * @var Datetime The moment this request was submitted by the submitter
      *
      * @Gedmo\Versioned
      * @Groups({"read"})
@@ -103,7 +100,7 @@ class Submitter
     private $dateSubmitted;
 
     /**
-     * @var Datetime $dateCreated The moment this request was created
+     * @var Datetime The moment this request was created
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -112,7 +109,7 @@ class Submitter
     private $dateCreated;
 
     /**
-     * @var Datetime $dateModified  The moment this request last Modified
+     * @var Datetime The moment this request last Modified
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="update")
@@ -151,14 +148,14 @@ class Submitter
 
     public function getPerson(): ?string
     {
-    	return $this->person;
+        return $this->person;
     }
 
     public function setPerson(string $person): self
     {
-    	$this->person= $person;
+        $this->person = $person;
 
-    	return $this;
+        return $this;
     }
 
     public function getRequest(): ?Request
@@ -175,37 +172,37 @@ class Submitter
 
     public function getDateSubmitted(): ?\DateTimeInterface
     {
-    	return $this->dateSubmitted;
+        return $this->dateSubmitted;
     }
 
     public function setDateSubmitted(\DateTimeInterface $dateSubmitted): self
     {
-    	$this->dateSubmitted= $dateSubmitted;
+        $this->dateSubmitted = $dateSubmitted;
 
-    	return $this;
+        return $this;
     }
 
     public function getDateCreated(): ?\DateTimeInterface
     {
-    	return $this->dateCreated;
+        return $this->dateCreated;
     }
 
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-    	$this->dateCreated= $dateCreated;
+        $this->dateCreated = $dateCreated;
 
-    	return $this;
+        return $this;
     }
 
     public function getDateModified(): ?\DateTimeInterface
     {
-    	return $this->dateModified;
+        return $this->dateModified;
     }
 
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
-    	$this->dateModified = $dateModified;
+        $this->dateModified = $dateModified;
 
-    	return $this;
+        return $this;
     }
 }
