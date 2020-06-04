@@ -2,24 +2,18 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -62,11 +56,11 @@ use Ramsey\Uuid\UuidInterface;
  *     "betrokkene": "exact",
  *     "betrokkeneType": "exact"})
  */
-
 class Role
 {
     /**
-     * @var UuidInterface $id The UUID identifier of this resource
+     * @var UuidInterface The UUID identifier of this resource
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -79,7 +73,8 @@ class Role
     private $id;
 
     /**
-     * @var string $rolType The type of role
+     * @var string The type of role
+     *
      * @example initiator
      *
      * @Gedmo\Versioned
@@ -102,7 +97,8 @@ class Role
     private $request;
 
     /**
-     * @var string $participant  A person that has a role, can be a User, Person or Employee object
+     * @var string A person that has a role, can be a User, Person or Employee object
+     *
      * @example https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f
      *
      * @Gedmo\Versioned
@@ -114,7 +110,8 @@ class Role
     private $participant;
 
     /**
-     * @var string $participantType The type of the participant on this request
+     * @var string The type of the participant on this request
+     *
      * @example Natuurlijk persoon
      *
      * @Gedmo\Versioned
@@ -128,7 +125,7 @@ class Role
     private $participantType;
 
     /**
-     * @var Datetime $dateCreated The moment this request was created
+     * @var Datetime The moment this request was created
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -137,7 +134,7 @@ class Role
     private $dateCreated;
 
     /**
-     * @var Datetime $dateModified  The moment this request last Modified
+     * @var Datetime The moment this request last Modified
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="update")
@@ -145,7 +142,7 @@ class Role
      */
     private $dateModified;
 
-    public function getId():?Uuid
+    public function getId(): ?Uuid
     {
         return $this->id;
     }
@@ -153,6 +150,7 @@ class Role
     public function setId($id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -187,7 +185,7 @@ class Role
 
     public function setParticipant(string $participant): self
     {
-        $this->participant  = $participant;
+        $this->participant = $participant;
 
         return $this;
     }
@@ -211,7 +209,7 @@ class Role
 
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-        $this->dateCreated= $dateCreated;
+        $this->dateCreated = $dateCreated;
 
         return $this;
     }
