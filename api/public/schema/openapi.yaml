@@ -6866,6 +6866,7 @@ components:
           description: 'The type of the participant on this request'
           type: string
         dateCreated:
+          readOnly: true
           description: 'The moment this request was created'
           type: string
           format: date-time
@@ -6885,6 +6886,7 @@ components:
           description: 'The type of role'
           type: string
         request:
+          writeOnly: true
           description: 'The spefic request that a person has a role on'
           $ref: '#/components/schemas/Request-write'
         participant:
@@ -6932,6 +6934,7 @@ components:
           description: 'The type of the participant on this request'
           type: string
         dateCreated:
+          readOnly: true
           description: 'The moment this request was created'
           type: string
           format: date-time
@@ -6960,6 +6963,7 @@ components:
           description: 'The type of role'
           type: string
         request:
+          writeOnly: true
           description: 'The spefic request that a person has a role on'
           $ref: '#/components/schemas/Request:jsonld-write'
         participant:
@@ -7661,6 +7665,12 @@ tags:
       A request (or verzoek in dutch) to an organization (usually governmental) to do 'something' on behalf of a citizen or another organization
       
       
+  -
+    name: Submitter
+    description: |
+      An entity representing a submitter of a request
+      
+      This entity represents a request submitter with the goal of being able to find the assent and the brp references
   -
     name: Role
     description: |

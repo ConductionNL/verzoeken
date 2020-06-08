@@ -104,25 +104,25 @@ class Request
      * @example 6666-2019-0000000012
      *
      * @Gedmo\Versioned
-     * @Assert\Length(
-     *      max = 255
-     * )
-     * @Groups({"read"})
-     * @ORM\Column(type="string", length=255, nullable=true) //, unique=true
-     */
-    private $reference;
+	 * @Assert\Length(
+	 *      max = 255
+	 * )
+	 * @Groups({"read"})
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $reference;
 
     /**
      * @param string $referenceId The autoincrementing id part of the reference, unique on an organization-year-id basis
      *
      * @Gedmo\Versioned
-     * @Assert\Positive
-     * @Assert\Length(
-     *      max = 11
-     * )
-     * @ORM\Column(type="integer", length=11, nullable=true)
-     */
-    private $referenceId;
+	 * @Assert\Positive
+	 * @Assert\Length(
+	 *      max = 11
+	 * )
+	 * @ORM\Column(type="integer", length=11) //, nullable=true
+	 */
+	private $referenceId;
 
     /**
      * @var string The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled
