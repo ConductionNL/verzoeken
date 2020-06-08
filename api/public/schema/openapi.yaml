@@ -2098,6 +2098,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[processes]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[confidential]'
           in: query
           required: false
@@ -3216,7 +3225,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Role:jsonld' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Role:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -3226,7 +3235,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Role:jsonld' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Role:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -3236,57 +3245,57 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
             application/json+hal:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
             application/vnd.api+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
             application/json+vnd.api:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
             application/health+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
             application/json+health:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
             application/x-yaml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
             text/csv:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
             text/html:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Role'
+                  $ref: '#/components/schemas/Role-read'
       parameters:
         -
           name: 'order[id]'
@@ -3546,43 +3555,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Role:jsonld'
+                $ref: '#/components/schemas/Role:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Role:jsonld'
+                $ref: '#/components/schemas/Role:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
           links:
             GetRoleItem:
               parameters:
@@ -3597,43 +3606,43 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Role:jsonld'
+              $ref: '#/components/schemas/Role:jsonld-write'
           application/json+ld:
             schema:
-              $ref: '#/components/schemas/Role:jsonld'
+              $ref: '#/components/schemas/Role:jsonld-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/json+hal:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/json+vnd.api:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/health+json:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/json+health:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
         description: 'The new Role resource'
       parameters:
         -
@@ -3755,93 +3764,47 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Role:jsonld'
+                $ref: '#/components/schemas/Role:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Role:jsonld'
+                $ref: '#/components/schemas/Role:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
         404:
           description: 'Resource not found'
       produces:
         - application/health+json
-    delete:
-      tags:
-        - Role
-      operationId: deleteRoleItem
-      summary: 'Removes the Role resource.'
-      responses:
-        204:
-          description: 'Role resource deleted'
-        404:
-          description: 'Resource not found'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
     put:
       tags:
         - Role
@@ -3889,43 +3852,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Role:jsonld'
+                $ref: '#/components/schemas/Role:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Role:jsonld'
+                $ref: '#/components/schemas/Role:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
         400:
           description: 'Invalid input'
         404:
@@ -3934,49 +3897,54 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Role:jsonld'
+              $ref: '#/components/schemas/Role:jsonld-write'
           application/json+ld:
             schema:
-              $ref: '#/components/schemas/Role:jsonld'
+              $ref: '#/components/schemas/Role:jsonld-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/json+hal:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/json+vnd.api:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/health+json:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/json+health:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Role'
+              $ref: '#/components/schemas/Role-write'
         description: 'The updated Role resource'
-    patch:
+    delete:
       tags:
         - Role
-      operationId: patchRoleItem
-      summary: 'Updates the Role resource.'
+      operationId: deleteRoleItem
+      summary: 'Removes the Role resource.'
+      responses:
+        204:
+          description: 'Role resource deleted'
+        404:
+          description: 'Resource not found'
       parameters:
         -
           name: id
@@ -4013,83 +3981,268 @@ paths:
           name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+  '/roles/{id}/audit_trail':
+    get:
+      tags:
+        - Role
+      operationId: get_audit_trailRoleItem
+      summary: 'Retrieves a Role resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
       responses:
         200:
-          description: 'Role resource updated'
+          description: 'Role resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Role:jsonld'
+                $ref: '#/components/schemas/Role:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Role:jsonld'
+                $ref: '#/components/schemas/Role:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Role'
+                $ref: '#/components/schemas/Role-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Role'
-        400:
-          description: 'Invalid input'
+                $ref: '#/components/schemas/Role-read'
         404:
           description: 'Resource not found'
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Role:jsonld'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Role'
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Role'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Role'
-          application/merge-patch+json:
-            schema:
-              $ref: '#/components/schemas/Role'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Role'
-          applications/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Role'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Role'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Role'
-        description: 'The updated Role resource'
+      produces:
+        - application/health+json
+  '/roles/{id}/change_log':
+    get:
+      tags:
+        - Role
+      operationId: get_change_logsRoleItem
+      summary: 'Retrieves a Role resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Role resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Role:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Role:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Role-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
   /submitters:
     get:
       tags:
@@ -5291,6 +5444,11 @@ components:
           type: array
           items:
             type: string
+        processes:
+          description: 'An array of processes tied to this request'
+          type: array
+          items:
+            type: string
         parent:
           description: 'The request that this request was based on'
           $ref: '#/components/schemas/Request-read'
@@ -5370,6 +5528,11 @@ components:
           type: array
           items:
             type: string
+        processes:
+          description: 'An array of processes tied to this request'
+          type: array
+          items:
+            type: string
         parent:
           description: 'The request that this request was based on'
           $ref: '#/components/schemas/Request-write'
@@ -5443,6 +5606,11 @@ components:
             type: string
         cases:
           description: 'An array of cases tied to this request'
+          type: array
+          items:
+            type: string
+        processes:
+          description: 'An array of processes tied to this request'
           type: array
           items:
             type: string
@@ -5534,6 +5702,11 @@ components:
           type: array
           items:
             type: string
+        processes:
+          description: 'An array of processes tied to this request'
+          type: array
+          items:
+            type: string
         parent:
           description: 'The request that this request was based on'
           $ref: '#/components/schemas/Request:jsonld-write'
@@ -5558,41 +5731,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Role:jsonld-write'
-    Role:
-      type: object
-      description: ''
-      properties:
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this resource'
-          externalDocs:
-            url: 'http://schema.org/identifier'
-          type: string
-          format: uuid
-        roleType:
-          type: string
-        request:
-          description: 'The spefic request that a person has a role on'
-          type: string
-          format: iri-reference
-        betrokkene:
-          description: 'A person that has a role, can be a User, Person or Employee object'
-          externalDocs:
-            url: 'http://schema.org/url'
-          type: string
-        betrokkeneType:
-          description: 'The type of the betrokkene on this request'
-          type: string
-        dateCreated:
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        dateModified:
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
-      required:
-        - betrokkene
     Role-read:
       type: object
       description: ''
@@ -5609,11 +5747,16 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        betrokkeneType:
+          description: 'The type of the betrokkene on this request'
+          type: string
         dateCreated:
+          readOnly: true
           description: 'The moment this request was created'
           type: string
           format: date-time
         dateModified:
+          readOnly: true
           description: 'The moment this request last Modified'
           type: string
           format: date-time
@@ -5624,42 +5767,9 @@ components:
       description: ''
       properties:
         request:
+          writeOnly: true
           description: 'The spefic request that a person has a role on'
-          type: string
-          format: iri-reference
-        betrokkene:
-          description: 'A person that has a role, can be a User, Person or Employee object'
-          externalDocs:
-            url: 'http://schema.org/url'
-          type: string
-      required:
-        - betrokkene
-    'Role:jsonld':
-      type: object
-      description: ''
-      properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          description: 'The UUID identifier of this resource'
-          externalDocs:
-            url: 'http://schema.org/identifier'
-          type: string
-          format: uuid
-        roleType:
-          type: string
-        request:
-          description: 'The spefic request that a person has a role on'
-          type: string
-          format: iri-reference
+          $ref: '#/components/schemas/Request-write'
         betrokkene:
           description: 'A person that has a role, can be a User, Person or Employee object'
           externalDocs:
@@ -5668,14 +5778,6 @@ components:
         betrokkeneType:
           description: 'The type of the betrokkene on this request'
           type: string
-        dateCreated:
-          description: 'The moment this request was created'
-          type: string
-          format: date-time
-        dateModified:
-          description: 'The moment this request last Modified'
-          type: string
-          format: date-time
       required:
         - betrokkene
     'Role:jsonld-read':
@@ -5703,11 +5805,16 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        betrokkeneType:
+          description: 'The type of the betrokkene on this request'
+          type: string
         dateCreated:
+          readOnly: true
           description: 'The moment this request was created'
           type: string
           format: date-time
         dateModified:
+          readOnly: true
           description: 'The moment this request last Modified'
           type: string
           format: date-time
@@ -5727,13 +5834,16 @@ components:
           readOnly: true
           type: string
         request:
+          writeOnly: true
           description: 'The spefic request that a person has a role on'
-          type: string
-          format: iri-reference
+          $ref: '#/components/schemas/Request:jsonld-write'
         betrokkene:
           description: 'A person that has a role, can be a User, Person or Employee object'
           externalDocs:
             url: 'http://schema.org/url'
+          type: string
+        betrokkeneType:
+          description: 'The type of the betrokkene on this request'
           type: string
       required:
         - betrokkene
@@ -5992,20 +6102,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-<<<<<<< HEAD
-        example: '2020-05-06 05:12:55'
-=======
-        example: '2020-04-23 07:15:17'
->>>>>>> development
+        example: '2020-06-08 15:57:50'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-<<<<<<< HEAD
-        example: '2020-05-06 05:12:55'
-=======
-        example: '2020-04-23 07:15:17'
->>>>>>> development
+        example: '2020-06-08 15:57:50'
     required: []
   AuditTrail-write:
     properties:
@@ -6053,20 +6155,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-<<<<<<< HEAD
-        example: '2020-05-06 05:12:55'
-=======
-        example: '2020-04-23 07:15:17'
->>>>>>> development
+        example: '2020-06-08 15:57:50'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-<<<<<<< HEAD
-        example: '2020-05-06 05:12:55'
-=======
-        example: '2020-04-23 07:15:17'
->>>>>>> development
+        example: '2020-06-08 15:57:50'
     required: []
   ChangeLog-write:
     properties:
@@ -6116,6 +6210,10 @@ definitions:
         example: '}'
       cases:
         description: 'An array of cases tied to this request'
+        type: array
+        example: ''
+      processes:
+        description: 'An array of processes tied to this request'
         type: array
         example: ''
       confidential:
@@ -6184,6 +6282,10 @@ definitions:
         description: 'An array of cases tied to this request'
         type: array
         example: ''
+      processes:
+        description: 'An array of processes tied to this request'
+        type: array
+        example: ''
       confidential:
         description: 'Whether or not this request is considered confidential'
         type: bool
@@ -6209,38 +6311,6 @@ definitions:
       - organization
       - requestType
       - submitters
-  Role-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      betrokkene:
-        description: 'A person that has a role, can be a User, Person or Employee object'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      dateCreated:
-        description: 'The moment this request was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: \Datetime
-    required:
-      - betrokkene
-  Role-write:
-    properties:
-      betrokkene:
-        description: 'A person that has a role, can be a User, Person or Employee object'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      request:
-        description: 'The spefic request that a person has a role on'
-        type: string
-    required:
-      - betrokkene
   Submitter-read:
     properties:
       id:
@@ -6297,6 +6367,58 @@ definitions:
         description: 'The request this submitter belongs to'
         type: \request
     required: []
+  Role-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      rolType:
+        description: 'The type of role'
+        type: string
+        example: initiator
+        maxLength: 255
+      betrokkene:
+        description: 'A person that has a role, can be a User, Person or Employee object'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      betrokkeneType:
+        description: 'The type of the betrokkene on this request'
+        type: string
+        example: 'Natuurlijk persoon'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
+    required:
+      - betrokkene
+  Role-write:
+    properties:
+      rolType:
+        description: 'The type of role'
+        type: string
+        example: initiator
+        maxLength: 255
+      betrokkene:
+        description: 'A person that has a role, can be a User, Person or Employee object'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      betrokkeneType:
+        description: 'The type of the betrokkene on this request'
+        type: string
+        example: 'Natuurlijk persoon'
+        maxLength: 255
+      request:
+        description: 'The spefic request that a person has a role on'
+        type: string
+    required:
+      - betrokkene
 tags:
   -
     name: AuditTrail
@@ -6317,32 +6439,32 @@ tags:
       
       
   -
-    name: Role
-    description: |
-      
-      
-      
-  -
     name: Submitter
     description: |
       An entity representing a submitter of a request
       
       This entity represents a request submitter with the goal of being able to find the assent and the brp references
+  -
+    name: Role
+    description: |
+      
+      
+      
 securityDefinitions:
   JWT-Oauth:
     type: oauth2
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the Submitter resource'
-      write: 'write right to the Submitter resource'
+      read: 'read right to the Role resource'
+      write: 'write right to the Role resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the Submitter resource'
-      write: 'write right to the Submitter resource'
+      read: 'read right to the Role resource'
+      write: 'write right to the Role resource'
 host: irc.zaakonline.nl
 servers:
   -
