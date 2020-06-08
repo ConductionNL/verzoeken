@@ -57,6 +57,4 @@ class AppFixtures extends Fixture
 
         $manager->flush();
     }
-
-
 }
