@@ -357,9 +357,6 @@
     "symfony/http-client": {
         "version": "v4.3.1"
     },
-    "symfony/http-client-contracts": {
-        "version": "v1.1.6"
-    },
     "symfony/http-foundation": {
         "version": "v4.3.1"
     },
