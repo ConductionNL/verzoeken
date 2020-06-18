@@ -14,7 +14,7 @@ settings:
   repro: https://github.com/ConductionNL/verzoekregistratiecomponent
   demo: pc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/vrc-php
-  domain: feat
+  domain: dev
   subdomain: vrc
   organisationName: Conduction
   email: info@conduction.nl
@@ -22,7 +22,7 @@ settings:
   state: Noord-Holland
   locality: Amsterdam
   unit: Common-Ground
-  env: feat
+  env: dev
   web: false
   debug: 1
   cache: 1
