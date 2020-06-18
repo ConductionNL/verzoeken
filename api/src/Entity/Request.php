@@ -120,7 +120,7 @@ class Request
      * @Assert\Length(
      *      max = 11
      * )
-     * @ORM\Column(type="integer", length=11) //, nullable=true
+     * @ORM\Column(type="integer", length=11, nullable=true) //
      */
     private $referenceId;
 
