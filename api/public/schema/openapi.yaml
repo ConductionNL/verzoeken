@@ -6,7 +6,7 @@ info:
     API Details
     - Component: Verzoekregistratiecomponent
     - Reference: vrc
-    - Enviroment: feat
+    - Enviroment: dev
     - Version: V.0.1
     - Repository: [online](https://github.com/ConductionNL/verzoekregistratiecomponent) / [zip](https://github.com/ConductionNL/verzoekregistratiecomponent/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
@@ -7580,12 +7580,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-15 07:53:39'
+        example: '2020-06-18 12:14:11'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-15 07:53:39'
+        example: '2020-06-18 12:14:11'
     required: []
   AuditTrail-write:
     properties:
@@ -7633,12 +7633,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-15 07:53:39'
+        example: '2020-06-18 12:14:11'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-15 07:53:39'
+        example: '2020-06-18 12:14:11'
     required: []
   ChangeLog-write:
     properties:
@@ -7703,8 +7703,8 @@ securityDefinitions:
 host: irc.zaakonline.nl
 servers:
   -
-    name: feat
-    url: vrc.feat.feat
+    name: conduction.nl
+    url: vrc.dev.conduction.nl
 externalDocs:
   -
     description: 'OAS Documentatie'

@@ -24,8 +24,11 @@ class MijnappFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // Lets make sure we only run these fixtures on larping enviroment
-        if ($this->params->get('app_domain') != "mijnapp.zaakonline.nl" && strpos($this->params->get('app_domain'), "mijnapp.zaakonline.nl") == false) {
-//            /return false;
+        if (
+            $this->params->get('app_domain') != "mijnapp.zaakonline.nl" && strpos($this->params->get('app_domain'), "mijnapp.zaakonline.nl") == false &&
+           $this->params->get('app_domain') != "verhuizen.accp.s-hertogenbosch.nl" && strpos($this->params->get('app_domain'), "verhuizen.accp.s-hertogenbosch.nl") == false
+        ) {
+            return false;
         }
 
         $now = new \Datetime();
