@@ -23,6 +23,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        // The fixtures that wil always load
         $now = new \Datetime();
 
         $id = Uuid::fromString('456918bc-8419-4e54-90eb-bafd3d18c6ff');
