@@ -114,13 +114,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </svg></a>
 </header>
 
-{% if showWebby %}
-    <div class="web"><img src="{{ asset('bundles/apiplatform/web.png') }}"></div>
-    <div class="webby"><img src="{{ asset('bundles/apiplatform/webby.png') }}"></div>
-{% endif %}
-
-<div id="swagger-ui" class="api-platform"></div>
-
+<!--
 <div class="swagger-ui" id="formats">
     <div class="information-container wrapper">
         <div class="info">
@@ -137,12 +131,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 </div>
-
+-->
 
 
 {% block javascript %}
-    <script src="bundles/apiplatform/redoc/redoc.standalone.js"></script>
-    <script src="bundles/apiplatform/init-redoc-ui.js"></script>
+    <redoc spec-url='schema/openapi.yaml'></redoc>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
     {# if (reDocEnabled and not swaggerUiEnabled) or (reDocEnabled and 're_doc' == active_ui) %}
         <script src="{{ asset('bundles/apiplatform/redoc/redoc.standalone.js') }}"></script>
         <script src="{{ asset('bundles/apiplatform/init-redoc-ui.js') }}"></script>
