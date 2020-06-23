@@ -3,14 +3,14 @@ entries:
   vrc:
   - apiVersion: v1
     appVersion: V.0.1
-    created: "2020-05-25T11:20:03.3746666Z"
+    created: "2020-06-23T06:03:46.445875278Z"
     description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql)
       interface beschikbaar.&#039;'
-    digest: 53b3bda131e5a10337ccb2464dfffd959d6ac88572a5c45c4a115c2afd092087
+    digest: af12f940bedcc197594d95d14fcf2c3315e83a8d25f7ced9835b12fac582627a
     home: pc.zaakonline.nl
     icon: pc.zaakonline.nl
     name: vrc
     urls:
     - vrc-0.1.0.tgz
     version: 0.1.0
-generated: "2020-05-25T11:20:03.3487556Z"
+generated: "2020-06-23T06:03:46.399902978Z"

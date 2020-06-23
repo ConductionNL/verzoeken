@@ -10,7 +10,7 @@ info:
     - Version: V.0.1
     - Repository: [online](https://github.com/ConductionNL/verzoekregistratiecomponent) / [zip](https://github.com/ConductionNL/verzoekregistratiecomponent/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
-    - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
+    - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
     'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
     
@@ -6460,7 +6460,7 @@ components:
               $ref: '#/components/schemas/Request:jsonld-write'
     Request-read:
       type: object
-      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
+      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization.'
       properties:
         id:
           readOnly: true
@@ -6564,7 +6564,7 @@ components:
         - submitters
     Request-write:
       type: object
-      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
+      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization.'
       required:
         - organization
         - requestType
@@ -6642,7 +6642,7 @@ components:
             $ref: '#/components/schemas/Role-write'
     'Request:jsonld-read':
       type: object
-      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
+      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization.'
       properties:
         '@context':
           readOnly: true
@@ -6755,7 +6755,7 @@ components:
         - submitters
     'Request:jsonld-write':
       type: object
-      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization'
+      description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization.'
       required:
         - organization
         - requestType
@@ -6974,7 +6974,7 @@ components:
         - participant
     Submitter-read:
       type: object
-      description: 'An entity representing a submitter of a request'
+      description: 'An entity representing a submitter of a request.'
       properties:
         id:
           readOnly: true
@@ -7024,7 +7024,7 @@ components:
           nullable: true
     Submitter-write:
       type: object
-      description: 'An entity representing a submitter of a request'
+      description: 'An entity representing a submitter of a request.'
       properties:
         assent:
           description: 'A reference to a Assent service for the requesting assent of a request'
@@ -7052,7 +7052,7 @@ components:
               $ref: '#/components/schemas/Request-write'
     'Submitter:jsonld-read':
       type: object
-      description: 'An entity representing a submitter of a request'
+      description: 'An entity representing a submitter of a request.'
       properties:
         '@context':
           readOnly: true
@@ -7111,7 +7111,7 @@ components:
           nullable: true
     'Submitter:jsonld-write':
       type: object
-      description: 'An entity representing a submitter of a request'
+      description: 'An entity representing a submitter of a request.'
       properties:
         '@context':
           readOnly: true
@@ -7365,61 +7365,6 @@ definitions:
       - organization
       - requestType
       - submitters
-  Role-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      rolType:
-        description: 'The type of role'
-        type: string
-        example: initiator
-        maxLength: 255
-      participant:
-        description: 'A person that has a role, can be a User, Person or Employee object'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      participantType:
-        description: 'The type of the participant on this request'
-        type: string
-        example: 'Natuurlijk persoon'
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: \Datetime
-      request:
-        description: 'The spefic request that a person has a role on'
-        type: \request
-    required:
-      - participant
-  Role-write:
-    properties:
-      rolType:
-        description: 'The type of role'
-        type: string
-        example: initiator
-        maxLength: 255
-      participant:
-        description: 'A person that has a role, can be a User, Person or Employee object'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      participantType:
-        description: 'The type of the participant on this request'
-        type: string
-        example: 'Natuurlijk persoon'
-        maxLength: 255
-      request:
-        description: 'The spefic request that a person has a role on'
-        type: \request
-    required:
-      - participant
   Submitter-read:
     properties:
       id:
@@ -7475,6 +7420,114 @@ definitions:
       request:
         description: 'The request this submitter belongs to'
         type: \request
+    required: []
+  Role-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      rolType:
+        description: 'The type of role'
+        type: string
+        example: initiator
+        maxLength: 255
+      participant:
+        description: 'A person that has a role, can be a User, Person or Employee object'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      participantType:
+        description: 'The type of the participant on this request'
+        type: string
+        example: 'Natuurlijk persoon'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
+      request:
+        description: 'The spefic request that a person has a role on'
+        type: \request
+    required:
+      - participant
+  Role-write:
+    properties:
+      rolType:
+        description: 'The type of role'
+        type: string
+        example: initiator
+        maxLength: 255
+      participant:
+        description: 'A person that has a role, can be a User, Person or Employee object'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      participantType:
+        description: 'The type of the participant on this request'
+        type: string
+        example: 'Natuurlijk persoon'
+        maxLength: 255
+      request:
+        description: 'The spefic request that a person has a role on'
+        type: \request
+    required:
+      - participant
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-06-23 06:04:27'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-06-23 06:04:27'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
     required: []
   AuditTrail-read:
     properties:
@@ -7580,12 +7633,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-25 11:21:28'
+        example: '2020-06-23 06:04:27'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-25 11:21:28'
+        example: '2020-06-23 06:04:27'
     required: []
   AuditTrail-write:
     properties:
@@ -7593,59 +7646,6 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
-        maxLength: 2555
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-05-25 11:21:28'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-05-25 11:21:28'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -7658,9 +7658,15 @@ tags:
   -
     name: Request
     description: |
-      A request (or verzoek in dutch) to an organization (usually governmental) to do 'something' on behalf of a citizen or another organization
+      A request (or verzoek in dutch) to an organization (usually governmental) to do 'something' on behalf of a citizen or another organization.
       
       
+  -
+    name: Submitter
+    description: |
+      An entity representing a submitter of a request.
+      
+      This entity represents a request submitter with the goal of being able to find the assent and the brp references
   -
     name: Role
     description: |
@@ -7668,19 +7674,13 @@ tags:
       
       
   -
-    name: Submitter
-    description: |
-      An entity representing a submitter of a request
-      
-      This entity represents a request submitter with the goal of being able to find the assent and the brp references
-  -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: ChangeLog
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
@@ -7691,15 +7691,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
 host: irc.zaakonline.nl
 servers:
   -

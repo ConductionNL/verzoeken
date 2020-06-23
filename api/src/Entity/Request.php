@@ -108,7 +108,7 @@ class Request
      *      max = 255
      * )
      * @Groups({"read"})
-     * @ORM\Column(type="string", length=255, nullable=true) //, unique=true
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $reference;
 
@@ -120,7 +120,7 @@ class Request
      * @Assert\Length(
      *      max = 11
      * )
-     * @ORM\Column(type="integer", length=11, nullable=true)
+     * @ORM\Column(type="integer", length=11, nullable=true) //
      */
     private $referenceId;
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f23f2682deb74204fce06fc98a4bcf4e",
+    "content-hash": "1e83600c54736324fa868536c1175272",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -524,16 +524,16 @@
         },
         {
             "name": "conduction/commongroundbundle",
-            "version": "dev-master",
+            "version": "dev-feature-internal",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ConductionNL/CommonGroundBundle.git",
-                "reference": "c1a6ecdb134f15ccb8595576204569da0b5321fa"
+                "reference": "30b0bb01f8bfe994ba726246484adfba3ac8b754"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ConductionNL/CommonGroundBundle/zipball/c1a6ecdb134f15ccb8595576204569da0b5321fa",
-                "reference": "c1a6ecdb134f15ccb8595576204569da0b5321fa",
+                "url": "https://api.github.com/repos/ConductionNL/CommonGroundBundle/zipball/30b0bb01f8bfe994ba726246484adfba3ac8b754",
+                "reference": "30b0bb01f8bfe994ba726246484adfba3ac8b754",
                 "shasum": ""
             },
             "require": {
@@ -611,7 +611,7 @@
                 "postcode",
                 "rsin"
             ],
-            "time": "2020-05-22T14:28:47+00:00"
+            "time": "2020-06-12T10:00:27+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1876,12 +1876,12 @@
             "version": "0.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/njh/easyrdf.git",
+                "url": "https://github.com/easyrdf/easyrdf.git",
                 "reference": "acd09dfe0555fbcfa254291e433c45fdd4652566"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/njh/easyrdf/zipball/acd09dfe0555fbcfa254291e433c45fdd4652566",
+                "url": "https://api.github.com/repos/easyrdf/easyrdf/zipball/acd09dfe0555fbcfa254291e433c45fdd4652566",
                 "reference": "acd09dfe0555fbcfa254291e433c45fdd4652566",
                 "shasum": ""
             },
