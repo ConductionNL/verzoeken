@@ -7365,61 +7365,6 @@ definitions:
       - organization
       - requestType
       - submitters
-  Role-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      rolType:
-        description: 'The type of role'
-        type: string
-        example: initiator
-        maxLength: 255
-      participant:
-        description: 'A person that has a role, can be a User, Person or Employee object'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      participantType:
-        description: 'The type of the participant on this request'
-        type: string
-        example: 'Natuurlijk persoon'
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: \Datetime
-      request:
-        description: 'The spefic request that a person has a role on'
-        type: \request
-    required:
-      - participant
-  Role-write:
-    properties:
-      rolType:
-        description: 'The type of role'
-        type: string
-        example: initiator
-        maxLength: 255
-      participant:
-        description: 'A person that has a role, can be a User, Person or Employee object'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
-        format: url
-      participantType:
-        description: 'The type of the participant on this request'
-        type: string
-        example: 'Natuurlijk persoon'
-        maxLength: 255
-      request:
-        description: 'The spefic request that a person has a role on'
-        type: \request
-    required:
-      - participant
   Submitter-read:
     properties:
       id:
@@ -7475,6 +7420,114 @@ definitions:
       request:
         description: 'The request this submitter belongs to'
         type: \request
+    required: []
+  Role-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      rolType:
+        description: 'The type of role'
+        type: string
+        example: initiator
+        maxLength: 255
+      participant:
+        description: 'A person that has a role, can be a User, Person or Employee object'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      participantType:
+        description: 'The type of the participant on this request'
+        type: string
+        example: 'Natuurlijk persoon'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: \Datetime
+      request:
+        description: 'The spefic request that a person has a role on'
+        type: \request
+    required:
+      - participant
+  Role-write:
+    properties:
+      rolType:
+        description: 'The type of role'
+        type: string
+        example: initiator
+        maxLength: 255
+      participant:
+        description: 'A person that has a role, can be a User, Person or Employee object'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      participantType:
+        description: 'The type of the participant on this request'
+        type: string
+        example: 'Natuurlijk persoon'
+        maxLength: 255
+      request:
+        description: 'The spefic request that a person has a role on'
+        type: \request
+    required:
+      - participant
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-06-23 06:04:27'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-06-23 06:04:27'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
     required: []
   AuditTrail-read:
     properties:
@@ -7580,12 +7633,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-18 12:14:11'
+        example: '2020-06-23 06:04:27'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-18 12:14:11'
+        example: '2020-06-23 06:04:27'
     required: []
   AuditTrail-write:
     properties:
@@ -7593,59 +7646,6 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
-        maxLength: 2555
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-06-18 12:14:11'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-06-18 12:14:11'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -7662,25 +7662,25 @@ tags:
       
       
   -
-    name: Role
-    description: |
-      
-      
-      
-  -
     name: Submitter
     description: |
       An entity representing a submitter of a request.
       
       This entity represents a request submitter with the goal of being able to find the assent and the brp references
   -
-    name: AuditTrail
+    name: Role
+    description: |
+      
+      
+      
+  -
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: ChangeLog
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
@@ -7691,15 +7691,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
 host: irc.zaakonline.nl
 servers:
   -
