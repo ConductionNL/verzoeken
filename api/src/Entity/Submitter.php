@@ -156,6 +156,7 @@ class Submitter
 
         return $this;
     }
+
     public function getBsn(): ?string
     {
         return $this->bsn;
