@@ -7,7 +7,6 @@ use App\Entity\Submitter;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class MijnappFixtures extends Fixture
@@ -25,10 +24,9 @@ class MijnappFixtures extends Fixture
     {
         // Lets make sure we only run these fixtures on larping enviroment
         if (
-            $this->params->get('app_domain') != "mijnapp.zaakonline.nl" && strpos($this->params->get('app_domain'), "mijnapp.zaakonline.nl") == false &&
-            $this->params->get('app_domain') != "verhuizen.accp.s-hertogenbosch.nl" && strpos($this->params->get('app_domain'), "verhuizen.accp.s-hertogenbosch.nl") == false &&
-            $this->params->get('app_domain') != "shertogenbosch.commonground.nu" && strpos($this->params->get('app_domain'), "shertogenbosch.commonground.nu") == false
-
+            $this->params->get('app_domain') != 'mijnapp.zaakonline.nl' && strpos($this->params->get('app_domain'), 'mijnapp.zaakonline.nl') == false &&
+            $this->params->get('app_domain') != 'verhuizen.accp.s-hertogenbosch.nl' && strpos($this->params->get('app_domain'), 'verhuizen.accp.s-hertogenbosch.nl') == false &&
+            $this->params->get('app_domain') != 'shertogenbosch.commonground.nu' && strpos($this->params->get('app_domain'), 'shertogenbosch.commonground.nu') == false
         ) {
             return false;
         }
@@ -44,12 +42,12 @@ class MijnappFixtures extends Fixture
             $request->setDateSubmitted($now);
             $request->setProperties(
                 [
-                    'datum' => $now->format('Y-m-d H:i:s'),
-                    'adres' => 'https://bag.basisregistraties.overheid.nl/api/v1/nummeraanduidingen/0796200000306540',
-                    'wie' => "['{$this->commonGroundService->getComponent('brp')['location']}/ingeschrevenpersoon/201445906',{$this->commonGroundService->getComponent('brp')['location']}/ingeschrevenpersoon/201445907']",
-                    'email' => 'verhuizen@conduction.nl',
-                    'telefoon' => '0612345678',
-                    'notificatie' => false
+                    'datum'       => $now->format('Y-m-d H:i:s'),
+                    'adres'       => 'https://bag.basisregistraties.overheid.nl/api/v1/nummeraanduidingen/0796200000306540',
+                    'wie'         => "['{$this->commonGroundService->getComponent('brp')['location']}/ingeschrevenpersoon/201445906',{$this->commonGroundService->getComponent('brp')['location']}/ingeschrevenpersoon/201445907']",
+                    'email'       => 'verhuizen@conduction.nl',
+                    'telefoon'    => '0612345678',
+                    'notificatie' => false,
                 ]
             );
 
