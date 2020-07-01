@@ -7,7 +7,6 @@ use App\Entity\Submitter;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class MijnappFixtures extends Fixture
@@ -25,10 +24,9 @@ class MijnappFixtures extends Fixture
     {
         // Lets make sure we only run these fixtures on larping enviroment
         if (
-            $this->params->get('app_domain') != "mijnapp.zaakonline.nl" && strpos($this->params->get('app_domain'), "mijnapp.zaakonline.nl") == false &&
-            $this->params->get('app_domain') != "verhuizen.accp.s-hertogenbosch.nl" && strpos($this->params->get('app_domain'), "verhuizen.accp.s-hertogenbosch.nl") == false &&
-            $this->params->get('app_domain') != "shertogenbosch.commonground.nu" && strpos($this->params->get('app_domain'), "shertogenbosch.commonground.nu") == false
-
+            $this->params->get('app_domain') != 'mijnapp.zaakonline.nl' && strpos($this->params->get('app_domain'), 'mijnapp.zaakonline.nl') == false &&
+            $this->params->get('app_domain') != 'verhuizen.accp.s-hertogenbosch.nl' && strpos($this->params->get('app_domain'), 'verhuizen.accp.s-hertogenbosch.nl') == false &&
+            $this->params->get('app_domain') != 'shertogenbosch.commonground.nu' && strpos($this->params->get('app_domain'), 'shertogenbosch.commonground.nu') == false
         ) {
             return false;
         }
