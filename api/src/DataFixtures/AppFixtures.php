@@ -44,10 +44,13 @@ class AppFixtures extends Fixture
         $request->setDateSubmitted($now);
         $request->setProperties(
             [
-                'datum'   => $now->format('Y-m-d H:i:s'),
-                'adres'   => 'Een willekeurig bag adres',
-                'persoon' => "{$this->commonGroundService->getComponent('brp')['location']}/ingeschrevenpersoon/201445906",
-                'bsn'     => '201445906',
+                'datum' => $now->format('Y-m-d H:i:s'),
+                'adres' => 'https://bag.basisregistraties.overheid.nl/api/v1/nummeraanduidingen/0796200000306540',
+                'wie' => "['".$this->commonGroundService->cleanUrl(["component"=>"brp","type"=>"ingeschrevenpersoon","id"=>"201445906"])."']",
+                'wie_bsn' => "['201445906']",
+                'email' => 'verhuizen@conduction.nl',
+                'telefoon' => '0612345678',
+                'notificatie' => false
             ]
         );
 
