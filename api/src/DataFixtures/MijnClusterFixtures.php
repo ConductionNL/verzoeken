@@ -23,6 +23,7 @@ class MijnClusterFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        return false;
         // Lets make sure we only run these fixtures on larping enviroment
         if ($this->params->get('app_domain') != 'mijncluster.nl' && strpos($this->params->get('app_domain'), 'mijncluster.nl') == false) {
             return false;
