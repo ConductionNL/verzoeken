@@ -2252,6 +2252,15 @@ paths:
             type: integer
             default: 1
         -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
           name: Authorization
           description: 'The JWT of the entity performing the request'
           in: header
@@ -3395,6 +3404,15 @@ paths:
             type: integer
             default: 1
         -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
           name: Authorization
           description: 'The JWT of the entity performing the request'
           in: header
@@ -4395,6 +4413,15 @@ paths:
             type: integer
             default: 1
         -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
           name: Authorization
           description: 'The JWT of the entity performing the request'
           in: header
@@ -5308,6 +5335,15 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -6515,6 +6551,7 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         cases:
           description: 'An array of cases tied to this request'
           type: array
@@ -6612,6 +6649,7 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         cases:
           description: 'An array of cases tied to this request'
           type: array
@@ -6706,6 +6744,7 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         cases:
           description: 'An array of cases tied to this request'
           type: array
@@ -6812,6 +6851,7 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         cases:
           description: 'An array of cases tied to this request'
           type: array
@@ -7622,12 +7662,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-30 13:00:14'
+        example: '2020-07-09 04:56:13'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-30 13:00:14'
+        example: '2020-07-09 04:56:13'
     required: []
   AuditTrail-write:
     properties:
@@ -7675,12 +7715,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-30 13:00:14'
+        example: '2020-07-09 04:56:13'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-30 13:00:14'
+        example: '2020-07-09 04:56:13'
     required: []
   ChangeLog-write:
     properties:
