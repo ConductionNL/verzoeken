@@ -400,6 +400,15 @@ paths:
             type: integer
             default: 1
         -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
           name: Authorization
           description: 'The JWT of the entity performing the request'
           in: header
@@ -1296,6 +1305,15 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -2233,6 +2251,15 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -3377,6 +3404,15 @@ paths:
             type: integer
             default: 1
         -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
           name: Authorization
           description: 'The JWT of the entity performing the request'
           in: header
@@ -4377,6 +4413,15 @@ paths:
             type: integer
             default: 1
         -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
           name: Authorization
           description: 'The JWT of the entity performing the request'
           in: header
@@ -5290,6 +5335,15 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -6497,6 +6551,7 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         cases:
           description: 'An array of cases tied to this request'
           type: array
@@ -6594,6 +6649,7 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         cases:
           description: 'An array of cases tied to this request'
           type: array
@@ -6688,6 +6744,7 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         cases:
           description: 'An array of cases tied to this request'
           type: array
@@ -6794,6 +6851,7 @@ components:
           type: array
           items:
             type: string
+          nullable: true
         cases:
           description: 'An array of cases tied to this request'
           type: array
@@ -6989,6 +7047,10 @@ components:
             url: 'http://schema.org/url'
           type: string
           nullable: true
+        bsn:
+          description: 'The BSN number of the submitter'
+          type: string
+          nullable: true
         brp:
           description: 'A reference to the BRP for the requester of a request'
           externalDocs:
@@ -7030,6 +7092,10 @@ components:
           description: 'A reference to a Assent service for the requesting assent of a request'
           externalDocs:
             url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        bsn:
+          description: 'The BSN number of the submitter'
           type: string
           nullable: true
         brp:
@@ -7074,6 +7140,10 @@ components:
           description: 'A reference to a Assent service for the requesting assent of a request'
           externalDocs:
             url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        bsn:
+          description: 'The BSN number of the submitter'
           type: string
           nullable: true
         brp:
@@ -7126,6 +7196,10 @@ components:
           description: 'A reference to a Assent service for the requesting assent of a request'
           externalDocs:
             url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        bsn:
+          description: 'The BSN number of the submitter'
           type: string
           nullable: true
         brp:
@@ -7365,62 +7439,6 @@ definitions:
       - organization
       - requestType
       - submitters
-  Submitter-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      assent:
-        description: 'A reference to a Assent service for the requesting assent of a request'
-        type: string
-        format: url
-        maxLength: 255
-      brp:
-        description: 'A reference to the BRP for the requester of a request'
-        type: string
-        format: url
-        maxLength: 255
-      person:
-        description: 'A reference to the contact component person'
-        type: string
-        format: url
-        maxLength: 255
-      dateSubmitted:
-        description: 'The moment this request was submitted by the submitter'
-        type: \Datetime
-      dateCreated:
-        description: 'The moment this request was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: \Datetime
-      request:
-        description: 'The request this submitter belongs to'
-        type: \request
-    required: []
-  Submitter-write:
-    properties:
-      assent:
-        description: 'A reference to a Assent service for the requesting assent of a request'
-        type: string
-        format: url
-        maxLength: 255
-      brp:
-        description: 'A reference to the BRP for the requester of a request'
-        type: string
-        format: url
-        maxLength: 255
-      person:
-        description: 'A reference to the contact component person'
-        type: string
-        format: url
-        maxLength: 255
-      request:
-        description: 'The request this submitter belongs to'
-        type: \request
-    required: []
   Role-read:
     properties:
       id:
@@ -7476,58 +7494,69 @@ definitions:
         type: \request
     required:
       - participant
-  ChangeLog-read:
+  Submitter-read:
     properties:
       id:
-        description: 'The UUID identifier of this object'
+        description: 'The UUID identifier of this resource'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      note:
-        description: 'A note conserning this log lin'
+      assent:
+        description: 'A reference to a Assent service for the requesting assent of a request'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
+        format: url
+        maxLength: 255
+      bsn:
+        description: 'The BSN number of the submitter'
         type: string
         maxLength: 255
+      brp:
+        description: 'A reference to the BRP for the requester of a request'
+        type: string
+        format: url
+        maxLength: 255
+      person:
+        description: 'A reference to the contact component person'
+        type: string
+        format: url
+        maxLength: 255
+      dateSubmitted:
+        description: 'The moment this request was submitted by the submitter'
+        type: \Datetime
       dateCreated:
         description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-06-23 06:04:27'
+        type: \Datetime
       dateModified:
         description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-06-23 06:04:27'
+        type: \Datetime
+      request:
+        description: 'The request this submitter belongs to'
+        type: \request
     required: []
-  ChangeLog-write:
+  Submitter-write:
     properties:
-      note:
-        description: 'A note conserning this log lin'
+      assent:
+        description: 'A reference to a Assent service for the requesting assent of a request'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
+        format: url
+        maxLength: 255
+      bsn:
+        description: 'The BSN number of the submitter'
+        type: string
+        maxLength: 255
+      brp:
+        description: 'A reference to the BRP for the requester of a request'
+        type: string
+        format: url
+        maxLength: 255
+      person:
+        description: 'A reference to the contact component person'
+        type: string
+        format: url
+        maxLength: 255
+      request:
+        description: 'The request this submitter belongs to'
+        type: \request
     required: []
   AuditTrail-read:
     properties:
@@ -7633,12 +7662,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-23 06:04:27'
+        example: '2020-07-09 04:56:13'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-23 06:04:27'
+        example: '2020-07-09 04:56:13'
     required: []
   AuditTrail-write:
     properties:
@@ -7646,6 +7675,59 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
+        maxLength: 2555
+    required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-07-09 04:56:13'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-07-09 04:56:13'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -7662,25 +7744,25 @@ tags:
       
       
   -
-    name: Submitter
-    description: |
-      An entity representing a submitter of a request.
-      
-      This entity represents a request submitter with the goal of being able to find the assent and the brp references
-  -
     name: Role
     description: |
       
       
       
   -
-    name: ChangeLog
+    name: Submitter
+    description: |
+      An entity representing a submitter of a request.
+      
+      This entity represents a request submitter with the goal of being able to find the assent and the brp references
+  -
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
@@ -7691,15 +7773,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
 host: irc.zaakonline.nl
 servers:
   -

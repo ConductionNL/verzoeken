@@ -58,6 +58,17 @@ class Submitter
     private $assent;
 
     /**
+     * @var string The BSN number of the submitter
+     *
+     * @Assert\Length(
+     *     max=255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $bsn;
+
+    /**
      * @var string A reference to the BRP for the requester of a request
      *
      * @Assert\Url
@@ -142,6 +153,18 @@ class Submitter
     public function setBrp(string $brp): self
     {
         $this->brp = $brp;
+
+        return $this;
+    }
+
+    public function getBsn(): ?string
+    {
+        return $this->bsn;
+    }
+
+    public function setBsn(string $bsn): self
+    {
+        $this->bsn = $bsn;
 
         return $this;
     }
