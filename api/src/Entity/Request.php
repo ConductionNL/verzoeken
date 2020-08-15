@@ -108,7 +108,7 @@ class Request
      * @Gedmo\Versioned
      * @Assert\Url
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="orderUri")
      */
     private $order;
 
