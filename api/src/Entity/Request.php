@@ -113,6 +113,18 @@ class Request
     private $order;
 
     /**
+     * @var string A specific commonground organisation that is being reviewd, e.g a single product
+     *
+     * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
+     *
+     * @Gedmo\Versioned
+     * @Assert\Url
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $event;
+
+    /**
      * @var array The resource of the contact moment
      *
      *
@@ -382,6 +394,18 @@ class Request
     public function setOrder(string $order): self
     {
         $this->order = $order;
+
+        return $this;
+    }
+
+    public function getEvent(): ?string
+    {
+        return $this->event;
+    }
+
+    public function setEvent(string $event): self
+    {
+        $this->event = $event;
 
         return $this;
     }
