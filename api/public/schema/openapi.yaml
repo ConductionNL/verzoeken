@@ -1,18 +1,18 @@
 openapi: 3.0.2
 info:
   title: Verzoekregistratiecomponent
-  version: V.0.1
+  version: V1.0
   description: |
     API Details
     - Component: Verzoekregistratiecomponent
     - Reference: vrc
     - Enviroment: dev
-    - Version: V.0.1
+    - Version: V1.0
     - Repository: [online](https://github.com/ConductionNL/verzoekregistratiecomponent) / [zip](https://github.com/ConductionNL/verzoekregistratiecomponent/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
     - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
+    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
     
 paths:
   /audit_trails:
@@ -2999,6 +2999,24 @@ paths:
               - asc
               - desc
         -
+          name: 'order[order]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[resources]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[reference]'
           in: query
           required: false
@@ -3243,6 +3261,22 @@ paths:
             type: string
         -
           name: 'organization[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: order
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'order[]'
           in: query
           required: false
           schema:
@@ -6528,6 +6562,18 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        order:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        resources:
+          description: 'The resource of the contact moment'
+          type: array
+          items:
+            type: string
+          nullable: true
         reference:
           description: 'The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations'
           type: string
@@ -6630,6 +6676,18 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        order:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        resources:
+          description: 'The resource of the contact moment'
+          type: array
+          items:
+            type: string
+          nullable: true
         status:
           description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
           type: string
@@ -6721,6 +6779,18 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        order:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        resources:
+          description: 'The resource of the contact moment'
+          type: array
+          items:
+            type: string
+          nullable: true
         reference:
           description: 'The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations'
           type: string
@@ -6832,6 +6902,18 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        order:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        resources:
+          description: 'The resource of the contact moment'
+          type: array
+          items:
+            type: string
+          nullable: true
         status:
           description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
           type: string
@@ -7304,6 +7386,14 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+      order:
+        description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      resources:
+        description: 'The resource of the contact moment'
+        type: array
       reference:
         description: 'The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations'
         type: string
@@ -7382,6 +7472,14 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+      order:
+        description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
+      resources:
+        description: 'The resource of the contact moment'
+        type: array
       status:
         description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
         type: string
@@ -7662,12 +7760,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-09 04:56:13'
+        example: '2020-08-15 09:43:46'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-09 04:56:13'
+        example: '2020-08-15 09:43:46'
     required: []
   AuditTrail-write:
     properties:
@@ -7715,12 +7813,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-09 04:56:13'
+        example: '2020-08-15 09:43:46'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-09 04:56:13'
+        example: '2020-08-15 09:43:46'
     required: []
   ChangeLog-write:
     properties:

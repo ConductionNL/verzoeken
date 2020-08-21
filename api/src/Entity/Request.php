@@ -59,6 +59,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "submitters.assent": "exact",
  *     "submitters.person": "exact",
  *     "organization": "exact",
+ *     "order": "exact",
+ *     "reources": "exact",
  *     "reference": "exact",
  *     "status": "exact",
  *     "requestType": "exact",
@@ -97,6 +99,39 @@ class Request
      * @ORM\Column(type="string", length=255)
      */
     private $organization;
+
+    /**
+     * @var string A specific commonground organisation that is being reviewd, e.g a single product
+     *
+     * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
+     *
+     * @Gedmo\Versioned
+     * @Assert\Url
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true, name="orderUri")
+     */
+    private $order;
+
+    /**
+     * @var string A specific commonground organisation that is being reviewd, e.g a single product
+     *
+     * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
+     *
+     * @Gedmo\Versioned
+     * @Assert\Url
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $event;
+
+    /**
+     * @var array The resource of the contact moment
+     *
+     *
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $resources = [];
 
     /**
      * @var string The human readable reference of this request, build as {gemeentecode}-{year}-{referenceId}. Where gemeentecode is a four digit number for gemeenten and a four letter abriviation for other organizations
@@ -347,6 +382,42 @@ class Request
     public function setOrganization(string $organization): self
     {
         $this->organization = $organization;
+
+        return $this;
+    }
+
+    public function getOrder(): ?string
+    {
+        return $this->order;
+    }
+
+    public function setOrder(string $order): self
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    public function getEvent(): ?string
+    {
+        return $this->event;
+    }
+
+    public function setEvent(string $event): self
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    public function getResources(): ?array
+    {
+        return $this->resources;
+    }
+
+    public function setResources(array $resources): self
+    {
+        $this->resources = $resources;
 
         return $this;
     }
