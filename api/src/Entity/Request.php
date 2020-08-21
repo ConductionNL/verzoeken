@@ -165,7 +165,7 @@ class Request
      * @example incomplete
      *
      * @Gedmo\Versioned
-     * @Assert\Choice({"incomplete", "complete", "submitted", "in progress", "processed", "cancelled", "retracted"})
+     * @Assert\Choice({"incomplete", "complete", "submitted", "inProgress", "processed", "cancelled", "retracted"})
      * @Assert\Length(
      *      max = 255
      * )
