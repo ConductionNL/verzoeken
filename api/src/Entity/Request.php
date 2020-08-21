@@ -160,12 +160,12 @@ class Request
     private $referenceId;
 
     /**
-     * @var string The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled
+     * @var string The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion *in progress* means the request is in progress by the organization and *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled *retracted* means the person who submitted the request retracted the request.
      *
      * @example incomplete
      *
      * @Gedmo\Versioned
-     * @Assert\Choice({"incomplete", "complete", "submitted", "processed","cancelled", "retracted"})
+     * @Assert\Choice({"incomplete", "complete", "submitted", "in progress", "processed", "cancelled", "retracted"})
      * @Assert\Length(
      *      max = 255
      * )
