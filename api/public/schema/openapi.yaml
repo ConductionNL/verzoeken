@@ -12,7 +12,7 @@ info:
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
     - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
+    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
     
 paths:
   /audit_trails:
@@ -3000,6 +3000,15 @@ paths:
               - desc
         -
           name: 'order[order]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[event]'
           in: query
           required: false
           schema:
@@ -6568,6 +6577,12 @@ components:
             url: 'http://schema.org/url'
           type: string
           nullable: true
+        event:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         resources:
           description: 'The resource of the contact moment'
           type: array
@@ -6579,7 +6594,7 @@ components:
           type: string
           nullable: true
         status:
-          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
+          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion *in progress* means the request is in progress by the organization and *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled *retracted* means the person who submitted the request retracted the request.'
           type: string
         requestType:
           description: 'The type of request against which this request should be validated'
@@ -6682,6 +6697,12 @@ components:
             url: 'http://schema.org/url'
           type: string
           nullable: true
+        event:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         resources:
           description: 'The resource of the contact moment'
           type: array
@@ -6689,7 +6710,7 @@ components:
             type: string
           nullable: true
         status:
-          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
+          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion *in progress* means the request is in progress by the organization and *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled *retracted* means the person who submitted the request retracted the request.'
           type: string
         requestType:
           description: 'The type of request against which this request should be validated'
@@ -6785,6 +6806,12 @@ components:
             url: 'http://schema.org/url'
           type: string
           nullable: true
+        event:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         resources:
           description: 'The resource of the contact moment'
           type: array
@@ -6796,7 +6823,7 @@ components:
           type: string
           nullable: true
         status:
-          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
+          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion *in progress* means the request is in progress by the organization and *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled *retracted* means the person who submitted the request retracted the request.'
           type: string
         requestType:
           description: 'The type of request against which this request should be validated'
@@ -6908,6 +6935,12 @@ components:
             url: 'http://schema.org/url'
           type: string
           nullable: true
+        event:
+          description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         resources:
           description: 'The resource of the contact moment'
           type: array
@@ -6915,7 +6948,7 @@ components:
             type: string
           nullable: true
         status:
-          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
+          description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion *in progress* means the request is in progress by the organization and *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled *retracted* means the person who submitted the request retracted the request.'
           type: string
         requestType:
           description: 'The type of request against which this request should be validated'
@@ -7391,6 +7424,11 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+      event:
+        description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
       resources:
         description: 'The resource of the contact moment'
         type: array
@@ -7400,7 +7438,7 @@ definitions:
         example: 6666-2019-0000000012
         maxLength: 255
       status:
-        description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
+        description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion *in progress* means the request is in progress by the organization and *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled *retracted* means the person who submitted the request retracted the request.'
         type: string
         example: incomplete
         maxLength: 255
@@ -7477,11 +7515,16 @@ definitions:
         type: string
         example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
         format: url
+      event:
+        description: 'A specific commonground organisation that is being reviewd, e.g a single product'
+        type: string
+        example: 'https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f'
+        format: url
       resources:
         description: 'The resource of the contact moment'
         type: array
       status:
-        description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled'
+        description: 'The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion *in progress* means the request is in progress by the organization and *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled *retracted* means the person who submitted the request retracted the request.'
         type: string
         example: incomplete
         maxLength: 255
@@ -7760,12 +7803,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-15 09:43:46'
+        example: '2020-08-24 14:26:10'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-15 09:43:46'
+        example: '2020-08-24 14:26:10'
     required: []
   AuditTrail-write:
     properties:
@@ -7813,12 +7856,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-15 09:43:46'
+        example: '2020-08-24 14:26:10'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-15 09:43:46'
+        example: '2020-08-24 14:26:10'
     required: []
   ChangeLog-write:
     properties:
