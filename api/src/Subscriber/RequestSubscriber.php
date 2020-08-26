@@ -47,16 +47,29 @@ class RequestSubscriber implements EventSubscriberInterface
         }
 
         if (!$result->getReference()) {
+            // Lets get a shortcode
             $organization = json_decode($event->getRequest()->getContent(), true)['organization'];
-            $referenceId = $this->em->getRepository('App\Entity\Request')->getNextReferenceId($organization);
-            $result->setReferenceId($referenceId);
             $organization = $this->commonGroundService->getResource($organization);
+
             if (array_key_exists('shortcode', $organization) && $organization['shortcode'] != null) {
                 $shortcode = $organization['shortcode'];
             } else {
                 $shortcode = $organization['name'];
             }
-            $result->setReference($shortcode.'-'.date('Y').'-'.$referenceId);
+
+            // Lets get a reference id
+            $referenceId = $this->em->getRepository('App\Entity\Request')->getLastReferenceId($organization['@id']);
+
+            // Turn that into a reference and check for double references
+            $double = true;
+            while($double){
+                $referenceId++;
+                $reference = $shortcode.'-'.date('Y').'-'.$referenceId;
+                $double = $this->em->getRepository('App\Entity\Request')->findOneBy(array('reference' => $reference));
+            }
+
+            $result->setReferenceId($referenceId);
+            $result->setReference($reference);
         }
 
         return $result;
