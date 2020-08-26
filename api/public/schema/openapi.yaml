@@ -2999,6 +2999,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[initialOrganization]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[order]'
           in: query
           required: false
@@ -7803,12 +7812,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-26 07:38:59'
+        example: '2020-08-26 08:06:37'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-26 07:38:59'
+        example: '2020-08-26 08:06:37'
     required: []
   AuditTrail-write:
     properties:
@@ -7856,12 +7865,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-26 07:38:59'
+        example: '2020-08-26 08:06:37'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-26 07:38:59'
+        example: '2020-08-26 08:06:37'
     required: []
   ChangeLog-write:
     properties:

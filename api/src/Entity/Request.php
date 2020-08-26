@@ -101,6 +101,16 @@ class Request
     private $organization;
 
     /**
+     * @var string The organization on wich this request was created
+     *
+     * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(type="string", length=255)
+     */
+    private $initialOrganization;
+
+    /**
      * @var string A specific commonground organisation that is being reviewd, e.g a single product
      *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
@@ -362,6 +372,17 @@ class Request
         $this->labels = new ArrayCollection();
     }
 
+    /**
+     *  @ORM\PrePersist
+     *  @ORM\PreUpdate
+     */
+    public function prePersist()
+    {
+        if(!$this->getInitialOrganization()){
+            $this->setInitialOrganization($this->getOrganization());
+        }
+    }
+
     public function getId(): ?Uuid
     {
         return $this->id;
@@ -385,6 +406,19 @@ class Request
 
         return $this;
     }
+
+    public function getInitialOrganization(): ?string
+    {
+        return $this->initialOrganization;
+    }
+
+    public function setInitialOrganization(string $initialOrganization): self
+    {
+        $this->initialOrganization = $initialOrganization;
+
+        return $this;
+    }
+
 
     public function getOrder(): ?string
     {

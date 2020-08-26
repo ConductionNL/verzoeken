@@ -34,8 +34,8 @@ class RequestRepository extends ServiceEntityRepository
 
         $result = $this->createQueryBuilder('r')
             ->select('MAX(r.referenceId) AS reference_id')
-            ->andWhere(':organisation = r.organization')
-            ->setParameter('organisation', $organization)
+            ->andWhere(':organization = r.initialOrganization')
+            ->setParameter('organization', $organization)
             ->andWhere('r.dateCreated >= :start')
             ->setParameter('start', $start)
             ->andWhere('r.dateCreated <= :end')
