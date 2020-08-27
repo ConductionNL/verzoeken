@@ -62,10 +62,10 @@ class RequestSubscriber implements EventSubscriberInterface
 
             // Turn that into a reference and check for double references
             $double = true;
-            while($double){
+            while ($double) {
                 $referenceId++;
                 $reference = $shortcode.'-'.date('Y').'-'.$referenceId;
-                $double = $this->em->getRepository('App\Entity\Request')->findOneBy(array('reference' => $reference));
+                $double = $this->em->getRepository('App\Entity\Request')->findOneBy(['reference' => $reference]);
             }
 
             $result->setReferenceId($referenceId);
