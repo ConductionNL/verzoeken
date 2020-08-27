@@ -101,6 +101,16 @@ class Request
     private $organization;
 
     /**
+     * @var string The organization on wich this request was created
+     *
+     * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
+     *
+     * @Gedmo\Versioned
+     * @ORM\Column(type="string", length=255)
+     */
+    private $initialOrganization;
+
+    /**
      * @var string A specific commonground organisation that is being reviewd, e.g a single product
      *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
@@ -160,12 +170,12 @@ class Request
     private $referenceId;
 
     /**
-     * @var string The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means that an organization has started handling the request and *processed* means that any or all cases attached to a request have been handled
+     * @var string The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion, *inProgress* means the request is in progress by the organization, *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled, *retracted* means the person who submitted the request retracted the request and *rejected* means that the request is rejected by the organization.
      *
      * @example incomplete
      *
      * @Gedmo\Versioned
-     * @Assert\Choice({"incomplete", "complete", "submitted", "processed","cancelled", "retracted"})
+     * @Assert\Choice({"incomplete", "complete", "submitted", "inProgress", "processed", "cancelled", "retracted", "rejected"})
      * @Assert\Length(
      *      max = 255
      * )
@@ -362,6 +372,17 @@ class Request
         $this->labels = new ArrayCollection();
     }
 
+    /**
+     *  @ORM\PrePersist
+     *  @ORM\PreUpdate
+     */
+    public function prePersist()
+    {
+        if(!$this->getInitialOrganization()){
+            $this->setInitialOrganization($this->getOrganization());
+        }
+    }
+
     public function getId(): ?Uuid
     {
         return $this->id;
@@ -385,6 +406,19 @@ class Request
 
         return $this;
     }
+
+    public function getInitialOrganization(): ?string
+    {
+        return $this->initialOrganization;
+    }
+
+    public function setInitialOrganization(string $initialOrganization): self
+    {
+        $this->initialOrganization = $initialOrganization;
+
+        return $this;
+    }
+
 
     public function getOrder(): ?string
     {

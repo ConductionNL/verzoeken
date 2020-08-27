@@ -25,7 +25,7 @@ class RequestRepository extends ServiceEntityRepository
      *
      * @return int the referenceId that should be used for the next refenceId
      */
-    public function getNextReferenceId($organization, $date = null)
+    public function getLastReferenceId($organization, $date = null)
     {
         //if(!$date){
         $start = new \DateTime('first day of January this year');
@@ -33,20 +33,20 @@ class RequestRepository extends ServiceEntityRepository
         //}
 
         $result = $this->createQueryBuilder('r')
-        ->select('MAX(r.referenceId) AS reference_id')
-        ->andWhere(':organisation = r.organization')
-        ->setParameter('organisation', $organization)
-        ->andWhere('r.dateCreated >= :start')
-        ->setParameter('start', $start)
-        ->andWhere('r.dateCreated <= :end')
-        ->setParameter('end', $end)
-        ->getQuery()
-        ->getOneOrNullResult();
+            ->select('MAX(r.referenceId) AS reference_id')
+            ->andWhere(':organization = r.initialOrganization')
+            ->setParameter('organization', $organization)
+            ->andWhere('r.dateCreated >= :start')
+            ->setParameter('start', $start)
+            ->andWhere('r.dateCreated <= :end')
+            ->setParameter('end', $end)
+            ->getQuery()
+            ->getOneOrNullResult();
 
         if (!$result) {
-            return 1;
+            return 0;
         } else {
-            return $result['reference_id'] + 1;
+            return $result['reference_id'];
         }
     }
 

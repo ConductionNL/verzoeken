@@ -264,7 +264,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"status\": \"incomplete\",\r\n\t\"requestType\": \"http://vtc.zaakonline.nl/request_types/9bd169ef-bc8c-4422-86ce-a0e7679ab67a\",\r\n\t\"organization\": \"http://wrc.dev.huwelijksplanner.online/organizations/1802c00b-c3d9-46a5-848c-5846bca29345\",\r\n\t\"submitter\": \"999993653\",\r\n\t\"submitters\": [\r\n\t\t{\r\n\t\t\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\t\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\t\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\"\r\n\t\t}\r\n\t],\r\n\t\"properties\": [ ],\r\n\t\"primaryOrganization\": \r\n\t\t{\r\n\t\t\t\"rsin\": \"002851234\",\r\n\t\t\t\"status\": \"none\"\r\n\t\t}\r\n\t,\r\n\t\"organizations\": [\r\n\t\t{\r\n\t\t\t\"rsin\": \"002851234\",\r\n\t\t\t\"status\": \"none\"\r\n\t\t}\r\n\t],\r\n\t\"openCases\": [\r\n\t\t{\r\n\t\t\t\"open_case\": \"zrc.gemeente.nl/case/e2984465-190a-4562-829e-a8cca81aa35d\"\r\n\t\t}\r\n\t]\r\n}",
+							"raw": "{\r\n\t\"status\": \"incomplete\",\r\n\t\"organization\": \"https://wrc.dev.zuid-drecht.nl/organizations/4d1eded3-fbdf-438f-9536-8747dd8ab591\",\r\n\t\"requestType\": \"https://vtc.dev.zuid-drecht.nl/request_types/24962583-a3a2-4453-88b8-970114ebb89b\",\r\n\t\"processType\": \"https://ptc.dev.zuid-drecht.nl/process_types/2e9b0775-5efc-4954-b1e4-da0382db2fbf\",\r\n\t\"properties\": [ ]\r\n}",
 							"options": {
 								"raw": {}
 							}
@@ -565,10 +565,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"status\": \"incomplete\",\r\n\t\"requestType\": \"http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a\",\r\n\t\"organization\": \"http://wrc.dev.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8\",\r\n\t\"submitter\": \"002851234\",\r\n\t\"submitters\": [\r\n\t\t{\r\n\t\t\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\t\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\t\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\"\r\n\t\t}\r\n\t],\r\n\t\"properties\": [ ],\r\n\t\"organizations\": [\r\n\t\t{\r\n\t\t\t\"rsin\": \"002851234\",\r\n\t\t\t\"status\": \"none\"\r\n\t\t}\r\n\t],\r\n\t\"open_cases\": [\r\n\t\t{\r\n\t\t\t\"open_case\": \"zrc.gemeente.nl/case/e2984465-190a-4562-829e-a8cca81aa35d\"\r\n\t\t}\r\n\t]\r\n}",
-							"options": {
-								"raw": {}
-							}
+							"raw": "{\r\n\t\"status\": \"incomplete\",\r\n\t\"requestType\": \"http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a\",\r\n\t\"organization\": \"http://wrc.dev.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8\",\r\n\t\"submitter\": \"002851234\",\r\n\t\"submitters\": [\r\n\t\t{\r\n\t\t\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\t\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\t\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\"\r\n\t\t}\r\n\t],\r\n\t\"properties\": [ ],\r\n\t\"organizations\": [\r\n\t\t{\r\n\t\t\t\"rsin\": \"002851234\",\r\n\t\t\t\"status\": \"none\"\r\n\t\t}\r\n\t],\r\n\t\"open_cases\": [\r\n\t\t{\r\n\t\t\t\"open_case\": \"zrc.gemeente.nl/case/e2984465-190a-4562-829e-a8cca81aa35d\"\r\n\t\t}\r\n\t]\r\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/requests/{{request}}",
@@ -846,10 +843,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\",\r\n\t\"request\": \"/requests/{{request}}\"\r\n}",
-							"options": {
-								"raw": {}
-							}
+							"raw": "{\r\n\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\",\r\n\t\"request\": \"/requests/{{request}}\"\r\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/submitters",
@@ -1125,10 +1119,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\",\r\n\t\"request\": \"/requests/{{request}}\"\r\n}",
-							"options": {
-								"raw": {}
-							}
+							"raw": "{\r\n\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\",\r\n\t\"request\": \"/requests/{{request}}\"\r\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/submitters/{{id}}",
@@ -4319,12 +4310,12 @@
 	],
 	"variable": [
 		{
-			"id": "95073294-82db-4c2a-a4d3-5f90628104fa",
+			"id": "a390b071-8f70-43bf-8e19-9669a98809f7",
 			"key": "baseUrl",
 			"value": "localhost"
 		},
 		{
-			"id": "4a364a5e-8101-4838-82e0-d3c9a564b509",
+			"id": "316697ff-ee10-4a79-a7ef-068e239507c8",
 			"key": "authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		}
