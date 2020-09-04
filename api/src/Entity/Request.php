@@ -378,7 +378,7 @@ class Request
      */
     public function prePersist()
     {
-        if(!$this->getInitialOrganization()){
+        if (!$this->getInitialOrganization()) {
             $this->setInitialOrganization($this->getOrganization());
         }
     }
@@ -418,7 +418,6 @@ class Request
 
         return $this;
     }
-
 
     public function getOrder(): ?string
     {
