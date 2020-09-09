@@ -135,7 +135,7 @@ class Request
     private $event;
 
     /**
-     * @var array The resource of the contact moment
+     * @var array The resources that are the subject of this request
      *
      *
      * @Groups({"read", "write"})
