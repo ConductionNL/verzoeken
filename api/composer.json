@@ -7,7 +7,7 @@
 		"ext-iconv": "*",
 		"api-platform/api-pack": "^1.1",
 		"beberlei/doctrineextensions": "^1.2",
-		"conduction/commongroundbundle": "dev-feature-internal",
+		"conduction/commongroundbundle": "dev-master",
 		"phpdocumentor/reflection-docblock": "^4.3",
 		"sensio/framework-extra-bundle": "^5.5",
 		"sensiolabs/security-checker": "^6.0",
