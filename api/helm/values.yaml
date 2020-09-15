@@ -10,7 +10,7 @@ settings:
   version: V1.0
   majorVersion: v1
   id: 
-  description: 'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'
+  description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
   type: component
   repro: https://github.com/ConductionNL/verzoekregistratiecomponent
   demo: pc.zaakonline.nl
@@ -18,6 +18,7 @@ settings:
   domain: conduction.nl
   subdomain: vrc
   subpath: vrc
+  subpathRouting: true
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
@@ -53,8 +54,8 @@ security:
   commongroundKey: "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
   applicationKey: "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
   userKey: "79d5b14c-70ab-41fb-ac02-917e3288870b"
-  authorisationProviderUser: https://uc.larping.eu
-  authorisationProviderApplication: https://ac.larping.eu
+  authorisationProviderUser: https://uc.zuid-drecht.nl
+  authorisationProviderApplication: https://openzaak.dev.zuid-drecht.nl/authorizaties/api/v1
 
 
 php:
