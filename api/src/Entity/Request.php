@@ -170,6 +170,20 @@ class Request
     private $referenceId;
 
     /**
+     * @var string The external human readable reference of this request, as set (by example) for an external application that has already profidet the consumer with an reference
+     *
+     * @example 6666-2019-0000000012
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $externalReference;
+
+    /**
      * @var string The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion, *inProgress* means the request is in progress by the organization, *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled, *retracted* means the person who submitted the request retracted the request and *rejected* means that the request is rejected by the organization.
      *
      * @example incomplete
@@ -441,6 +455,18 @@ class Request
     public function setReferenceId(int $referenceId): self
     {
         $this->referenceId = $referenceId;
+
+        return $this;
+    }
+
+    public function getExternalReference(): ?string
+    {
+        return $this->externalReference;
+    }
+
+    public function setEternalReference(string $externalReference): self
+    {
+        $this->externalReference = $externalReference;
 
         return $this;
     }

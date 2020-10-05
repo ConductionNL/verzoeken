@@ -565,7 +565,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"status\": \"incomplete\",\r\n\t\"requestType\": \"http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a\",\r\n\t\"organization\": \"http://wrc.dev.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8\",\r\n\t\"submitter\": \"002851234\",\r\n\t\"submitters\": [\r\n\t\t{\r\n\t\t\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\t\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\t\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\"\r\n\t\t}\r\n\t],\r\n\t\"properties\": [ ],\r\n\t\"organizations\": [\r\n\t\t{\r\n\t\t\t\"rsin\": \"002851234\",\r\n\t\t\t\"status\": \"none\"\r\n\t\t}\r\n\t],\r\n\t\"open_cases\": [\r\n\t\t{\r\n\t\t\t\"open_case\": \"zrc.gemeente.nl/case/e2984465-190a-4562-829e-a8cca81aa35d\"\r\n\t\t}\r\n\t]\r\n}",
+							"raw": "{\r\n\t\"status\": \"submitted\"\r\n}",
 							"options": {
 								"raw": {}
 							}
@@ -998,9 +998,9 @@
 									"    console.log(jsonData);\r",
 									"    //var payloadData = JSON.parse(jsonData.Payload); //parsed payload\r",
 									"\r",
-									"    //console.log(payloadData.Id);\r",
 									"\r",
-									"    pm.environment.set(\"role\", jsonData.id);\r",
+									"    pm.environment.set(\"submitter\", jsonData.id);\r",
+									"    pm.environment.get(\"submitter\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1058,12 +1058,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/roles",
+							"raw": "{{baseUrl}}/submitters",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"roles"
+								"submitters"
 							]
 						}
 					},
@@ -1313,13 +1313,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/submitters/{{id}}",
+							"raw": "{{baseUrl}}/submitters/{{submitter}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"submitters",
-								"{{id}}"
+								"{{submitter}}"
 							]
 						}
 					},
@@ -1424,19 +1424,19 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\",\r\n\t\"request\": \"/requests/{{request}}\"\r\n}",
+							"raw": "{\r\n\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\"\r\n}",
 							"options": {
 								"raw": {}
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/submitters/{{id}}",
+							"raw": "{{baseUrl}}/submitters/{{submitter}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"submitters",
-								"{{id}}"
+								"{{submitter}}"
 							]
 						}
 					},
@@ -1582,13 +1582,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/submitters/{{id}}",
+							"raw": "{{baseUrl}}/submitters/{{submitter}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"submitters",
-								"{{id}}"
+								"{{submitter}}"
 							]
 						}
 					},
@@ -1786,14 +1786,24 @@
 	],
 	"variable": [
 		{
-			"id": "4452058e-61c5-47d3-ae87-ecdccb9c9ddb",
+			"id": "65890470-ae11-4d91-9df2-d7dc7aec0dd4",
 			"key": "baseUrl",
 			"value": "localhost"
 		},
 		{
-			"id": "a62ce5d6-f7c4-4197-bdd6-9a3143761ed6",
+			"id": "158a541f-04f0-4b42-9c9f-ea61e8fe2ebb",
 			"key": "authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
+		},
+		{
+			"id": "9b991c47-30eb-4d50-a6fa-052a675348f3",
+			"key": "request",
+			"value": ""
+		},
+		{
+			"id": "d332dfaf-f30c-44e2-b862-4834f7a3f45e",
+			"key": "submitter",
+			"value": ""
 		}
 	],
 	"protocolProfileBehavior": {}
