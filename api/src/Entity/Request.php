@@ -170,6 +170,20 @@ class Request
     private $referenceId;
 
     /**
+     * @var string The external human readable reference of this request, as set (by example) for an external application that has already profidet the consumer with an reference
+     *
+     * @example 6666-2019-0000000012
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Groups({"read"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $externalReference;
+
+    /**
      * @var string The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion, *inProgress* means the request is in progress by the organization, *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled, *retracted* means the person who submitted the request retracted the request and *rejected* means that the request is rejected by the organization.
      *
      * @example incomplete
@@ -215,17 +229,6 @@ class Request
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $processType;
-
-    //	/**
-    //	 * @var array $submitters An array instemmingen of the people or organizations that submitted this request
-    //	 * @example
-    //	 *
-//     * @Gedmo\Versioned
-    //	 * @Assert\NotNull
-    //	 * @Groups({"read", "write"})
-    //	 * @ORM\Column(type="array")
-    //	 */
-    //	private $submitters = [];
 
     /**
      * @var array The actual properties of the request, as described by the request type in the [vtc](http://vrc.zaakonline.nl/).
@@ -317,18 +320,6 @@ class Request
     private $submitters;
 
     /**
-     * @var ArrayCollection labels for this request
-     *
-     *
-     * @Assert\Valid
-     * @MaxDepth(1)
-     * @Groups({"read", "write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Label", mappedBy="request", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $labels;
-
-    /**
      * @var Datetime The moment this request was submitted by the submitter
      *
      * @Gedmo\Versioned
@@ -336,15 +327,6 @@ class Request
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateSubmitted;
-
-    /**
-     * @var ArrayCollection An array of roles that exist on this object
-     *
-     * @MaxDepth(1)
-     * @Groups({"read", "write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Role", mappedBy="request", orphanRemoval=true, cascade={"persist", "remove"})
-     */
-    private $roles;
 
     /**
      * @var Datetime The moment this request was created
@@ -368,8 +350,6 @@ class Request
     {
         $this->children = new ArrayCollection();
         $this->submitters = new ArrayCollection();
-        $this->roles = new ArrayCollection();
-        $this->labels = new ArrayCollection();
     }
 
     /**
@@ -475,6 +455,18 @@ class Request
     public function setReferenceId(int $referenceId): self
     {
         $this->referenceId = $referenceId;
+
+        return $this;
+    }
+
+    public function getExternalReference(): ?string
+    {
+        return $this->externalReference;
+    }
+
+    public function setEternalReference(string $externalReference): self
+    {
+        $this->externalReference = $externalReference;
 
         return $this;
     }
@@ -678,68 +670,6 @@ class Request
             // set the owning side to null (unless already changed)
             if ($submitter->getRequest() === $this) {
                 $submitter->setRequest(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Role[]
-     */
-    public function getRoles(): Collection
-    {
-        return $this->roles;
-    }
-
-    public function addRole(Role $role): self
-    {
-        if (!$this->roles->contains($role)) {
-            $this->roles[] = $role;
-            $role->setRequest($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRole(Role $role): self
-    {
-        if ($this->roles->contains($role)) {
-            $this->roles->removeElement($role);
-            // set the owning side to null (unless already changed)
-            if ($role->getRequest() === $this) {
-                $role->setRequest(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Label[]
-     */
-    public function getLabels(): Collection
-    {
-        return $this->labels;
-    }
-
-    public function addLabel(Label $label): self
-    {
-        if (!$this->labels->contains($label)) {
-            $this->labels[] = $label;
-            $label->setRequest($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLabel(Label $label): self
-    {
-        if ($this->labels->contains($label)) {
-            $this->labels->removeElement($label);
-            // set the owning side to null (unless already changed)
-            if ($label->getRequest() === $this) {
-                $label->setRequest(null);
             }
         }
 
