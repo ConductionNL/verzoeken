@@ -264,7 +264,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"status\": \"incomplete\",\r\n\t\"organization\": \"https://wrc.dev.zuid-drecht.nl/organizations/4d1eded3-fbdf-438f-9536-8747dd8ab591\",\r\n\t\"requestType\": \"https://vtc.dev.zuid-drecht.nl/request_types/24962583-a3a2-4453-88b8-970114ebb89b\",\r\n\t\"processType\": \"https://ptc.dev.zuid-drecht.nl/process_types/2e9b0775-5efc-4954-b1e4-da0382db2fbf\",\r\n\t\"properties\": [ ]\r\n}",
+							"raw": "{\r\n    \"status\": \"submitted\",\r\n    \"organization\": \"https://dev.zuid-drecht.nl/api/v1/wrc/organizations/4d1eded3-fbdf-438f-9536-8747dd8ab591\",\r\n\t\"requestType\": \"https://dev.zuid-drecht.nl/api/v1/vtc/request_types/c328e6b4-77f6-4c58-8544-4128452acc80\",\r\n\t\"processType\": \"https://dev.zuid-drecht.nl/api/v1/ptc/process_types/fdb7186c-0ce9-4050-bd6d-cf83b0c162eb\",\r\n\t\"properties\": {\r\n        \"contact_gegevens\": \"https://dev.zuid-drecht.nl/api/v1/cc/people/445a2283-2027-4c99-8c9e-3437c6d601fe\",\r\n        \"horeca_onderneming_contact\": \"https://dev.zuid-drecht.nl/api/v1/cc/organizations/0265628a-1b0e-4505-bba9-370e5ca88671\"\r\n    } \r\n}",
 							"options": {
 								"raw": {}
 							}
@@ -565,7 +565,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"status\": \"incomplete\",\r\n\t\"requestType\": \"http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a\",\r\n\t\"organization\": \"http://wrc.dev.huwelijksplanner.online/organizations/68b64145-0740-46df-a65a-9d3259c2fec8\",\r\n\t\"submitter\": \"002851234\",\r\n\t\"submitters\": [\r\n\t\t{\r\n\t\t\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\t\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\t\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\"\r\n\t\t}\r\n\t],\r\n\t\"properties\": [ ],\r\n\t\"organizations\": [\r\n\t\t{\r\n\t\t\t\"rsin\": \"002851234\",\r\n\t\t\t\"status\": \"none\"\r\n\t\t}\r\n\t],\r\n\t\"open_cases\": [\r\n\t\t{\r\n\t\t\t\"open_case\": \"zrc.gemeente.nl/case/e2984465-190a-4562-829e-a8cca81aa35d\"\r\n\t\t}\r\n\t]\r\n}"
+							"raw": "{\r\n\t\"status\": \"submitted\"\r\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "{{baseUrl}}/requests/{{request}}",
@@ -704,1795 +707,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "bfdc0bd8-c889-4ae5-852a-739cbf96eebb",
-								"exec": [
-									" //example using pm.response.to.have\r",
-									"pm.test(\"response is ok\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"// example using response assertions\r",
-									"pm.test(\"response should be okay to process\", function () {\r",
-									"    pm.response.to.not.be.error;\r",
-									"    pm.response.to.not.have.jsonBody(\"error\");\r",
-									"});\r",
-									"\r",
-									"// example using pm.response.to.be*\r",
-									"pm.test(\"response must be valid and have a body\", function () {\r",
-									"     // assert that the status code is 200\r",
-									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants\r",
-									"     // assert that the response has a valid JSON body\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "apikey",
-							"apikey": [
-								{
-									"key": "value",
-									"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "Authorization",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/submitters",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"submitters"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Submitter collection response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/submitters?page=<integer>",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"submitters"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "<integer>"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/hal+json"
-								}
-							],
-							"cookie": [],
-							"body": "null"
-						}
-					]
-				},
-				{
-					"name": "Creates a Submitter resource.",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "7178b3cd-8f8c-4190-b7c4-6d318b67d637",
-								"exec": [
-									"// example using pm.response.to.have\r",
-									"pm.test(\"response is ok\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
-									"\r",
-									"// example using response assertions\r",
-									"pm.test(\"response should be okay to process\", function () {\r",
-									"    pm.response.to.not.be.error;\r",
-									"    pm.response.to.not.have.jsonBody(\"error\");\r",
-									"});\r",
-									"\r",
-									"// example using pm.response.to.be*\r",
-									"pm.test(\"response must be valid and have a body\", function () {\r",
-									"     // assert that the status code is 200\r",
-									"     // pm.response.to.be.created; // info, success, redirection, clientError,  serverError, are other variants\r",
-									"     // assert that the response has a valid JSON body\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
-									"});\r",
-									"\r",
-									"\r",
-									"pm.test(\"Set ID\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.environment.set(\"id\", jsonData.id);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\",\r\n\t\"request\": \"/requests/{{request}}\"\r\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/submitters",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"submitters"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Resource not found",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "null"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/submitters",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"submitters"
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Submitter resource created",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "null"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/submitters",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"submitters"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/hal+json"
-								}
-							],
-							"cookie": [],
-							"body": "null"
-						},
-						{
-							"name": "Invalid input",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "null"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/submitters",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"submitters"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "submitters/{id}",
-			"item": [
-				{
-					"name": "Retrieves a Submitter resource.",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "036f783b-b6a8-48e0-850e-f5150fe6ec3d",
-								"exec": [
-									"// example using pm.response.to.have\r",
-									"pm.test(\"response is ok\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"// example using response assertions\r",
-									"pm.test(\"response should be okay to process\", function () {\r",
-									"    pm.response.to.not.be.error;\r",
-									"    pm.response.to.not.have.jsonBody(\"error\");\r",
-									"});\r",
-									"\r",
-									"// example using pm.response.to.be*\r",
-									"pm.test(\"response must be valid and have a body\", function () {\r",
-									"     // assert that the status code is 200\r",
-									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants\r",
-									"     // assert that the response has a valid JSON body\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/submitters/{{id}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"submitters",
-								"{{id}}"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Submitter resource response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/submitters/<string>",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"submitters",
-										"<string>"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/hal+json"
-								}
-							],
-							"cookie": [],
-							"body": "null"
-						},
-						{
-							"name": "Resource not found",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/submitters/<string>",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"submitters",
-										"<string>"
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
-				},
-				{
-					"name": "Replaces the Submitter resource.",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "fb9055bd-6a59-4221-af44-d95e2c3dcf25",
-								"exec": [
-									"// example using pm.response.to.have\r",
-									"pm.test(\"response is ok\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"// example using response assertions\r",
-									"pm.test(\"response should be okay to process\", function () {\r",
-									"    pm.response.to.not.be.error;\r",
-									"    pm.response.to.not.have.jsonBody(\"error\");\r",
-									"});\r",
-									"\r",
-									"// example using pm.response.to.be*\r",
-									"pm.test(\"response must be valid and have a body\", function () {\r",
-									"     // assert that the status code is 200\r",
-									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants\r",
-									"     // assert that the response has a valid JSON body\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"assent\": \"https://irc.zaakonline.nl/assent/e2984465-190a-4562-829e-a8cca81aa35d\",\r\n\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\",\r\n\t\"person\": \"https://cc.zaakonline.nl/people/a67a98ce-b11e-4ed3-bb78-ed5792592ffc\",\r\n\t\"request\": \"/requests/{{request}}\"\r\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/submitters/{{id}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"submitters",
-								"{{id}}"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Resource not found",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "null"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/submitters/<string>",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"submitters",
-										"<string>"
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Invalid input",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "null"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/submitters/<string>",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"submitters",
-										"<string>"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Submitter resource updated",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "null"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/submitters/<string>",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"submitters",
-										"<string>"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/hal+json"
-								}
-							],
-							"cookie": [],
-							"body": "null"
-						}
-					]
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "labels",
-			"item": [
-				{
-					"name": "Retrieves the collection of Label resources.",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "2371d2ac-7143-4893-b41d-5da9206c9474",
-								"exec": [
-									"// example using pm.response.to.have\r",
-									"pm.test(\"response is ok\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"// example using response assertions\r",
-									"pm.test(\"response should be okay to process\", function () {\r",
-									"    pm.response.to.not.be.error;\r",
-									"    pm.response.to.not.have.jsonBody(\"error\");\r",
-									"});\r",
-									"\r",
-									"// example using pm.response.to.be*\r",
-									"pm.test(\"response must be valid and have a body\", function () {\r",
-									"    // assert that the status code is 200\r",
-									"    pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants\r",
-									"    // assert that the response has a valid JSON body\r",
-									"    pm.response.to.be.withBody;\r",
-									"    pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"description": "The JWT of the entity performing the request"
-							},
-							{
-								"key": "API-Version",
-								"value": "",
-								"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-							},
-							{
-								"key": "X-NLX-Logrecord-ID",
-								"value": "",
-								"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-							},
-							{
-								"key": "X-NLX-Request-Process-Id",
-								"value": "",
-								"description": "A process id for purpose registration (doelbinding)"
-							},
-							{
-								"key": "X-NLX-Request-Data-Elements",
-								"value": "",
-								"description": "A list of requested data elements"
-							},
-							{
-								"key": "X-NLX-Request-Data-Subject",
-								"value": "",
-								"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-							},
-							{
-								"key": "X-NLX-Audit-Clarification",
-								"value": "",
-								"description": "A clarification as to why a request has been made  (doelbinding)"
-							},
-							{
-								"key": "Link",
-								"value": "",
-								"description": "A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel=\"hub\""
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/labels",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"labels"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Label collection response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									},
-									{
-										"key": "Link",
-										"value": "",
-										"description": "A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel=\"hub\""
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/labels?order[id]=<string>&order[name]=<string>&order[description]=<string>&order[color]=<string>&order[icon]=<string>&order[dateCreated]=<string>&order[dateModified]=<string>&dateCreated[before]=<string>&dateCreated[strictly_before]=<string>&dateCreated[after]=<string>&dateCreated[strictly_after]=<string>&dateModified[before]=<string>&dateModified[strictly_before]=<string>&dateModified[after]=<string>&dateModified[strictly_after]=<string>&id=<string>&id[]=<string>&id[]=<string>&name=<string>&name[]=<string>&name[]=<string>&description=<string>&description[]=<string>&description[]=<string>&color=<string>&color[]=<string>&color[]=<string>&icon=<string>&icon[]=<string>&icon[]=<string>&dateCreated=<string>&dateCreated[]=<string>&dateModified=<string>&dateModified[]=<string>&page=1&extend[]=<array>&fields[]=<array>&validOn=<dateTime>&validFrom=<dateTime>&validUntil=<dateTime>",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels"
-									],
-									"query": [
-										{
-											"key": "order[id]",
-											"value": "<string>"
-										},
-										{
-											"key": "order[name]",
-											"value": "<string>"
-										},
-										{
-											"key": "order[description]",
-											"value": "<string>"
-										},
-										{
-											"key": "order[color]",
-											"value": "<string>"
-										},
-										{
-											"key": "order[icon]",
-											"value": "<string>"
-										},
-										{
-											"key": "order[dateCreated]",
-											"value": "<string>"
-										},
-										{
-											"key": "order[dateModified]",
-											"value": "<string>"
-										},
-										{
-											"key": "dateCreated[before]",
-											"value": "<string>"
-										},
-										{
-											"key": "dateCreated[strictly_before]",
-											"value": "<string>"
-										},
-										{
-											"key": "dateCreated[after]",
-											"value": "<string>"
-										},
-										{
-											"key": "dateCreated[strictly_after]",
-											"value": "<string>"
-										},
-										{
-											"key": "dateModified[before]",
-											"value": "<string>"
-										},
-										{
-											"key": "dateModified[strictly_before]",
-											"value": "<string>"
-										},
-										{
-											"key": "dateModified[after]",
-											"value": "<string>"
-										},
-										{
-											"key": "dateModified[strictly_after]",
-											"value": "<string>"
-										},
-										{
-											"key": "id",
-											"value": "<string>"
-										},
-										{
-											"key": "id[]",
-											"value": "<string>"
-										},
-										{
-											"key": "id[]",
-											"value": "<string>"
-										},
-										{
-											"key": "name",
-											"value": "<string>"
-										},
-										{
-											"key": "name[]",
-											"value": "<string>"
-										},
-										{
-											"key": "name[]",
-											"value": "<string>"
-										},
-										{
-											"key": "description",
-											"value": "<string>"
-										},
-										{
-											"key": "description[]",
-											"value": "<string>"
-										},
-										{
-											"key": "description[]",
-											"value": "<string>"
-										},
-										{
-											"key": "color",
-											"value": "<string>"
-										},
-										{
-											"key": "color[]",
-											"value": "<string>"
-										},
-										{
-											"key": "color[]",
-											"value": "<string>"
-										},
-										{
-											"key": "icon",
-											"value": "<string>"
-										},
-										{
-											"key": "icon[]",
-											"value": "<string>"
-										},
-										{
-											"key": "icon[]",
-											"value": "<string>"
-										},
-										{
-											"key": "dateCreated",
-											"value": "<string>"
-										},
-										{
-											"key": "dateCreated[]",
-											"value": "<string>"
-										},
-										{
-											"key": "dateModified",
-											"value": "<string>"
-										},
-										{
-											"key": "dateModified[]",
-											"value": "<string>"
-										},
-										{
-											"key": "page",
-											"value": "1"
-										},
-										{
-											"key": "extend[]",
-											"value": "<array>"
-										},
-										{
-											"key": "fields[]",
-											"value": "<array>"
-										},
-										{
-											"key": "validOn",
-											"value": "<dateTime>"
-										},
-										{
-											"key": "validFrom",
-											"value": "<dateTime>"
-										},
-										{
-											"key": "validUntil",
-											"value": "<dateTime>"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/ld+json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"hydra:member\": [\n  {\n   \"name\": \"<string>\",\n   \"description\": \"<string>\",\n   \"color\": \"<string>\",\n   \"icon\": \"<string>\",\n   \"@context\": \"<string>\",\n   \"@id\": \"<string>\",\n   \"@type\": \"<string>\",\n   \"id\": \"<uuid>\",\n   \"request\": {\n    \"organization\": \"<string>\",\n    \"requestType\": \"<string>\",\n    \"submitters\": [\n     {\n      \"@context\": \"<string>\",\n      \"@id\": \"<string>\",\n      \"@type\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"assent\": \"<string>\",\n      \"brp\": \"<string>\",\n      \"person\": \"<string>\",\n      \"request\": {\n       \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n      },\n      \"dateSubmitted\": \"<dateTime>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"dateModified\": \"<dateTime>\"\n     },\n     {\n      \"@context\": \"<string>\",\n      \"@id\": \"<string>\",\n      \"@type\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"assent\": \"<string>\",\n      \"brp\": \"<string>\",\n      \"person\": \"<string>\",\n      \"request\": {\n       \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n      },\n      \"dateSubmitted\": \"<dateTime>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"dateModified\": \"<dateTime>\"\n     }\n    ],\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"reference\": \"<string>\",\n    \"status\": \"<string>\",\n    \"processType\": \"<string>\",\n    \"properties\": [\n     \"<string>\",\n     \"<string>\"\n    ],\n    \"cases\": [\n     \"<string>\",\n     \"<string>\"\n    ],\n    \"processes\": [\n     \"<string>\",\n     \"<string>\"\n    ],\n    \"parent\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"children\": [\n     {\n      \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n     },\n     {\n      \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n     }\n    ],\n    \"confidential\": \"<boolean>\",\n    \"currentStage\": \"<string>\",\n    \"labels\": [\n     {\n      \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n     },\n     {\n      \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n     }\n    ],\n    \"dateSubmitted\": \"<dateTime>\",\n    \"roles\": [\n     {\n      \"participant\": \"<string>\",\n      \"@context\": \"<string>\",\n      \"@id\": \"<string>\",\n      \"@type\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"rolType\": \"<string>\",\n      \"request\": {\n       \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n      },\n      \"participantType\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"dateModified\": \"<dateTime>\"\n     },\n     {\n      \"participant\": \"<string>\",\n      \"@context\": \"<string>\",\n      \"@id\": \"<string>\",\n      \"@type\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"rolType\": \"<string>\",\n      \"request\": {\n       \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n      },\n      \"participantType\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"dateModified\": \"<dateTime>\"\n     }\n    ],\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   \"dateCreated\": \"<dateTime>\",\n   \"dateModified\": \"<dateTime>\"\n  },\n  {\n   \"name\": \"<string>\",\n   \"description\": \"<string>\",\n   \"color\": \"<string>\",\n   \"icon\": \"<string>\",\n   \"@context\": \"<string>\",\n   \"@id\": \"<string>\",\n   \"@type\": \"<string>\",\n   \"id\": \"<uuid>\",\n   \"request\": {\n    \"organization\": \"<string>\",\n    \"requestType\": \"<string>\",\n    \"submitters\": [\n     {\n      \"@context\": \"<string>\",\n      \"@id\": \"<string>\",\n      \"@type\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"assent\": \"<string>\",\n      \"brp\": \"<string>\",\n      \"person\": \"<string>\",\n      \"request\": {\n       \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n      },\n      \"dateSubmitted\": \"<dateTime>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"dateModified\": \"<dateTime>\"\n     },\n     {\n      \"@context\": \"<string>\",\n      \"@id\": \"<string>\",\n      \"@type\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"assent\": \"<string>\",\n      \"brp\": \"<string>\",\n      \"person\": \"<string>\",\n      \"request\": {\n       \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n      },\n      \"dateSubmitted\": \"<dateTime>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"dateModified\": \"<dateTime>\"\n     }\n    ],\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"reference\": \"<string>\",\n    \"status\": \"<string>\",\n    \"processType\": \"<string>\",\n    \"properties\": [\n     \"<string>\",\n     \"<string>\"\n    ],\n    \"cases\": [\n     \"<string>\",\n     \"<string>\"\n    ],\n    \"processes\": [\n     \"<string>\",\n     \"<string>\"\n    ],\n    \"parent\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"children\": [\n     {\n      \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n     },\n     {\n      \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n     }\n    ],\n    \"confidential\": \"<boolean>\",\n    \"currentStage\": \"<string>\",\n    \"labels\": [\n     {\n      \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n     },\n     {\n      \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n     }\n    ],\n    \"dateSubmitted\": \"<dateTime>\",\n    \"roles\": [\n     {\n      \"participant\": \"<string>\",\n      \"@context\": \"<string>\",\n      \"@id\": \"<string>\",\n      \"@type\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"rolType\": \"<string>\",\n      \"request\": {\n       \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n      },\n      \"participantType\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"dateModified\": \"<dateTime>\"\n     },\n     {\n      \"participant\": \"<string>\",\n      \"@context\": \"<string>\",\n      \"@id\": \"<string>\",\n      \"@type\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"rolType\": \"<string>\",\n      \"request\": {\n       \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n      },\n      \"participantType\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"dateModified\": \"<dateTime>\"\n     }\n    ],\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   \"dateCreated\": \"<dateTime>\",\n   \"dateModified\": \"<dateTime>\"\n  }\n ],\n \"hydra:totalItems\": \"<integer>\",\n \"hydra:view\": {\n  \"@id\": \"<iri-reference>\",\n  \"@type\": \"<string>\",\n  \"hydra:first\": \"<iri-reference>\",\n  \"hydra:last\": \"<iri-reference>\",\n  \"hydra:next\": \"<iri-reference>\"\n },\n \"hydra:search\": {\n  \"@type\": \"<string>\",\n  \"hydra:template\": \"<string>\",\n  \"hydra:variableRepresentation\": \"<string>\",\n  \"hydra:mapping\": [\n   {\n    \"@type\": \"<string>\",\n    \"variable\": \"<string>\",\n    \"property\": \"<string>\",\n    \"required\": \"<boolean>\"\n   },\n   {\n    \"@type\": \"<string>\",\n    \"variable\": \"<string>\",\n    \"property\": \"<string>\",\n    \"required\": \"<boolean>\"\n   }\n  ]\n }\n}"
-						}
-					]
-				},
-				{
-					"name": "Creates a Label resource.",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "590b06f2-f8a7-4340-8e72-6caa188a5060",
-								"exec": [
-									"// example using pm.response.to.have\r",
-									"pm.test(\"response is ok\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
-									"\r",
-									"// example using response assertions\r",
-									"pm.test(\"response should be okay to process\", function () {\r",
-									"    pm.response.to.not.be.error;\r",
-									"    pm.response.to.not.have.jsonBody(\"error\");\r",
-									"});\r",
-									"\r",
-									"// example using pm.response.to.be*\r",
-									"pm.test(\"response must be valid and have a body\", function () {\r",
-									"    // assert that the status code is 200\r",
-									"    // pm.response.to.be.created; // info, success, redirection, clientError,  serverError, are other variants\r",
-									"    // assert that the response has a valid JSON body\r",
-									"    pm.response.to.be.withBody;\r",
-									"    pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
-									"});\r",
-									"\r",
-									"\r",
-									"pm.test(\"Set ID\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    console.log(jsonData);\r",
-									"    //var payloadData = JSON.parse(jsonData.Payload); //parsed payload\r",
-									"\r",
-									"    //console.log(payloadData.Id);\r",
-									"\r",
-									"    pm.environment.set(\"label\", jsonData.id);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"description": "The JWT of the entity performing the request"
-							},
-							{
-								"key": "API-Version",
-								"value": "",
-								"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-							},
-							{
-								"key": "X-NLX-Logrecord-ID",
-								"value": "",
-								"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-							},
-							{
-								"key": "X-NLX-Request-Process-Id",
-								"value": "",
-								"description": "A process id for purpose registration (doelbinding)"
-							},
-							{
-								"key": "X-NLX-Request-Data-Elements",
-								"value": "",
-								"description": "A list of requested data elements"
-							},
-							{
-								"key": "X-NLX-Request-Data-Subject",
-								"value": "",
-								"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-							},
-							{
-								"key": "X-NLX-Audit-Clarification",
-								"value": "",
-								"description": "A clarification as to why a request has been made  (doelbinding)"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Label\",\n    \"description\": \"label description\",\n    \"color\": \"red\",\n    \"icon\": \"url of icon\"\n}",
-							"options": {
-								"raw": {}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/labels",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"labels"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Label resource created",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"color\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"request\": {\n        \"organization\": \"<string>\",\n        \"requestType\": \"<string>\",\n        \"submitters\": [\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"status\": \"<string>\",\n        \"processType\": \"<string>\",\n        \"properties\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"cases\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"processes\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"parent\": {\n            \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n        },\n        \"children\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            }\n        ],\n        \"confidential\": \"<boolean>\",\n        \"currentStage\": \"<string>\",\n        \"labels\": [\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"roles\": [\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            },\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            }\n        ]\n    }\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/labels",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/ld+json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"name\": \"<string>\",\n \"description\": \"<string>\",\n \"color\": \"<string>\",\n \"icon\": \"<string>\",\n \"@context\": \"<string>\",\n \"@id\": \"<string>\",\n \"@type\": \"<string>\",\n \"id\": \"<uuid>\",\n \"request\": {\n  \"organization\": \"<string>\",\n  \"requestType\": \"<string>\",\n  \"submitters\": [\n   {\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"assent\": \"<string>\",\n    \"brp\": \"<string>\",\n    \"person\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   {\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"assent\": \"<string>\",\n    \"brp\": \"<string>\",\n    \"person\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   }\n  ],\n  \"@context\": \"<string>\",\n  \"@id\": \"<string>\",\n  \"@type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"reference\": \"<string>\",\n  \"status\": \"<string>\",\n  \"processType\": \"<string>\",\n  \"properties\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"cases\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"processes\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"parent\": {\n   \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n  },\n  \"children\": [\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n   },\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n   }\n  ],\n  \"confidential\": \"<boolean>\",\n  \"currentStage\": \"<string>\",\n  \"labels\": [\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n   },\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n   }\n  ],\n  \"dateSubmitted\": \"<dateTime>\",\n  \"roles\": [\n   {\n    \"participant\": \"<string>\",\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"participantType\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   {\n    \"participant\": \"<string>\",\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"participantType\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   }\n  ],\n  \"dateCreated\": \"<dateTime>\",\n  \"dateModified\": \"<dateTime>\"\n },\n \"dateCreated\": \"<dateTime>\",\n \"dateModified\": \"<dateTime>\"\n}"
-						},
-						{
-							"name": "Invalid input",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"color\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"request\": {\n        \"organization\": \"<string>\",\n        \"requestType\": \"<string>\",\n        \"submitters\": [\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"status\": \"<string>\",\n        \"processType\": \"<string>\",\n        \"properties\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"cases\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"processes\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"parent\": {\n            \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n        },\n        \"children\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            }\n        ],\n        \"confidential\": \"<boolean>\",\n        \"currentStage\": \"<string>\",\n        \"labels\": [\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"roles\": [\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            },\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            }\n        ]\n    }\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/labels",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Resource not found",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"color\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"request\": {\n        \"organization\": \"<string>\",\n        \"requestType\": \"<string>\",\n        \"submitters\": [\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"status\": \"<string>\",\n        \"processType\": \"<string>\",\n        \"properties\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"cases\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"processes\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"parent\": {\n            \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n        },\n        \"children\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            }\n        ],\n        \"confidential\": \"<boolean>\",\n        \"currentStage\": \"<string>\",\n        \"labels\": [\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"roles\": [\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            },\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            }\n        ]\n    }\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/labels",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels"
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "labels/{id}",
-			"item": [
-				{
-					"name": "Retrieves a Label resource.",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "421d9238-7c55-4e4a-92da-58a8dfddff82",
-								"exec": [
-									"// example using pm.response.to.have\r",
-									"pm.test(\"response is ok\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"// example using response assertions\r",
-									"pm.test(\"response should be okay to process\", function () {\r",
-									"    pm.response.to.not.be.error;\r",
-									"    pm.response.to.not.have.jsonBody(\"error\");\r",
-									"});\r",
-									"\r",
-									"// example using pm.response.to.be*\r",
-									"pm.test(\"response must be valid and have a body\", function () {\r",
-									"     // assert that the status code is 200\r",
-									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants\r",
-									"     // assert that the response has a valid JSON body\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"description": "The JWT of the entity performing the request"
-							},
-							{
-								"key": "API-Version",
-								"value": "",
-								"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-							},
-							{
-								"key": "X-NLX-Logrecord-ID",
-								"value": "",
-								"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-							},
-							{
-								"key": "X-NLX-Request-Process-Id",
-								"value": "",
-								"description": "A process id for purpose registration (doelbinding)"
-							},
-							{
-								"key": "X-NLX-Request-Data-Elements",
-								"value": "",
-								"description": "A list of requested data elements"
-							},
-							{
-								"key": "X-NLX-Request-Data-Subject",
-								"value": "",
-								"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-							},
-							{
-								"key": "X-NLX-Audit-Clarification",
-								"value": "",
-								"description": "A clarification as to why a request has been made  (doelbinding)"
-							},
-							{
-								"key": "Link",
-								"value": "",
-								"description": "A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel=\"hub\""
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/labels/{{label}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"labels",
-								"{{label}}"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Label resource response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									},
-									{
-										"key": "Link",
-										"value": "",
-										"description": "A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel=\"hub\""
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/labels/:id?extend[]=<array>&fields[]=<array>&validOn=<dateTime>&validFrom=<dateTime>&validUntil=<dateTime>",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels",
-										":id"
-									],
-									"query": [
-										{
-											"key": "extend[]",
-											"value": "<array>"
-										},
-										{
-											"key": "fields[]",
-											"value": "<array>"
-										},
-										{
-											"key": "validOn",
-											"value": "<dateTime>"
-										},
-										{
-											"key": "validFrom",
-											"value": "<dateTime>"
-										},
-										{
-											"key": "validUntil",
-											"value": "<dateTime>"
-										}
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/ld+json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"name\": \"<string>\",\n \"description\": \"<string>\",\n \"color\": \"<string>\",\n \"icon\": \"<string>\",\n \"@context\": \"<string>\",\n \"@id\": \"<string>\",\n \"@type\": \"<string>\",\n \"id\": \"<uuid>\",\n \"request\": {\n  \"organization\": \"<string>\",\n  \"requestType\": \"<string>\",\n  \"submitters\": [\n   {\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"assent\": \"<string>\",\n    \"brp\": \"<string>\",\n    \"person\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   {\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"assent\": \"<string>\",\n    \"brp\": \"<string>\",\n    \"person\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   }\n  ],\n  \"@context\": \"<string>\",\n  \"@id\": \"<string>\",\n  \"@type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"reference\": \"<string>\",\n  \"status\": \"<string>\",\n  \"processType\": \"<string>\",\n  \"properties\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"cases\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"processes\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"parent\": {\n   \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n  },\n  \"children\": [\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n   },\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n   }\n  ],\n  \"confidential\": \"<boolean>\",\n  \"currentStage\": \"<string>\",\n  \"labels\": [\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n   },\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n   }\n  ],\n  \"dateSubmitted\": \"<dateTime>\",\n  \"roles\": [\n   {\n    \"participant\": \"<string>\",\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"participantType\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   {\n    \"participant\": \"<string>\",\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"participantType\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   }\n  ],\n  \"dateCreated\": \"<dateTime>\",\n  \"dateModified\": \"<dateTime>\"\n },\n \"dateCreated\": \"<dateTime>\",\n \"dateModified\": \"<dateTime>\"\n}"
-						},
-						{
-							"name": "Resource not found",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									},
-									{
-										"key": "Link",
-										"value": "",
-										"description": "A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel=\"hub\""
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/labels/:id?extend[]=<array>&fields[]=<array>&validOn=<dateTime>&validFrom=<dateTime>&validUntil=<dateTime>",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels",
-										":id"
-									],
-									"query": [
-										{
-											"key": "extend[]",
-											"value": "<array>"
-										},
-										{
-											"key": "fields[]",
-											"value": "<array>"
-										},
-										{
-											"key": "validOn",
-											"value": "<dateTime>"
-										},
-										{
-											"key": "validFrom",
-											"value": "<dateTime>"
-										},
-										{
-											"key": "validUntil",
-											"value": "<dateTime>"
-										}
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
-				},
-				{
-					"name": "Replaces the Label resource.",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "cb534867-4b14-4eb3-97c6-8f6076ad2e63",
-								"exec": [
-									"// example using pm.response.to.have\r",
-									"pm.test(\"response is ok\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"// example using response assertions\r",
-									"pm.test(\"response should be okay to process\", function () {\r",
-									"    pm.response.to.not.be.error;\r",
-									"    pm.response.to.not.have.jsonBody(\"error\");\r",
-									"});\r",
-									"\r",
-									"// example using pm.response.to.be*\r",
-									"pm.test(\"response must be valid and have a body\", function () {\r",
-									"     // assert that the status code is 200\r",
-									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants\r",
-									"     // assert that the response has a valid JSON body\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"description": "The JWT of the entity performing the request"
-							},
-							{
-								"key": "API-Version",
-								"value": "",
-								"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-							},
-							{
-								"key": "X-NLX-Logrecord-ID",
-								"value": "",
-								"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-							},
-							{
-								"key": "X-NLX-Request-Process-Id",
-								"value": "",
-								"description": "A process id for purpose registration (doelbinding)"
-							},
-							{
-								"key": "X-NLX-Request-Data-Elements",
-								"value": "",
-								"description": "A list of requested data elements"
-							},
-							{
-								"key": "X-NLX-Request-Data-Subject",
-								"value": "",
-								"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-							},
-							{
-								"key": "X-NLX-Audit-Clarification",
-								"value": "",
-								"description": "A clarification as to why a request has been made  (doelbinding)"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Label\",\n    \"description\": \"label description\",\n    \"color\": \"red\",\n    \"icon\": \"url of icon\"\n}",
-							"options": {
-								"raw": {}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/labels/{{label}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"labels",
-								"{{label}}"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Invalid input",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"color\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"request\": {\n        \"organization\": \"<string>\",\n        \"requestType\": \"<string>\",\n        \"submitters\": [\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"status\": \"<string>\",\n        \"processType\": \"<string>\",\n        \"properties\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"cases\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"processes\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"parent\": {\n            \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n        },\n        \"children\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            }\n        ],\n        \"confidential\": \"<boolean>\",\n        \"currentStage\": \"<string>\",\n        \"labels\": [\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"roles\": [\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            },\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            }\n        ]\n    }\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/labels/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Resource not found",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"color\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"request\": {\n        \"organization\": \"<string>\",\n        \"requestType\": \"<string>\",\n        \"submitters\": [\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"status\": \"<string>\",\n        \"processType\": \"<string>\",\n        \"properties\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"cases\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"processes\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"parent\": {\n            \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n        },\n        \"children\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            }\n        ],\n        \"confidential\": \"<boolean>\",\n        \"currentStage\": \"<string>\",\n        \"labels\": [\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"roles\": [\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            },\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            }\n        ]\n    }\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/labels/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Label resource updated",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"color\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"request\": {\n        \"organization\": \"<string>\",\n        \"requestType\": \"<string>\",\n        \"submitters\": [\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"status\": \"<string>\",\n        \"processType\": \"<string>\",\n        \"properties\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"cases\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"processes\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"parent\": {\n            \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n        },\n        \"children\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            }\n        ],\n        \"confidential\": \"<boolean>\",\n        \"currentStage\": \"<string>\",\n        \"labels\": [\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"roles\": [\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            },\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            }\n        ]\n    }\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/labels/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/ld+json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"name\": \"<string>\",\n \"description\": \"<string>\",\n \"color\": \"<string>\",\n \"icon\": \"<string>\",\n \"@context\": \"<string>\",\n \"@id\": \"<string>\",\n \"@type\": \"<string>\",\n \"id\": \"<uuid>\",\n \"request\": {\n  \"organization\": \"<string>\",\n  \"requestType\": \"<string>\",\n  \"submitters\": [\n   {\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"assent\": \"<string>\",\n    \"brp\": \"<string>\",\n    \"person\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   {\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"assent\": \"<string>\",\n    \"brp\": \"<string>\",\n    \"person\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   }\n  ],\n  \"@context\": \"<string>\",\n  \"@id\": \"<string>\",\n  \"@type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"reference\": \"<string>\",\n  \"status\": \"<string>\",\n  \"processType\": \"<string>\",\n  \"properties\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"cases\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"processes\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"parent\": {\n   \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n  },\n  \"children\": [\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n   },\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n   }\n  ],\n  \"confidential\": \"<boolean>\",\n  \"currentStage\": \"<string>\",\n  \"labels\": [\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n   },\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n   }\n  ],\n  \"dateSubmitted\": \"<dateTime>\",\n  \"roles\": [\n   {\n    \"participant\": \"<string>\",\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"participantType\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   {\n    \"participant\": \"<string>\",\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"participantType\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   }\n  ],\n  \"dateCreated\": \"<dateTime>\",\n  \"dateModified\": \"<dateTime>\"\n },\n \"dateCreated\": \"<dateTime>\",\n \"dateModified\": \"<dateTime>\"\n}"
-						}
-					]
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "roles",
-			"item": [
-				{
-					"name": "Retrieves the collection of Role resources.",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
 								"id": "9cd23a7a-a365-4c34-a58c-6cb67bc975d9",
 								"exec": [
 									"// example using pm.response.to.have\r",
@@ -2564,12 +778,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/roles",
+							"raw": "{{baseUrl}}/submitters",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"roles"
+								"submitters"
 							]
 						}
 					},
@@ -2751,7 +965,7 @@
 					]
 				},
 				{
-					"name": "Creates a Role resource.",
+					"name": "Creates a Submitter resource.",
 					"event": [
 						{
 							"listen": "test",
@@ -2784,9 +998,9 @@
 									"    console.log(jsonData);\r",
 									"    //var payloadData = JSON.parse(jsonData.Payload); //parsed payload\r",
 									"\r",
-									"    //console.log(payloadData.Id);\r",
 									"\r",
-									"    pm.environment.set(\"role\", jsonData.id);\r",
+									"    pm.environment.set(\"submitter\", jsonData.id);\r",
+									"    pm.environment.get(\"submitter\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2797,39 +1011,39 @@
 						"method": "POST",
 						"header": [
 							{
+								"description": "The JWT of the entity performing the request",
 								"key": "Authorization",
-								"value": "",
-								"description": "The JWT of the entity performing the request"
+								"value": ""
 							},
 							{
+								"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)",
 								"key": "API-Version",
-								"value": "",
-								"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
+								"value": ""
 							},
 							{
+								"description": "A  globally unique id of the request, which makes a request traceable throughout the network.",
 								"key": "X-NLX-Logrecord-ID",
-								"value": "",
-								"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
+								"value": ""
 							},
 							{
+								"description": "A process id for purpose registration (doelbinding)",
 								"key": "X-NLX-Request-Process-Id",
-								"value": "",
-								"description": "A process id for purpose registration (doelbinding)"
+								"value": ""
 							},
 							{
+								"description": "A list of requested data elements",
 								"key": "X-NLX-Request-Data-Elements",
-								"value": "",
-								"description": "A list of requested data elements"
+								"value": ""
 							},
 							{
+								"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`",
 								"key": "X-NLX-Request-Data-Subject",
-								"value": "",
-								"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
+								"value": ""
 							},
 							{
+								"description": "A clarification as to why a request has been made  (doelbinding)",
 								"key": "X-NLX-Audit-Clarification",
-								"value": "",
-								"description": "A clarification as to why a request has been made  (doelbinding)"
+								"value": ""
 							},
 							{
 								"key": "Content-Type",
@@ -2838,18 +1052,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"participant\": \"https://www.example.com/\",\n    \"rolType\": \"initiator\",\n    \"participantType\": \"Natuurlijk persoon\",\n\t\"request\": \"/requests/{{request}}\"\n}",
+							"raw": "{\n    \"assent\": \"https://www.example.com/\",\n    \"bsn\": \"123456789\",\n    \"brp\": \"https://www.example.com/\",\n    \"request\": \"/requests/{{request}}\"\n}",
 							"options": {
 								"raw": {}
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/roles",
+							"raw": "{{baseUrl}}/submitters",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"roles"
+								"submitters"
 							]
 						}
 					},
@@ -3061,15 +1275,15 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "roles/{id}",
+			"name": "submitters/{id}",
 			"item": [
 				{
-					"name": "Retrieves a Role resource.",
+					"name": "Retrieves a Submitter resource.",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "be574d7b-03af-49df-b14c-748672e96850",
+								"id": "036f783b-b6a8-48e0-850e-f5150fe6ec3d",
 								"exec": [
 									"// example using pm.response.to.have\r",
 									"pm.test(\"response is ok\", function () {\r",
@@ -3097,141 +1311,60 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"description": "The JWT of the entity performing the request"
-							},
-							{
-								"key": "API-Version",
-								"value": "",
-								"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-							},
-							{
-								"key": "X-NLX-Logrecord-ID",
-								"value": "",
-								"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-							},
-							{
-								"key": "X-NLX-Request-Process-Id",
-								"value": "",
-								"description": "A process id for purpose registration (doelbinding)"
-							},
-							{
-								"key": "X-NLX-Request-Data-Elements",
-								"value": "",
-								"description": "A list of requested data elements"
-							},
-							{
-								"key": "X-NLX-Request-Data-Subject",
-								"value": "",
-								"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-							},
-							{
-								"key": "X-NLX-Audit-Clarification",
-								"value": "",
-								"description": "A clarification as to why a request has been made  (doelbinding)"
-							},
-							{
-								"key": "Link",
-								"value": "",
-								"description": "A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel=\"hub\""
-							}
-						],
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/roles/{{role}}",
+							"raw": "{{baseUrl}}/submitters/{{submitter}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"roles",
-								"{{role}}"
+								"submitters",
+								"{{submitter}}"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "Resource not found",
+							"name": "Submitter resource response",
 							"originalRequest": {
 								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									},
-									{
-										"key": "Link",
-										"value": "",
-										"description": "A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel=\"hub\""
-									}
-								],
+								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/roles/:id?extend[]=<array>&fields[]=<array>&validOn=<dateTime>&validFrom=<dateTime>&validUntil=<dateTime>",
+									"raw": "{{baseUrl}}/submitters/<string>",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"roles",
-										":id"
+										"submitters",
+										"<string>"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "null"
+						},
+						{
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/submitters/<string>",
+									"host": [
+										"{{baseUrl}}"
 									],
-									"query": [
-										{
-											"key": "extend[]",
-											"value": "<array>"
-										},
-										{
-											"key": "fields[]",
-											"value": "<array>"
-										},
-										{
-											"key": "validOn",
-											"value": "<dateTime>"
-										},
-										{
-											"key": "validFrom",
-											"value": "<dateTime>"
-										},
-										{
-											"key": "validUntil",
-											"value": "<dateTime>"
-										}
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
+									"path": [
+										"submitters",
+										"<string>"
 									]
 								}
 							},
@@ -3246,112 +1379,16 @@
 							],
 							"cookie": [],
 							"body": ""
-						},
-						{
-							"name": "Role resource response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									},
-									{
-										"key": "Link",
-										"value": "",
-										"description": "A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel=\"hub\""
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/roles/:id?extend[]=<array>&fields[]=<array>&validOn=<dateTime>&validFrom=<dateTime>&validUntil=<dateTime>",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"roles",
-										":id"
-									],
-									"query": [
-										{
-											"key": "extend[]",
-											"value": "<array>"
-										},
-										{
-											"key": "fields[]",
-											"value": "<array>"
-										},
-										{
-											"key": "validOn",
-											"value": "<dateTime>"
-										},
-										{
-											"key": "validFrom",
-											"value": "<dateTime>"
-										},
-										{
-											"key": "validUntil",
-											"value": "<dateTime>"
-										}
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/ld+json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"participant\": \"<string>\",\n \"@context\": \"<string>\",\n \"@id\": \"<string>\",\n \"@type\": \"<string>\",\n \"id\": \"<uuid>\",\n \"rolType\": \"<string>\",\n \"request\": {\n  \"organization\": \"<string>\",\n  \"requestType\": \"<string>\",\n  \"submitters\": [\n   {\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"assent\": \"<string>\",\n    \"brp\": \"<string>\",\n    \"person\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   {\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"assent\": \"<string>\",\n    \"brp\": \"<string>\",\n    \"person\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   }\n  ],\n  \"@context\": \"<string>\",\n  \"@id\": \"<string>\",\n  \"@type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"reference\": \"<string>\",\n  \"status\": \"<string>\",\n  \"processType\": \"<string>\",\n  \"properties\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"cases\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"processes\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"parent\": {\n   \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n  },\n  \"children\": [\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n   },\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n   }\n  ],\n  \"confidential\": \"<boolean>\",\n  \"currentStage\": \"<string>\",\n  \"labels\": [\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n   },\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n   }\n  ],\n  \"dateSubmitted\": \"<dateTime>\",\n  \"roles\": [\n   {\n    \"participant\": \"<string>\",\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"participantType\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   {\n    \"participant\": \"<string>\",\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"participantType\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   }\n  ],\n  \"dateCreated\": \"<dateTime>\",\n  \"dateModified\": \"<dateTime>\"\n },\n \"participantType\": \"<string>\",\n \"dateCreated\": \"<dateTime>\",\n \"dateModified\": \"<dateTime>\"\n}"
 						}
 					]
 				},
 				{
-					"name": "Replaces the Role resource.",
+					"name": "Replaces the Submitter resource.",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "0d60bfc0-90c2-4444-8b69-6ccfe30589f5",
+								"id": "fb9055bd-6a59-4221-af44-d95e2c3dcf25",
 								"exec": [
 									"// example using pm.response.to.have\r",
 									"pm.test(\"response is ok\", function () {\r",
@@ -3381,195 +1418,51 @@
 						"method": "PUT",
 						"header": [
 							{
-								"key": "Authorization",
-								"value": "",
-								"description": "The JWT of the entity performing the request"
-							},
-							{
-								"key": "API-Version",
-								"value": "",
-								"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-							},
-							{
-								"key": "X-NLX-Logrecord-ID",
-								"value": "",
-								"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-							},
-							{
-								"key": "X-NLX-Request-Process-Id",
-								"value": "",
-								"description": "A process id for purpose registration (doelbinding)"
-							},
-							{
-								"key": "X-NLX-Request-Data-Elements",
-								"value": "",
-								"description": "A list of requested data elements"
-							},
-							{
-								"key": "X-NLX-Request-Data-Subject",
-								"value": "",
-								"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-							},
-							{
-								"key": "X-NLX-Audit-Clarification",
-								"value": "",
-								"description": "A clarification as to why a request has been made  (doelbinding)"
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"participant\": \"https://www.example.com/\",\n    \"rolType\": \"initiator\",\n    \"participantType\": \"Natuurlijk persoon\",\n\t\"request\": \"/requests/{{request}}\"\n}",
+							"raw": "{\r\n\t\"brp\": \"https://brp.zaakonline.nl/ingeschrevenpersonen/999993653\"\r\n}",
 							"options": {
 								"raw": {}
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/roles/{{role}}",
+							"raw": "{{baseUrl}}/submitters/{{submitter}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"roles",
-								"{{role}}"
+								"submitters",
+								"{{submitter}}"
 							]
 						}
 					},
 					"response": [
-						{
-							"name": "Role resource updated",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"participant\": \"<string>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n        \"organization\": \"<string>\",\n        \"requestType\": \"<string>\",\n        \"submitters\": [\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"status\": \"<string>\",\n        \"processType\": \"<string>\",\n        \"properties\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"cases\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"processes\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"parent\": {\n            \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n        },\n        \"children\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            }\n        ],\n        \"confidential\": \"<boolean>\",\n        \"currentStage\": \"<string>\",\n        \"labels\": [\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"roles\": [\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            },\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            }\n        ]\n    },\n    \"participantType\": \"<string>\"\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/roles/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"roles",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/ld+json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"participant\": \"<string>\",\n \"@context\": \"<string>\",\n \"@id\": \"<string>\",\n \"@type\": \"<string>\",\n \"id\": \"<uuid>\",\n \"rolType\": \"<string>\",\n \"request\": {\n  \"organization\": \"<string>\",\n  \"requestType\": \"<string>\",\n  \"submitters\": [\n   {\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"assent\": \"<string>\",\n    \"brp\": \"<string>\",\n    \"person\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   {\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"assent\": \"<string>\",\n    \"brp\": \"<string>\",\n    \"person\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   }\n  ],\n  \"@context\": \"<string>\",\n  \"@id\": \"<string>\",\n  \"@type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"reference\": \"<string>\",\n  \"status\": \"<string>\",\n  \"processType\": \"<string>\",\n  \"properties\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"cases\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"processes\": [\n   \"<string>\",\n   \"<string>\"\n  ],\n  \"parent\": {\n   \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n  },\n  \"children\": [\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n   },\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n   }\n  ],\n  \"confidential\": \"<boolean>\",\n  \"currentStage\": \"<string>\",\n  \"labels\": [\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n   },\n   {\n    \"value\": \"<Circular reference to #/components/schemas/Label:jsonld-read detected>\"\n   }\n  ],\n  \"dateSubmitted\": \"<dateTime>\",\n  \"roles\": [\n   {\n    \"participant\": \"<string>\",\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"participantType\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   },\n   {\n    \"participant\": \"<string>\",\n    \"@context\": \"<string>\",\n    \"@id\": \"<string>\",\n    \"@type\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n     \"value\": \"<Circular reference to #/components/schemas/Request:jsonld-read detected>\"\n    },\n    \"participantType\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"dateModified\": \"<dateTime>\"\n   }\n  ],\n  \"dateCreated\": \"<dateTime>\",\n  \"dateModified\": \"<dateTime>\"\n },\n \"participantType\": \"<string>\",\n \"dateCreated\": \"<dateTime>\",\n \"dateModified\": \"<dateTime>\"\n}"
-						},
 						{
 							"name": "Resource not found",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
 									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
+										"key": "Content-Type",
+										"value": "application/json"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"participant\": \"<string>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n        \"organization\": \"<string>\",\n        \"requestType\": \"<string>\",\n        \"submitters\": [\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"status\": \"<string>\",\n        \"processType\": \"<string>\",\n        \"properties\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"cases\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"processes\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"parent\": {\n            \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n        },\n        \"children\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            }\n        ],\n        \"confidential\": \"<boolean>\",\n        \"currentStage\": \"<string>\",\n        \"labels\": [\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"roles\": [\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            },\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            }\n        ]\n    },\n    \"participantType\": \"<string>\"\n}"
+									"raw": "null"
 								},
 								"url": {
-									"raw": "{{baseUrl}}/roles/:id",
+									"raw": "{{baseUrl}}/submitters/<string>",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"roles",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
+										"submitters",
+										"<string>"
 									]
 								}
 							},
@@ -3591,58 +1484,22 @@
 								"method": "PUT",
 								"header": [
 									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
+										"key": "Content-Type",
+										"value": "application/json"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"participant\": \"<string>\",\n    \"rolType\": \"<string>\",\n    \"request\": {\n        \"organization\": \"<string>\",\n        \"requestType\": \"<string>\",\n        \"submitters\": [\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"assent\": \"<string>\",\n                \"brp\": \"<string>\",\n                \"person\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"status\": \"<string>\",\n        \"processType\": \"<string>\",\n        \"properties\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"cases\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"processes\": [\n            \"<string>\",\n            \"<string>\"\n        ],\n        \"parent\": {\n            \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n        },\n        \"children\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n            }\n        ],\n        \"confidential\": \"<boolean>\",\n        \"currentStage\": \"<string>\",\n        \"labels\": [\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            },\n            {\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"color\": \"<string>\",\n                \"icon\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                }\n            }\n        ],\n        \"roles\": [\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            },\n            {\n                \"participant\": \"<string>\",\n                \"rolType\": \"<string>\",\n                \"request\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Request-write detected>\"\n                },\n                \"participantType\": \"<string>\"\n            }\n        ]\n    },\n    \"participantType\": \"<string>\"\n}"
+									"raw": "null"
 								},
 								"url": {
-									"raw": "{{baseUrl}}/roles/:id",
+									"raw": "{{baseUrl}}/submitters/<string>",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"roles",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
+										"submitters",
+										"<string>"
 									]
 								}
 							},
@@ -3657,6 +1514,43 @@
 							],
 							"cookie": [],
 							"body": ""
+						},
+						{
+							"name": "Submitter resource updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "null"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/submitters/<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"submitters",
+										"<string>"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/hal+json"
+								}
+							],
+							"cookie": [],
+							"body": "null"
 						}
 					]
 				}
@@ -3688,13 +1582,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/submitters/{{id}}",
+							"raw": "{{baseUrl}}/submitters/{{submitter}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"submitters",
-								"{{id}}"
+								"{{submitter}}"
 							]
 						}
 					},
@@ -3745,424 +1639,6 @@
 							},
 							"status": "No Content",
 							"code": 204,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
-				},
-				{
-					"name": "Removes the Role resource.",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "61d37bcf-e148-4345-bef7-7dfb628bc585",
-								"exec": [
-									"// example using pm.response.to.have\r",
-									"pm.test(\"response is ok\", function () {\r",
-									"    pm.response.to.have.status(204);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"description": "The JWT of the entity performing the request"
-							},
-							{
-								"key": "API-Version",
-								"value": "",
-								"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-							},
-							{
-								"key": "X-NLX-Logrecord-ID",
-								"value": "",
-								"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-							},
-							{
-								"key": "X-NLX-Request-Process-Id",
-								"value": "",
-								"description": "A process id for purpose registration (doelbinding)"
-							},
-							{
-								"key": "X-NLX-Request-Data-Elements",
-								"value": "",
-								"description": "A list of requested data elements"
-							},
-							{
-								"key": "X-NLX-Request-Data-Subject",
-								"value": "",
-								"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-							},
-							{
-								"key": "X-NLX-Audit-Clarification",
-								"value": "",
-								"description": "A clarification as to why a request has been made  (doelbinding)"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/roles/{{role}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"roles",
-								"{{role}}"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Role resource deleted",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/roles/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"roles",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "No Content",
-							"code": 204,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Resource not found",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/roles/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"roles",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						}
-					]
-				},
-				{
-					"name": "Removes the Label resource.",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "d88c20cf-0c6a-4913-b66d-1c8120fce32a",
-								"exec": [
-									"// example using pm.response.to.have\r",
-									"pm.test(\"response is ok\", function () {\r",
-									"    pm.response.to.have.status(204);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "",
-								"description": "The JWT of the entity performing the request"
-							},
-							{
-								"key": "API-Version",
-								"value": "",
-								"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-							},
-							{
-								"key": "X-NLX-Logrecord-ID",
-								"value": "",
-								"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-							},
-							{
-								"key": "X-NLX-Request-Process-Id",
-								"value": "",
-								"description": "A process id for purpose registration (doelbinding)"
-							},
-							{
-								"key": "X-NLX-Request-Data-Elements",
-								"value": "",
-								"description": "A list of requested data elements"
-							},
-							{
-								"key": "X-NLX-Request-Data-Subject",
-								"value": "",
-								"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-							},
-							{
-								"key": "X-NLX-Audit-Clarification",
-								"value": "",
-								"description": "A clarification as to why a request has been made  (doelbinding)"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/labels/{{label}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"labels",
-								"{{label}}"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Label resource deleted",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/labels/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "No Content",
-							"code": 204,
-							"_postman_previewlanguage": "text",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain"
-								}
-							],
-							"cookie": [],
-							"body": ""
-						},
-						{
-							"name": "Resource not found",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "",
-										"description": "The JWT of the entity performing the request"
-									},
-									{
-										"key": "API-Version",
-										"value": "",
-										"description": "The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)"
-									},
-									{
-										"key": "X-NLX-Logrecord-ID",
-										"value": "",
-										"description": "A  globally unique id of the request, which makes a request traceable throughout the network."
-									},
-									{
-										"key": "X-NLX-Request-Process-Id",
-										"value": "",
-										"description": "A process id for purpose registration (doelbinding)"
-									},
-									{
-										"key": "X-NLX-Request-Data-Elements",
-										"value": "",
-										"description": "A list of requested data elements"
-									},
-									{
-										"key": "X-NLX-Request-Data-Subject",
-										"value": "",
-										"description": "A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`"
-									},
-									{
-										"key": "X-NLX-Audit-Clarification",
-										"value": "",
-										"description": "A clarification as to why a request has been made  (doelbinding)"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/labels/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"labels",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
 							"_postman_previewlanguage": "text",
 							"header": [
 								{
@@ -4310,14 +1786,24 @@
 	],
 	"variable": [
 		{
-			"id": "a390b071-8f70-43bf-8e19-9669a98809f7",
+			"id": "65890470-ae11-4d91-9df2-d7dc7aec0dd4",
 			"key": "baseUrl",
 			"value": "localhost"
 		},
 		{
-			"id": "316697ff-ee10-4a79-a7ef-068e239507c8",
+			"id": "158a541f-04f0-4b42-9c9f-ea61e8fe2ebb",
 			"key": "authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
+		},
+		{
+			"id": "9b991c47-30eb-4d50-a6fa-052a675348f3",
+			"key": "request",
+			"value": ""
+		},
+		{
+			"id": "d332dfaf-f30c-44e2-b862-4834f7a3f45e",
+			"key": "submitter",
+			"value": ""
 		}
 	],
 	"protocolProfileBehavior": {}
