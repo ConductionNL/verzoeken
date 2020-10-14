@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-    <title>{% if title %}{{ title }} - {% endif %}API Platform</title>
+    <title>{% if title %}{{ title }} - {% endif %}Common Ground Component</title>
 
-    <link rel="stylesheet" href="{{ commonground_cleanurl({'component':'vrc'}) }}/bundles/apiplatform/graphql-playground/index.css">
+    <link rel="stylesheet" href="{{ commonground_path('api_entrypoint') }}bundles/apiplatform/graphql-playground/index.css">
 
-    <script src="{{ commonground_cleanurl({'component':'vrc'}) }}/bundles/apiplatform/graphql-playground/middleware.js"></script>
+    <script src="{{ commonground_path('api_entrypoint') }}bundles/apiplatform/graphql-playground/middleware.js"></script>
     {# json_encode(65) is for JSON_UNESCAPED_SLASHES|JSON_HEX_TAG to avoid JS XSS #}
     <script id="graphql-playground-data" type="application/json">{{ graphql_playground_data|json_encode(65)|raw }}</script>
 
@@ -534,13 +534,13 @@
         </g>
     </svg>
     <div class="text">Loading
-        <span class="dGfHfc">Conduction Commonground GraphQL Playground</span>
+        <span class="dGfHfc">{% if title %}{{ title }} - {% endif %}Common Ground Component </span>
     </div>
 </div>
 
 <div id="graphql-playground" />
 
-<script src="{{ commonground_cleanurl({'component':'vrc'}) }}/bundles/apiplatform/init-graphql-playground.js"></script>
+<script src="{{ commonground_path('api_entrypoint') }}bundles/apiplatform/init-graphql-playground.js"></script>
 
 </body>
 </html>
