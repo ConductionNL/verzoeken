@@ -8,7 +8,7 @@
 		"api-platform/api-pack": "^1.1",
 		"beberlei/doctrineextensions": "^1.2",
 		"conduction/commongroundbundle": "dev-master",
-		"gedmo/doctrine-extensions": "2.4.40",
+        "gedmo/doctrine-extensions": "2.4.40",
 		"phpdocumentor/reflection-docblock": "^4.3",
 		"sensio/framework-extra-bundle": "^5.5",
 		"sensiolabs/security-checker": "^6.0",
