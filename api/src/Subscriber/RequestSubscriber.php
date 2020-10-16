@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -35,7 +36,7 @@ class RequestSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function newRequest(GetResponseForControllerResultEvent $event)
+    public function newRequest(ViewEvent $event)
     {
         $result = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
