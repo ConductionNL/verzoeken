@@ -4,10 +4,8 @@ namespace App\Subscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\Request;
-use App\Entity\Request as CCRequest;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\DocBlock\Serializer;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,7 +47,7 @@ class LocaleSubscriber implements EventSubscriberInterface
             $contentType = $event->getRequest()->headers->get('Accept');
         }
 
-        if (!$event->getRequest()->query->get("_locale") == 'nl' || !$result instanceof Request ) {
+        if (!$event->getRequest()->query->get('_locale') == 'nl' || !$result instanceof Request) {
             return;
         }
 
