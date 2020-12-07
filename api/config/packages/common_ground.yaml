@@ -309,6 +309,7 @@ twig:
         app_subdomain: "%env(APP_SUBDOMAIN)%"
         app_subpath: "%env(APP_SUBPATH)%"
         app_subpath_routing: "%env(APP_SUBPATH_ROUTING)%"
+        app_url: "%env(APP_URL)%"
         app_demo: "%env(APP_DEMO)%"
         app_container: "%env(APP_CONTAINER)%"
         app_repro: "%env(APP_REPRO)%"

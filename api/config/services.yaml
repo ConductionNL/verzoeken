@@ -33,6 +33,7 @@ services:
         decorates: 'api_platform.swagger.normalizer.api_gateway'
         arguments: [ '@Conduction\CommonGroundBundle\Swagger\SwaggerDecorator.inner' ]
         autoconfigure: false
+        
 
 #    Redis:
 #        class: Redis
