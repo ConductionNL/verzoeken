@@ -248,6 +248,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: app_user_key
+            - name: NOTIFICATIONS_ENABLED
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: notifications_enabled
             - name: APP_URL
               {{- if and (eq $.Values.settings.env "prod") (eq $.Values.settings.type "component") }}
               value: https://{{ $.Values.settings.domain }}/api/{{ $.Values.settings.majorVersion }}/{{ $.Values.settings.subpath }}
