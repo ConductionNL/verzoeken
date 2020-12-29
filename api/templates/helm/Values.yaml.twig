@@ -18,6 +18,7 @@ settings:
   domain: {{ app_domain }}
   subdomain: {{ app_subdomain }}
   subpath: {{ app_subpath }}
+  subpathRouting: {{ app_subpath_routing }}
   organisationName: {{ organization_name }}
   email: {{ organization_email }}
   country: {{ organization_country }}
@@ -42,7 +43,7 @@ settings:
   # If you want to enable NLX you are requered to add the appropreate certificates to you nlx-settings folder (located in the /api folder)
   nlxInwayEnabled: {{ nlx_inway }}
   # If you are runnig a single component on a kubernetes cluster you can just easaliy enable the load balancer, if not you need to set up a multi component load balancer
-  notificationEnabled: false
+  notificationEnabled: '{{ app_notification }}'
   audittrailEnabled: false
   authorisationEnabled: false
   healthEnabled: false
