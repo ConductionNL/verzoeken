@@ -10,7 +10,7 @@ info:
     - Version: V1.0
     - Repository: [online](https://github.com/ConductionNL/verzoekregistratiecomponent) / [zip](https://github.com/ConductionNL/verzoekregistratiecomponent/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/vrc-php) 
-    - Datamodel: [postman](/schema/vrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
+    - Datamodel: [postman](schema/vrc.postman_collection.json) / [oas](schema/openapi.yaml) / [pdf](schema/datamodel.pdf) / [modelio (zip)](schema/Datamodel_Modelio.zip) 
     
     'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
     
@@ -5339,12 +5339,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-16 08:14:58'
+        example: '2020-12-14 15:28:59'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-16 08:14:58'
+        example: '2020-12-14 15:28:59'
     required: []
   AuditTrail-write:
     properties:
@@ -5392,12 +5392,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-16 08:14:58'
+        example: '2020-12-14 15:28:59'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-16 08:14:58'
+        example: '2020-12-14 15:28:59'
     required: []
   ChangeLog-write:
     properties:
@@ -5408,6 +5408,12 @@ definitions:
         maxLength: 2555
     required: []
 tags:
+  -
+    name: Notifications
+    description: Authorization
+    externalDocs:
+      -
+        url: 'http://docs.my-api.com/pet-operations.htm'
   -
     name: Request
     description: |
@@ -5450,8 +5456,8 @@ securityDefinitions:
 host: irc.zaakonline.nl
 servers:
   -
-    name: conduction.nl
-    url: vrc.dev.conduction.nl
+    name: zuid-drecht.nl
+    url: vrc.dev.zuid-drecht.nl
 externalDocs:
   -
     description: 'OAS Documentatie'
