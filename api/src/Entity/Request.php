@@ -88,7 +88,7 @@ class Request
     private $id;
 
     /**
-     * @var string A specific commonground organisation that is being reviewd, e.g a single product
+     * @var string A specific commonground organisation that is being reviewed, e.g a single product
      *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
@@ -111,7 +111,7 @@ class Request
     private $initialOrganization;
 
     /**
-     * @var string A specific commonground organisation that is being reviewd, e.g a single product
+     * @var string A specific commonground organisation that is being reviewed, e.g a single product
      *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
@@ -123,7 +123,7 @@ class Request
     private $order;
 
     /**
-     * @var string A specific commonground organisation that is being reviewd, e.g a single product
+     * @var string A specific commonground organisation that is being reviewed, e.g a single product
      *
      * @example https://wrc.zaakonline.nl/organisations/16353702-4614-42ff-92af-7dd11c8eef9f
      *
@@ -136,7 +136,6 @@ class Request
 
     /**
      * @var array The resources that are the subject of this request
-     *
      *
      * @Groups({"read", "write"})
      * @ORM\Column(type="array", nullable=true)
@@ -184,7 +183,7 @@ class Request
     private $externalReference;
 
     /**
-     * @var string The curent status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion, *inProgress* means the request is in progress by the organization, *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled, *retracted* means the person who submitted the request retracted the request and *rejected* means that the request is rejected by the organization.
+     * @var string The current status of this request. Where *incomplete* is unfinished request, *complete* means that a request has been posted by the submitter, *submitted* means the request is submitted to the organizaztion, *inProgress* means the request is in progress by the organization, *processed* means that any or all cases attached to a request have been handled *cancelled* means the request has been cancelled, *retracted* means the person who submitted the request retracted the request and *rejected* means that the request is rejected by the organization.
      *
      * @example incomplete
      *
