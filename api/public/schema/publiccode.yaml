@@ -4,7 +4,7 @@ name: vrc
 applicationSuite: commonground
 url: "https://github.com/ConductionNL/verzoekregistratiecomponent"
 landingURL: "pc.zaakonline.nl"
-    isBasedOn: "https://github.com/ConductionNL/Proto-component-commonground.git"
+isBasedOn: "https://github.com/ConductionNL/Proto-component-commonground.git"
 softwareVersion: "V1.0"
 releaseDate: "2021-02-02"
 logo: pc.zaakonline.nl
