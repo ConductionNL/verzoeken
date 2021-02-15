@@ -2,19 +2,19 @@
 
 Description
 ----
-De verzoeken catalogus bevat zowel het eind als tussenresultaat van een proces. Of om het iets simpeler te zeggen een proces schrijft bij iedere stap zijn variabelen weg naar een verzoek. Daarmee is het proces stateless en het verzoek stateful. In deze zin is een verzoek vergelijkbaar met een proces token in bijvoorbeeld BPMN- engines.  
+The request catalog contains both the end and intermediate results of a process. Or to put it more simply, a process writes its variables to a request at each step. This makes the process stateless and the request stateful. In this sense, a request is comparable to a process token in, for example, BPMN engines.
 
-Hierdoor is het mogelijk om verzoeken uit te wisselen tussen processen. Het is bijvoorbeeld mogelijk om via een chatbot een proces te draaien dat het verzoektype verhuizen gebruikt om een verzoek aan te maken, maar het ondertekenen van dit verzoek te laten doen via het webformulier.
+This makes it possible to exchange requests between processes. For example, it is possible to run a process via a chatbot that uses the verhuizen (move house) request type to create a request, but have the request signed via the web form.
 
-Vanuit deze gedachte bevat een verzoek dus alle variabelen die horen bij de klantreis gekoppeld aan een verzoektype. Waarbij uiteindelijk het verzoek type doorslaggevend is voor de validiteit en de processen alleen de manier van aanleveren bepalen.
+From this perspective, a request therefore contains all variables associated with the customer journey linked to a request type. Ultimately, the request type is decisive for the validity and the processes only determine the method of delivery.
 
-Dit betekent ook dat verzoeken een nog niet afgeronde klantreis kan zijn, ofwel gebruikers kunnen hun klantreis parkeren en later vervolgen. Het betekent ook dat deze klantreizen in principe inzichtelijk zijn voor de aanbieder (gemeente), met andere woorden als een gebruiker in een formulier vast loopt, kan hij/zij de helpdesk bellen en kan een helpdeskmedewerker meekijken en aanvullen. Sterker nog, doordat wijzigingen aan verzoeken op gebruikersniveau worden gelogd en het indienen een losse actie is, zou het ook denkbaar zijn dat een medewerker of externe partij een verzoek klaarzet voor een gebruiker om te controleren en te ondertekenen. 
+This also means that requests can be an unfinished customer journey, or users can put aside their customer journey and continue later. It also means that these customer journeys are in principle transparent to the provider (municipality), in other words if a user gets stuck in a form, he / she can call the helpdesk and a helpdesk employee can watch and supplement. In fact, because changes to requests are logged at the user level and submission is a casual action, it would also be conceivable that an employee or external party would prepare a request for a user to review and sign.
 
-Dit maakt het mogelijk om bijvoorbeeld een verhuizer een verhuismelding te laten klaar zetten voor de gebruiker die de gebruiker overneemt, ondertekent en opstuurt.  Of bijvoorbeeld een aannemer die een bouwvergunning voor een dakkapel klaarzet.
+This makes it possible, for example, to have a mover prepare a relocation notification for the user who takes over, signs and sends. Or, for example, a contractor who prepares a building permit for a dormer window.
 
-Overigens hoeft een verzoek niet zijn grondslag te vinden in een proces (bijvoorbeeld vanuit de Processen Catalogus). De enige randvoorwaarde van een verzoek is dat deze op het moment van indienen voldoet aan de voorwaarde van het bijbehorende verzoektype.
+Incidentally, a request does not have to be based on a process (for example from the Process Catalogue).The only condition of a request is that it fulfills the condition of the corresponding request type at the time of submission.
 
-Het is derhalve goed denkbaar dat simpele verzoeken worden ingeschoten en ondertekend door IOT devices zo als een lantaarnpaal die zelf meldt dat hij kapot is.
+It is therefore quite conceivable that simple requests are fired in and signed by IOT devices, like a lamppost that reports itself that it is broken.
 
 Additional Information
 ----
