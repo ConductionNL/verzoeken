@@ -1,4 +1,4 @@
-# vrc
+# verzoekregistratiecomponent
 
 Description
 ----
