@@ -4437,6 +4437,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         processType:
           description: 'The processType that made this request'
           externalDocs:
@@ -4502,14 +4503,12 @@ components:
           nullable: true
       required:
         - organization
-        - requestType
         - submitters
     Request-write:
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization.'
       required:
         - organization
-        - requestType
         - submitters
       properties:
         organization:
@@ -4543,6 +4542,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         processType:
           description: 'The processType that made this request'
           externalDocs:
@@ -4651,6 +4651,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         processType:
           description: 'The processType that made this request'
           externalDocs:
@@ -4716,14 +4717,12 @@ components:
           nullable: true
       required:
         - organization
-        - requestType
         - submitters
     'Request:jsonld-write':
       type: object
       description: 'A request (or verzoek in dutch) to an organization (usually governmental) to do ''something'' on behalf of a citizen or another organization.'
       required:
         - organization
-        - requestType
         - submitters
       properties:
         '@context':
@@ -4766,6 +4765,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         processType:
           description: 'The processType that made this request'
           externalDocs:
@@ -4847,6 +4847,12 @@ components:
             url: 'http://schema.org/url'
           type: string
           nullable: true
+        organization:
+          description: 'A reference to a wrc organization'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         request:
           description: 'The request this submitter belongs to'
           nullable: true
@@ -4890,6 +4896,12 @@ components:
           nullable: true
         person:
           description: 'A reference to the contact component person'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        organization:
+          description: 'A reference to a wrc organization'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
@@ -4938,6 +4950,12 @@ components:
           nullable: true
         person:
           description: 'A reference to the contact component person'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        organization:
+          description: 'A reference to a wrc organization'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
@@ -4994,6 +5012,12 @@ components:
           nullable: true
         person:
           description: 'A reference to the contact component person'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        organization:
+          description: 'A reference to a wrc organization'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
@@ -5098,7 +5122,6 @@ definitions:
         type: \ArrayCollection
     required:
       - organization
-      - requestType
       - submitters
   Request-write:
     properties:
@@ -5169,7 +5192,6 @@ definitions:
         type: \ArrayCollection
     required:
       - organization
-      - requestType
       - submitters
   Submitter-read:
     properties:
@@ -5194,6 +5216,11 @@ definitions:
         maxLength: 255
       person:
         description: 'A reference to the contact component person'
+        type: string
+        format: url
+        maxLength: 255
+      organization:
+        description: 'A reference to a wrc organization'
         type: string
         format: url
         maxLength: 255
@@ -5231,62 +5258,14 @@ definitions:
         type: string
         format: url
         maxLength: 255
+      organization:
+        description: 'A reference to a wrc organization'
+        type: string
+        format: url
+        maxLength: 255
       request:
         description: 'The request this submitter belongs to'
         type: \request
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2021-03-12 12:20:22'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2021-03-12 12:20:22'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
     required: []
   AuditTrail-read:
     properties:
@@ -5392,12 +5371,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-03-12 12:20:22'
+        example: '2021-03-17 13:17:41'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-03-12 12:20:22'
+        example: '2021-03-17 13:17:41'
     required: []
   AuditTrail-write:
     properties:
@@ -5405,6 +5384,59 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
+        maxLength: 2555
+    required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2021-03-17 13:17:41'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2021-03-17 13:17:41'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -5427,13 +5459,13 @@ tags:
       
       This entity represents a request submitter with the goal of being able to find the assent and the brp references
   -
-    name: ChangeLog
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
@@ -5444,15 +5476,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
 host: irc.zaakonline.nl
 servers:
   -
