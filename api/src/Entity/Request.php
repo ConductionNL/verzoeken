@@ -58,7 +58,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "submitters.brp": "exact",
  *     "submitters.assent": "exact",
  *     "submitters.person": "exact",
- *     "submitters.organization: "partial",
+ *     "submitters.organization": "partial",
  *     "organization": "exact",
  *     "order": "exact",
  *     "reources": "exact",
