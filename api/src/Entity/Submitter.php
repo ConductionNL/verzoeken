@@ -93,6 +93,18 @@ class Submitter
     private $person;
 
     /**
+     * @var string A reference to a wrc organization
+     *
+     * @Assert\Url
+     * @Assert\Length(
+     *     max=255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $organization;
+
+    /**
      * @var request The request this submitter belongs to
      *
      * @Groups({"read","write"})
@@ -177,6 +189,18 @@ class Submitter
     public function setPerson(string $person): self
     {
         $this->person = $person;
+
+        return $this;
+    }
+
+    public function getOrganization(): ?string
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(string $organization): self
+    {
+        $this->organization = $organization;
 
         return $this;
     }

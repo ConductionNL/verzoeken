@@ -58,6 +58,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "submitters.brp": "exact",
  *     "submitters.assent": "exact",
  *     "submitters.person": "exact",
+ *     "submitters.organization": "partial",
  *     "organization": "exact",
  *     "order": "exact",
  *     "reources": "exact",
@@ -204,13 +205,12 @@ class Request
      * @example http://vtc.zaakonline.nl/9bd169ef-bc8c-4422-86ce-a0e7679ab67a
      *
      * @Gedmo\Versioned
-     * @Assert\NotNull
      * @Assert\Url
      * @Assert\Length(
      *      max = 255
      * )
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $requestType;
 
