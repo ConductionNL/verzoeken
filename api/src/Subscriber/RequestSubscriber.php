@@ -6,25 +6,18 @@ use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\Request as CCRequest;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class RequestSubscriber implements EventSubscriberInterface
 {
-    private $params;
     private $em;
-    private $serializer;
     private $commonGroundService;
-    private $nlxLogService;
 
-    public function __construct(ParameterBagInterface $params, EntityManagerInterface $em, SerializerInterface $serializer, CommonGroundService $commonGroundService)
+    public function __construct(EntityManagerInterface $em, CommonGroundService $commonGroundService)
     {
-        $this->params = $params;
         $this->em = $em;
-        $this->serializer = $serializer;
         $this->commonGroundService = $commonGroundService;
     }
 
