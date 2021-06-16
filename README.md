@@ -1,8 +1,15 @@
 # verzoekregistratiecomponent
+[![StyleCI](https://github.styleci.io/repos/198549754/shield?branch=master)](https://github.styleci.io/repos/198549754?branch=master)
+[![Docker Image CI](https://github.com/ConductionNL/verzoekregistratiecomponent/workflows/Docker%20Image%20CI/badge.svg?branch=master)](https://github.com/ConductionNL/verzoekregistratiecomponent/actions?query=workflow%3A"Docker+Image+CI")
+[![Artifacthub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/verzoekregistratiecomponent)](https://artifacthub.io/packages/helm/verzoekregistratiecomponent/verzoekregistratiecomponent)
+[![BCH compliance](https://bettercodehub.com/edge/badge/ConductionNL/verzoekregistratiecomponent?branch=master)](https://bettercodehub.com/)
 
 Description
 ----
-Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.
+Het Verzoek Registratie Component bevat zowel het eind- als tussenresultaat van een proces.
+Of om het iets simpeler te zeggen een proces schrijft bij iedere stap zijn variabelen weg naar een verzoek. Daarmee is het proces stateless en het verzoek stateful. In deze zin is een verzoek vergelijkbaar met een proces token in bijvoorbeeld BPMN- engines.
+
+Hierdoor is het mogelijk om verzoeken uit te wisselen tussen processen. Het is bijvoorbeeld mogelijk om via een chatbot een proces te draaien dat het verzoektype verhuizen gebruikt om een verzoek aan te maken, maar het ondertekenen van dit verzoek te laten doen via het webformulier.
 
 Additional Information
 ----
