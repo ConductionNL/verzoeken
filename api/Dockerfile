@@ -39,6 +39,11 @@ COPY src src/
 COPY templates templates/
 COPY translations translations/
 
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug-2.9.2 \
+    && docker-php-ext-enable xdebug;\
+    echo -e "xdebug.overload_var_dump=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
@@ -54,23 +59,6 @@ ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
 
-
-#############################
-# 		"varnish" stage 	#
-#############################
-# does not depend on any of the above stages, but placed here to keep everything in one Dockerfile
-#FROM conduction/pc-varnish:prod AS api_platform_varnish
-#
-#COPY docker/varnish/conf/default.vcl /etc/varnish/conf.d/
-# Lets install envsubst
-#RUN apk --no-cache add gettext
-
-#COPY docker/varnish/conf /usr/local/etc/varnish/
-
-#RUN envsubst '$PHP_SERVICE' < /usr/local/etc/varnish/default.vcl.template > /usr/local/etc/varnish/default.vcl
-
-# Lets parse the toml file
-# RUN envsubst < /usr/local/etc/varnish/default.vcl.template > /usr/local/etc/varnish/default.vcl
 
 #############################
 # 		NLX Outway	 		#
