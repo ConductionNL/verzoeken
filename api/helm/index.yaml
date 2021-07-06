@@ -5,13 +5,12 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 11.10.0
-    created: "2021-06-23T09:25:39.7281026Z"
+    created: "2021-07-06T20:18:43.8443816+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
       version: 1.x.x
-    description: Chart for PostgreSQL, an object-relational database management system
-      (ORDBMS) with an emphasis on extensibility and on standards-compliance.
+    description: Chart for PostgreSQL, an object-relational database management system (ORDBMS) with an emphasis on extensibility and on standards-compliance.
     digest: eebe8f456cf98d5927a35666d1d899174dc4d3e09f26788033f761527bc90749
     home: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
     icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-110x117.png
@@ -39,16 +38,14 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 6.0.11
-    created: "2021-06-23T09:25:39.7344876Z"
+    created: "2021-07-06T20:18:43.849381+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
       tags:
       - bitnami-common
       version: 1.x.x
-    description: Open source, advanced key-value store. It is often referred to as
-      a data structure server since keys can contain strings, hashes, lists, sets
-      and sorted sets.
+    description: Open source, advanced key-value store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets and sorted sets.
     digest: 2d70861d16fc410ed6d6c818b97f7b0d519031147e5c7b42c5691d4c38742c44
     home: https://github.com/bitnami/charts/tree/master/bitnami/redis
     icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
@@ -73,7 +70,7 @@ entries:
       artifacthub.io/containsSecurityUpdates: "true"
     apiVersion: v2
     appVersion: V1.0
-    created: "2021-06-23T09:25:39.7234234Z"
+    created: "2021-07-06T20:18:43.8414111+02:00"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -83,15 +80,8 @@ entries:
       name: redis
       repository: https://charts.bitnami.com/bitnami
       version: 12.7.7
-    description: Het Verzoek Registratie Component bevat zowel het eind- als tussenresultaat
-      van een proces. Of om het iets simpeler te zeggen een proces schrijft bij iedere
-      stap zijn variabelen weg naar een verzoek. Daarmee is het proces stateless en
-      het verzoek stateful. In deze zin is een verzoek vergelijkbaar met een proces
-      token in bijvoorbeeld BPMN- engines. Hierdoor is het mogelijk om verzoeken uit
-      te wisselen tussen processen. Het is bijvoorbeeld mogelijk om via een chatbot
-      een proces te draaien dat het verzoektype verhuizen gebruikt om een verzoek
-      aan te maken, maar het ondertekenen van dit verzoek te laten doen via het webformulier.
-    digest: 54efe7f8e56baf008f628165a407627112a4f22022f3fa1834fe1fa9fc288186
+    description: Het Verzoek Registratie Component bevat zowel het eind- als tussenresultaat van een proces. Of om het iets simpeler te zeggen een proces schrijft bij iedere stap zijn variabelen weg naar een verzoek. Daarmee is het proces stateless en het verzoek stateful. In deze zin is een verzoek vergelijkbaar met een proces token in bijvoorbeeld BPMN- engines. Hierdoor is het mogelijk om verzoeken uit te wisselen tussen processen. Het is bijvoorbeeld mogelijk om via een chatbot een proces te draaien dat het verzoektype verhuizen gebruikt om een verzoek aan te maken, maar het ondertekenen van dit verzoek te laten doen via het webformulier.
+    digest: c3c6f90b58497a1f776263e452c3223b56cdf22392053b33ab071b03073b3b98
     home: https://www.conduction.nl
     icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
     keywords:
@@ -113,15 +103,8 @@ entries:
     version: 1.0.0
   - apiVersion: v1
     appVersion: V1.0
-    created: "2021-06-23T09:25:39.7097548Z"
-    description: Het Verzoek Registratie Component bevat zowel het eind- als tussenresultaat
-      van een proces. Of om het iets simpeler te zeggen een proces schrijft bij iedere
-      stap zijn variabelen weg naar een verzoek. Daarmee is het proces stateless en
-      het verzoek stateful. In deze zin is een verzoek vergelijkbaar met een proces
-      token in bijvoorbeeld BPMN- engines. Hierdoor is het mogelijk om verzoeken uit
-      te wisselen tussen processen. Het is bijvoorbeeld mogelijk om via een chatbot
-      een proces te draaien dat het verzoektype verhuizen gebruikt om een verzoek
-      aan te maken, maar het ondertekenen van dit verzoek te laten doen via het webformulier.
+    created: "2021-07-06T20:18:43.8333814+02:00"
+    description: Het Verzoek Registratie Component bevat zowel het eind- als tussenresultaat van een proces. Of om het iets simpeler te zeggen een proces schrijft bij iedere stap zijn variabelen weg naar een verzoek. Daarmee is het proces stateless en het verzoek stateful. In deze zin is een verzoek vergelijkbaar met een proces token in bijvoorbeeld BPMN- engines. Hierdoor is het mogelijk om verzoeken uit te wisselen tussen processen. Het is bijvoorbeeld mogelijk om via een chatbot een proces te draaien dat het verzoektype verhuizen gebruikt om een verzoek aan te maken, maar het ondertekenen van dit verzoek te laten doen via het webformulier.
     digest: 03fd140223cb2e863e5c0e66fc0cac232d96386ae3e50a425279c44f2badbe8a
     home: https://www.conduction.nl
     icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
@@ -142,4 +125,4 @@ entries:
     urls:
     - verzoekregistratiecomponent-0.1.0.tgz
     version: 0.1.0
-generated: "2021-06-23T09:25:39.7015908Z"
+generated: "2021-07-06T20:18:43.8273817+02:00"
