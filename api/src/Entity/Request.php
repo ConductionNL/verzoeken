@@ -415,7 +415,7 @@ class Request
         return $this->event;
     }
 
-    public function setEvent(string $event): self
+    public function setEvent(?string $event): self
     {
         $this->event = $event;
 
