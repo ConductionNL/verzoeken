@@ -403,7 +403,7 @@ class Request
         return $this->order;
     }
 
-    public function setOrder(string $order): self
+    public function setOrder(?string $order): self
     {
         $this->order = $order;
 

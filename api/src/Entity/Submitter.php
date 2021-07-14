@@ -150,7 +150,7 @@ class Submitter
         return $this->assent;
     }
 
-    public function setAssent(string $assent): self
+    public function setAssent(?string $assent): self
     {
         $this->assent = $assent;
 
@@ -162,7 +162,7 @@ class Submitter
         return $this->brp;
     }
 
-    public function setBrp(string $brp): self
+    public function setBrp(?string $brp): self
     {
         $this->brp = $brp;
 
@@ -174,7 +174,7 @@ class Submitter
         return $this->bsn;
     }
 
-    public function setBsn(string $bsn): self
+    public function setBsn(?string $bsn): self
     {
         $this->bsn = $bsn;
 
@@ -186,7 +186,7 @@ class Submitter
         return $this->person;
     }
 
-    public function setPerson(string $person): self
+    public function setPerson(?string $person): self
     {
         $this->person = $person;
 
@@ -198,7 +198,7 @@ class Submitter
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 
