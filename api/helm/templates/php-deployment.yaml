@@ -47,6 +47,10 @@ spec:
               value: 'bafe1dc254b45471754c221081f874aa'
             - name: APP_ENV
               value: 'prod'
+            - name: APP_NAME
+              value: {{ .Chart.Name }}
+            - name: APP_NAME_TECHNICAL
+              value: {{ .Chart.Name }}
             - name: TRUSTED_HOSTS
               valueFrom:
                 configMapKeyRef:
