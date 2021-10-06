@@ -1,13 +1,9 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ include "name" . }}-warmup
+  name: {{ include "template.fullname" . }}-warmup
   labels:
-    app.kubernetes.io/name: {{ include "name" . }}-warmup
-    app.kubernetes.io/part-of: {{ include "name" . }}
-    helm.sh/chart: {{ include "chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "template.labels" . | nindent 4 }}
 spec:
   # this cronjob runs every 10 minutes https://crontab.guru/#*_*_*_*_*
   schedule: "0 5 * * *"

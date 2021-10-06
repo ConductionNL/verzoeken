@@ -21,6 +21,7 @@ security:
   jwt:
     id:
     privateKey:
+  dependencies: {}
 
 replicaCount: 2
 
